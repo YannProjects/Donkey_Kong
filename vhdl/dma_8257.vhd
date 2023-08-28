@@ -9,8 +9,6 @@
 -- Target Devices: Artyx 7
 -- Tool Versions: 
 -- Description: i8257 DMA light pour Donkey Kong
--- Only 1 DMA channel
--- Not handling TC and MARK
 -- sources: https://github.com/MiSTer-devel/Arcade-DonkeyKong_MiSTer mais en VHDL, MAME i8257.h, Intel 8257 datasheet
 -- Dependencies: 
 -- 
@@ -40,6 +38,14 @@
 --                  DRQ0  19 |             | 22  D6
 --                   GND  20 |_____________| 21  D7
 --
+-- TODO:
+-- 20 August 2023:
+--   - Rotating priority mode not yet managed
+--   - Extended write not handled => EXT WR should start in S2 and normal write in S3
+--   - How to handle WRITE_VERIFY, not clear. 
+--   - UPDATE flag bit inside status register not handled (TODO: Find a proper location to reset the update flag).
+--   - Not clear was is done or not on rising or falling edge clock (a NOT gate should be added compared to CPU clock...)
+--     All code below is working on rising edge i8257 CLK (i.e.: each falling edge CPU clk).
 ----------------------------------------------------------------------------------
 
 library IEEE;
@@ -56,7 +62,7 @@ use ieee.numeric_std.all;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity dkong_dma is
+entity dma_i8257 is
 port (
     i_clk       : in std_logic;
     i_reset     : in std_logic;
@@ -64,8 +70,8 @@ port (
     o_aen       : out std_logic;
     i_hdla      : in std_logic;
     o_hrq       : out std_logic;
-    i_drq0      : in std_logic; -- Just one channel here
-    i_dack0     : out std_logic; -- Just one channel here
+    i_drq       : in std_logic_vector(3 downto 0); -- Just one channel here
+    o_dackn     : out std_logic_vector(3 downto 0); -- Just one channel here
     o_adstb     : out std_logic;
     i_As        : in std_logic_vector(3 downto 0); -- Low addresses bus is input in slave mode
     o_Am        : out std_logic_vector(7 downto 0); -- Address bus is output in master mode
@@ -77,91 +83,271 @@ port (
     o_Dout      : out std_logic_vector(7 downto 0);
     i_csn       : in std_logic;
     o_memrn     : out std_logic;
-    o_memwn     : out std_logic
+    o_memwn     : out std_logic;
+    o_mark      : out std_logic;
+    o_tc        : out std_logic
 );
-end dkong_dma;
+end;
 
-architecture Behavioral of dkong_dma is
+architecture Behavioral of dma_i8257 is
 
-type dma_register_type is 
-record
-    dma_addr_lsb   : std_logic_vector(7 downto 0);
-    dma_addr_msb   : std_logic_vector(7 downto 0);
+type dma_register_t is record
+    dma_addr_lsb   : unsigned(7 downto 0);
+    dma_addr_msb   : unsigned(7 downto 0);
     dma_tc_lsb     : unsigned(7 downto 0);
     dma_tc_msb     : unsigned(7 downto 0);
+    num_bytes      : unsigned(13 downto 0);
 end record;
-type dma_states is (SI, S0, S1, S2, S3, S4);
-type dma_registers_type is array (0 to 3) of dma_register_type;
 
-signal dma_registers : dma_registers_type;
-signal dma_state : dma_states;
-signal dma_mode : std_logic_vector(7 downto 0);
+type dma_states_t is (SI, S0, S1, S2, S3, S4);
+type dma_registers_t is array (0 to 3) of dma_register_t;
+
+signal dma_registers : dma_registers_t;
+signal dma_state : dma_states_t;
+signal dma_mode : unsigned(7 downto 0);
 signal tc : std_logic_vector(3 downto 0);
-signal update : std_logic;
+signal msb_lsb_toogle : std_logic;
+signal refresh_update : std_logic_vector(1 downto 0);
 signal dma_address : unsigned(15 downto 0);
+signal dma_request : unsigned(3 downto 0);
+signal current_channel : integer;
 
+constant AUTOLOAD : unsigned(7 downto 0) := X"80";
+constant TC_STOP : unsigned(7 downto 0) := X"40";
+constant EXTENDED_WRITE : unsigned(7 downto 0) := X"20";
+constant RP : unsigned(7 downto 0) := X"10";
+constant CH3_EN : unsigned(7 downto 0) := X"08";
+constant CH2_EN : unsigned(7 downto 0) := X"04";
+constant CH1_EN : unsigned(7 downto 0) := X"02";
+constant CH0_EN : unsigned(7 downto 0) := X"01";
+
+constant DMA_READ : unsigned(7 downto 0) := X"80";
+constant DMA_WRITE : unsigned(7 downto 0) := X"40";
 begin
 
-p_dma : process(i_clk)
+p_dma : process(i_clk, i_reset)
+
+variable reg_index : integer;
+
 begin
     if i_reset = '1' then
         for i in 0 to 3 loop
             dma_registers(i).dma_addr_lsb <= (others => '0');
             dma_registers(i).dma_addr_msb <= (others => '0');
+            dma_registers(i).dma_tc_lsb <= (others => '0');
+            dma_registers(i).dma_tc_msb <= (others => '0');
+            dma_registers(i).num_bytes <= (others => '0');
         end loop;
         dma_mode <= (others => '0');
+        tc <= (others => '0');
+        o_dackn <= (others => '0');
         dma_state <= SI;
-    
+        o_aen <= '1';
+        o_hrq <= '0';
+        o_adstb <= '0';
+        o_iormn <= '1';
+        o_iowmn <= '1';
+        o_memrn <= '1';
+        o_memwn <= '1';
+        o_mark <= '0';
+        o_tc <= '0';
+        msb_lsb_toogle <= '0';
+        refresh_update <= "00";
+
     elsif rising_edge(i_clk) then
-        -- Configuration DMA
+        -- DMA configuration
         if i_csn = '0' then
             if i_iowsn = '0' then
+                -- CH-X DMA addresses and CH-X Terminal count
                 if i_As(3) = '0' then
+                    reg_index := to_integer(unsigned(i_As(3 downto 1)));
+                    -- DMA addresses
                     if i_As(0) = '0' then
-                        dma_registers(to_integer(unsigned(i_As(3 downto 1)))).dma_addr_lsb <= i_Din;
+                        -- DMA adress LSB
+                        if msb_lsb_toogle = '0' then
+                            dma_registers(reg_index).dma_addr_lsb <= unsigned(i_Din);
+                            -- In case of autoload and DMA channel is 2, load automatically channel 3
+                            -- with channel 2 data
+                            if (dma_mode & AUTOLOAD = AUTOLOAD) and reg_index = 2 then
+                                dma_registers(3).dma_addr_lsb <= unsigned(i_Din);
+                            end if;
+                            msb_lsb_toogle <= '1';
+                        -- DMA adress MSB
+                        else
+                            dma_registers(reg_index).dma_addr_msb <= unsigned(i_Din);
+                            if (dma_mode & AUTOLOAD = AUTOLOAD) and reg_index = 2 then
+                                dma_registers(3).dma_addr_msb <= unsigned(i_Din);
+                            end if;                            
+                            msb_lsb_toogle <= '0';
+                        end if;
+                    -- TC
                     else
-                        dma_registers(to_integer(unsigned(i_As(3 downto 1)))).dma_addr_msb <= i_Din;
+                        -- TC adress LSB
+                        if msb_lsb_toogle = '0' then
+                            dma_registers(reg_index).dma_tc_lsb <= unsigned(i_Din);
+                            if (dma_mode & AUTOLOAD = AUTOLOAD) and reg_index = 2 then
+                                dma_registers(3).dma_tc_lsb <= unsigned(i_Din);
+                            end if;                            
+                            msb_lsb_toogle <= '1';
+                        -- TC adress MSB
+                        else
+                            dma_registers(reg_index).dma_tc_msb <= unsigned(i_Din);
+                            -- In case of autoload and DMA channel is 2, load automatically channel 3
+                            -- with channel 2 data                                                         
+                            if (dma_mode & AUTOLOAD = AUTOLOAD) and reg_index = 2 then
+                                dma_registers(3).dma_tc_msb <= unsigned(i_Din);                              
+                            end if;                             
+                            msb_lsb_toogle <= '0';
+                        end if;
                     end if;
                 else
-                    dma_mode <= i_Din;
+                    dma_mode <= unsigned(i_Din);
                 end if;
             elsif i_iorsn = '0' then
-                o_Dout <= "000" & update & tc(2 downto 0);
+                if i_As(3) = '0' then
+                    if msb_lsb_toogle = '0' then
+                        if i_As(0) = '0' then
+                            o_Dout <= std_logic_vector(dma_registers(to_integer(unsigned(i_As(3 downto 1)))).dma_addr_lsb);
+                        else
+                            o_Dout <= std_logic_vector(dma_registers(to_integer(unsigned(i_As(3 downto 1)))).dma_tc_lsb);
+                        end if;
+                        msb_lsb_toogle <= '1';
+                    else
+                        if i_As(0) = '0' then
+                            o_Dout <= std_logic_vector(dma_registers(to_integer(unsigned(i_As(3 downto 1)))).dma_addr_msb);
+                        else
+                            o_Dout <= std_logic_vector(dma_registers(to_integer(unsigned(i_As(3 downto 1)))).dma_tc_msb);
+                        end if;                   
+                        msb_lsb_toogle <= '0';
+                    end if;
+                else
+                    o_Dout <= "000" & refresh_update(0) & tc(3 downto 0);
+                    -- Reset channels status when status register is read.
+                    tc <= (others => '0');                
+                end if;
             end if;
         else
             case dma_state is
                 when SI =>
-                    dma_state <= S0;
-                    if i_drq0 = '1' then
+                    -- Is there a DMA request pending and is it enabled ?
+                    dma_request <= unsigned(i_drq) and dma_mode(3 downto 0);
+                    if dma_request /= X"0" then
                         o_hrq <= '1';
+                        dma_state <= S0;
+                        if dma_request = X"1" then
+                            current_channel <= 0;
+                        elsif dma_request = X"2" then
+                            current_channel <= 1;
+                        elsif dma_request = X"4" then
+                            current_channel <= 2;
+                        elsif dma_request = X"8" then
+                            current_channel <= 3;
+                        end if;
                     end if;
                 when S0 =>
                     if i_hdla = '1' then
                         dma_state <= S1;
-                        dma_address <= unsigned(dma_registers(0).dma_addr_msb & dma_registers(0).dma_addr_lsb);
+                        dma_address <= dma_registers(current_channel).dma_addr_msb & dma_registers(current_channel).dma_addr_lsb;
+                        dma_registers(current_channel).num_bytes <= (dma_registers(current_channel).dma_tc_msb(5 downto 0) & dma_registers(current_channel).dma_tc_lsb) + 1;
+                        -- In case of autoload and DMA channel is 2, load automatically channel 3
+                        -- with channel 2 data
+                        if (dma_mode & AUTOLOAD = AUTOLOAD) and current_channel = 2 then
+                            dma_registers(3).num_bytes <= (dma_registers(2).dma_tc_msb(5 downto 0) & dma_registers(2).dma_tc_lsb) + 1;
+                        end if;                            
+                        o_aen <= '1';
                     end if;
+                    
                 when S1 =>
                     o_Dout <= std_logic_vector(dma_address(15 downto 8));
-                    o_adstb <= '1';
                     o_Am <=  std_logic_vector(dma_address(7 downto 0));
+                    o_adstb <= '1';
                     dma_state <= S2;
-                when S2 =>
-                    -- Canal DRQ0 (le plus prioritaire). Dans ce cas (Si Mode TC : RD=0, WR=1 ?):
-                    -- IORDn = 0 + MEMWn = 0 : Lecture la mémoire OBJ RAM et ecriture dans le latch 2N
-                    -- Dans ce cas, le buffer bi-dir LS245 6A présente les données sur le latch LS 273 2N
-                    -- car IORDn = 0 (B -> A) et MEMWn = 0 (G = 1)
-                    --
-                    -- On passe ensuite au canal DRQ1 (le suivant dans l'ordre de priorité). Dans ce cas:
-                    -- IOWRn = 0 + MEMRn = 0 : Le contenu du latch est presente sur le bus de donnees et les donnees
-                    -- sont ecrites dans la RAM CPU.
-                    -- On recommence ensuite avec le canal 0, puis 1,...
-                    -- A priori on peut faire le transfert inverse en configurant le registre TC du DMA avec RD ou WR (?)
-                    -- Dans ce cas ou l'autre le fonctionnement du latch mémorise la donnée de la RAM OBJ ou de la RAM CPU.  
                     
-                    dma_address <= 
+                when S2 => 
+                    o_adstb <= '0';
+                    -- Enable I/O device
+                    o_dackn(current_channel) <= '0';
+                    dma_address <= dma_address + 1;
+                    dma_registers(current_channel).num_bytes <= dma_registers(current_channel).num_bytes - 1;      
+                    -- DMA write cycle (from IO device to memory)
+                    if (dma_registers(current_channel).dma_tc_msb and DMA_WRITE) = DMA_WRITE then
+                        o_iormn <= '0';
+                    -- DMA read cycle (from memory to IO device)
+                    elsif (dma_registers(current_channel).dma_tc_msb and DMA_READ) = DMA_READ then
+                        o_memrn <= '0';
+                    end if;
+                    dma_state <= S3; 
+                                       
+                when S3 =>
+                    if i_ready = '1' then
+                        -- DMA write cycle (from IO device to memory)
+                        if (dma_registers(current_channel).dma_tc_msb and DMA_WRITE) = DMA_WRITE then
+                            o_memwn <= '0';
+                        -- DMA read cycle (from memory to IO device)
+                        elsif (dma_registers(current_channel).dma_tc_msb and DMA_READ) = DMA_READ then
+                            o_iowmn <= '0';
+                        end if;                    
+                        if ((dma_registers(current_channel).num_bytes) and ("00"&X"07F")) = 0 then
+                            o_mark <= '1';
+                        end if;
+                        if (dma_registers(current_channel).num_bytes = 0) then
+                            o_tc <= '1';
+                            tc(current_channel) <= '1';
+                            if ((dma_mode and AUTOLOAD) = AUTOLOAD) and (current_channel = 2) then
+                                -- In case of autoload and channel 2, update flag is set to 1 until
+                                -- the completion of the next CH2 DMA cycle. This prevent the CPU
+                                -- to update CH3 as CH2 data is reloading
+                                -- (see description of Autoloadbit 7 inside datasheet and autoload timing
+                                -- figure).
+                                refresh_update <= "01";
+                                dma_registers(2).dma_addr_lsb <= dma_registers(3).dma_addr_lsb;
+                                dma_registers(2).dma_addr_msb <= dma_registers(3).dma_addr_msb;
+                                dma_registers(2).num_bytes <= dma_registers(3).num_bytes;
+                            end if;   
+                        end if;                        
+                        dma_state <= S4;
+                    end if;
+                    
+                when S4 =>
+                    o_tc <= '0';
+                    o_mark <= '0';
+                    o_iormn <= '1';
+                    o_iowmn <= '1';
+                    o_memrn <= '1';
+                    o_memwn <= '1';
+                    o_dackn(current_channel) <= '1';
+                    -- Update flag is updated at the end of the next DMA cycle following the reload operation
+                    -- (only in case of AUTOLOAD and channel 2 as per my understanding...)
+                    if refresh_update = "01" then
+                        refresh_update <= "11";
+                    elsif refresh_update = "11" then
+                        refresh_update <= "00";
+                    end if;
 
-                    
-                    
+                    if (dma_registers(current_channel).num_bytes = 0) and (dma_mode & TC_STOP = TC_STOP) then
+                        -- TC stop is not taken into account in case of autoload and channel 2
+                        if ((dma_mode and AUTOLOAD) /= AUTOLOAD) or (current_channel /= 2) then
+                            dma_mode(3 downto 0) <= dma_mode(3 downto 0) and (not to_unsigned(current_channel, 4));
+                            o_hrq <= '0';
+                        end if;
+                    end if;
+                    -- Is there a DMA request pending and is bus still available ?
+                    if dma_request /= "0" and i_hdla = '1' then
+                        dma_state <= S1;
+                        if dma_request = X"1" then
+                            current_channel <= 0;
+                        elsif dma_request = X"2" then
+                            current_channel <= 1;
+                        elsif dma_request = X"4" then
+                            current_channel <= 2;
+                        elsif dma_request = X"8" then
+                            current_channel <= 3;
+                        end if;
+                    else
+                        o_hrq <= '0';
+                        dma_state <= SI;
+                        o_aen <= '0';
+                    end if;
            end case;
         end if;
     end if;
