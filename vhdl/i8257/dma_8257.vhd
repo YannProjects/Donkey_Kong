@@ -46,6 +46,8 @@
 --   - UPDATE flag bit inside status register not handled (TODO: Find a proper location to reset the update flag).
 --   - Not clear was is done or not on rising or falling edge clock (a NOT gate should be added compared to CPU clock...)
 --     All code below is working on rising edge i8257 CLK (i.e.: each falling edge CPU clk).
+--     Entrée "READY" ?
+-- Verifier les compteurs pour le nombre de bytes et aussi le moment ou TC et MARK sont settés 
 ----------------------------------------------------------------------------------
 
 library IEEE;
@@ -70,8 +72,8 @@ port (
     o_aen       : out std_logic;
     i_hdla      : in std_logic;
     o_hrq       : out std_logic;
-    i_drq       : in std_logic_vector(3 downto 0); -- Just one channel here
-    o_dackn     : out std_logic_vector(3 downto 0); -- Just one channel here
+    i_drq       : in std_logic_vector(3 downto 0);
+    o_dackn     : out std_logic_vector(3 downto 0);
     o_adstb     : out std_logic;
     i_As        : in std_logic_vector(3 downto 0); -- Low addresses bus is input in slave mode
     o_Am        : out std_logic_vector(7 downto 0); -- Address bus is output in master mode
@@ -92,25 +94,29 @@ end;
 architecture Behavioral of dma_i8257 is
 
 type dma_register_t is record
-    dma_addr_lsb   : unsigned(7 downto 0);
-    dma_addr_msb   : unsigned(7 downto 0);
     dma_tc_lsb     : unsigned(7 downto 0);
     dma_tc_msb     : unsigned(7 downto 0);
     num_bytes      : unsigned(13 downto 0);
+    cycle_sel      : unsigned(1 downto 0);
+    dma_address    : unsigned(15 downto 0);
 end record;
 
 type dma_states_t is (SI, S0, S1, S2, S3, S4);
 type dma_registers_t is array (0 to 3) of dma_register_t;
+type channel_priorities_t is array (0 to 3) of unsigned(3 downto 0);
+type channel_priorities_idx_t is array (0 to 3) of integer;
 
-signal dma_registers : dma_registers_t;
 signal dma_state : dma_states_t;
-signal dma_mode : unsigned(7 downto 0);
 signal tc : std_logic_vector(3 downto 0);
 signal msb_lsb_toogle : std_logic;
 signal refresh_update : std_logic_vector(1 downto 0);
-signal dma_address : unsigned(15 downto 0);
 signal dma_request : unsigned(3 downto 0);
-signal current_channel : integer;
+signal channel_priorities : channel_priorities_t;
+signal channel_priorities_idx : channel_priorities_idx_t;
+signal dma_registers_signal : dma_registers_t;
+
+signal dma_mode : unsigned(7 downto 0);
+signal current_channel : integer range 0 to 3;
 
 constant AUTOLOAD : unsigned(7 downto 0) := X"80";
 constant TC_STOP : unsigned(7 downto 0) := X"40";
@@ -121,26 +127,35 @@ constant CH2_EN : unsigned(7 downto 0) := X"04";
 constant CH1_EN : unsigned(7 downto 0) := X"02";
 constant CH0_EN : unsigned(7 downto 0) := X"01";
 
-constant DMA_READ : unsigned(7 downto 0) := X"80";
-constant DMA_WRITE : unsigned(7 downto 0) := X"40";
+constant DMA_READ : unsigned(1 downto 0) := "10";
+constant DMA_WRITE : unsigned(1 downto 0) := "01";
+
 begin
 
 p_dma : process(i_clk, i_reset)
 
 variable reg_index : integer;
+variable dma_registers : dma_registers_t;
 
 begin
     if i_reset = '1' then
         for i in 0 to 3 loop
-            dma_registers(i).dma_addr_lsb <= (others => '0');
-            dma_registers(i).dma_addr_msb <= (others => '0');
-            dma_registers(i).dma_tc_lsb <= (others => '0');
-            dma_registers(i).dma_tc_msb <= (others => '0');
-            dma_registers(i).num_bytes <= (others => '0');
+            dma_registers(i).dma_tc_lsb := (others => '0');
+            dma_registers(i).dma_tc_msb := (others => '0');
+            dma_registers(i).num_bytes := (others => '0');
+            dma_registers(i).cycle_sel := (others => '0');
         end loop;
+        -- dma_mode(0) : Channel 0 enabled
+        -- dma_mode(1) : Channel 1 enabled
+        -- dma_mode(2) : Channel 2 enabled
+        -- dma_mode(3) : Channel 3 enabled
+        -- dma_mode(4) : RP (Rotating priority)
+        -- dma_mode(5) : EW (Extended Write)
+        -- dma_mode(6) : TCS (TC Stop)
+        -- dma_mode(7) : AL (Autoload)
         dma_mode <= (others => '0');
         tc <= (others => '0');
-        o_dackn <= (others => '0');
+        o_dackn <= (others => '1');
         dma_state <= SI;
         o_aen <= '1';
         o_hrq <= '0';
@@ -152,6 +167,7 @@ begin
         o_mark <= '0';
         o_tc <= '0';
         msb_lsb_toogle <= '0';
+        current_channel <= 0;
         refresh_update <= "00";
 
     elsif rising_edge(i_clk) then
@@ -165,18 +181,18 @@ begin
                     if i_As(0) = '0' then
                         -- DMA adress LSB
                         if msb_lsb_toogle = '0' then
-                            dma_registers(reg_index).dma_addr_lsb <= unsigned(i_Din);
+                            dma_registers(reg_index).dma_address := (dma_registers(reg_index).dma_address(15 downto 8)) & unsigned(i_Din);
                             -- In case of autoload and DMA channel is 2, load automatically channel 3
                             -- with channel 2 data
                             if (dma_mode & AUTOLOAD = AUTOLOAD) and reg_index = 2 then
-                                dma_registers(3).dma_addr_lsb <= unsigned(i_Din);
+                                dma_registers(3).dma_address := (dma_registers(3).dma_address(15 downto 8)) & unsigned(i_Din);
                             end if;
                             msb_lsb_toogle <= '1';
                         -- DMA adress MSB
                         else
-                            dma_registers(reg_index).dma_addr_msb <= unsigned(i_Din);
+                            dma_registers(reg_index).dma_address := unsigned(i_Din) & dma_registers(reg_index).dma_address(7 downto 0);
                             if (dma_mode & AUTOLOAD = AUTOLOAD) and reg_index = 2 then
-                                dma_registers(3).dma_addr_msb <= unsigned(i_Din);
+                                dma_registers(3).dma_address := unsigned(i_Din) & dma_registers(3).dma_address(7 downto 0);
                             end if;                            
                             msb_lsb_toogle <= '0';
                         end if;
@@ -184,18 +200,20 @@ begin
                     else
                         -- TC adress LSB
                         if msb_lsb_toogle = '0' then
-                            dma_registers(reg_index).dma_tc_lsb <= unsigned(i_Din);
+                            dma_registers(reg_index).num_bytes := (dma_registers(reg_index).num_bytes(5 downto 0)) & unsigned(i_Din);
                             if (dma_mode & AUTOLOAD = AUTOLOAD) and reg_index = 2 then
-                                dma_registers(3).dma_tc_lsb <= unsigned(i_Din);
-                            end if;                            
+                                dma_registers(3).num_bytes := dma_registers(3).num_bytes(5 downto 0) & unsigned(i_Din);
+                            end if;
                             msb_lsb_toogle <= '1';
                         -- TC adress MSB
                         else
-                            dma_registers(reg_index).dma_tc_msb <= unsigned(i_Din);
+                            dma_registers(reg_index).num_bytes := unsigned(i_Din(5 downto 0)) & dma_registers(reg_index).num_bytes(7 downto 0);
+                            dma_registers(reg_index).cycle_sel := unsigned(i_Din(7 downto 6));                            
                             -- In case of autoload and DMA channel is 2, load automatically channel 3
                             -- with channel 2 data                                                         
                             if (dma_mode & AUTOLOAD = AUTOLOAD) and reg_index = 2 then
-                                dma_registers(3).dma_tc_msb <= unsigned(i_Din);                              
+                                dma_registers(3).num_bytes := unsigned(i_Din(5 downto 0)) & dma_registers(3).num_bytes(7 downto 0);
+                                dma_registers(3).cycle_sel := unsigned(i_Din(7 downto 6));
                             end if;                             
                             msb_lsb_toogle <= '0';
                         end if;
@@ -207,18 +225,19 @@ begin
                 if i_As(3) = '0' then
                     if msb_lsb_toogle = '0' then
                         if i_As(0) = '0' then
-                            o_Dout <= std_logic_vector(dma_registers(to_integer(unsigned(i_As(3 downto 1)))).dma_addr_lsb);
+                            o_Dout <= std_logic_vector(dma_registers(to_integer(unsigned(i_As(3 downto 1)))).dma_address(7 downto 0));
                         else
-                            o_Dout <= std_logic_vector(dma_registers(to_integer(unsigned(i_As(3 downto 1)))).dma_tc_lsb);
+                            o_Dout <= std_logic_vector(dma_registers(to_integer(unsigned(i_As(3 downto 1)))).num_bytes(7 downto 0));
                         end if;
                         msb_lsb_toogle <= '1';
                     else
                         if i_As(0) = '0' then
-                            o_Dout <= std_logic_vector(dma_registers(to_integer(unsigned(i_As(3 downto 1)))).dma_addr_msb);
+                            o_Dout <= std_logic_vector(dma_registers(to_integer(unsigned(i_As(3 downto 1)))).dma_address(15 downto 8));
                         else
-                            o_Dout <= std_logic_vector(dma_registers(to_integer(unsigned(i_As(3 downto 1)))).dma_tc_msb);
+                            o_Dout <= std_logic_vector(dma_registers(to_integer(unsigned(i_As(3 downto 1)))).cycle_sel)
+                                 & std_logic_vector(dma_registers(to_integer(unsigned(i_As(3 downto 1)))).num_bytes(13 downto 8));
                         end if;                   
-                        msb_lsb_toogle <= '0';
+                        msb_lsb_toogle <= '0';                       
                     end if;
                 else
                     o_Dout <= "000" & refresh_update(0) & tc(3 downto 0);
@@ -229,37 +248,52 @@ begin
         else
             case dma_state is
                 when SI =>
+                    o_hrq <= '0';
+                    o_aen <= '0';
                     -- Is there a DMA request pending and is it enabled ?
-                    dma_request <= unsigned(i_drq) and dma_mode(3 downto 0);
                     if dma_request /= X"0" then
                         o_hrq <= '1';
                         dma_state <= S0;
-                        if dma_request = X"1" then
-                            current_channel <= 0;
-                        elsif dma_request = X"2" then
-                            current_channel <= 1;
-                        elsif dma_request = X"4" then
-                            current_channel <= 2;
-                        elsif dma_request = X"8" then
-                            current_channel <= 3;
-                        end if;
+                        channel_priorities <= (X"1", X"2", X"4", X"8");
+                        channel_priorities_idx <= (0, 1, 2, 3);
                     end if;
-                when S0 =>
+                when S0 =>                  
                     if i_hdla = '1' then
+                        -- Fixed or rotating priority ?
+                        if (dma_mode and RP) = X"0" then
+                           if (dma_request and dma_mode(3 downto 0) and X"1") = X"1" then
+                               current_channel <= 0;
+                           elsif (dma_request and dma_mode(3 downto 0) and X"2") = X"2" then
+                               current_channel <= 1;
+                           elsif (dma_request and dma_mode(3 downto 0) and X"4") = X"4" then
+                               current_channel <= 2;
+                           elsif (dma_request and dma_mode(3 downto 0) and X"8") = X"8" then
+                               current_channel <= 3;
+                           end if;
+                        else
+                           if (channel_priorities(0) and dma_request and dma_mode(3 downto 0)) = channel_priorities(0) then
+                               current_channel <= channel_priorities_idx(0);
+                               channel_priorities <= (channel_priorities(1),  channel_priorities(2),  channel_priorities(3),  channel_priorities(0));
+                               channel_priorities_idx <= (channel_priorities_idx(1), channel_priorities_idx(2), channel_priorities_idx(3), channel_priorities_idx(0));
+                           elsif (channel_priorities(1) and dma_request and dma_mode(3 downto 0)) = channel_priorities(1) then
+                               current_channel <= channel_priorities_idx(1);
+                               channel_priorities <= (channel_priorities(2), channel_priorities(3), channel_priorities(0), channel_priorities(1));
+                               channel_priorities_idx <= (channel_priorities_idx(2), channel_priorities_idx(3), channel_priorities_idx(0), channel_priorities_idx(1));
+                           elsif (channel_priorities(2) and dma_request and dma_mode(3 downto 0)) = channel_priorities(2) then
+                               current_channel <= channel_priorities_idx(2);
+                               channel_priorities <= (channel_priorities(3), channel_priorities(0), channel_priorities(1), channel_priorities(2));
+                               channel_priorities_idx <= (channel_priorities_idx(3), channel_priorities_idx(0), channel_priorities_idx(1), channel_priorities_idx(2));
+                           elsif (channel_priorities(0) and dma_request and dma_mode(3 downto 0)) = channel_priorities(0) then
+                               current_channel <= channel_priorities_idx(3);
+                           end if;
+                        end if;                    
                         dma_state <= S1;
-                        dma_address <= dma_registers(current_channel).dma_addr_msb & dma_registers(current_channel).dma_addr_lsb;
-                        dma_registers(current_channel).num_bytes <= (dma_registers(current_channel).dma_tc_msb(5 downto 0) & dma_registers(current_channel).dma_tc_lsb) + 1;
-                        -- In case of autoload and DMA channel is 2, load automatically channel 3
-                        -- with channel 2 data
-                        if (dma_mode & AUTOLOAD = AUTOLOAD) and current_channel = 2 then
-                            dma_registers(3).num_bytes <= (dma_registers(2).dma_tc_msb(5 downto 0) & dma_registers(2).dma_tc_lsb) + 1;
-                        end if;                            
                         o_aen <= '1';
                     end if;
                     
                 when S1 =>
-                    o_Dout <= std_logic_vector(dma_address(15 downto 8));
-                    o_Am <=  std_logic_vector(dma_address(7 downto 0));
+                    o_Dout <= std_logic_vector(dma_registers(current_channel).dma_address(15 downto 8));
+                    o_Am <=  std_logic_vector(dma_registers(current_channel).dma_address(7 downto 0));
                     o_adstb <= '1';
                     dma_state <= S2;
                     
@@ -267,13 +301,11 @@ begin
                     o_adstb <= '0';
                     -- Enable I/O device
                     o_dackn(current_channel) <= '0';
-                    dma_address <= dma_address + 1;
-                    dma_registers(current_channel).num_bytes <= dma_registers(current_channel).num_bytes - 1;      
                     -- DMA write cycle (from IO device to memory)
-                    if (dma_registers(current_channel).dma_tc_msb and DMA_WRITE) = DMA_WRITE then
+                    if (dma_registers(current_channel).cycle_sel and DMA_WRITE) = DMA_WRITE then
                         o_iormn <= '0';
                     -- DMA read cycle (from memory to IO device)
-                    elsif (dma_registers(current_channel).dma_tc_msb and DMA_READ) = DMA_READ then
+                    elsif (dma_registers(current_channel).cycle_sel and DMA_READ) = DMA_READ then
                         o_memrn <= '0';
                     end if;
                     dma_state <= S3; 
@@ -281,16 +313,14 @@ begin
                 when S3 =>
                     if i_ready = '1' then
                         -- DMA write cycle (from IO device to memory)
-                        if (dma_registers(current_channel).dma_tc_msb and DMA_WRITE) = DMA_WRITE then
+                        -- num_bytes contains Rd or Wr mode
+                        if (dma_registers(current_channel).cycle_sel and DMA_WRITE) = DMA_WRITE then
                             o_memwn <= '0';
                         -- DMA read cycle (from memory to IO device)
-                        elsif (dma_registers(current_channel).dma_tc_msb and DMA_READ) = DMA_READ then
+                        elsif (dma_registers(current_channel).cycle_sel and DMA_READ) = DMA_READ then
                             o_iowmn <= '0';
                         end if;                    
-                        if ((dma_registers(current_channel).num_bytes) and ("00"&X"07F")) = 0 then
-                            o_mark <= '1';
-                        end if;
-                        if (dma_registers(current_channel).num_bytes = 0) then
+                        if (dma_registers(current_channel).num_bytes = 0) and tc(current_channel) = '0' then
                             o_tc <= '1';
                             tc(current_channel) <= '1';
                             if ((dma_mode and AUTOLOAD) = AUTOLOAD) and (current_channel = 2) then
@@ -300,11 +330,12 @@ begin
                                 -- (see description of Autoloadbit 7 inside datasheet and autoload timing
                                 -- figure).
                                 refresh_update <= "01";
-                                dma_registers(2).dma_addr_lsb <= dma_registers(3).dma_addr_lsb;
-                                dma_registers(2).dma_addr_msb <= dma_registers(3).dma_addr_msb;
-                                dma_registers(2).num_bytes <= dma_registers(3).num_bytes;
+                                dma_registers(2).dma_address := dma_registers(3).dma_address;
+                                dma_registers(2).num_bytes := dma_registers(3).num_bytes;
                             end if;   
-                        end if;                        
+                        elsif (dma_registers(current_channel).num_bytes /= 0) and (dma_registers(current_channel).num_bytes and ("00" & X"07F")) = 0 then
+                            o_mark <= '1';
+                        end if;
                         dma_state <= S4;
                     end if;
                     
@@ -324,33 +355,66 @@ begin
                         refresh_update <= "00";
                     end if;
 
-                    if (dma_registers(current_channel).num_bytes = 0) and (dma_mode & TC_STOP = TC_STOP) then
-                        -- TC stop is not taken into account in case of autoload and channel 2
-                        if ((dma_mode and AUTOLOAD) /= AUTOLOAD) or (current_channel /= 2) then
-                            dma_mode(3 downto 0) <= dma_mode(3 downto 0) and (not to_unsigned(current_channel, 4));
-                            o_hrq <= '0';
+                    if (dma_mode and TC_STOP) = TC_STOP then
+                        if (dma_registers(current_channel).num_bytes = 0) then
+                            -- TC stop is not taken into account in case of autoload and channel 2
+                            if ((dma_mode and AUTOLOAD) = 0) or (current_channel /= 2) then
+                                case current_channel is
+                                    when 0 => dma_mode <= dma_mode and X"FE";
+                                    when 1 => dma_mode <= dma_mode and X"FD";
+                                    when 2 => dma_mode <= dma_mode and X"FB";
+                                    when 3 => dma_mode <= dma_mode and X"F7";
+                                    when others => dma_mode <= (others => '0');
+                                end case;                        
+                                -- o_hrq <= '0';
+                            end if;
+                        else
+                            dma_registers(current_channel).dma_address := dma_registers(current_channel).dma_address + 1;
+                            dma_registers(current_channel).num_bytes := dma_registers(current_channel).num_bytes - 1;
                         end if;
                     end if;
+                    
+                    dma_state <= SI;
                     -- Is there a DMA request pending and is bus still available ?
                     if dma_request /= "0" and i_hdla = '1' then
                         dma_state <= S1;
-                        if dma_request = X"1" then
-                            current_channel <= 0;
-                        elsif dma_request = X"2" then
-                            current_channel <= 1;
-                        elsif dma_request = X"4" then
-                            current_channel <= 2;
-                        elsif dma_request = X"8" then
-                            current_channel <= 3;
-                        end if;
-                    else
-                        o_hrq <= '0';
-                        dma_state <= SI;
-                        o_aen <= '0';
+                        -- Fixed or rotating priority ?
+                        if (dma_mode and RP) = X"0" then
+                           if (dma_request and dma_mode(3 downto 0) and X"1") = X"1" then
+                               current_channel <= 0;
+                           elsif (dma_request and dma_mode(3 downto 0) and X"2") = X"2" then
+                               current_channel <= 1;
+                           elsif (dma_request and dma_mode(3 downto 0) and X"4") = X"4" then
+                               current_channel <= 2;
+                           elsif (dma_request and dma_mode(3 downto 0) and X"8") = X"8" then
+                               current_channel <= 3;
+                           end if;
+                        else
+                           if (channel_priorities(0) and dma_request and dma_mode(3 downto 0)) = channel_priorities(0) then
+                               current_channel <= channel_priorities_idx(0);
+                               channel_priorities <= (channel_priorities(1),  channel_priorities(2),  channel_priorities(3),  channel_priorities(0));
+                               channel_priorities_idx <= (channel_priorities_idx(1), channel_priorities_idx(2), channel_priorities_idx(3), channel_priorities_idx(0));
+                           elsif (channel_priorities(1) and dma_request and dma_mode(3 downto 0)) = channel_priorities(1) then
+                               current_channel <= channel_priorities_idx(1);
+                               channel_priorities <= (channel_priorities(2), channel_priorities(3), channel_priorities(0), channel_priorities(1));
+                               channel_priorities_idx <= (channel_priorities_idx(2), channel_priorities_idx(3), channel_priorities_idx(0), channel_priorities_idx(1));
+                           elsif (channel_priorities(2) and dma_request and dma_mode(3 downto 0)) = channel_priorities(2) then
+                               current_channel <= channel_priorities_idx(2);
+                               channel_priorities <= (channel_priorities(3), channel_priorities(0), channel_priorities(1), channel_priorities(2));
+                               channel_priorities_idx <= (channel_priorities_idx(3), channel_priorities_idx(0), channel_priorities_idx(1), channel_priorities_idx(2));
+                           elsif (channel_priorities(3) and dma_request and dma_mode(3 downto 0)) = channel_priorities(3) then
+                               current_channel <= channel_priorities_idx(3);
+                           end if;
+                        end if; 
                     end if;
            end case;
         end if;
     end if;
+    
+    -- For debug
+    dma_registers_signal <= dma_registers;
+    dma_request <= unsigned(i_drq) and dma_mode(3 downto 0);
 end process;
+
 
 end Behavioral;
