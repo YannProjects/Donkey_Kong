@@ -12,20 +12,17 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="5,093,981.500 ns"></ZoomStartTime>
-      <ZoomEndTime time="5,100,576.501 ns"></ZoomEndTime>
-      <Cursor1Time time="5,098,731.500 ns"></Cursor1Time>
+      <ZoomStartTime time="0.000000000 ms"></ZoomStartTime>
+      <ZoomEndTime time="80.000000001 ms"></ZoomEndTime>
+      <Cursor1Time time="1.556706500 ms"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="224"></NameColumnWidth>
+      <NameColumnWidth column_width="188"></NameColumnWidth>
       <ValueColumnWidth column_width="58"></ValueColumnWidth>
    </column_width_setting>
    <WVObjectSize size="28" />
    <wave_markers>
-      <marker time="5097030000" label="" />
-      <marker time="5097362000" label="" />
-      <marker time="5097694000" label="" />
-      <marker time="5098358000" label="" />
+      <marker time="2690113000" label="" />
    </wave_markers>
    <wvobject fp_name="/DMA_Sim/cpu_clk" type="logic">
       <obj_property name="ElementShortName">cpu_clk</obj_property>
@@ -218,31 +215,14 @@
          <obj_property name="ElementShortName">i_ready</obj_property>
          <obj_property name="ObjectShortName">i_ready</obj_property>
       </wvobject>
-      <wvobject fp_name="/DMA_Sim/u_dma/o_aen" type="logic">
-         <obj_property name="ElementShortName">o_aen</obj_property>
-         <obj_property name="ObjectShortName">o_aen</obj_property>
-      </wvobject>
       <wvobject fp_name="/DMA_Sim/u_dma/i_hdla" type="logic">
          <obj_property name="ElementShortName">i_hdla</obj_property>
          <obj_property name="ObjectShortName">i_hdla</obj_property>
-      </wvobject>
-      <wvobject fp_name="/DMA_Sim/u_dma/o_hrq" type="logic">
-         <obj_property name="ElementShortName">o_hrq</obj_property>
-         <obj_property name="ObjectShortName">o_hrq</obj_property>
       </wvobject>
       <wvobject fp_name="/DMA_Sim/u_dma/i_drq" type="array">
          <obj_property name="ElementShortName">i_drq[3:0]</obj_property>
          <obj_property name="ObjectShortName">i_drq[3:0]</obj_property>
          <obj_property name="isExpanded"></obj_property>
-      </wvobject>
-      <wvobject fp_name="/DMA_Sim/u_dma/o_dackn" type="array">
-         <obj_property name="ElementShortName">o_dackn[3:0]</obj_property>
-         <obj_property name="ObjectShortName">o_dackn[3:0]</obj_property>
-         <obj_property name="isExpanded"></obj_property>
-      </wvobject>
-      <wvobject fp_name="/DMA_Sim/u_dma/o_adstb" type="logic">
-         <obj_property name="ElementShortName">o_adstb</obj_property>
-         <obj_property name="ObjectShortName">o_adstb</obj_property>
       </wvobject>
       <wvobject fp_name="/DMA_Sim/u_dma/i_As" type="array">
          <obj_property name="ElementShortName">i_As[3:0]</obj_property>
@@ -252,54 +232,134 @@
          <obj_property name="ElementShortName">i_iorsn</obj_property>
          <obj_property name="ObjectShortName">i_iorsn</obj_property>
       </wvobject>
-      <wvobject fp_name="/DMA_Sim/u_dma/i_iowsn" type="logic">
-         <obj_property name="ElementShortName">i_iowsn</obj_property>
-         <obj_property name="ObjectShortName">i_iowsn</obj_property>
-      </wvobject>
-      <wvobject fp_name="/DMA_Sim/u_dma/o_iormn" type="logic">
-         <obj_property name="ElementShortName">o_iormn</obj_property>
-         <obj_property name="ObjectShortName">o_iormn</obj_property>
-      </wvobject>
-      <wvobject fp_name="/DMA_Sim/u_dma/o_iowmn" type="logic">
-         <obj_property name="ElementShortName">o_iowmn</obj_property>
-         <obj_property name="ObjectShortName">o_iowmn</obj_property>
-      </wvobject>
       <wvobject fp_name="/DMA_Sim/u_dma/i_Din" type="array">
          <obj_property name="ElementShortName">i_Din[7:0]</obj_property>
          <obj_property name="ObjectShortName">i_Din[7:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/DMA_Sim/u_dma/o_Am" type="array">
-         <obj_property name="ElementShortName">o_Am[7:0]</obj_property>
-         <obj_property name="ObjectShortName">o_Am[7:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/DMA_Sim/u_dma/o_Dout" type="array">
-         <obj_property name="ElementShortName">o_Dout[7:0]</obj_property>
-         <obj_property name="ObjectShortName">o_Dout[7:0]</obj_property>
       </wvobject>
       <wvobject fp_name="/DMA_Sim/u_dma/i_csn" type="logic">
          <obj_property name="ElementShortName">i_csn</obj_property>
          <obj_property name="ObjectShortName">i_csn</obj_property>
       </wvobject>
-      <wvobject fp_name="/DMA_Sim/u_dma/o_memrn" type="logic">
-         <obj_property name="ElementShortName">o_memrn</obj_property>
-         <obj_property name="ObjectShortName">o_memrn</obj_property>
+      <wvobject fp_name="/DMA_Sim/u_dma/i_iowsn" type="logic">
+         <obj_property name="ElementShortName">i_iowsn</obj_property>
+         <obj_property name="ObjectShortName">i_iowsn</obj_property>
+         <obj_property name="CustomSignalColor">#00FF00</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+      </wvobject>
+      <wvobject fp_name="/DMA_Sim/u_dma/o_Am" type="array">
+         <obj_property name="ElementShortName">o_Am[7:0]</obj_property>
+         <obj_property name="ObjectShortName">o_Am[7:0]</obj_property>
+         <obj_property name="CustomSignalColor">#00FFFF</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+      </wvobject>
+      <wvobject fp_name="/DMA_Sim/u_dma/o_Dout" type="array">
+         <obj_property name="ElementShortName">o_Dout[7:0]</obj_property>
+         <obj_property name="ObjectShortName">o_Dout[7:0]</obj_property>
+         <obj_property name="CustomSignalColor">#00FFFF</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+      </wvobject>
+      <wvobject fp_name="/DMA_Sim/u_dma/o_aen" type="logic">
+         <obj_property name="ElementShortName">o_aen</obj_property>
+         <obj_property name="ObjectShortName">o_aen</obj_property>
+         <obj_property name="CustomSignalColor">#00FFFF</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+      </wvobject>
+      <wvobject fp_name="/DMA_Sim/u_dma/o_hrq" type="logic">
+         <obj_property name="ElementShortName">o_hrq</obj_property>
+         <obj_property name="ObjectShortName">o_hrq</obj_property>
+         <obj_property name="CustomSignalColor">#00FFFF</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+      </wvobject>
+      <wvobject fp_name="/DMA_Sim/u_dma/o_dackn" type="array">
+         <obj_property name="ElementShortName">o_dackn[3:0]</obj_property>
+         <obj_property name="ObjectShortName">o_dackn[3:0]</obj_property>
+         <obj_property name="isExpanded"></obj_property>
+         <obj_property name="CustomSignalColor">#00FFFF</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+      </wvobject>
+      <wvobject fp_name="/DMA_Sim/u_dma/o_adstb" type="logic">
+         <obj_property name="ElementShortName">o_adstb</obj_property>
+         <obj_property name="ObjectShortName">o_adstb</obj_property>
+         <obj_property name="CustomSignalColor">#00FFFF</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+      </wvobject>
+      <wvobject fp_name="/DMA_Sim/u_dma/o_iormn" type="logic">
+         <obj_property name="ElementShortName">o_iormn</obj_property>
+         <obj_property name="ObjectShortName">o_iormn</obj_property>
+         <obj_property name="CustomSignalColor">#00FFFF</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject fp_name="/DMA_Sim/u_dma/o_memwn" type="logic">
          <obj_property name="ElementShortName">o_memwn</obj_property>
          <obj_property name="ObjectShortName">o_memwn</obj_property>
+         <obj_property name="CustomSignalColor">#00FFFF</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+      </wvobject>
+      <wvobject fp_name="/DMA_Sim/u_dma/o_iowmn" type="logic">
+         <obj_property name="ElementShortName">o_iowmn</obj_property>
+         <obj_property name="ObjectShortName">o_iowmn</obj_property>
+         <obj_property name="CustomSignalColor">#00FFFF</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+      </wvobject>
+      <wvobject fp_name="/DMA_Sim/u_dma/o_memrn" type="logic">
+         <obj_property name="ElementShortName">o_memrn</obj_property>
+         <obj_property name="ObjectShortName">o_memrn</obj_property>
+         <obj_property name="CustomSignalColor">#00FFFF</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject fp_name="/DMA_Sim/u_dma/o_mark" type="logic">
          <obj_property name="ElementShortName">o_mark</obj_property>
          <obj_property name="ObjectShortName">o_mark</obj_property>
+         <obj_property name="CustomSignalColor">#00FFFF</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject fp_name="/DMA_Sim/u_dma/o_tc" type="logic">
          <obj_property name="ElementShortName">o_tc</obj_property>
          <obj_property name="ObjectShortName">o_tc</obj_property>
+         <obj_property name="CustomSignalColor">#00FFFF</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
-      <wvobject fp_name="/DMA_Sim/u_dma/dma_registers_signal" type="array">
-         <obj_property name="ElementShortName">dma_registers_signal[0:3]</obj_property>
-         <obj_property name="ObjectShortName">dma_registers_signal[0:3]</obj_property>
+      <wvobject fp_name="/DMA_Sim/u_dma/dma_registers_debug" type="array">
+         <obj_property name="ElementShortName">dma_registers_debug[0:3]</obj_property>
+         <obj_property name="ObjectShortName">dma_registers_debug[0:3]</obj_property>
          <obj_property name="isExpanded"></obj_property>
+         <wvobject fp_name="/DMA_Sim/u_dma/dma_registers_debug[0]" type="array">
+            <obj_property name="ElementShortName">[0]</obj_property>
+            <obj_property name="ObjectShortName">[0]</obj_property>
+            <obj_property name="isExpanded"></obj_property>
+         </wvobject>
+         <wvobject fp_name="/DMA_Sim/u_dma/dma_registers_debug[1]" type="array">
+            <obj_property name="ElementShortName">[1]</obj_property>
+            <obj_property name="ObjectShortName">[1]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DMA_Sim/u_dma/dma_registers_debug[2]" type="array">
+            <obj_property name="ElementShortName">[2]</obj_property>
+            <obj_property name="ObjectShortName">[2]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DMA_Sim/u_dma/dma_registers_debug[3]" type="array">
+            <obj_property name="ElementShortName">[3]</obj_property>
+            <obj_property name="ObjectShortName">[3]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DMA_Sim/u_dma/dma_registers_debug[0]" type="array">
+            <obj_property name="ElementShortName">[0]</obj_property>
+            <obj_property name="ObjectShortName">[0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DMA_Sim/u_dma/dma_registers_debug[1]" type="array">
+            <obj_property name="ElementShortName">[1]</obj_property>
+            <obj_property name="ObjectShortName">[1]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DMA_Sim/u_dma/dma_registers_debug[2]" type="array">
+            <obj_property name="ElementShortName">[2]</obj_property>
+            <obj_property name="ObjectShortName">[2]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DMA_Sim/u_dma/dma_registers_debug[3]" type="array">
+            <obj_property name="ElementShortName">[3]</obj_property>
+            <obj_property name="ObjectShortName">[3]</obj_property>
+         </wvobject>
+      </wvobject>
+      <wvobject fp_name="/DMA_Sim/u_dma/dma_mode_debug" type="array">
+         <obj_property name="ElementShortName">dma_mode_debug[7:0]</obj_property>
+         <obj_property name="ObjectShortName">dma_mode_debug[7:0]</obj_property>
       </wvobject>
       <wvobject fp_name="/DMA_Sim/u_dma/dma_state" type="other">
          <obj_property name="ElementShortName">dma_state</obj_property>
@@ -315,18 +375,9 @@
          <obj_property name="CustomSignalColor">#FF00FF</obj_property>
          <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
-      <wvobject fp_name="/DMA_Sim/u_dma/dma_mode" type="array">
-         <obj_property name="ElementShortName">dma_mode[7:0]</obj_property>
-         <obj_property name="ObjectShortName">dma_mode[7:0]</obj_property>
-      </wvobject>
       <wvobject fp_name="/DMA_Sim/u_dma/current_channel" type="other">
          <obj_property name="ElementShortName">current_channel</obj_property>
          <obj_property name="ObjectShortName">current_channel</obj_property>
-      </wvobject>
-      <wvobject fp_name="/DMA_Sim/u_dma/dma_request" type="array">
-         <obj_property name="ElementShortName">dma_request[3:0]</obj_property>
-         <obj_property name="ObjectShortName">dma_request[3:0]</obj_property>
-         <obj_property name="Radix">BINARYRADIX</obj_property>
       </wvobject>
       <wvobject fp_name="/DMA_Sim/u_dma/channel_priorities" type="array">
          <obj_property name="ElementShortName">channel_priorities[0:3][3:0]</obj_property>
