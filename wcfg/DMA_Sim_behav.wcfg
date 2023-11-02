@@ -12,17 +12,19 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="0.000000000 ms"></ZoomStartTime>
-      <ZoomEndTime time="80.000000001 ms"></ZoomEndTime>
-      <Cursor1Time time="1.556706500 ms"></Cursor1Time>
+      <ZoomStartTime time="91,584,763.833 ns"></ZoomStartTime>
+      <ZoomEndTime time="91,586,891.834 ns"></ZoomEndTime>
+      <Cursor1Time time="91,587,055.500 ns"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="188"></NameColumnWidth>
+      <NameColumnWidth column_width="168"></NameColumnWidth>
       <ValueColumnWidth column_width="58"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="28" />
+   <WVObjectSize size="29" />
    <wave_markers>
-      <marker time="2690113000" label="" />
+      <marker time="84158970500" label="" />
+      <marker time="84189845500" label="" />
+      <marker time="87993570500" label="" />
    </wave_markers>
    <wvobject fp_name="/DMA_Sim/cpu_clk" type="logic">
       <obj_property name="ElementShortName">cpu_clk</obj_property>
@@ -68,6 +70,11 @@
    <wvobject fp_name="/DMA_Sim/ram2_cs" type="logic">
       <obj_property name="ElementShortName">ram2_cs</obj_property>
       <obj_property name="ObjectShortName">ram2_cs</obj_property>
+   </wvobject>
+   <wvobject fp_name="/DMA_Sim/dma_channels_state" type="array">
+      <obj_property name="ElementShortName">dma_channels_state[0:3]</obj_property>
+      <obj_property name="ObjectShortName">dma_channels_state[0:3]</obj_property>
+      <obj_property name="isExpanded"></obj_property>
    </wvobject>
    <wvobject fp_name="/DMA_Sim/dma_addr" type="array">
       <obj_property name="ElementShortName">dma_addr[15:0]</obj_property>
@@ -323,39 +330,6 @@
          <obj_property name="ElementShortName">dma_registers_debug[0:3]</obj_property>
          <obj_property name="ObjectShortName">dma_registers_debug[0:3]</obj_property>
          <obj_property name="isExpanded"></obj_property>
-         <wvobject fp_name="/DMA_Sim/u_dma/dma_registers_debug[0]" type="array">
-            <obj_property name="ElementShortName">[0]</obj_property>
-            <obj_property name="ObjectShortName">[0]</obj_property>
-            <obj_property name="isExpanded"></obj_property>
-         </wvobject>
-         <wvobject fp_name="/DMA_Sim/u_dma/dma_registers_debug[1]" type="array">
-            <obj_property name="ElementShortName">[1]</obj_property>
-            <obj_property name="ObjectShortName">[1]</obj_property>
-         </wvobject>
-         <wvobject fp_name="/DMA_Sim/u_dma/dma_registers_debug[2]" type="array">
-            <obj_property name="ElementShortName">[2]</obj_property>
-            <obj_property name="ObjectShortName">[2]</obj_property>
-         </wvobject>
-         <wvobject fp_name="/DMA_Sim/u_dma/dma_registers_debug[3]" type="array">
-            <obj_property name="ElementShortName">[3]</obj_property>
-            <obj_property name="ObjectShortName">[3]</obj_property>
-         </wvobject>
-         <wvobject fp_name="/DMA_Sim/u_dma/dma_registers_debug[0]" type="array">
-            <obj_property name="ElementShortName">[0]</obj_property>
-            <obj_property name="ObjectShortName">[0]</obj_property>
-         </wvobject>
-         <wvobject fp_name="/DMA_Sim/u_dma/dma_registers_debug[1]" type="array">
-            <obj_property name="ElementShortName">[1]</obj_property>
-            <obj_property name="ObjectShortName">[1]</obj_property>
-         </wvobject>
-         <wvobject fp_name="/DMA_Sim/u_dma/dma_registers_debug[2]" type="array">
-            <obj_property name="ElementShortName">[2]</obj_property>
-            <obj_property name="ObjectShortName">[2]</obj_property>
-         </wvobject>
-         <wvobject fp_name="/DMA_Sim/u_dma/dma_registers_debug[3]" type="array">
-            <obj_property name="ElementShortName">[3]</obj_property>
-            <obj_property name="ObjectShortName">[3]</obj_property>
-         </wvobject>
       </wvobject>
       <wvobject fp_name="/DMA_Sim/u_dma/dma_mode_debug" type="array">
          <obj_property name="ElementShortName">dma_mode_debug[7:0]</obj_property>

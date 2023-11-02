@@ -375,7 +375,7 @@ begin
                                     when 0 => dma_mode := dma_mode and X"FE"; 
                                     when 1 => dma_mode := dma_mode and X"FD";
                                     when 2 => dma_mode := dma_mode and X"FB";
-                                    when 3 => dma_mode := dma_mode and X"F8";
+                                    when 3 => dma_mode := dma_mode and X"F7";
                                     when others => dma_mode := X"00";
                                 end case;
                             end if;
