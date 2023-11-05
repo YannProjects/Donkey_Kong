@@ -44,14 +44,17 @@
 --   - Extended write not handled => EXT WR should start in S2 and normal write in S3
 --   - How to handle WRITE_VERIFY, not clear. 
 --   - UPDATE flag bit inside status register not handled (TODO: Find a proper location to reset the update flag).
---   - Not clear was is done or not on rising or falling edge clock (a NOT gate should be added compared to CPU clock...)
---     All code below is working on rising edge i8257 CLK (i.e.: each falling edge CPU clk).
---     Input "READY" ?
+--   - Not clear was is done or not on rising or falling edge clock (a NOT gate should be added compared to CPU clock but inside datasheet 
+--     state change are triggered with falling edge...)
+--     Anyway, all code below is working on rising edge i8257 CLK (i.e.: also each rising edge CPU clk).
 --     To be checked: Nb bytes counters, when TC et MARK are setted
 -- 01 Nov 2023:
 --    Rotating priority is now ok
 --    Unitary tests performed with Test_DMA.c + Z80  
 --    Nothing to do for WRITE_VERIFY mode
+--    TC and MARK signals seem to be ok now.
+-- 05 Nov 203:
+--    Autoreload seems ok.
 ----------------------------------------------------------------------------------
 
 library IEEE;
@@ -98,8 +101,6 @@ end;
 architecture Behavioral of dma_i8257 is
 
 type dma_register_t is record
-    dma_tc_lsb     : unsigned(7 downto 0);
-    dma_tc_msb     : unsigned(7 downto 0);
     num_bytes      : unsigned(13 downto 0);
     num_cycles     : unsigned(13 downto 0);
     cycle_sel      : unsigned(1 downto 0);
@@ -114,7 +115,7 @@ type channel_priorities_idx_t is array (0 to 3) of integer;
 signal dma_state : dma_states_t;
 signal tc : std_logic_vector(3 downto 0);
 signal msb_lsb_toogle : std_logic;
-signal refresh_update : std_logic_vector(1 downto 0);
+signal refresh_update : unsigned(1 downto 0);
 signal channel_priorities : channel_priorities_t;
 signal channel_priorities_idx : channel_priorities_idx_t;
 signal dma_registers_debug : dma_registers_t;
@@ -146,8 +147,6 @@ variable dma_mode : unsigned(7 downto 0);
 begin
     if i_reset = '1' then
         for i in 0 to 3 loop
-            dma_registers(i).dma_tc_lsb := (others => '0');
-            dma_registers(i).dma_tc_msb := (others => '0');
             dma_registers(i).num_bytes := (others => '0');
             dma_registers(i).num_cycles := (others => '0');
             dma_registers(i).cycle_sel := (others => '0');
@@ -260,6 +259,7 @@ begin
                 when SI =>
                     o_hrq <= '0';
                     o_aen <= '0';
+                    refresh_update <= "00";
                     -- Is there a DMA request pending and is it enabled ?
                     if (unsigned(i_drq) and dma_mode(3 downto 0) and dma_mode(3 downto 0)) /= X"0" then
                         o_hrq <= '1';
@@ -298,10 +298,10 @@ begin
                            end if;
                         end if;                    
                         dma_state <= S1;
-                        o_aen <= '1';
                     end if;
                     
                 when S1 =>
+                    o_aen <= '1';
                     o_Dout <= std_logic_vector(dma_registers(current_channel).dma_address(15 downto 8));
                     o_Am <=  std_logic_vector(dma_registers(current_channel).dma_address(7 downto 0));
                     o_adstb <= '1';
@@ -330,18 +330,13 @@ begin
                         elsif (dma_registers(current_channel).cycle_sel and DMA_READ) = DMA_READ then
                             o_iowmn <= '0';
                         end if;                    
-                        if ((dma_registers(current_channel).num_bytes = 0) and tc(current_channel) = '0') then
+                        if (dma_registers(current_channel).num_bytes = 0) then
                             o_tc <= '1';
                             tc(current_channel) <= '1';
-                            if ((dma_mode and AUTOLOAD) = AUTOLOAD) and (current_channel = 2) then
-                                -- In case of autoload and channel 2, update flag is set to 1 until
-                                -- the completion of the next CH2 DMA cycle. This prevent the CPU
-                                -- to update CH3 as CH2 data is reloading
-                                -- (see description of Autoloadbit 7 inside datasheet and autoload timing
-                                -- figure).
+                            if ((dma_mode and AUTOLOAD) = AUTOLOAD) and (current_channel = 2) then                                
+                                -- Update flag is updated at the end of the next DMA cycle following the reload operation
+                                -- (only in case of AUTOLOAD and channel 2 as per my understanding...)
                                 refresh_update <= "01";
-                                dma_registers(2).dma_address := dma_registers(3).dma_address;
-                                dma_registers(2).num_bytes := dma_registers(3).num_bytes;
                             end if;
                         -- Is it the right way to set TC as inside datasheet it's stated : "...MARK always occurs at 128 (and all mutiples of 128)
                         -- cycled FROM THE END of the data block...". I don't know if it's really "from the end" here. I think so, as num_bytes are decremented.
@@ -355,22 +350,16 @@ begin
                     o_tc <= '0';
                     o_mark <= '0';
                     o_iormn <= '1';
+                    
                     o_iowmn <= '1';
                     o_memrn <= '1';
                     o_memwn <= '1';
                     o_dackn(current_channel) <= '1';
-                    -- Update flag is updated at the end of the next DMA cycle following the reload operation
-                    -- (only in case of AUTOLOAD and channel 2 as per my understanding...)
-                    if refresh_update = "01" then
-                        refresh_update <= "11";
-                    elsif refresh_update = "11" then
-                        refresh_update <= "00";
-                    end if;
 
                     if (dma_mode and TC_STOP) = TC_STOP then
                         if (dma_registers(current_channel).num_bytes = 0) then
                             -- TC stop is not taken into account in case of autoload and channel 2
-                            if ((dma_mode and AUTOLOAD) = 0) or (current_channel /= 2) then
+                            if ((dma_mode and AUTOLOAD) = 0) then
                                 case current_channel is
                                     when 0 => dma_mode := dma_mode and X"FE"; 
                                     when 1 => dma_mode := dma_mode and X"FD";
@@ -378,6 +367,15 @@ begin
                                     when 3 => dma_mode := dma_mode and X"F7";
                                     when others => dma_mode := X"00";
                                 end case;
+                            elsif (current_channel = 2) then
+                                -- In case of autoload and channel 2, update flag is set to 1 until
+                                -- the completion of the next CH2 DMA cycle. This prevent the CPU
+                                -- to update CH3 as CH2 data is reloading
+                                -- (see description of Autoloadbit 7 inside datasheet and autoload timing
+                                -- figure).
+                                dma_registers(2).dma_address := dma_registers(3).dma_address;
+                                dma_registers(2).num_bytes := dma_registers(3).num_bytes;
+                                dma_registers(2).num_cycles := (others => '0');
                             end if;
                         else
                             dma_registers(current_channel).dma_address := dma_registers(current_channel).dma_address + 1;
@@ -419,6 +417,11 @@ begin
                            end if;
                         end if; 
                     end if;
+                    if refresh_update = "01" then
+                        refresh_update <= "11";
+                    else
+                        refresh_update <= "00";
+                    end if;                    
            end case;
         end if;
     end if;
