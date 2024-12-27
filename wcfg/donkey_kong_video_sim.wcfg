@@ -14,19 +14,19 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="2,518,399.574 ns"></ZoomStartTime>
-      <ZoomEndTime time="2,521,017.575 ns"></ZoomEndTime>
-      <Cursor1Time time="2,519,599.574 ns"></Cursor1Time>
+      <ZoomStartTime time="2,732,490.377 ns"></ZoomStartTime>
+      <ZoomEndTime time="2,733,946.378 ns"></ZoomEndTime>
+      <Cursor1Time time="2,732,946.272 ns"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="234"></NameColumnWidth>
-      <ValueColumnWidth column_width="58"></ValueColumnWidth>
+      <NameColumnWidth column_width="266"></NameColumnWidth>
+      <ValueColumnWidth column_width="106"></ValueColumnWidth>
    </column_width_setting>
    <WVObjectSize size="3" />
    <wave_markers>
-      <marker time="23520367971" label="" />
-      <marker time="6331524102" label="" />
-      <marker time="2519599574" label="" />
+      <marker time="2733190377" label="" />
+      <marker time="2733027641" label="" />
+      <marker time="2732946272" label="" />
    </wave_markers>
    <wvobject fp_name="/donkey_kong_video_sim/main_clk" type="logic">
       <obj_property name="ElementShortName">main_clk</obj_property>
@@ -500,33 +500,7 @@
                <obj_property name="ObjectShortName">h[7:0]</obj_property>
                <obj_property name="CustomSignalColor">#FF00FF</obj_property>
                <obj_property name="UseCustomSignalColor">true</obj_property>
-            </wvobject>
-            <wvobject fp_name="vbus287" type="vbus">
-               <obj_property name="label">H</obj_property>
-               <obj_property name="DisplayName">label</obj_property>
                <obj_property name="isExpanded"></obj_property>
-               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/U1L/X_12" type="logic">
-                  <obj_property name="ElementShortName">X_12</obj_property>
-                  <obj_property name="ObjectShortName">X_12</obj_property>
-               </wvobject>
-               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/U1L/X_11" type="logic">
-                  <obj_property name="ElementShortName">X_11</obj_property>
-                  <obj_property name="ObjectShortName">X_11</obj_property>
-               </wvobject>
-               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/h_128n" type="logic">
-                  <obj_property name="ElementShortName">h_128n</obj_property>
-                  <obj_property name="ObjectShortName">h_128n</obj_property>
-               </wvobject>
-               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/h_256n" type="logic">
-                  <obj_property name="ElementShortName">h_256n</obj_property>
-                  <obj_property name="ObjectShortName">h_256n</obj_property>
-               </wvobject>
-               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/h" type="array">
-                  <obj_property name="ElementShortName">h[7:0]</obj_property>
-                  <obj_property name="ObjectShortName">h[7:0]</obj_property>
-                  <obj_property name="CustomSignalColor">#FF00FF</obj_property>
-                  <obj_property name="UseCustomSignalColor">true</obj_property>
-               </wvobject>
             </wvobject>
             <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/v" type="array">
                <obj_property name="ElementShortName">v[8:0]</obj_property>
@@ -771,7 +745,6 @@
                <obj_property name="ObjectShortName">Y_4M[3:0]</obj_property>
                <obj_property name="CustomSignalColor">#FF00FF</obj_property>
                <obj_property name="UseCustomSignalColor">true</obj_property>
-               <obj_property name="isExpanded"></obj_property>
             </wvobject>
             <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/rom_u2F_cs_l" type="logic">
                <obj_property name="ElementShortName">rom_u2F_cs_l</obj_property>
@@ -884,6 +857,7 @@
                <obj_property name="ObjectShortName">U6K_Q[7:0]</obj_property>
                <obj_property name="CustomSignalColor">#FF00FF</obj_property>
                <obj_property name="UseCustomSignalColor">true</obj_property>
+               <obj_property name="isExpanded"></obj_property>
             </wvobject>
             <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/Q7_6K" type="logic">
                <obj_property name="ElementShortName">Q7_6K</obj_property>

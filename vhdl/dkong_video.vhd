@@ -78,7 +78,7 @@ end dk_tg4_video;
 architecture Behavioral of dk_tg4_video is
 
 signal Phi34, Phi34n, g_3K : std_logic;
-signal h, hpo, vfc, S_7_8_J : unsigned(7 downto 0);
+signal h, hpo, vfc, S_7_8_J, S_78R, S_78P : unsigned(7 downto 0);
 signal h_128, h_128n, h_256, h_256n : std_logic;
 signal cnt : unsigned(3 downto 0);
 signal dc, da : std_logic_vector(5 downto 0);
@@ -96,11 +96,11 @@ signal vf : std_logic_vector(7 downto 0);
 signal Q7_6K, Q5_6K, Q4_6K, G_5F, O1A_5F : std_logic;
 signal O3A_5F : std_logic;
 signal O2B_5F : std_logic;
-signal O1B_5F, O0B_5F, u8h_O0B_5F_0, u8h_O0B_5F_1 : std_logic;
+signal O1B_5F, O0B_5F, u8h_O0B_5F_0 : std_logic;
 signal I1C_I0D_8B, Q7_8H, Q1_8H, Q0_8H, Q6_8H, Q1_8N  : std_logic;
 signal mb7074_wr_l, mb7074_wr, csn_6PR : std_logic;
 signal Q_5KL : unsigned(7 downto 0);
-signal C4_8R, C4_8P, scanline_wr_l, scanline_wr_l_0, scanline_wr_l_1 : std_logic;
+signal C4_8R, C4_8P, scanline_wr_l, scanline_wr_l_0 : std_logic;
 signal Q0_4P, Q0_4N, Q7_4P, Q7_4N : std_logic;
 signal DI0_7M, Q_4L, u1ef_clr_l, rom_u2F_cs_l : std_logic;
 signal addr_7M : std_logic_vector(5 downto 0);
@@ -113,7 +113,7 @@ signal do_draw_l, u6pr_ram_wr : std_logic;
 signal U8B_sprite_data, sprite_shifter : std_logic_vector(1 downto 0);
 signal addr_ram_tiles : std_logic_vector(9 downto 0);
 signal addr_tiles_ram_cs_l, char_tile_reload, U234S_S, clk_color_latch : std_logic;
-signal scanline_wr, clk_4KL, clk_4KL_0, clk_4KL_1, clr_u3E4E_l, load_u3E4E_l, cmpblk2_l : std_logic;
+signal scanline_wr, clk_4KL, clk_4KL_0, clr_u3E4E_l, load_u3E4E_l, cmpblk2_l : std_logic;
 signal final_vid, S_U4PN : std_logic_vector(1 downto 0);
 signal final_col, A_U8B, B_U8B, Y_U8B : std_logic_vector(3 downto 0);
 signal addr_2EF, data_2E, data_2F, U6K_D, U6K_Q, U8CD_sprite_shifter  : std_logic_vector(7 downto 0);
@@ -122,10 +122,10 @@ signal hsyncn, vsyncn, flip_1, flip_2, flip_3, flip_4, flip_5 : std_logic;
 signal Q0_8CD, Q15_8CD, Q0_8EF, Q15_8EF : std_logic;
 signal U8CD_reg, U8CD_sprite_data, U8EF_reg, U8EF_sprite_data, reg_8CD, reg_8EF : std_logic_vector(15 downto 0);
 signal h_cnt : unsigned(11 downto 0);
-signal h_256_0, h_256_1, v_4_0, v_4_1, v_clk_0, v_clk_1 : std_logic;
-signal h_256n_0, h_256n_1, u8n_O0B_5F_0, u8n_O0B_5F_1, u1e_h_0_0, u1e_h_0_1 : std_logic;
-signal u2k_h_5_0, u2k_h_5_1, u4a_h_5_0, u4a_h_5_1, u2k_h_2_0, u2k_h_2_1, clk_color_latch_0, clk_color_latch_1 : std_logic;
-signal u14p_h_0_0, u14p_h_0_1, u14n_h_0_0, u14n_h_0_1 : std_logic;
+signal h_256_0, v_4_0, v_clk_0 : std_logic;
+signal h_256n_0, u8n_O0B_5F_0, u1e_h_0_0 : std_logic;
+signal u2k_h_5_0, u4a_h_5_0, u2k_h_2_0, clk_color_latch_0 : std_logic;
+signal u14p_h_0_0, u14n_h_0_0 : std_logic;
 
 signal CA_1N, U1L_reload, CA_1M : std_logic;
 
@@ -271,8 +271,7 @@ begin
         elsif rising_edge(Phi34) then
             -- Detection front montant h_256
             h_256_0 <= h_256;
-            h_256_1 <= h_256_0;
-            if (h_256_0 = '1') and (h_256_1 = '0') then  
+            if (h_256 = '1') and (h_256_0 = '0') then  
                 cnt_vsync <= cnt_vsync + 1;
             end if;
         end if;
@@ -306,10 +305,8 @@ begin
             v_clk <= '0';
         elsif rising_edge(Phi34) then
             u4a_h_5_0 <= h(5);
-            u4a_h_5_1 <= u4a_h_5_0;
             -- Detection front montant h(5)
-            -- if (u4a_h_5_0 = '1') and (u4a_h_5_1 = '0') then
-            if (h(5) = '1') then 
+            if (u4a_h_5_0 = '0') and (h(5) = '1') then 
                 if (not((not(h(7))) and h(6))) = '1' then
                     v_clk <='0';
                 else
@@ -324,8 +321,7 @@ begin
         if rising_edge(Phi34) then
             -- Detection front montant v(4)
             v_4_0 <= v(4);
-            v_4_1 <= v_4_0;        
-            if (v_4_0 = '1' and v_4_1 = '0') then  
+            if (v(4) = '1' and v_4_0 = '0') then  
                 if (v(7 downto 5) = "111") then
                     vblk <='1';
                 else
@@ -343,8 +339,7 @@ begin
          elsif rising_edge(Phi34) then
             -- Detection front montant v_clk
             v_clk_0 <= v_clk;
-            v_clk_1 <= v_clk_0;        
-            if (v_clk_0 = '1' and v_clk_1 = '0') then          
+            if (v_clk = '1' and v_clk_0 = '0') then          
                 if (v = "1" & X"FF") then
                     v <= "011111000";
                 else 
@@ -366,9 +361,8 @@ begin
     begin
         if rising_edge(Phi34) then
             h_256n_0 <= h_256n;
-            h_256n_1 <= h_256n_0;
             -- Detection front montant h_256n
-            if (h_256n_0 = '1') and (h_256n_1 = '0') then  
+            if (h_256n = '1') and (h_256n_0 = '0') then  
                 vfc <= unsigned(vf);
             end if;
         end if;
@@ -576,9 +570,8 @@ begin
     begin
         if falling_edge(Phi34) then
             u8h_O0B_5F_0 <= O0B_5F;
-            u8h_O0B_5F_1 <= u8h_O0B_5F_0;
 		    -- Detection front montant clk_u3E4E
-		    if (u8h_O0B_5F_0 = '1' and u8h_O0B_5F_1 = '0') then
+		    if (O0B_5F = '1' and u8h_O0B_5F_0 = '0') then
                 db <= std_logic_vector(S_7_8_J(3 downto 0));
                 (Q6_8H, Q1_8H, Q0_8H, Q7_8H) <= S_7_8_J(7 downto 4);
             end if;
@@ -595,9 +588,8 @@ begin
 			Q1_8N <= '0';
 		elsif rising_edge(Phi34) then
 		    u8n_O0B_5F_0 <= O0B_5F;
-		    u8n_O0B_5F_1 <= u8n_O0B_5F_0;
-		    -- Dectection front montant O0B_5F
-		    if (u8n_O0B_5F_0 = '1') and (u8n_O0B_5F_1 = '0') and (dataout_7M(0) = '1') then		              
+		    -- Detection front montant O0B_5F
+		    if (O0B_5F = '1') and (u8n_O0B_5F_0 = '0') and (dataout_7M(0) = '1') then		              
 			     Q1_8N <= '1';
 			end if;
 		end if;
@@ -632,9 +624,8 @@ begin
             u1ef_clr_l <= '1';
         elsif rising_edge(Phi34) then
             u1e_h_0_0 <= h(0);
-            u1e_h_0_1 <= u1e_h_0_0;
 		    -- Detection front montant h(0)
-		    if (u1e_h_0_0 = '1' and u1e_h_0_1 = '0') then            
+		    if (h(0) = '1' and u1e_h_0_0 = '0') then            
                 addr_2EF <= i_game_palette & final_col & final_vid;
                 rom_u2F_cs_l <= not (final_vid(0) or final_vid(1));
                 u1ef_clr_l <= cmpblk2_l;
@@ -720,21 +711,26 @@ begin
     end process;
                                    
     -- 7R, 8R, 7P, 8P
-    U7R : entity work.SN74LS283N(SYNTH) port map(X_5 => '1', X_6 => data_6N(4), X_3 => '1', X_2 => data_6N(5), X_14 => '1', X_15 => data_6N(6), X_12 => '1', X_11 => data_6N(7),
-                                   X_7 => C4_8R,
-                                   X_4 => S_7R(0), X_1 => S_7R(1), X_13 => S_7R(2), X_10 => S_7R(3));
-    U8R : entity work.SN74LS283N(SYNTH) port map(X_5 => data_6N(0), X_6 => '1', X_3 => data_6N(1), X_2 => flip_1, X_14 => data_6N(2), X_15 => flip_1, X_12 => data_6N(3), X_11 => i_flipn,
-                                   X_7 => '1', X_9 => C4_8R,
-                                   X_4 => S_8R(0), X_1 => S_8R(1), X_13 => S_8R(2), X_10 => S_8R(3));
-    U7P : entity work.SN74LS283N(SYNTH) port map(X_6 => S_7R(0), X_5 => vf(4), X_2 => S_7R(1), X_3 => vf(5), X_14 => S_7R(2), X_15 => vf(6), X_12 => S_7R(3), X_11 => vf(7),
-                                   X_7 => C4_8P,
-                                   X_4 => S_7P(0), X_1 => S_7P(1), X_13 => S_7P(2), X_10 => S_7P(3));
-    U8P : entity work.SN74LS283N(SYNTH) port map(X_6 => S_8R(0), X_5 => vf(0), X_2 => S_8R(1), X_3 => vf(1), X_14 => S_8R(2), X_15 => vf(2), X_12 => S_8R(3), X_11 => vf(3),
-                                   X_7 => '0', X_9 => C4_8P,
-                                   X_4 => S_8P(0), X_1 => S_8P(1), X_13 => S_8P(2), X_10 => S_8P(3));           
+    -- U7R : entity work.SN74LS283N(SYNTH) port map(X_5 => '1', X_6 => data_6N(4), X_3 => '1', X_2 => data_6N(5), X_14 => '1', X_15 => data_6N(6), X_12 => '1', X_11 => data_6N(7),
+    --                                X_7 => C4_8R,
+    --                                X_4 => S_7R(0), X_1 => S_7R(1), X_13 => S_7R(2), X_10 => S_7R(3));
+    -- U8R : entity work.SN74LS283N(SYNTH) port map(X_5 => data_6N(0), X_6 => '1', X_3 => data_6N(1), X_2 => flip_1, X_14 => data_6N(2), X_15 => flip_1, X_12 => data_6N(3), X_11 => i_flipn,
+    --                                X_7 => '1', X_9 => C4_8R,
+    --                                X_4 => S_8R(0), X_1 => S_8R(1), X_13 => S_8R(2), X_10 => S_8R(3));
+    -- U7P : entity work.SN74LS283N(SYNTH) port map(X_6 => S_7R(0), X_5 => vf(4), X_2 => S_7R(1), X_3 => vf(5), X_14 => S_7R(2), X_15 => vf(6), X_12 => S_7R(3), X_11 => vf(7),
+    --                                X_7 => C4_8P,
+    --                                X_4 => S_7P(0), X_1 => S_7P(1), X_13 => S_7P(2), X_10 => S_7P(3));
+    -- U8P : entity work.SN74LS283N(SYNTH) port map(X_6 => S_8R(0), X_5 => vf(0), X_2 => S_8R(1), X_3 => vf(1), X_14 => S_8R(2), X_15 => vf(2), X_12 => S_8R(3), X_11 => vf(3),
+    --                                X_7 => '0', X_9 => C4_8P,
+    --                                X_4 => S_8P(0), X_1 => S_8P(1), X_13 => S_8P(2), X_10 => S_8P(3));
+    --7R, 8R
+    S_78R <= unsigned(data_6N) + ("1111" & i_flipn & flip_1 & flip_1 & '1') + 1;
+
+	--7P, 8P
+    S_78P <= unsigned(vf) + S_78R;
                                    
     DI0_7M <= not ((not(Q_5KL(6) or Q_5KL(7))) and h(2) and h(3) and h(4) and h(5) and h(6) and h(7) and h_128);
-    do_draw_l <= not(S_7P(0) and S_7P(1) and S_7P(2) and S_7P(3));
+    do_draw_l <= not(S_78P(7) and S_78P(6) and S_78P(5) and S_78P(4));
     
     -- 5L, 5K
     scanline_wr_l <= not((not(Q_5KL(6) or Q_5KL(7))) and Q_4L and h_256n and Phi34);
@@ -754,9 +750,8 @@ begin
             Q_5KL <= (others => '0');
         elsif rising_edge(Phi34) then
             scanline_wr_l_0 <= scanline_wr;
-            scanline_wr_l_0 <= scanline_wr_l_1;
             -- Detection front montant scanline_wr
-            if (scanline_wr_l_0 = '1') and (scanline_wr_l_1 = '0') then
+            if (scanline_wr_l = '1') and (scanline_wr_l_0 = '0') then
                 Q_5KL <= Q_5KL + 1;
             end if;
         end if;
@@ -773,8 +768,8 @@ begin
             Q_4L <= '0';
         elsif rising_edge(Phi34) then
             clk_4KL_0 <= clk_4KL;
-            clk_4KL_1 <= clk_4KL_0;
-            if (clk_4KL_0 = '1') and (clk_4KL_1 = '0') then
+            -- Detection front montant clk_4KL
+            if (clk_4KL = '1') and (clk_4KL_0 = '0') then
                 if (not (do_draw_l and DI0_7M)) = '1' then
                     Q_4L <='1';
                 else
@@ -815,8 +810,8 @@ begin
            esblk  <= '1';
         elsif rising_edge(Phi34) then
             u2k_h_5_0 <= h(5);
-            u2k_h_5_1 <= u2k_h_5_0;
-            if (u2k_h_5_0 = '1') and (u2k_h_5_1 = '0') then
+            -- Detection front montant h(5)
+            if (h(5) = '1') and (u2k_h_5_0 = '0') then
                 if (h(6) = '1') then
                     esblk <='0';
                 else
@@ -833,9 +828,8 @@ begin
            vram_busy <= '1';
         elsif rising_edge(Phi34) then
             u2k_h_2_0 <= h(2);
-            u2k_h_2_1 <= u2k_h_2_0;
             -- Detection front montant h(2)
-            if (u2k_h_2_0 = '1') and (u2k_h_2_1 = '0') then
+            if (h(2) = '1') and (u2k_h_2_0 = '0') then
                 if (h(7 downto 4) = "1111") then
                     vram_busy <='0';
                 else
@@ -913,9 +907,8 @@ begin
     begin
         if rising_edge(Phi34) then
             clk_color_latch_0 <= clk_color_latch;
-            clk_color_latch_1 <= clk_color_latch_0;
             -- Detection front montant clk_color_latch
-            if (clk_color_latch_0 = '1' and clk_color_latch_1 = '0') then
+            if (clk_color_latch = '0' and clk_color_latch_0 = '1') then
 		      col <= data_2N;
 		    end if;
         end if;
@@ -934,9 +927,8 @@ begin
 	begin
         if rising_edge(Phi34) then
            u14p_h_0_0 <= h(0);
-           u14p_h_0_1 <= u14p_h_0_0;
           -- Detection front descendant h(0)
-		  if (u14p_h_0_0 = '0') and (u14p_h_0_1 = '1') then
+		  if (h(0) = '0') and (u14p_h_0_0 = '1') then
             case S_U4PN is
                 when "10" => shift_reg_U4P <= shift_reg_U4P(1 to 7) & '0'; -- Shift left
                 when "01" => shift_reg_U4P <= '0' & shift_reg_U4P(0 to 6); -- Shift right
@@ -959,8 +951,7 @@ begin
       if rising_edge(Phi34) then
           -- Detection front descendant h(0)
           u14n_h_0_0 <= h(0);
-          u14n_h_0_1 <= u14n_h_0_0;          
-          if (u14n_h_0_0 = '0' and u14n_h_0_1 = '1') then
+          if (h(0) = '0' and u14n_h_0_0 = '1') then
             case S_U4PN is
                 when "10" => shift_reg_U4N <= shift_reg_U4N(1 to 7) & '0'; -- Shift left
                 when "01" => shift_reg_U4N <= '0' & shift_reg_U4N(0 to 6); -- Shift right
