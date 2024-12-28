@@ -14,20 +14,15 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="2,732,490.377 ns"></ZoomStartTime>
-      <ZoomEndTime time="2,733,946.378 ns"></ZoomEndTime>
-      <Cursor1Time time="2,732,946.272 ns"></Cursor1Time>
+      <ZoomStartTime time="38,098,052.169 ns"></ZoomStartTime>
+      <ZoomEndTime time="38,100,534.170 ns"></ZoomEndTime>
+      <Cursor1Time time="38,098,733.536 ns"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="266"></NameColumnWidth>
-      <ValueColumnWidth column_width="106"></ValueColumnWidth>
+      <ValueColumnWidth column_width="94"></ValueColumnWidth>
    </column_width_setting>
    <WVObjectSize size="3" />
-   <wave_markers>
-      <marker time="2733190377" label="" />
-      <marker time="2733027641" label="" />
-      <marker time="2732946272" label="" />
-   </wave_markers>
    <wvobject fp_name="/donkey_kong_video_sim/main_clk" type="logic">
       <obj_property name="ElementShortName">main_clk</obj_property>
       <obj_property name="ObjectShortName">main_clk</obj_property>
@@ -84,10 +79,6 @@
          <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/o_hsyncn" type="logic">
             <obj_property name="ElementShortName">o_hsyncn</obj_property>
             <obj_property name="ObjectShortName">o_hsyncn</obj_property>
-         </wvobject>
-         <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/o_hblkn" type="logic">
-            <obj_property name="ElementShortName">o_hblkn</obj_property>
-            <obj_property name="ObjectShortName">o_hblkn</obj_property>
          </wvobject>
          <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/o_vsyncn" type="logic">
             <obj_property name="ElementShortName">o_vsyncn</obj_property>
@@ -373,6 +364,10 @@
                <obj_property name="ElementShortName">o_hsyncn</obj_property>
                <obj_property name="ObjectShortName">o_hsyncn</obj_property>
             </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/o_cmpblk2_l" type="logic">
+               <obj_property name="ElementShortName">o_cmpblk2_l</obj_property>
+               <obj_property name="ObjectShortName">o_cmpblk2_l</obj_property>
+            </wvobject>
             <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/o_r" type="array">
                <obj_property name="ElementShortName">o_r[2:0]</obj_property>
                <obj_property name="ObjectShortName">o_r[2:0]</obj_property>
@@ -384,10 +379,6 @@
             <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/o_b" type="array">
                <obj_property name="ElementShortName">o_b[1:0]</obj_property>
                <obj_property name="ObjectShortName">o_b[1:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/o_cmpsyncn" type="logic">
-               <obj_property name="ElementShortName">o_cmpsyncn</obj_property>
-               <obj_property name="ObjectShortName">o_cmpsyncn</obj_property>
             </wvobject>
             <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/o_1_2_hb" type="logic">
                <obj_property name="ElementShortName">o_1_2_hb</obj_property>

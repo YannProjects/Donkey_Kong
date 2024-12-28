@@ -48,12 +48,11 @@ entity dk_tg4_video is
             i_rst : in std_logic;
             o_vblkn : out std_logic;
             o_vsyncn : out std_logic;
-            o_hblkn : out std_logic;
             o_hsyncn : out std_logic;
             o_r : out std_logic_vector(2 downto 0);
             o_g : out std_logic_vector(2 downto 0);
             o_b : out std_logic_vector(1 downto 0); 
-            o_cmpsyncn : out std_logic;
+            o_cmpblk2_l : out std_logic;
             o_1_2_hb : out std_logic;
             o_1_hb : out std_logic;
             o_vf_2 : out std_logic;
@@ -212,7 +211,6 @@ begin
     h_128 <= not h_128n;
     -- h_256n <= h_128;
     h_256 <= not h_256n;
-    o_hblkn <= h_256n;
     
     -- U3A
     -- U3A : entity work.SN74123N
@@ -282,7 +280,7 @@ begin
     -- 6B
     o_hsyncn <= hsyncn;
     o_vsyncn <= vsyncn;
-    o_cmpsyncn <= hsyncn and vsyncn;
+    o_cmpblk2_l <= cmpblk2_l;
     
     -- 4A, 4B, 5D, 6D
     -- U4A : entity work.SN74LS74N(SYNTH) port map (X_1 => not i_rst, X_2 => not ((not h(7)) and h(6)), X_3 => h(5), X_4 => h_256,
@@ -923,12 +921,12 @@ begin
     --                                X_12 => not h(0), X_9 => '1', X_2 => '1', X_3 => '1',
     --                                X_1 => S0_U4PN, X_19 => S1_U4PN);
     -- U4P                               
-	U4P : process(Phi34)
+	U4P : process(Phi34n)
 	begin
-        if rising_edge(Phi34) then
+        if rising_edge(Phi34n) then
            u14p_h_0_0 <= h(0);
           -- Detection front descendant h(0)
-		  if (h(0) = '0') and (u14p_h_0_0 = '1') then
+		  if (h(0) = '1') and (u14p_h_0_0 = '0') then
             case S_U4PN is
                 when "10" => shift_reg_U4P <= shift_reg_U4P(1 to 7) & '0'; -- Shift left
                 when "01" => shift_reg_U4P <= '0' & shift_reg_U4P(0 to 6); -- Shift right
@@ -946,16 +944,16 @@ begin
     --                                X_12 => not h(0), X_9 => '1', X_2 => '1', X_3 => '1',
     --                                X_1 => S0_U4PN, X_19 => S1_U4PN);
     -- U4N                               
-	process(Phi34)
+	process(Phi34n)
 	begin
-      if rising_edge(Phi34) then
+      if rising_edge(Phi34n) then
           -- Detection front descendant h(0)
           u14n_h_0_0 <= h(0);
-          if (h(0) = '0' and u14n_h_0_0 = '1') then
+          if (h(0) = '1' and u14n_h_0_0 = '0') then
             case S_U4PN is
                 when "10" => shift_reg_U4N <= shift_reg_U4N(1 to 7) & '0'; -- Shift left
                 when "01" => shift_reg_U4N <= '0' & shift_reg_U4N(0 to 6); -- Shift right
-                when "11" => shift_reg_U4N <= data_tile_2;                     -- Parallel load
+                when "11" => shift_reg_U4N <= data_tile_2;                 -- Parallel load
                 when others => null;
             end case;
           end if;
