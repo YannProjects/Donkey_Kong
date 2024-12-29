@@ -456,7 +456,7 @@ begin
     (Q7_6K, cmpblk2_l, Q5_6K, Q4_6K, cd(3), cd(2), cd(1), cd(0)) <= U6K_Q;
 	process(Phi34n)
 	begin
-		if rising_edge(Phi34n) then
+		if rising_edge(Phi34) then
 			if (G_5F = '0') then
 				U6K_Q <= U6K_D;
 			end if;
@@ -742,16 +742,12 @@ begin
     --                                X_14 => Q0_5K, X_13 => Q1_5K, X_12 => Q2_5K, X_11 => Q3_5K, 
     --                                X_2 => scanline_wr_l, X_1 => h_256n);    
     -- U5KL
-    p_u5kl : process(Phi34, h_256n)
+    p_u5kl : process(scanline_wr_l, h_256n)
     begin
         if (h_256n = '0') then
             Q_5KL <= (others => '0');
-        elsif rising_edge(Phi34) then
-            scanline_wr_l_0 <= scanline_wr;
-            -- Detection front montant scanline_wr
-            if (scanline_wr_l = '1') and (scanline_wr_l_0 = '0') then
-                Q_5KL <= Q_5KL + 1;
-            end if;
+        elsif rising_edge(scanline_wr_l) then
+            Q_5KL <= Q_5KL + 1;
         end if;
     end process;
                                                          

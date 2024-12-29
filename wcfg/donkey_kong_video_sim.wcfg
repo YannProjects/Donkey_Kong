@@ -14,13 +14,13 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="38,098,052.169 ns"></ZoomStartTime>
-      <ZoomEndTime time="38,100,534.170 ns"></ZoomEndTime>
-      <Cursor1Time time="38,098,733.536 ns"></Cursor1Time>
+      <ZoomStartTime time="167,091.587 ns"></ZoomStartTime>
+      <ZoomEndTime time="169,589.588 ns"></ZoomEndTime>
+      <Cursor1Time time="168,554.764 ns"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="266"></NameColumnWidth>
-      <ValueColumnWidth column_width="94"></ValueColumnWidth>
+      <ValueColumnWidth column_width="86"></ValueColumnWidth>
    </column_width_setting>
    <WVObjectSize size="3" />
    <wvobject fp_name="/donkey_kong_video_sim/main_clk" type="logic">
@@ -922,6 +922,10 @@
                <obj_property name="ElementShortName">C4_8P</obj_property>
                <obj_property name="ObjectShortName">C4_8P</obj_property>
             </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/Q_5KL" type="array">
+               <obj_property name="ElementShortName">Q_5KL[7:0]</obj_property>
+               <obj_property name="ObjectShortName">Q_5KL[7:0]</obj_property>
+            </wvobject>
             <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/scanline_wr_l" type="logic">
                <obj_property name="ElementShortName">scanline_wr_l</obj_property>
                <obj_property name="ObjectShortName">scanline_wr_l</obj_property>
@@ -974,6 +978,10 @@
                <obj_property name="ElementShortName">u6pr_ram_wr</obj_property>
                <obj_property name="ObjectShortName">u6pr_ram_wr</obj_property>
             </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/clk_4KL" type="logic">
+               <obj_property name="ElementShortName">clk_4KL</obj_property>
+               <obj_property name="ObjectShortName">clk_4KL</obj_property>
+            </wvobject>
             <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/U8B_sprite_data" type="array">
                <obj_property name="ElementShortName">U8B_sprite_data[1:0]</obj_property>
                <obj_property name="ObjectShortName">U8B_sprite_data[1:0]</obj_property>
@@ -981,14 +989,6 @@
             <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/char_tile_reload" type="logic">
                <obj_property name="ElementShortName">char_tile_reload</obj_property>
                <obj_property name="ObjectShortName">char_tile_reload</obj_property>
-            </wvobject>
-            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/scanline_wr" type="logic">
-               <obj_property name="ElementShortName">scanline_wr</obj_property>
-               <obj_property name="ObjectShortName">scanline_wr</obj_property>
-            </wvobject>
-            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/clk_4KL" type="logic">
-               <obj_property name="ElementShortName">clk_4KL</obj_property>
-               <obj_property name="ObjectShortName">clk_4KL</obj_property>
             </wvobject>
             <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/clr_u3E4E_l" type="logic">
                <obj_property name="ElementShortName">clr_u3E4E_l</obj_property>
