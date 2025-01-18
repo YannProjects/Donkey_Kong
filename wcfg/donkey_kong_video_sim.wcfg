@@ -3,7 +3,7 @@
    <wave_state>
    </wave_state>
    <db_ref_list>
-      <db_ref path="donkey_kong_video_sim_behav.wdb" id="1">
+      <db_ref path="C:/Users/yannv/Documents/Projets_HW/Donkey_Kong/Dkong_Artyx7/Dkong_Artyx7.sim/sim_1/behav/xsim/donkey_kong_video_sim_behav.wdb" id="1">
          <top_modules>
             <top_module name="dkong_pack" />
             <top_module name="donkey_kong_video_sim" />
@@ -14,15 +14,20 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="167,091.587 ns"></ZoomStartTime>
-      <ZoomEndTime time="169,589.588 ns"></ZoomEndTime>
-      <Cursor1Time time="168,554.764 ns"></Cursor1Time>
+      <ZoomStartTime time="8,788.871509 us"></ZoomStartTime>
+      <ZoomEndTime time="9,440.871510 us"></ZoomEndTime>
+      <Cursor1Time time="9,088.871509 us"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="266"></NameColumnWidth>
-      <ValueColumnWidth column_width="86"></ValueColumnWidth>
+      <NameColumnWidth column_width="239"></NameColumnWidth>
+      <ValueColumnWidth column_width="58"></ValueColumnWidth>
    </column_width_setting>
    <WVObjectSize size="3" />
+   <wave_markers>
+      <marker time="8588946980" label="" />
+      <marker time="8586392027" label="" />
+      <marker time="8651437547" label="" />
+   </wave_markers>
    <wvobject fp_name="/donkey_kong_video_sim/main_clk" type="logic">
       <obj_property name="ElementShortName">main_clk</obj_property>
       <obj_property name="ObjectShortName">main_clk</obj_property>
@@ -171,10 +176,6 @@
          <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/pixel_clk" type="logic">
             <obj_property name="ElementShortName">pixel_clk</obj_property>
             <obj_property name="ObjectShortName">pixel_clk</obj_property>
-         </wvobject>
-         <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/h_1_2" type="logic">
-            <obj_property name="ElementShortName">h_1_2</obj_property>
-            <obj_property name="ObjectShortName">h_1_2</obj_property>
          </wvobject>
          <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/h_1" type="logic">
             <obj_property name="ElementShortName">h_1</obj_property>
@@ -380,10 +381,6 @@
                <obj_property name="ElementShortName">o_b[1:0]</obj_property>
                <obj_property name="ObjectShortName">o_b[1:0]</obj_property>
             </wvobject>
-            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/o_1_2_hb" type="logic">
-               <obj_property name="ElementShortName">o_1_2_hb</obj_property>
-               <obj_property name="ObjectShortName">o_1_2_hb</obj_property>
-            </wvobject>
             <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/o_1_hb" type="logic">
                <obj_property name="ElementShortName">o_1_hb</obj_property>
                <obj_property name="ObjectShortName">o_1_hb</obj_property>
@@ -458,18 +455,6 @@
                <obj_property name="ElementShortName">h_256n</obj_property>
                <obj_property name="ObjectShortName">h_256n</obj_property>
             </wvobject>
-            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/dc" type="array">
-               <obj_property name="ElementShortName">dc[5:0]</obj_property>
-               <obj_property name="ObjectShortName">dc[5:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/da" type="array">
-               <obj_property name="ElementShortName">da[5:0]</obj_property>
-               <obj_property name="ObjectShortName">da[5:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/cd" type="array">
-               <obj_property name="ElementShortName">cd[3:0]</obj_property>
-               <obj_property name="ObjectShortName">cd[3:0]</obj_property>
-            </wvobject>
             <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/db" type="array">
                <obj_property name="ElementShortName">db[3:0]</obj_property>
                <obj_property name="ObjectShortName">db[3:0]</obj_property>
@@ -498,6 +483,7 @@
                <obj_property name="ObjectShortName">v[8:0]</obj_property>
                <obj_property name="CustomSignalColor">#FF00FF</obj_property>
                <obj_property name="UseCustomSignalColor">true</obj_property>
+               <obj_property name="isExpanded"></obj_property>
             </wvobject>
             <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/vf" type="array">
                <obj_property name="ElementShortName">vf[7:0]</obj_property>
@@ -743,89 +729,413 @@
                <obj_property name="CustomSignalColor">#FFD700</obj_property>
                <obj_property name="UseCustomSignalColor">true</obj_property>
             </wvobject>
-            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/S_7P" type="array">
-               <obj_property name="ElementShortName">S_7P[3:0]</obj_property>
-               <obj_property name="ObjectShortName">S_7P[3:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/S_8P" type="array">
-               <obj_property name="ElementShortName">S_8P[3:0]</obj_property>
-               <obj_property name="ObjectShortName">S_8P[3:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/S_7R" type="array">
-               <obj_property name="ElementShortName">S_7R[3:0]</obj_property>
-               <obj_property name="ObjectShortName">S_7R[3:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/S_8R" type="array">
-               <obj_property name="ElementShortName">S_8R[3:0]</obj_property>
-               <obj_property name="ObjectShortName">S_8R[3:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/hpo" type="array">
-               <obj_property name="ElementShortName">hpo[7:0]</obj_property>
-               <obj_property name="ObjectShortName">hpo[7:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/hd" type="array">
-               <obj_property name="ElementShortName">hd[7:0]</obj_property>
-               <obj_property name="ObjectShortName">hd[7:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/g_3K" type="logic">
-               <obj_property name="ElementShortName">g_3K</obj_property>
-               <obj_property name="ObjectShortName">g_3K</obj_property>
-            </wvobject>
-            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/Q_6H" type="array">
-               <obj_property name="ElementShortName">Q_6H[7:0]</obj_property>
-               <obj_property name="ObjectShortName">Q_6H[7:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/data_7C" type="array">
-               <obj_property name="ElementShortName">data_7C[7:0]</obj_property>
-               <obj_property name="ObjectShortName">data_7C[7:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/data_7D" type="array">
-               <obj_property name="ElementShortName">data_7D[7:0]</obj_property>
-               <obj_property name="ObjectShortName">data_7D[7:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/data_7E" type="array">
-               <obj_property name="ElementShortName">data_7E[7:0]</obj_property>
-               <obj_property name="ObjectShortName">data_7E[7:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/data_7F" type="array">
-               <obj_property name="ElementShortName">data_7F[7:0]</obj_property>
-               <obj_property name="ObjectShortName">data_7F[7:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/data_6N" type="array">
-               <obj_property name="ElementShortName">data_6N[7:0]</obj_property>
-               <obj_property name="ObjectShortName">data_6N[7:0]</obj_property>
-            </wvobject>
             <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/din_6PR" type="array">
                <obj_property name="ElementShortName">din_6PR[7:0]</obj_property>
                <obj_property name="ObjectShortName">din_6PR[7:0]</obj_property>
             </wvobject>
-            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/dout_6PR" type="array">
-               <obj_property name="ElementShortName">dout_6PR[7:0]</obj_property>
-               <obj_property name="ObjectShortName">dout_6PR[7:0]</obj_property>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/Q_6H" type="array">
+               <obj_property name="ElementShortName">Q_6H[7:0]</obj_property>
+               <obj_property name="ObjectShortName">Q_6H[7:0]</obj_property>
+               <obj_property name="CustomSignalColor">#00FF00</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
             </wvobject>
-            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/datain_7M" type="array">
-               <obj_property name="ElementShortName">datain_7M[7:0]</obj_property>
-               <obj_property name="ObjectShortName">datain_7M[7:0]</obj_property>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/Phi34" type="logic">
+               <obj_property name="ElementShortName">Phi34</obj_property>
+               <obj_property name="ObjectShortName">Phi34</obj_property>
+               <obj_property name="CustomSignalColor">#FFD700</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/Phi34n" type="logic">
+               <obj_property name="ElementShortName">Phi34n</obj_property>
+               <obj_property name="ObjectShortName">Phi34n</obj_property>
+               <obj_property name="CustomSignalColor">#FFD700</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
             </wvobject>
             <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/addr_6PR" type="array">
                <obj_property name="ElementShortName">addr_6PR[9:0]</obj_property>
                <obj_property name="ObjectShortName">addr_6PR[9:0]</obj_property>
+               <obj_property name="CustomSignalColor">#FFD700</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/dout_6PR" type="array">
+               <obj_property name="ElementShortName">dout_6PR[7:0]</obj_property>
+               <obj_property name="ObjectShortName">dout_6PR[7:0]</obj_property>
+               <obj_property name="CustomSignalColor">#FFD700</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/u6pr_ram_wr" type="logic">
+               <obj_property name="ElementShortName">u6pr_ram_wr</obj_property>
+               <obj_property name="ObjectShortName">u6pr_ram_wr</obj_property>
+               <obj_property name="CustomSignalColor">#FFD700</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/data_6N" type="array">
+               <obj_property name="ElementShortName">data_6N[7:0]</obj_property>
+               <obj_property name="ObjectShortName">data_6N[7:0]</obj_property>
+               <obj_property name="CustomSignalColor">#FFD700</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/S_78R" type="array">
+               <obj_property name="ElementShortName">S_78R[7:0]</obj_property>
+               <obj_property name="ObjectShortName">S_78R[7:0]</obj_property>
+               <obj_property name="CustomSignalColor">#FFD700</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/S_78P" type="array">
+               <obj_property name="ElementShortName">S_78P[7:0]</obj_property>
+               <obj_property name="ObjectShortName">S_78P[7:0]</obj_property>
+               <obj_property name="CustomSignalColor">#FFD700</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/clk_4KL" type="logic">
+               <obj_property name="ElementShortName">clk_4KL</obj_property>
+               <obj_property name="ObjectShortName">clk_4KL</obj_property>
+               <obj_property name="CustomSignalColor">#FFD700</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/do_draw_l" type="logic">
+               <obj_property name="ElementShortName">do_draw_l</obj_property>
+               <obj_property name="ObjectShortName">do_draw_l</obj_property>
+               <obj_property name="CustomSignalColor">#FFD700</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/h_256n" type="logic">
+               <obj_property name="ElementShortName">h_256n</obj_property>
+               <obj_property name="ObjectShortName">h_256n</obj_property>
+               <obj_property name="CustomSignalColor">#FFD700</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/DI0_7M" type="logic">
+               <obj_property name="ElementShortName">DI0_7M</obj_property>
+               <obj_property name="ObjectShortName">DI0_7M</obj_property>
+               <obj_property name="CustomSignalColor">#FFD700</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/Q_4L" type="logic">
+               <obj_property name="ElementShortName">Q_4L</obj_property>
+               <obj_property name="ObjectShortName">Q_4L</obj_property>
+               <obj_property name="CustomSignalColor">#FFD700</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/scanline_wr" type="logic">
+               <obj_property name="ElementShortName">scanline_wr</obj_property>
+               <obj_property name="ObjectShortName">scanline_wr</obj_property>
+               <obj_property name="CustomSignalColor">#FFD700</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/Q_5KL" type="array">
+               <obj_property name="ElementShortName">Q_5KL[7:0]</obj_property>
+               <obj_property name="ObjectShortName">Q_5KL[7:0]</obj_property>
+               <obj_property name="CustomSignalColor">#FFD700</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/addr_7M" type="array">
+               <obj_property name="ElementShortName">addr_7M[5:0]</obj_property>
+               <obj_property name="ObjectShortName">addr_7M[5:0]</obj_property>
+               <obj_property name="CustomSignalColor">#FFD700</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/datain_7M" type="array">
+               <obj_property name="ElementShortName">datain_7M[7:0]</obj_property>
+               <obj_property name="ObjectShortName">datain_7M[7:0]</obj_property>
+               <obj_property name="CustomSignalColor">#FFD700</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/dataout_7M" type="array">
+               <obj_property name="ElementShortName">dataout_7M[8:0]</obj_property>
+               <obj_property name="ObjectShortName">dataout_7M[8:0]</obj_property>
+               <obj_property name="CustomSignalColor">#FFD700</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+               <obj_property name="Radix">HEXRADIX</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/Q_6J" type="array">
+               <obj_property name="ElementShortName">Q_6J[7:0]</obj_property>
+               <obj_property name="ObjectShortName">Q_6J[7:0]</obj_property>
+               <obj_property name="CustomSignalColor">#FFD700</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/U6K_D" type="array">
+               <obj_property name="ElementShortName">U6K_D[7:0]</obj_property>
+               <obj_property name="ObjectShortName">U6K_D[7:0]</obj_property>
+               <obj_property name="CustomSignalColor">#FFD700</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/U6K_Q" type="array">
+               <obj_property name="ElementShortName">U6K_Q[7:0]</obj_property>
+               <obj_property name="ObjectShortName">U6K_Q[7:0]</obj_property>
+               <obj_property name="CustomSignalColor">#FFD700</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/Q1_8N" type="logic">
+               <obj_property name="ElementShortName">Q1_8N</obj_property>
+               <obj_property name="ObjectShortName">Q1_8N</obj_property>
+               <obj_property name="CustomSignalColor">#FFD700</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/I1C_I0D_8B" type="logic">
+               <obj_property name="ElementShortName">I1C_I0D_8B</obj_property>
+               <obj_property name="ObjectShortName">I1C_I0D_8B</obj_property>
+               <obj_property name="CustomSignalColor">#FFD700</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/Q7_6K" type="logic">
+               <obj_property name="ElementShortName">Q7_6K</obj_property>
+               <obj_property name="ObjectShortName">Q7_6K</obj_property>
+               <obj_property name="CustomSignalColor">#FFD700</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/S_7_8_J" type="array">
+               <obj_property name="ElementShortName">S_7_8_J[7:0]</obj_property>
+               <obj_property name="ObjectShortName">S_7_8_J[7:0]</obj_property>
+               <obj_property name="CustomSignalColor">#FFD700</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+            </wvobject>
+            <wvobject fp_name="vbus287" type="vbus">
+               <obj_property name="label">Q_8H</obj_property>
+               <obj_property name="DisplayName">label</obj_property>
+               <obj_property name="CustomSignalColor">#FFD700</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/Q6_8H" type="logic">
+                  <obj_property name="ElementShortName">Q6_8H</obj_property>
+                  <obj_property name="ObjectShortName">Q6_8H</obj_property>
+                  <obj_property name="CustomSignalColor">#FFD700</obj_property>
+                  <obj_property name="UseCustomSignalColor">true</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/Q1_8H" type="logic">
+                  <obj_property name="ElementShortName">Q1_8H</obj_property>
+                  <obj_property name="ObjectShortName">Q1_8H</obj_property>
+                  <obj_property name="CustomSignalColor">#FFD700</obj_property>
+                  <obj_property name="UseCustomSignalColor">true</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/Q0_8H" type="logic">
+                  <obj_property name="ElementShortName">Q0_8H</obj_property>
+                  <obj_property name="ObjectShortName">Q0_8H</obj_property>
+                  <obj_property name="CustomSignalColor">#FFD700</obj_property>
+                  <obj_property name="UseCustomSignalColor">true</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/Q7_8H" type="logic">
+                  <obj_property name="ElementShortName">Q7_8H</obj_property>
+                  <obj_property name="ObjectShortName">Q7_8H</obj_property>
+                  <obj_property name="CustomSignalColor">#FFD700</obj_property>
+                  <obj_property name="UseCustomSignalColor">true</obj_property>
+               </wvobject>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/db" type="array">
+               <obj_property name="ElementShortName">db[3:0]</obj_property>
+               <obj_property name="ObjectShortName">db[3:0]</obj_property>
+               <obj_property name="CustomSignalColor">#FFD700</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/hd" type="array">
+               <obj_property name="ElementShortName">hd[7:0]</obj_property>
+               <obj_property name="ObjectShortName">hd[7:0]</obj_property>
+               <obj_property name="CustomSignalColor">#FFD700</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+               <obj_property name="Radix">HEXRADIX</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/hpo" type="array">
+               <obj_property name="ElementShortName">hpo[7:0]</obj_property>
+               <obj_property name="ObjectShortName">hpo[7:0]</obj_property>
+               <obj_property name="CustomSignalColor">#FFD700</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/addr_7CDEF" type="array">
+               <obj_property name="ElementShortName">addr_7CDEF[10:0]</obj_property>
+               <obj_property name="ObjectShortName">addr_7CDEF[10:0]</obj_property>
+               <obj_property name="CustomSignalColor">#FFD700</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/data_7C" type="array">
+               <obj_property name="ElementShortName">data_7C[7:0]</obj_property>
+               <obj_property name="ObjectShortName">data_7C[7:0]</obj_property>
+               <obj_property name="CustomSignalColor">#FFD700</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/data_7D" type="array">
+               <obj_property name="ElementShortName">data_7D[7:0]</obj_property>
+               <obj_property name="ObjectShortName">data_7D[7:0]</obj_property>
+               <obj_property name="CustomSignalColor">#FFD700</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/data_7E" type="array">
+               <obj_property name="ElementShortName">data_7E[7:0]</obj_property>
+               <obj_property name="ObjectShortName">data_7E[7:0]</obj_property>
+               <obj_property name="CustomSignalColor">#FFD700</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/data_7F" type="array">
+               <obj_property name="ElementShortName">data_7F[7:0]</obj_property>
+               <obj_property name="ObjectShortName">data_7F[7:0]</obj_property>
+               <obj_property name="CustomSignalColor">#FFD700</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/U8B_sprite_data" type="array">
+               <obj_property name="ElementShortName">U8B_sprite_data[1:0]</obj_property>
+               <obj_property name="ObjectShortName">U8B_sprite_data[1:0]</obj_property>
+               <obj_property name="CustomSignalColor">#FFD700</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/sprite_shifter" type="array">
+               <obj_property name="ElementShortName">sprite_shifter[1:0]</obj_property>
+               <obj_property name="ObjectShortName">sprite_shifter[1:0]</obj_property>
+               <obj_property name="CustomSignalColor">#FFD700</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/U8CD_sprite_data" type="array">
+               <obj_property name="ElementShortName">U8CD_sprite_data[15:0]</obj_property>
+               <obj_property name="ObjectShortName">U8CD_sprite_data[15:0]</obj_property>
+               <obj_property name="CustomSignalColor">#FFD700</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/U8CD_reg" type="array">
+               <obj_property name="ElementShortName">U8CD_reg[15:0]</obj_property>
+               <obj_property name="ObjectShortName">U8CD_reg[15:0]</obj_property>
+               <obj_property name="CustomSignalColor">#FFD700</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/U8EF_sprite_data" type="array">
+               <obj_property name="ElementShortName">U8EF_sprite_data[15:0]</obj_property>
+               <obj_property name="ObjectShortName">U8EF_sprite_data[15:0]</obj_property>
+               <obj_property name="CustomSignalColor">#FFD700</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/U8EF_reg" type="array">
+               <obj_property name="ElementShortName">U8EF_reg[15:0]</obj_property>
+               <obj_property name="ObjectShortName">U8EF_reg[15:0]</obj_property>
+               <obj_property name="CustomSignalColor">#FFD700</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/Q0_8CD" type="logic">
+               <obj_property name="ElementShortName">Q0_8CD</obj_property>
+               <obj_property name="ObjectShortName">Q0_8CD</obj_property>
+               <obj_property name="CustomSignalColor">#FFD700</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/Q15_8CD" type="logic">
+               <obj_property name="ElementShortName">Q15_8CD</obj_property>
+               <obj_property name="ObjectShortName">Q15_8CD</obj_property>
+               <obj_property name="CustomSignalColor">#FFD700</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/Q5_6K" type="logic">
+               <obj_property name="ElementShortName">Q5_6K</obj_property>
+               <obj_property name="ObjectShortName">Q5_6K</obj_property>
+               <obj_property name="CustomSignalColor">#FFD700</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/G_5F" type="logic">
+               <obj_property name="ElementShortName">G_5F</obj_property>
+               <obj_property name="ObjectShortName">G_5F</obj_property>
+               <obj_property name="CustomSignalColor">#FFD700</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/O0B_5F" type="logic">
+               <obj_property name="ElementShortName">O0B_5F</obj_property>
+               <obj_property name="ObjectShortName">O0B_5F</obj_property>
+               <obj_property name="CustomSignalColor">#FFD700</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/O1B_5F" type="logic">
+               <obj_property name="ElementShortName">O1B_5F</obj_property>
+               <obj_property name="ObjectShortName">O1B_5F</obj_property>
+               <obj_property name="CustomSignalColor">#FFD700</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/O2B_5F" type="logic">
+               <obj_property name="ElementShortName">O2B_5F</obj_property>
+               <obj_property name="ObjectShortName">O2B_5F</obj_property>
+               <obj_property name="CustomSignalColor">#FFD700</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/A_U8B" type="array">
+               <obj_property name="ElementShortName">A_U8B[3:0]</obj_property>
+               <obj_property name="ObjectShortName">A_U8B[3:0]</obj_property>
+               <obj_property name="CustomSignalColor">#FFD700</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/B_U8B" type="array">
+               <obj_property name="ElementShortName">B_U8B[3:0]</obj_property>
+               <obj_property name="ObjectShortName">B_U8B[3:0]</obj_property>
+               <obj_property name="CustomSignalColor">#FFD700</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/Y_U8B" type="array">
+               <obj_property name="ElementShortName">Y_U8B[3:0]</obj_property>
+               <obj_property name="ObjectShortName">Y_U8B[3:0]</obj_property>
+               <obj_property name="CustomSignalColor">#FFD700</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/clk_u3E4E" type="logic">
+               <obj_property name="ElementShortName">clk_u3E4E</obj_property>
+               <obj_property name="ObjectShortName">clk_u3E4E</obj_property>
+               <obj_property name="CustomSignalColor">#FFD700</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/clr_u3E4E_l" type="logic">
+               <obj_property name="ElementShortName">clr_u3E4E_l</obj_property>
+               <obj_property name="ObjectShortName">clr_u3E4E_l</obj_property>
+               <obj_property name="CustomSignalColor">#FFD700</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/load_u3E4E_l" type="logic">
+               <obj_property name="ElementShortName">load_u3E4E_l</obj_property>
+               <obj_property name="ObjectShortName">load_u3E4E_l</obj_property>
+               <obj_property name="CustomSignalColor">#FFD700</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/Q_3_4_E" type="array">
+               <obj_property name="ElementShortName">Q_3_4_E[7:0]</obj_property>
+               <obj_property name="ObjectShortName">Q_3_4_E[7:0]</obj_property>
+               <obj_property name="CustomSignalColor">#FFD700</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/cd" type="array">
+               <obj_property name="ElementShortName">cd[3:0]</obj_property>
+               <obj_property name="ObjectShortName">cd[3:0]</obj_property>
+               <obj_property name="CustomSignalColor">#FFD700</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
             </wvobject>
             <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/mb7074_addr" type="array">
                <obj_property name="ElementShortName">mb7074_addr[7:0]</obj_property>
                <obj_property name="ObjectShortName">mb7074_addr[7:0]</obj_property>
+               <obj_property name="CustomSignalColor">#FFD700</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/dc" type="array">
+               <obj_property name="ElementShortName">dc[5:0]</obj_property>
+               <obj_property name="ObjectShortName">dc[5:0]</obj_property>
+               <obj_property name="CustomSignalColor">#FFD700</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
             </wvobject>
             <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/mb7074_do_2E" type="array">
                <obj_property name="ElementShortName">mb7074_do_2E[3:0]</obj_property>
                <obj_property name="ObjectShortName">mb7074_do_2E[3:0]</obj_property>
+               <obj_property name="CustomSignalColor">#FFD700</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
             </wvobject>
             <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/mb7074_do_2H" type="array">
                <obj_property name="ElementShortName">mb7074_do_2H[3:0]</obj_property>
                <obj_property name="ObjectShortName">mb7074_do_2H[3:0]</obj_property>
+               <obj_property name="CustomSignalColor">#FFD700</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
             </wvobject>
             <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/mb7074_wr" type="logic">
                <obj_property name="ElementShortName">mb7074_wr</obj_property>
                <obj_property name="ObjectShortName">mb7074_wr</obj_property>
+               <obj_property name="CustomSignalColor">#FFD700</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/g_3K" type="logic">
+               <obj_property name="ElementShortName">g_3K</obj_property>
+               <obj_property name="ObjectShortName">g_3K</obj_property>
+               <obj_property name="CustomSignalColor">#FFD700</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/da" type="array">
+               <obj_property name="ElementShortName">da[5:0]</obj_property>
+               <obj_property name="ObjectShortName">da[5:0]</obj_property>
+               <obj_property name="CustomSignalColor">#FFD700</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
             </wvobject>
             <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/s2" type="logic">
                <obj_property name="ElementShortName">s2</obj_property>
@@ -848,15 +1158,6 @@
                <obj_property name="ObjectShortName">U6K_Q[7:0]</obj_property>
                <obj_property name="CustomSignalColor">#FF00FF</obj_property>
                <obj_property name="UseCustomSignalColor">true</obj_property>
-               <obj_property name="isExpanded"></obj_property>
-            </wvobject>
-            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/Q7_6K" type="logic">
-               <obj_property name="ElementShortName">Q7_6K</obj_property>
-               <obj_property name="ObjectShortName">Q7_6K</obj_property>
-            </wvobject>
-            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/G_5F" type="logic">
-               <obj_property name="ElementShortName">G_5F</obj_property>
-               <obj_property name="ObjectShortName">G_5F</obj_property>
             </wvobject>
             <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/O1A_5F" type="logic">
                <obj_property name="ElementShortName">O1A_5F</obj_property>
@@ -866,69 +1167,9 @@
                <obj_property name="ElementShortName">O3A_5F</obj_property>
                <obj_property name="ObjectShortName">O3A_5F</obj_property>
             </wvobject>
-            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/O0B_5F" type="logic">
-               <obj_property name="ElementShortName">O0B_5F</obj_property>
-               <obj_property name="ObjectShortName">O0B_5F</obj_property>
-               <obj_property name="CustomSignalColor">#00FF00</obj_property>
-               <obj_property name="UseCustomSignalColor">true</obj_property>
-            </wvobject>
-            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/O1B_5F" type="logic">
-               <obj_property name="ElementShortName">O1B_5F</obj_property>
-               <obj_property name="ObjectShortName">O1B_5F</obj_property>
-            </wvobject>
-            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/O2B_5F" type="logic">
-               <obj_property name="ElementShortName">O2B_5F</obj_property>
-               <obj_property name="ObjectShortName">O2B_5F</obj_property>
-               <obj_property name="CustomSignalColor">#00FF00</obj_property>
-               <obj_property name="UseCustomSignalColor">true</obj_property>
-            </wvobject>
-            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/Q5_6K" type="logic">
-               <obj_property name="ElementShortName">Q5_6K</obj_property>
-               <obj_property name="ObjectShortName">Q5_6K</obj_property>
-            </wvobject>
-            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/I1C_I0D_8B" type="logic">
-               <obj_property name="ElementShortName">I1C_I0D_8B</obj_property>
-               <obj_property name="ObjectShortName">I1C_I0D_8B</obj_property>
-            </wvobject>
-            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/Q7_8H" type="logic">
-               <obj_property name="ElementShortName">Q7_8H</obj_property>
-               <obj_property name="ObjectShortName">Q7_8H</obj_property>
-            </wvobject>
-            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/Q1_8H" type="logic">
-               <obj_property name="ElementShortName">Q1_8H</obj_property>
-               <obj_property name="ObjectShortName">Q1_8H</obj_property>
-            </wvobject>
-            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/Q0_8H" type="logic">
-               <obj_property name="ElementShortName">Q0_8H</obj_property>
-               <obj_property name="ObjectShortName">Q0_8H</obj_property>
-            </wvobject>
-            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/Q6_8H" type="logic">
-               <obj_property name="ElementShortName">Q6_8H</obj_property>
-               <obj_property name="ObjectShortName">Q6_8H</obj_property>
-            </wvobject>
-            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/Q1_8N" type="logic">
-               <obj_property name="ElementShortName">Q1_8N</obj_property>
-               <obj_property name="ObjectShortName">Q1_8N</obj_property>
-            </wvobject>
             <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/csn_6PR" type="logic">
                <obj_property name="ElementShortName">csn_6PR</obj_property>
                <obj_property name="ObjectShortName">csn_6PR</obj_property>
-            </wvobject>
-            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/C4_8R" type="logic">
-               <obj_property name="ElementShortName">C4_8R</obj_property>
-               <obj_property name="ObjectShortName">C4_8R</obj_property>
-            </wvobject>
-            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/C4_8P" type="logic">
-               <obj_property name="ElementShortName">C4_8P</obj_property>
-               <obj_property name="ObjectShortName">C4_8P</obj_property>
-            </wvobject>
-            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/Q_5KL" type="array">
-               <obj_property name="ElementShortName">Q_5KL[7:0]</obj_property>
-               <obj_property name="ObjectShortName">Q_5KL[7:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/scanline_wr_l" type="logic">
-               <obj_property name="ElementShortName">scanline_wr_l</obj_property>
-               <obj_property name="ObjectShortName">scanline_wr_l</obj_property>
             </wvobject>
             <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/Q0_4P" type="logic">
                <obj_property name="ElementShortName">Q0_4P</obj_property>
@@ -941,18 +1182,6 @@
             <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/DI0_7M" type="logic">
                <obj_property name="ElementShortName">DI0_7M</obj_property>
                <obj_property name="ObjectShortName">DI0_7M</obj_property>
-            </wvobject>
-            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/addr_7M" type="array">
-               <obj_property name="ElementShortName">addr_7M[5:0]</obj_property>
-               <obj_property name="ObjectShortName">addr_7M[5:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/dataout_7M" type="array">
-               <obj_property name="ElementShortName">dataout_7M[8:0]</obj_property>
-               <obj_property name="ObjectShortName">dataout_7M[8:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/addr_7CDEF" type="array">
-               <obj_property name="ElementShortName">addr_7CDEF[10:0]</obj_property>
-               <obj_property name="ObjectShortName">addr_7CDEF[10:0]</obj_property>
             </wvobject>
             <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/S0_U4PN" type="logic">
                <obj_property name="ElementShortName">S0_U4PN</obj_property>
@@ -970,41 +1199,9 @@
                <obj_property name="ElementShortName">esblk</obj_property>
                <obj_property name="ObjectShortName">esblk</obj_property>
             </wvobject>
-            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/do_draw_l" type="logic">
-               <obj_property name="ElementShortName">do_draw_l</obj_property>
-               <obj_property name="ObjectShortName">do_draw_l</obj_property>
-            </wvobject>
-            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/u6pr_ram_wr" type="logic">
-               <obj_property name="ElementShortName">u6pr_ram_wr</obj_property>
-               <obj_property name="ObjectShortName">u6pr_ram_wr</obj_property>
-            </wvobject>
-            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/clk_4KL" type="logic">
-               <obj_property name="ElementShortName">clk_4KL</obj_property>
-               <obj_property name="ObjectShortName">clk_4KL</obj_property>
-            </wvobject>
-            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/U8B_sprite_data" type="array">
-               <obj_property name="ElementShortName">U8B_sprite_data[1:0]</obj_property>
-               <obj_property name="ObjectShortName">U8B_sprite_data[1:0]</obj_property>
-            </wvobject>
             <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/char_tile_reload" type="logic">
                <obj_property name="ElementShortName">char_tile_reload</obj_property>
                <obj_property name="ObjectShortName">char_tile_reload</obj_property>
-            </wvobject>
-            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/clr_u3E4E_l" type="logic">
-               <obj_property name="ElementShortName">clr_u3E4E_l</obj_property>
-               <obj_property name="ObjectShortName">clr_u3E4E_l</obj_property>
-            </wvobject>
-            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/load_u3E4E_l" type="logic">
-               <obj_property name="ElementShortName">load_u3E4E_l</obj_property>
-               <obj_property name="ObjectShortName">load_u3E4E_l</obj_property>
-            </wvobject>
-            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/cnt_vsync" type="array">
-               <obj_property name="ElementShortName">cnt_vsync[7:0]</obj_property>
-               <obj_property name="ObjectShortName">cnt_vsync[7:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_Core/u_Dkong_Video/cnt_hsync" type="array">
-               <obj_property name="ElementShortName">cnt_hsync[7:0]</obj_property>
-               <obj_property name="ObjectShortName">cnt_hsync[7:0]</obj_property>
             </wvobject>
          </wvobject>
       </wvobject>
@@ -1088,14 +1285,6 @@
          <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/vga_controller_ok" type="logic">
             <obj_property name="ElementShortName">vga_controller_ok</obj_property>
             <obj_property name="ObjectShortName">vga_controller_ok</obj_property>
-         </wvobject>
-         <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/video_mem_addr_pacman" type="array">
-            <obj_property name="ElementShortName">video_mem_addr_pacman[15:0]</obj_property>
-            <obj_property name="ObjectShortName">video_mem_addr_pacman[15:0]</obj_property>
-         </wvobject>
-         <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/video_mem_pacman_data" type="array">
-            <obj_property name="ElementShortName">video_mem_pacman_data[7:0]</obj_property>
-            <obj_property name="ObjectShortName">video_mem_pacman_data[7:0]</obj_property>
          </wvobject>
          <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/video_dpram_vga_core_addr_l" type="array">
             <obj_property name="ElementShortName">video_dpram_vga_core_addr_l[31:0]</obj_property>
