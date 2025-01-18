@@ -123,10 +123,6 @@ signal U8CD_reg, U8CD_sprite_data, U8EF_reg, U8EF_sprite_data : std_logic_vector
 signal h_cnt : unsigned(11 downto 0);
 signal h_256_0, v_4_0, v_clk_0 : std_logic;
 signal h_256n_0, u8n_O0B_5F_0, u1e_h_0_0, u6j_O2B_5F_0 : std_logic;
-signal u2k_h_5_0, u4a_h_5_0, u2k_h_2_0, clk_color_latch_0 : std_logic;
-signal u14p_h_0_0, u14n_h_0_0 : std_logic;
-
-signal CA_1N, U1L_reload, CA_1M, qi_ff : std_logic;
 
 -- VSYNC_P = Nombre de pulse Phi34 entre le début de VBLK et le début du pulse signal VSYNCn
 -- VSYNC_W = Nombre de pulse Phi34 pour la durée de VSYNCn
@@ -388,10 +384,6 @@ begin
     -- a la sortie des mémoires 7C, 7D, 7E, 7F.
 	U8CD_sprite_data <= data_7C & data_7D;
 	                    
-    ---------------------------------------------------------------------------------------------
-	-- Dans la simulation on voit par exemple 0xC003 alors qu'il faudfrati que ça soit 0x03C0
-	---------------------------------------------------------------------------------------------
-
 	process(Phi34n)
 	begin
 		if rising_edge(Phi34n) then

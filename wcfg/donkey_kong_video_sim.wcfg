@@ -14,12 +14,12 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="8,788.871509 us"></ZoomStartTime>
-      <ZoomEndTime time="9,440.871510 us"></ZoomEndTime>
-      <Cursor1Time time="9,088.871509 us"></Cursor1Time>
+      <ZoomStartTime time="8,970.438253 us"></ZoomStartTime>
+      <ZoomEndTime time="9,047.188254 us"></ZoomEndTime>
+      <Cursor1Time time="8,997.788253 us"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="239"></NameColumnWidth>
+      <NameColumnWidth column_width="235"></NameColumnWidth>
       <ValueColumnWidth column_width="58"></ValueColumnWidth>
    </column_width_setting>
    <WVObjectSize size="3" />
@@ -27,6 +27,9 @@
       <marker time="8588946980" label="" />
       <marker time="8586392027" label="" />
       <marker time="8651437547" label="" />
+      <marker time="9039399811" label="" />
+      <marker time="8997788253" label="" />
+      <marker time="9018569622" label="" />
    </wave_markers>
    <wvobject fp_name="/donkey_kong_video_sim/main_clk" type="logic">
       <obj_property name="ElementShortName">main_clk</obj_property>
