@@ -475,9 +475,9 @@ begin
     U2E_COL : entity work.dist_mem_gen_2E port map (a => addr_2EF, spo => data_2E);
     U2F_COL : entity work.dist_mem_gen_2F port map (a => addr_2EF, spo => data_2F);
 
-    o_r <= not (data_2E(3 downto 1)) when rom_u2F_cs_l = '0' else (others => '0');
-    o_g <= not (data_2E(0) & data_2E(3 downto 2)) when rom_u2F_cs_l = '0' else (others => '0');
-    o_b <= not (data_2F(1 downto 0)) when rom_u2F_cs_l = '0' else (others => '0');
+    o_r <= data_2E(3 downto 1) when rom_u2F_cs_l = '0' else (others => '1');
+    o_g <= data_2E(0) & data_2F(3 downto 2) when rom_u2F_cs_l = '0' else (others => '1');
+    o_b <= data_2F(1 downto 0) when rom_u2F_cs_l = '0' else (others => '1');
                                    
     -- U6S, U7S, U8S
     (csn_6PR, addr_6PR) <= Y_6_7_8_S;

@@ -3,7 +3,7 @@
    <wave_state>
    </wave_state>
    <db_ref_list>
-      <db_ref path="C:/Users/yannv/Documents/Projets_HW/Donkey_Kong/Dkong_Artyx7/Dkong_Artyx7.sim/sim_1/behav/xsim/donkey_kong_video_sim_behav.wdb" id="1">
+      <db_ref path="donkey_kong_video_sim_behav.wdb" id="1">
          <top_modules>
             <top_module name="dkong_pack" />
             <top_module name="donkey_kong_video_sim" />
@@ -14,22 +14,18 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="8,970.438253 us"></ZoomStartTime>
-      <ZoomEndTime time="9,047.188254 us"></ZoomEndTime>
-      <Cursor1Time time="8,997.788253 us"></Cursor1Time>
+      <ZoomStartTime time="2,125,856.414 ns"></ZoomStartTime>
+      <ZoomEndTime time="2,128,638.415 ns"></ZoomEndTime>
+      <Cursor1Time time="2,127,194.622 ns"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="235"></NameColumnWidth>
-      <ValueColumnWidth column_width="58"></ValueColumnWidth>
+      <NameColumnWidth column_width="296"></NameColumnWidth>
+      <ValueColumnWidth column_width="141"></ValueColumnWidth>
    </column_width_setting>
    <WVObjectSize size="3" />
    <wave_markers>
-      <marker time="8588946980" label="" />
-      <marker time="8586392027" label="" />
-      <marker time="8651437547" label="" />
-      <marker time="9039399811" label="" />
-      <marker time="8997788253" label="" />
-      <marker time="9018569622" label="" />
+      <marker time="2126706414" label="" />
+      <marker time="2127194622" label="" />
    </wave_markers>
    <wvobject fp_name="/donkey_kong_video_sim/main_clk" type="logic">
       <obj_property name="ElementShortName">main_clk</obj_property>
@@ -1211,6 +1207,7 @@
       <wvobject fp_name="group573" type="group">
          <obj_property name="label">u_VGA_Ctrl</obj_property>
          <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="isExpanded"></obj_property>
          <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/i_reset" type="logic">
             <obj_property name="ElementShortName">i_reset</obj_property>
             <obj_property name="ObjectShortName">i_reset</obj_property>
@@ -1349,6 +1346,10 @@
             <obj_property name="ElementShortName">vga_dat_i[31:0]</obj_property>
             <obj_property name="ObjectShortName">vga_dat_i[31:0]</obj_property>
          </wvobject>
+         <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/video_mem_data" type="array">
+            <obj_property name="ElementShortName">video_mem_data[7:0]</obj_property>
+            <obj_property name="ObjectShortName">video_mem_data[7:0]</obj_property>
+         </wvobject>
          <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/vga_stb_o" type="logic">
             <obj_property name="ElementShortName">vga_stb_o</obj_property>
             <obj_property name="ObjectShortName">vga_stb_o</obj_property>
@@ -1380,6 +1381,1528 @@
          <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/b_vgac" type="array">
             <obj_property name="ElementShortName">b_vgac[7:0]</obj_property>
             <obj_property name="ObjectShortName">b_vgac[7:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="group333" type="group">
+            <obj_property name="label">VGA_Core</obj_property>
+            <obj_property name="DisplayName">label</obj_property>
+            <obj_property name="isExpanded"></obj_property>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wb_clk_i" type="logic">
+               <obj_property name="ElementShortName">wb_clk_i</obj_property>
+               <obj_property name="ObjectShortName">wb_clk_i</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wb_inta_o" type="logic">
+               <obj_property name="ElementShortName">wb_inta_o</obj_property>
+               <obj_property name="ObjectShortName">wb_inta_o</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs_adr_i" type="array">
+               <obj_property name="ElementShortName">wbs_adr_i[11:0]</obj_property>
+               <obj_property name="ObjectShortName">wbs_adr_i[11:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs_dat_i" type="array">
+               <obj_property name="ElementShortName">wbs_dat_i[31:0]</obj_property>
+               <obj_property name="ObjectShortName">wbs_dat_i[31:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs_dat_o" type="array">
+               <obj_property name="ElementShortName">wbs_dat_o[31:0]</obj_property>
+               <obj_property name="ObjectShortName">wbs_dat_o[31:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs_sel_i" type="array">
+               <obj_property name="ElementShortName">wbs_sel_i[3:0]</obj_property>
+               <obj_property name="ObjectShortName">wbs_sel_i[3:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs_we_i" type="logic">
+               <obj_property name="ElementShortName">wbs_we_i</obj_property>
+               <obj_property name="ObjectShortName">wbs_we_i</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs_stb_i" type="logic">
+               <obj_property name="ElementShortName">wbs_stb_i</obj_property>
+               <obj_property name="ObjectShortName">wbs_stb_i</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs_cyc_i" type="logic">
+               <obj_property name="ElementShortName">wbs_cyc_i</obj_property>
+               <obj_property name="ObjectShortName">wbs_cyc_i</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs_ack_o" type="logic">
+               <obj_property name="ElementShortName">wbs_ack_o</obj_property>
+               <obj_property name="ObjectShortName">wbs_ack_o</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs_rty_o" type="logic">
+               <obj_property name="ElementShortName">wbs_rty_o</obj_property>
+               <obj_property name="ObjectShortName">wbs_rty_o</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs_err_o" type="logic">
+               <obj_property name="ElementShortName">wbs_err_o</obj_property>
+               <obj_property name="ObjectShortName">wbs_err_o</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm_adr_o" type="array">
+               <obj_property name="ElementShortName">wbm_adr_o[31:0]</obj_property>
+               <obj_property name="ObjectShortName">wbm_adr_o[31:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm_dat_i" type="array">
+               <obj_property name="ElementShortName">wbm_dat_i[31:0]</obj_property>
+               <obj_property name="ObjectShortName">wbm_dat_i[31:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm_sel_o" type="array">
+               <obj_property name="ElementShortName">wbm_sel_o[3:0]</obj_property>
+               <obj_property name="ObjectShortName">wbm_sel_o[3:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm_we_o" type="logic">
+               <obj_property name="ElementShortName">wbm_we_o</obj_property>
+               <obj_property name="ObjectShortName">wbm_we_o</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm_stb_o" type="logic">
+               <obj_property name="ElementShortName">wbm_stb_o</obj_property>
+               <obj_property name="ObjectShortName">wbm_stb_o</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm_cyc_o" type="logic">
+               <obj_property name="ElementShortName">wbm_cyc_o</obj_property>
+               <obj_property name="ObjectShortName">wbm_cyc_o</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm_cti_o" type="array">
+               <obj_property name="ElementShortName">wbm_cti_o[2:0]</obj_property>
+               <obj_property name="ObjectShortName">wbm_cti_o[2:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm_bte_o" type="array">
+               <obj_property name="ElementShortName">wbm_bte_o[1:0]</obj_property>
+               <obj_property name="ObjectShortName">wbm_bte_o[1:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm_ack_i" type="logic">
+               <obj_property name="ElementShortName">wbm_ack_i</obj_property>
+               <obj_property name="ObjectShortName">wbm_ack_i</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm_err_i" type="logic">
+               <obj_property name="ElementShortName">wbm_err_i</obj_property>
+               <obj_property name="ObjectShortName">wbm_err_i</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/clk_p_i" type="logic">
+               <obj_property name="ElementShortName">clk_p_i</obj_property>
+               <obj_property name="ObjectShortName">clk_p_i</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/clk_p_o" type="logic">
+               <obj_property name="ElementShortName">clk_p_o</obj_property>
+               <obj_property name="ObjectShortName">clk_p_o</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/hsync_pad_o" type="logic">
+               <obj_property name="ElementShortName">hsync_pad_o</obj_property>
+               <obj_property name="ObjectShortName">hsync_pad_o</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/vsync_pad_o" type="logic">
+               <obj_property name="ElementShortName">vsync_pad_o</obj_property>
+               <obj_property name="ObjectShortName">vsync_pad_o</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/csync_pad_o" type="logic">
+               <obj_property name="ElementShortName">csync_pad_o</obj_property>
+               <obj_property name="ObjectShortName">csync_pad_o</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/blank_pad_o" type="logic">
+               <obj_property name="ElementShortName">blank_pad_o</obj_property>
+               <obj_property name="ObjectShortName">blank_pad_o</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/r_pad_o" type="array">
+               <obj_property name="ElementShortName">r_pad_o[7:0]</obj_property>
+               <obj_property name="ObjectShortName">r_pad_o[7:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/g_pad_o" type="array">
+               <obj_property name="ElementShortName">g_pad_o[7:0]</obj_property>
+               <obj_property name="ObjectShortName">g_pad_o[7:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/b_pad_o" type="array">
+               <obj_property name="ElementShortName">b_pad_o[7:0]</obj_property>
+               <obj_property name="ObjectShortName">b_pad_o[7:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/arst" type="logic">
+               <obj_property name="ElementShortName">arst</obj_property>
+               <obj_property name="ObjectShortName">arst</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/ctrl_bl" type="logic">
+               <obj_property name="ElementShortName">ctrl_bl</obj_property>
+               <obj_property name="ObjectShortName">ctrl_bl</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/ctrl_csl" type="logic">
+               <obj_property name="ElementShortName">ctrl_csl</obj_property>
+               <obj_property name="ObjectShortName">ctrl_csl</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/ctrl_vsl" type="logic">
+               <obj_property name="ElementShortName">ctrl_vsl</obj_property>
+               <obj_property name="ObjectShortName">ctrl_vsl</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/ctrl_hsl" type="logic">
+               <obj_property name="ElementShortName">ctrl_hsl</obj_property>
+               <obj_property name="ObjectShortName">ctrl_hsl</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/ctrl_pc" type="logic">
+               <obj_property name="ElementShortName">ctrl_pc</obj_property>
+               <obj_property name="ObjectShortName">ctrl_pc</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/ctrl_cbsw" type="logic">
+               <obj_property name="ElementShortName">ctrl_cbsw</obj_property>
+               <obj_property name="ObjectShortName">ctrl_cbsw</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/ctrl_vbsw" type="logic">
+               <obj_property name="ElementShortName">ctrl_vbsw</obj_property>
+               <obj_property name="ObjectShortName">ctrl_vbsw</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/cc0_adr_i" type="array">
+               <obj_property name="ElementShortName">cc0_adr_i[3:0]</obj_property>
+               <obj_property name="ObjectShortName">cc0_adr_i[3:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/cc1_adr_i" type="array">
+               <obj_property name="ElementShortName">cc1_adr_i[3:0]</obj_property>
+               <obj_property name="ObjectShortName">cc1_adr_i[3:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/fb_data_fifo_rreq" type="logic">
+               <obj_property name="ElementShortName">fb_data_fifo_rreq</obj_property>
+               <obj_property name="ObjectShortName">fb_data_fifo_rreq</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/fb_data_fifo_empty" type="logic">
+               <obj_property name="ElementShortName">fb_data_fifo_empty</obj_property>
+               <obj_property name="ObjectShortName">fb_data_fifo_empty</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/fb_data_fifo_q" type="array">
+               <obj_property name="ElementShortName">fb_data_fifo_q[31:0]</obj_property>
+               <obj_property name="ObjectShortName">fb_data_fifo_q[31:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/ImDoneFifoQ" type="logic">
+               <obj_property name="ElementShortName">ImDoneFifoQ</obj_property>
+               <obj_property name="ObjectShortName">ImDoneFifoQ</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/line_fifo_wreq" type="logic">
+               <obj_property name="ElementShortName">line_fifo_wreq</obj_property>
+               <obj_property name="ObjectShortName">line_fifo_wreq</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/line_fifo_rreq" type="logic">
+               <obj_property name="ElementShortName">line_fifo_rreq</obj_property>
+               <obj_property name="ObjectShortName">line_fifo_rreq</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/line_fifo_empty_rd" type="logic">
+               <obj_property name="ElementShortName">line_fifo_empty_rd</obj_property>
+               <obj_property name="ObjectShortName">line_fifo_empty_rd</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/line_fifo_d" type="array">
+               <obj_property name="ElementShortName">line_fifo_d[23:0]</obj_property>
+               <obj_property name="ObjectShortName">line_fifo_d[23:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/line_fifo_q" type="array">
+               <obj_property name="ElementShortName">line_fifo_q[23:0]</obj_property>
+               <obj_property name="ObjectShortName">line_fifo_q[23:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/ext_clut_req" type="logic">
+               <obj_property name="ElementShortName">ext_clut_req</obj_property>
+               <obj_property name="ObjectShortName">ext_clut_req</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/ext_clut_ack" type="logic">
+               <obj_property name="ElementShortName">ext_clut_ack</obj_property>
+               <obj_property name="ObjectShortName">ext_clut_ack</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/ext_clut_q" type="array">
+               <obj_property name="ElementShortName">ext_clut_q[23:0]</obj_property>
+               <obj_property name="ObjectShortName">ext_clut_q[23:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/cp_clut_req" type="logic">
+               <obj_property name="ElementShortName">cp_clut_req</obj_property>
+               <obj_property name="ObjectShortName">cp_clut_req</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/cp_clut_ack" type="logic">
+               <obj_property name="ElementShortName">cp_clut_ack</obj_property>
+               <obj_property name="ObjectShortName">cp_clut_ack</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/cp_clut_adr" type="array">
+               <obj_property name="ElementShortName">cp_clut_adr[8:0]</obj_property>
+               <obj_property name="ObjectShortName">cp_clut_adr[8:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/cp_clut_q" type="array">
+               <obj_property name="ElementShortName">cp_clut_q[23:0]</obj_property>
+               <obj_property name="ObjectShortName">cp_clut_q[23:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/ctrl_ven_not" type="logic">
+               <obj_property name="ElementShortName">ctrl_ven_not</obj_property>
+               <obj_property name="ObjectShortName">ctrl_ven_not</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/luint_pclk" type="logic">
+               <obj_property name="ElementShortName">luint_pclk</obj_property>
+               <obj_property name="ObjectShortName">luint_pclk</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/sluint" type="logic">
+               <obj_property name="ElementShortName">sluint</obj_property>
+               <obj_property name="ObjectShortName">sluint</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm_busy" type="logic">
+               <obj_property name="ElementShortName">wbm_busy</obj_property>
+               <obj_property name="ObjectShortName">wbm_busy</obj_property>
+            </wvobject>
+            <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/line_fifo_full_wr" type="logic">
+               <obj_property name="ElementShortName">line_fifo_full_wr</obj_property>
+               <obj_property name="ObjectShortName">line_fifo_full_wr</obj_property>
+            </wvobject>
+            <wvobject fp_name="group337" type="group">
+               <obj_property name="label">clut_mem</obj_property>
+               <obj_property name="DisplayName">label</obj_property>
+               <obj_property name="isExpanded"></obj_property>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/clut_mem/clk_i" type="logic">
+                  <obj_property name="ElementShortName">clk_i</obj_property>
+                  <obj_property name="ObjectShortName">clk_i</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/clut_mem/adr0_i" type="array">
+                  <obj_property name="ElementShortName">adr0_i[8:0]</obj_property>
+                  <obj_property name="ObjectShortName">adr0_i[8:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/clut_mem/dat0_i" type="array">
+                  <obj_property name="ElementShortName">dat0_i[23:0]</obj_property>
+                  <obj_property name="ObjectShortName">dat0_i[23:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/clut_mem/dat0_o" type="array">
+                  <obj_property name="ElementShortName">dat0_o[23:0]</obj_property>
+                  <obj_property name="ObjectShortName">dat0_o[23:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/clut_mem/we0_i" type="logic">
+                  <obj_property name="ElementShortName">we0_i</obj_property>
+                  <obj_property name="ObjectShortName">we0_i</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/clut_mem/req0_i" type="logic">
+                  <obj_property name="ElementShortName">req0_i</obj_property>
+                  <obj_property name="ObjectShortName">req0_i</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/clut_mem/ack0_o" type="logic">
+                  <obj_property name="ElementShortName">ack0_o</obj_property>
+                  <obj_property name="ObjectShortName">ack0_o</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/clut_mem/adr1_i" type="array">
+                  <obj_property name="ElementShortName">adr1_i[8:0]</obj_property>
+                  <obj_property name="ObjectShortName">adr1_i[8:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/clut_mem/dat1_i" type="array">
+                  <obj_property name="ElementShortName">dat1_i[23:0]</obj_property>
+                  <obj_property name="ObjectShortName">dat1_i[23:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/clut_mem/dat1_o" type="array">
+                  <obj_property name="ElementShortName">dat1_o[23:0]</obj_property>
+                  <obj_property name="ObjectShortName">dat1_o[23:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/clut_mem/we1_i" type="logic">
+                  <obj_property name="ElementShortName">we1_i</obj_property>
+                  <obj_property name="ObjectShortName">we1_i</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/clut_mem/req1_i" type="logic">
+                  <obj_property name="ElementShortName">req1_i</obj_property>
+                  <obj_property name="ObjectShortName">req1_i</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/clut_mem/ack1_o" type="logic">
+                  <obj_property name="ElementShortName">ack1_o</obj_property>
+                  <obj_property name="ObjectShortName">ack1_o</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/clut_mem/acc0" type="logic">
+                  <obj_property name="ElementShortName">acc0</obj_property>
+                  <obj_property name="ObjectShortName">acc0</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/clut_mem/acc1" type="logic">
+                  <obj_property name="ElementShortName">acc1</obj_property>
+                  <obj_property name="ObjectShortName">acc1</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/clut_mem/dacc0" type="logic">
+                  <obj_property name="ElementShortName">dacc0</obj_property>
+                  <obj_property name="ObjectShortName">dacc0</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/clut_mem/dacc1" type="logic">
+                  <obj_property name="ElementShortName">dacc1</obj_property>
+                  <obj_property name="ObjectShortName">dacc1</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/clut_mem/sel0" type="logic">
+                  <obj_property name="ElementShortName">sel0</obj_property>
+                  <obj_property name="ObjectShortName">sel0</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/clut_mem/sel1" type="logic">
+                  <obj_property name="ElementShortName">sel1</obj_property>
+                  <obj_property name="ObjectShortName">sel1</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/clut_mem/ack0" type="logic">
+                  <obj_property name="ElementShortName">ack0</obj_property>
+                  <obj_property name="ObjectShortName">ack0</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/clut_mem/ack1" type="logic">
+                  <obj_property name="ElementShortName">ack1</obj_property>
+                  <obj_property name="ObjectShortName">ack1</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/clut_mem/mem_q" type="array">
+                  <obj_property name="ElementShortName">mem_q[23:0]</obj_property>
+                  <obj_property name="ObjectShortName">mem_q[23:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/clut_mem/mem_adr" type="array">
+                  <obj_property name="ElementShortName">mem_adr[8:0]</obj_property>
+                  <obj_property name="ObjectShortName">mem_adr[8:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/clut_mem/mem_d" type="array">
+                  <obj_property name="ElementShortName">mem_d[23:0]</obj_property>
+                  <obj_property name="ObjectShortName">mem_d[23:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/clut_mem/mem_we" type="logic">
+                  <obj_property name="ElementShortName">mem_we</obj_property>
+                  <obj_property name="ObjectShortName">mem_we</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/clut_mem/DWIDTH" type="array">
+                  <obj_property name="ElementShortName">DWIDTH[31:0]</obj_property>
+                  <obj_property name="ObjectShortName">DWIDTH[31:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/clut_mem/AWIDTH" type="array">
+                  <obj_property name="ElementShortName">AWIDTH[31:0]</obj_property>
+                  <obj_property name="ObjectShortName">AWIDTH[31:0]</obj_property>
+               </wvobject>
+            </wvobject>
+            <wvobject fp_name="group338" type="group">
+               <obj_property name="label">pixel_generator</obj_property>
+               <obj_property name="DisplayName">label</obj_property>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/clk_i" type="logic">
+                  <obj_property name="ElementShortName">clk_i</obj_property>
+                  <obj_property name="ObjectShortName">clk_i</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/ctrl_ven" type="logic">
+                  <obj_property name="ElementShortName">ctrl_ven</obj_property>
+                  <obj_property name="ObjectShortName">ctrl_ven</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/ctrl_HSyncL" type="logic">
+                  <obj_property name="ElementShortName">ctrl_HSyncL</obj_property>
+                  <obj_property name="ObjectShortName">ctrl_HSyncL</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/Thsync" type="array">
+                  <obj_property name="ElementShortName">Thsync[7:0]</obj_property>
+                  <obj_property name="ObjectShortName">Thsync[7:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/Thgdel" type="array">
+                  <obj_property name="ElementShortName">Thgdel[7:0]</obj_property>
+                  <obj_property name="ObjectShortName">Thgdel[7:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/Thgate" type="array">
+                  <obj_property name="ElementShortName">Thgate[15:0]</obj_property>
+                  <obj_property name="ObjectShortName">Thgate[15:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/Thlen" type="array">
+                  <obj_property name="ElementShortName">Thlen[15:0]</obj_property>
+                  <obj_property name="ObjectShortName">Thlen[15:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/ctrl_VSyncL" type="logic">
+                  <obj_property name="ElementShortName">ctrl_VSyncL</obj_property>
+                  <obj_property name="ObjectShortName">ctrl_VSyncL</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/Tvsync" type="array">
+                  <obj_property name="ElementShortName">Tvsync[7:0]</obj_property>
+                  <obj_property name="ObjectShortName">Tvsync[7:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/Tvgdel" type="array">
+                  <obj_property name="ElementShortName">Tvgdel[7:0]</obj_property>
+                  <obj_property name="ObjectShortName">Tvgdel[7:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/Tvgate" type="array">
+                  <obj_property name="ElementShortName">Tvgate[15:0]</obj_property>
+                  <obj_property name="ObjectShortName">Tvgate[15:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/Tvlen" type="array">
+                  <obj_property name="ElementShortName">Tvlen[15:0]</obj_property>
+                  <obj_property name="ObjectShortName">Tvlen[15:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/ctrl_CSyncL" type="logic">
+                  <obj_property name="ElementShortName">ctrl_CSyncL</obj_property>
+                  <obj_property name="ObjectShortName">ctrl_CSyncL</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/ctrl_BlankL" type="logic">
+                  <obj_property name="ElementShortName">ctrl_BlankL</obj_property>
+                  <obj_property name="ObjectShortName">ctrl_BlankL</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/eoh" type="logic">
+                  <obj_property name="ElementShortName">eoh</obj_property>
+                  <obj_property name="ObjectShortName">eoh</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/eov" type="logic">
+                  <obj_property name="ElementShortName">eov</obj_property>
+                  <obj_property name="ObjectShortName">eov</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/ctrl_dvi_odf" type="array">
+                  <obj_property name="ElementShortName">ctrl_dvi_odf[1:0]</obj_property>
+                  <obj_property name="ObjectShortName">ctrl_dvi_odf[1:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/ctrl_cd" type="array">
+                  <obj_property name="ElementShortName">ctrl_cd[1:0]</obj_property>
+                  <obj_property name="ObjectShortName">ctrl_cd[1:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/ctrl_pc" type="logic">
+                  <obj_property name="ElementShortName">ctrl_pc</obj_property>
+                  <obj_property name="ObjectShortName">ctrl_pc</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/fb_data_fifo_q" type="array">
+                  <obj_property name="ElementShortName">fb_data_fifo_q[31:0]</obj_property>
+                  <obj_property name="ObjectShortName">fb_data_fifo_q[31:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/fb_data_fifo_empty" type="logic">
+                  <obj_property name="ElementShortName">fb_data_fifo_empty</obj_property>
+                  <obj_property name="ObjectShortName">fb_data_fifo_empty</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/fb_data_fifo_rreq" type="logic">
+                  <obj_property name="ElementShortName">fb_data_fifo_rreq</obj_property>
+                  <obj_property name="ObjectShortName">fb_data_fifo_rreq</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/stat_acmp" type="logic">
+                  <obj_property name="ElementShortName">stat_acmp</obj_property>
+                  <obj_property name="ObjectShortName">stat_acmp</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/clut_req" type="logic">
+                  <obj_property name="ElementShortName">clut_req</obj_property>
+                  <obj_property name="ObjectShortName">clut_req</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/clut_adr" type="array">
+                  <obj_property name="ElementShortName">clut_adr[8:0]</obj_property>
+                  <obj_property name="ObjectShortName">clut_adr[8:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/clut_q" type="array">
+                  <obj_property name="ElementShortName">clut_q[23:0]</obj_property>
+                  <obj_property name="ObjectShortName">clut_q[23:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/clut_ack" type="logic">
+                  <obj_property name="ElementShortName">clut_ack</obj_property>
+                  <obj_property name="ObjectShortName">clut_ack</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/ctrl_cbsw" type="logic">
+                  <obj_property name="ElementShortName">ctrl_cbsw</obj_property>
+                  <obj_property name="ObjectShortName">ctrl_cbsw</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/clut_switch" type="logic">
+                  <obj_property name="ElementShortName">clut_switch</obj_property>
+                  <obj_property name="ObjectShortName">clut_switch</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/cursor_adr" type="array">
+                  <obj_property name="ElementShortName">cursor_adr[8:0]</obj_property>
+                  <obj_property name="ObjectShortName">cursor_adr[8:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/cursor0_en" type="logic">
+                  <obj_property name="ElementShortName">cursor0_en</obj_property>
+                  <obj_property name="ObjectShortName">cursor0_en</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/cursor0_res" type="logic">
+                  <obj_property name="ElementShortName">cursor0_res</obj_property>
+                  <obj_property name="ObjectShortName">cursor0_res</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/cursor0_xy" type="array">
+                  <obj_property name="ElementShortName">cursor0_xy[31:0]</obj_property>
+                  <obj_property name="ObjectShortName">cursor0_xy[31:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/cc0_adr_o" type="array">
+                  <obj_property name="ElementShortName">cc0_adr_o[3:0]</obj_property>
+                  <obj_property name="ObjectShortName">cc0_adr_o[3:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/cc0_dat_i" type="array">
+                  <obj_property name="ElementShortName">cc0_dat_i[15:0]</obj_property>
+                  <obj_property name="ObjectShortName">cc0_dat_i[15:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/cursor1_en" type="logic">
+                  <obj_property name="ElementShortName">cursor1_en</obj_property>
+                  <obj_property name="ObjectShortName">cursor1_en</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/cursor1_res" type="logic">
+                  <obj_property name="ElementShortName">cursor1_res</obj_property>
+                  <obj_property name="ObjectShortName">cursor1_res</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/cursor1_xy" type="array">
+                  <obj_property name="ElementShortName">cursor1_xy[31:0]</obj_property>
+                  <obj_property name="ObjectShortName">cursor1_xy[31:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/cc1_adr_o" type="array">
+                  <obj_property name="ElementShortName">cc1_adr_o[3:0]</obj_property>
+                  <obj_property name="ObjectShortName">cc1_adr_o[3:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/cc1_dat_i" type="array">
+                  <obj_property name="ElementShortName">cc1_dat_i[15:0]</obj_property>
+                  <obj_property name="ObjectShortName">cc1_dat_i[15:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/line_fifo_full" type="logic">
+                  <obj_property name="ElementShortName">line_fifo_full</obj_property>
+                  <obj_property name="ObjectShortName">line_fifo_full</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/line_fifo_wreq" type="logic">
+                  <obj_property name="ElementShortName">line_fifo_wreq</obj_property>
+                  <obj_property name="ObjectShortName">line_fifo_wreq</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/line_fifo_d" type="array">
+                  <obj_property name="ElementShortName">line_fifo_d[23:0]</obj_property>
+                  <obj_property name="ObjectShortName">line_fifo_d[23:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/line_fifo_rreq" type="logic">
+                  <obj_property name="ElementShortName">line_fifo_rreq</obj_property>
+                  <obj_property name="ObjectShortName">line_fifo_rreq</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/line_fifo_q" type="array">
+                  <obj_property name="ElementShortName">line_fifo_q[23:0]</obj_property>
+                  <obj_property name="ObjectShortName">line_fifo_q[23:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/pclk_i" type="logic">
+                  <obj_property name="ElementShortName">pclk_i</obj_property>
+                  <obj_property name="ObjectShortName">pclk_i</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/pclk_o" type="logic">
+                  <obj_property name="ElementShortName">pclk_o</obj_property>
+                  <obj_property name="ObjectShortName">pclk_o</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/hsync_o" type="logic">
+                  <obj_property name="ElementShortName">hsync_o</obj_property>
+                  <obj_property name="ObjectShortName">hsync_o</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/vsync_o" type="logic">
+                  <obj_property name="ElementShortName">vsync_o</obj_property>
+                  <obj_property name="ObjectShortName">vsync_o</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/csync_o" type="logic">
+                  <obj_property name="ElementShortName">csync_o</obj_property>
+                  <obj_property name="ObjectShortName">csync_o</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/blank_o" type="logic">
+                  <obj_property name="ElementShortName">blank_o</obj_property>
+                  <obj_property name="ObjectShortName">blank_o</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/r_o" type="array">
+                  <obj_property name="ElementShortName">r_o[7:0]</obj_property>
+                  <obj_property name="ObjectShortName">r_o[7:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/g_o" type="array">
+                  <obj_property name="ElementShortName">g_o[7:0]</obj_property>
+                  <obj_property name="ObjectShortName">g_o[7:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/b_o" type="array">
+                  <obj_property name="ElementShortName">b_o[7:0]</obj_property>
+                  <obj_property name="ObjectShortName">b_o[7:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/nVen" type="logic">
+                  <obj_property name="ElementShortName">nVen</obj_property>
+                  <obj_property name="ObjectShortName">nVen</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/eol" type="logic">
+                  <obj_property name="ElementShortName">eol</obj_property>
+                  <obj_property name="ObjectShortName">eol</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/eof" type="logic">
+                  <obj_property name="ElementShortName">eof</obj_property>
+                  <obj_property name="ObjectShortName">eof</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/ihsync" type="logic">
+                  <obj_property name="ElementShortName">ihsync</obj_property>
+                  <obj_property name="ObjectShortName">ihsync</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/ivsync" type="logic">
+                  <obj_property name="ElementShortName">ivsync</obj_property>
+                  <obj_property name="ObjectShortName">ivsync</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/icsync" type="logic">
+                  <obj_property name="ElementShortName">icsync</obj_property>
+                  <obj_property name="ObjectShortName">icsync</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/iblank" type="logic">
+                  <obj_property name="ElementShortName">iblank</obj_property>
+                  <obj_property name="ObjectShortName">iblank</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/pclk_ena" type="logic">
+                  <obj_property name="ElementShortName">pclk_ena</obj_property>
+                  <obj_property name="ObjectShortName">pclk_ena</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/seol" type="logic">
+                  <obj_property name="ElementShortName">seol</obj_property>
+                  <obj_property name="ObjectShortName">seol</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/seof" type="logic">
+                  <obj_property name="ElementShortName">seof</obj_property>
+                  <obj_property name="ObjectShortName">seof</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/dseol" type="logic">
+                  <obj_property name="ElementShortName">dseol</obj_property>
+                  <obj_property name="ObjectShortName">dseol</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/dseof" type="logic">
+                  <obj_property name="ElementShortName">dseof</obj_property>
+                  <obj_property name="ObjectShortName">dseof</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/hsync" type="logic">
+                  <obj_property name="ElementShortName">hsync</obj_property>
+                  <obj_property name="ObjectShortName">hsync</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/vsync" type="logic">
+                  <obj_property name="ElementShortName">vsync</obj_property>
+                  <obj_property name="ObjectShortName">vsync</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/csync" type="logic">
+                  <obj_property name="ElementShortName">csync</obj_property>
+                  <obj_property name="ObjectShortName">csync</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/blank" type="logic">
+                  <obj_property name="ElementShortName">blank</obj_property>
+                  <obj_property name="ObjectShortName">blank</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/color_proc_q" type="array">
+                  <obj_property name="ElementShortName">color_proc_q[23:0]</obj_property>
+                  <obj_property name="ObjectShortName">color_proc_q[23:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/color_proc_wreq" type="logic">
+                  <obj_property name="ElementShortName">color_proc_wreq</obj_property>
+                  <obj_property name="ObjectShortName">color_proc_wreq</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/clut_offs" type="array">
+                  <obj_property name="ElementShortName">clut_offs[7:0]</obj_property>
+                  <obj_property name="ObjectShortName">clut_offs[7:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/ImDoneFifoQ" type="logic">
+                  <obj_property name="ElementShortName">ImDoneFifoQ</obj_property>
+                  <obj_property name="ObjectShortName">ImDoneFifoQ</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/dImDoneFifoQ" type="logic">
+                  <obj_property name="ElementShortName">dImDoneFifoQ</obj_property>
+                  <obj_property name="ObjectShortName">dImDoneFifoQ</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/ddImDoneFifoQ" type="logic">
+                  <obj_property name="ElementShortName">ddImDoneFifoQ</obj_property>
+                  <obj_property name="ObjectShortName">ddImDoneFifoQ</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/cur1_q" type="array">
+                  <obj_property name="ElementShortName">cur1_q[23:0]</obj_property>
+                  <obj_property name="ObjectShortName">cur1_q[23:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/cur1_wreq" type="logic">
+                  <obj_property name="ElementShortName">cur1_wreq</obj_property>
+                  <obj_property name="ObjectShortName">cur1_wreq</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/rgb_fifo_d" type="array">
+                  <obj_property name="ElementShortName">rgb_fifo_d[23:0]</obj_property>
+                  <obj_property name="ObjectShortName">rgb_fifo_d[23:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/rgb_fifo_empty" type="logic">
+                  <obj_property name="ElementShortName">rgb_fifo_empty</obj_property>
+                  <obj_property name="ObjectShortName">rgb_fifo_empty</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/rgb_fifo_full" type="logic">
+                  <obj_property name="ElementShortName">rgb_fifo_full</obj_property>
+                  <obj_property name="ObjectShortName">rgb_fifo_full</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/rgb_fifo_rreq" type="logic">
+                  <obj_property name="ElementShortName">rgb_fifo_rreq</obj_property>
+                  <obj_property name="ObjectShortName">rgb_fifo_rreq</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/rgb_fifo_wreq" type="logic">
+                  <obj_property name="ElementShortName">rgb_fifo_wreq</obj_property>
+                  <obj_property name="ObjectShortName">rgb_fifo_wreq</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/sclr" type="logic">
+                  <obj_property name="ElementShortName">sclr</obj_property>
+                  <obj_property name="ObjectShortName">sclr</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/rgb_fifo_nword" type="array">
+                  <obj_property name="ElementShortName">rgb_fifo_nword[4:0]</obj_property>
+                  <obj_property name="ObjectShortName">rgb_fifo_nword[4:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/r" type="array">
+                  <obj_property name="ElementShortName">r[7:0]</obj_property>
+                  <obj_property name="ObjectShortName">r[7:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/g" type="array">
+                  <obj_property name="ElementShortName">g[7:0]</obj_property>
+                  <obj_property name="ObjectShortName">g[7:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/b" type="array">
+                  <obj_property name="ElementShortName">b[7:0]</obj_property>
+                  <obj_property name="ObjectShortName">b[7:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/dvi_pclk_p_o" type="logic">
+                  <obj_property name="ElementShortName">dvi_pclk_p_o</obj_property>
+                  <obj_property name="ObjectShortName">dvi_pclk_p_o</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/dvi_pclk_m_o" type="logic">
+                  <obj_property name="ElementShortName">dvi_pclk_m_o</obj_property>
+                  <obj_property name="ObjectShortName">dvi_pclk_m_o</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/pixel_generator/gate" type="logic">
+                  <obj_property name="ElementShortName">gate</obj_property>
+                  <obj_property name="ObjectShortName">gate</obj_property>
+               </wvobject>
+            </wvobject>
+            <wvobject fp_name="group339" type="group">
+               <obj_property name="label">line_fifo</obj_property>
+               <obj_property name="DisplayName">label</obj_property>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/line_fifo/rclk" type="logic">
+                  <obj_property name="ElementShortName">rclk</obj_property>
+                  <obj_property name="ObjectShortName">rclk</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/line_fifo/wclk" type="logic">
+                  <obj_property name="ElementShortName">wclk</obj_property>
+                  <obj_property name="ObjectShortName">wclk</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/line_fifo/rclr" type="logic">
+                  <obj_property name="ElementShortName">rclr</obj_property>
+                  <obj_property name="ObjectShortName">rclr</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/line_fifo/wclr" type="logic">
+                  <obj_property name="ElementShortName">wclr</obj_property>
+                  <obj_property name="ObjectShortName">wclr</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/line_fifo/wreq" type="logic">
+                  <obj_property name="ElementShortName">wreq</obj_property>
+                  <obj_property name="ObjectShortName">wreq</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/line_fifo/d" type="array">
+                  <obj_property name="ElementShortName">d[23:0]</obj_property>
+                  <obj_property name="ObjectShortName">d[23:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/line_fifo/rreq" type="logic">
+                  <obj_property name="ElementShortName">rreq</obj_property>
+                  <obj_property name="ObjectShortName">rreq</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/line_fifo/q" type="array">
+                  <obj_property name="ElementShortName">q[23:0]</obj_property>
+                  <obj_property name="ObjectShortName">q[23:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/line_fifo/empty" type="logic">
+                  <obj_property name="ElementShortName">empty</obj_property>
+                  <obj_property name="ObjectShortName">empty</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/line_fifo/full" type="logic">
+                  <obj_property name="ElementShortName">full</obj_property>
+                  <obj_property name="ObjectShortName">full</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/line_fifo/rrst" type="logic">
+                  <obj_property name="ElementShortName">rrst</obj_property>
+                  <obj_property name="ObjectShortName">rrst</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/line_fifo/wrst" type="logic">
+                  <obj_property name="ElementShortName">wrst</obj_property>
+                  <obj_property name="ObjectShortName">wrst</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/line_fifo/srclr" type="logic">
+                  <obj_property name="ElementShortName">srclr</obj_property>
+                  <obj_property name="ObjectShortName">srclr</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/line_fifo/ssrclr" type="logic">
+                  <obj_property name="ElementShortName">ssrclr</obj_property>
+                  <obj_property name="ObjectShortName">ssrclr</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/line_fifo/swclr" type="logic">
+                  <obj_property name="ElementShortName">swclr</obj_property>
+                  <obj_property name="ObjectShortName">swclr</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/line_fifo/sswclr" type="logic">
+                  <obj_property name="ElementShortName">sswclr</obj_property>
+                  <obj_property name="ObjectShortName">sswclr</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/line_fifo/rptr" type="array">
+                  <obj_property name="ElementShortName">rptr[6:0]</obj_property>
+                  <obj_property name="ObjectShortName">rptr[6:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/line_fifo/wptr" type="array">
+                  <obj_property name="ElementShortName">wptr[6:0]</obj_property>
+                  <obj_property name="ObjectShortName">wptr[6:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/line_fifo/rptr_gray" type="array">
+                  <obj_property name="ElementShortName">rptr_gray[6:0]</obj_property>
+                  <obj_property name="ObjectShortName">rptr_gray[6:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/line_fifo/wptr_gray" type="array">
+                  <obj_property name="ElementShortName">wptr_gray[6:0]</obj_property>
+                  <obj_property name="ObjectShortName">wptr_gray[6:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/line_fifo/srptr_gray" type="array">
+                  <obj_property name="ElementShortName">srptr_gray[6:0]</obj_property>
+                  <obj_property name="ObjectShortName">srptr_gray[6:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/line_fifo/ssrptr_gray" type="array">
+                  <obj_property name="ElementShortName">ssrptr_gray[6:0]</obj_property>
+                  <obj_property name="ObjectShortName">ssrptr_gray[6:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/line_fifo/swptr_gray" type="array">
+                  <obj_property name="ElementShortName">swptr_gray[6:0]</obj_property>
+                  <obj_property name="ObjectShortName">swptr_gray[6:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/line_fifo/sswptr_gray" type="array">
+                  <obj_property name="ElementShortName">sswptr_gray[6:0]</obj_property>
+                  <obj_property name="ObjectShortName">sswptr_gray[6:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/line_fifo/AWIDTH" type="array">
+                  <obj_property name="ElementShortName">AWIDTH[31:0]</obj_property>
+                  <obj_property name="ObjectShortName">AWIDTH[31:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/line_fifo/DWIDTH" type="array">
+                  <obj_property name="ElementShortName">DWIDTH[31:0]</obj_property>
+                  <obj_property name="ObjectShortName">DWIDTH[31:0]</obj_property>
+               </wvobject>
+            </wvobject>
+            <wvobject fp_name="group335" type="group">
+               <obj_property name="label">wbm</obj_property>
+               <obj_property name="DisplayName">label</obj_property>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm/clk_i" type="logic">
+                  <obj_property name="ElementShortName">clk_i</obj_property>
+                  <obj_property name="ObjectShortName">clk_i</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm/rst_i" type="logic">
+                  <obj_property name="ElementShortName">rst_i</obj_property>
+                  <obj_property name="ObjectShortName">rst_i</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm/nrst_i" type="logic">
+                  <obj_property name="ElementShortName">nrst_i</obj_property>
+                  <obj_property name="ObjectShortName">nrst_i</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm/cyc_o" type="logic">
+                  <obj_property name="ElementShortName">cyc_o</obj_property>
+                  <obj_property name="ObjectShortName">cyc_o</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm/stb_o" type="logic">
+                  <obj_property name="ElementShortName">stb_o</obj_property>
+                  <obj_property name="ObjectShortName">stb_o</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm/cti_o" type="array">
+                  <obj_property name="ElementShortName">cti_o[2:0]</obj_property>
+                  <obj_property name="ObjectShortName">cti_o[2:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm/bte_o" type="array">
+                  <obj_property name="ElementShortName">bte_o[1:0]</obj_property>
+                  <obj_property name="ObjectShortName">bte_o[1:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm/we_o" type="logic">
+                  <obj_property name="ElementShortName">we_o</obj_property>
+                  <obj_property name="ObjectShortName">we_o</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm/adr_o" type="array">
+                  <obj_property name="ElementShortName">adr_o[31:0]</obj_property>
+                  <obj_property name="ObjectShortName">adr_o[31:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm/sel_o" type="array">
+                  <obj_property name="ElementShortName">sel_o[3:0]</obj_property>
+                  <obj_property name="ObjectShortName">sel_o[3:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm/ack_i" type="logic">
+                  <obj_property name="ElementShortName">ack_i</obj_property>
+                  <obj_property name="ObjectShortName">ack_i</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm/err_i" type="logic">
+                  <obj_property name="ElementShortName">err_i</obj_property>
+                  <obj_property name="ObjectShortName">err_i</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm/dat_i" type="array">
+                  <obj_property name="ElementShortName">dat_i[31:0]</obj_property>
+                  <obj_property name="ObjectShortName">dat_i[31:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm/sint" type="logic">
+                  <obj_property name="ElementShortName">sint</obj_property>
+                  <obj_property name="ObjectShortName">sint</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm/ctrl_ven" type="logic">
+                  <obj_property name="ElementShortName">ctrl_ven</obj_property>
+                  <obj_property name="ObjectShortName">ctrl_ven</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm/ctrl_cd" type="array">
+                  <obj_property name="ElementShortName">ctrl_cd[1:0]</obj_property>
+                  <obj_property name="ObjectShortName">ctrl_cd[1:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm/ctrl_vbl" type="array">
+                  <obj_property name="ElementShortName">ctrl_vbl[1:0]</obj_property>
+                  <obj_property name="ObjectShortName">ctrl_vbl[1:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm/ctrl_vbsw" type="logic">
+                  <obj_property name="ElementShortName">ctrl_vbsw</obj_property>
+                  <obj_property name="ObjectShortName">ctrl_vbsw</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm/busy" type="logic">
+                  <obj_property name="ElementShortName">busy</obj_property>
+                  <obj_property name="ObjectShortName">busy</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm/VBAa" type="array">
+                  <obj_property name="ElementShortName">VBAa[31:2]</obj_property>
+                  <obj_property name="ObjectShortName">VBAa[31:2]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm/VBAb" type="array">
+                  <obj_property name="ElementShortName">VBAb[31:2]</obj_property>
+                  <obj_property name="ObjectShortName">VBAb[31:2]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm/Thgate" type="array">
+                  <obj_property name="ElementShortName">Thgate[15:0]</obj_property>
+                  <obj_property name="ObjectShortName">Thgate[15:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm/Tvgate" type="array">
+                  <obj_property name="ElementShortName">Tvgate[15:0]</obj_property>
+                  <obj_property name="ObjectShortName">Tvgate[15:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm/stat_avmp" type="logic">
+                  <obj_property name="ElementShortName">stat_avmp</obj_property>
+                  <obj_property name="ObjectShortName">stat_avmp</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm/vmem_switch" type="logic">
+                  <obj_property name="ElementShortName">vmem_switch</obj_property>
+                  <obj_property name="ObjectShortName">vmem_switch</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm/ImDoneFifoQ" type="logic">
+                  <obj_property name="ElementShortName">ImDoneFifoQ</obj_property>
+                  <obj_property name="ObjectShortName">ImDoneFifoQ</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm/cursor0_ba" type="array">
+                  <obj_property name="ElementShortName">cursor0_ba[31:11]</obj_property>
+                  <obj_property name="ObjectShortName">cursor0_ba[31:11]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm/cursor1_ba" type="array">
+                  <obj_property name="ElementShortName">cursor1_ba[31:11]</obj_property>
+                  <obj_property name="ObjectShortName">cursor1_ba[31:11]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm/cursor0_ld" type="logic">
+                  <obj_property name="ElementShortName">cursor0_ld</obj_property>
+                  <obj_property name="ObjectShortName">cursor0_ld</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm/cursor1_ld" type="logic">
+                  <obj_property name="ElementShortName">cursor1_ld</obj_property>
+                  <obj_property name="ObjectShortName">cursor1_ld</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm/fb_data_fifo_rreq" type="logic">
+                  <obj_property name="ElementShortName">fb_data_fifo_rreq</obj_property>
+                  <obj_property name="ObjectShortName">fb_data_fifo_rreq</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm/fb_data_fifo_q" type="array">
+                  <obj_property name="ElementShortName">fb_data_fifo_q[31:0]</obj_property>
+                  <obj_property name="ObjectShortName">fb_data_fifo_q[31:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm/fb_data_fifo_empty" type="logic">
+                  <obj_property name="ElementShortName">fb_data_fifo_empty</obj_property>
+                  <obj_property name="ObjectShortName">fb_data_fifo_empty</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm/vmem_acc" type="logic">
+                  <obj_property name="ElementShortName">vmem_acc</obj_property>
+                  <obj_property name="ObjectShortName">vmem_acc</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm/vmem_req" type="logic">
+                  <obj_property name="ElementShortName">vmem_req</obj_property>
+                  <obj_property name="ObjectShortName">vmem_req</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm/vmem_ack" type="logic">
+                  <obj_property name="ElementShortName">vmem_ack</obj_property>
+                  <obj_property name="ObjectShortName">vmem_ack</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm/ImDone" type="logic">
+                  <obj_property name="ElementShortName">ImDone</obj_property>
+                  <obj_property name="ObjectShortName">ImDone</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm/dImDone" type="logic">
+                  <obj_property name="ElementShortName">dImDone</obj_property>
+                  <obj_property name="ObjectShortName">dImDone</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm/ImDoneStrb" type="logic">
+                  <obj_property name="ElementShortName">ImDoneStrb</obj_property>
+                  <obj_property name="ObjectShortName">ImDoneStrb</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm/dImDoneStrb" type="logic">
+                  <obj_property name="ElementShortName">dImDoneStrb</obj_property>
+                  <obj_property name="ObjectShortName">dImDoneStrb</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm/sclr" type="logic">
+                  <obj_property name="ElementShortName">sclr</obj_property>
+                  <obj_property name="ObjectShortName">sclr</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm/cursor_ba" type="array">
+                  <obj_property name="ElementShortName">cursor_ba[31:11]</obj_property>
+                  <obj_property name="ObjectShortName">cursor_ba[31:11]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm/cursor_adr" type="array">
+                  <obj_property name="ElementShortName">cursor_adr[8:0]</obj_property>
+                  <obj_property name="ObjectShortName">cursor_adr[8:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm/cursor0_we" type="logic">
+                  <obj_property name="ElementShortName">cursor0_we</obj_property>
+                  <obj_property name="ObjectShortName">cursor0_we</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm/cursor1_we" type="logic">
+                  <obj_property name="ElementShortName">cursor1_we</obj_property>
+                  <obj_property name="ObjectShortName">cursor1_we</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm/ld_cursor0" type="logic">
+                  <obj_property name="ElementShortName">ld_cursor0</obj_property>
+                  <obj_property name="ObjectShortName">ld_cursor0</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm/ld_cursor1" type="logic">
+                  <obj_property name="ElementShortName">ld_cursor1</obj_property>
+                  <obj_property name="ObjectShortName">ld_cursor1</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm/cur_acc" type="logic">
+                  <obj_property name="ElementShortName">cur_acc</obj_property>
+                  <obj_property name="ObjectShortName">cur_acc</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm/cur_acc_sel" type="logic">
+                  <obj_property name="ElementShortName">cur_acc_sel</obj_property>
+                  <obj_property name="ObjectShortName">cur_acc_sel</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm/cur_ack" type="logic">
+                  <obj_property name="ElementShortName">cur_ack</obj_property>
+                  <obj_property name="ObjectShortName">cur_ack</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm/cur_done" type="logic">
+                  <obj_property name="ElementShortName">cur_done</obj_property>
+                  <obj_property name="ObjectShortName">cur_done</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm/burst_cnt" type="array">
+                  <obj_property name="ElementShortName">burst_cnt[2:0]</obj_property>
+                  <obj_property name="ObjectShortName">burst_cnt[2:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm/burst_done" type="logic">
+                  <obj_property name="ElementShortName">burst_done</obj_property>
+                  <obj_property name="ObjectShortName">burst_done</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm/sel_VBA" type="logic">
+                  <obj_property name="ElementShortName">sel_VBA</obj_property>
+                  <obj_property name="ObjectShortName">sel_VBA</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm/vmemA" type="array">
+                  <obj_property name="ElementShortName">vmemA[31:2]</obj_property>
+                  <obj_property name="ObjectShortName">vmemA[31:2]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm/burst_cnt_val" type="array">
+                  <obj_property name="ElementShortName">burst_cnt_val[3:0]</obj_property>
+                  <obj_property name="ObjectShortName">burst_cnt_val[3:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm/hgate_cnt" type="array">
+                  <obj_property name="ElementShortName">hgate_cnt[15:0]</obj_property>
+                  <obj_property name="ObjectShortName">hgate_cnt[15:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm/hgate_cnt_val" type="array">
+                  <obj_property name="ElementShortName">hgate_cnt_val[16:0]</obj_property>
+                  <obj_property name="ObjectShortName">hgate_cnt_val[16:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm/hgate_div_cnt" type="array">
+                  <obj_property name="ElementShortName">hgate_div_cnt[1:0]</obj_property>
+                  <obj_property name="ObjectShortName">hgate_div_cnt[1:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm/hgate_div_val" type="array">
+                  <obj_property name="ElementShortName">hgate_div_val[2:0]</obj_property>
+                  <obj_property name="ObjectShortName">hgate_div_val[2:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm/hdone" type="logic">
+                  <obj_property name="ElementShortName">hdone</obj_property>
+                  <obj_property name="ObjectShortName">hdone</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm/vgate_cnt" type="array">
+                  <obj_property name="ElementShortName">vgate_cnt[15:0]</obj_property>
+                  <obj_property name="ObjectShortName">vgate_cnt[15:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm/vgate_cnt_val" type="array">
+                  <obj_property name="ElementShortName">vgate_cnt_val[16:0]</obj_property>
+                  <obj_property name="ObjectShortName">vgate_cnt_val[16:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm/vdone" type="logic">
+                  <obj_property name="ElementShortName">vdone</obj_property>
+                  <obj_property name="ObjectShortName">vdone</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm/next_cursor_adr" type="array">
+                  <obj_property name="ElementShortName">next_cursor_adr[9:0]</obj_property>
+                  <obj_property name="ObjectShortName">next_cursor_adr[9:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm/wb_cycle" type="logic">
+                  <obj_property name="ElementShortName">wb_cycle</obj_property>
+                  <obj_property name="ObjectShortName">wb_cycle</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbm/fb_data_fifo_nword" type="array">
+                  <obj_property name="ElementShortName">fb_data_fifo_nword[4:0]</obj_property>
+                  <obj_property name="ObjectShortName">fb_data_fifo_nword[4:0]</obj_property>
+               </wvobject>
+            </wvobject>
+            <wvobject fp_name="group334" type="group">
+               <obj_property name="label">wbs</obj_property>
+               <obj_property name="DisplayName">label</obj_property>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/clk_i" type="logic">
+                  <obj_property name="ElementShortName">clk_i</obj_property>
+                  <obj_property name="ObjectShortName">clk_i</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/rst_i" type="logic">
+                  <obj_property name="ElementShortName">rst_i</obj_property>
+                  <obj_property name="ObjectShortName">rst_i</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/arst_i" type="logic">
+                  <obj_property name="ElementShortName">arst_i</obj_property>
+                  <obj_property name="ObjectShortName">arst_i</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/adr_i" type="array">
+                  <obj_property name="ElementShortName">adr_i[11:2]</obj_property>
+                  <obj_property name="ObjectShortName">adr_i[11:2]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/dat_i" type="array">
+                  <obj_property name="ElementShortName">dat_i[31:0]</obj_property>
+                  <obj_property name="ObjectShortName">dat_i[31:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/dat_o" type="array">
+                  <obj_property name="ElementShortName">dat_o[31:0]</obj_property>
+                  <obj_property name="ObjectShortName">dat_o[31:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/sel_i" type="array">
+                  <obj_property name="ElementShortName">sel_i[3:0]</obj_property>
+                  <obj_property name="ObjectShortName">sel_i[3:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/we_i" type="logic">
+                  <obj_property name="ElementShortName">we_i</obj_property>
+                  <obj_property name="ObjectShortName">we_i</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/stb_i" type="logic">
+                  <obj_property name="ElementShortName">stb_i</obj_property>
+                  <obj_property name="ObjectShortName">stb_i</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/cyc_i" type="logic">
+                  <obj_property name="ElementShortName">cyc_i</obj_property>
+                  <obj_property name="ObjectShortName">cyc_i</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/ack_o" type="logic">
+                  <obj_property name="ElementShortName">ack_o</obj_property>
+                  <obj_property name="ObjectShortName">ack_o</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/rty_o" type="logic">
+                  <obj_property name="ElementShortName">rty_o</obj_property>
+                  <obj_property name="ObjectShortName">rty_o</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/err_o" type="logic">
+                  <obj_property name="ElementShortName">err_o</obj_property>
+                  <obj_property name="ObjectShortName">err_o</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/inta_o" type="logic">
+                  <obj_property name="ElementShortName">inta_o</obj_property>
+                  <obj_property name="ObjectShortName">inta_o</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/wbm_busy" type="logic">
+                  <obj_property name="ElementShortName">wbm_busy</obj_property>
+                  <obj_property name="ObjectShortName">wbm_busy</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/dvi_odf" type="array">
+                  <obj_property name="ElementShortName">dvi_odf[1:0]</obj_property>
+                  <obj_property name="ObjectShortName">dvi_odf[1:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/bl" type="logic">
+                  <obj_property name="ElementShortName">bl</obj_property>
+                  <obj_property name="ObjectShortName">bl</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/csl" type="logic">
+                  <obj_property name="ElementShortName">csl</obj_property>
+                  <obj_property name="ObjectShortName">csl</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/vsl" type="logic">
+                  <obj_property name="ElementShortName">vsl</obj_property>
+                  <obj_property name="ObjectShortName">vsl</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/hsl" type="logic">
+                  <obj_property name="ElementShortName">hsl</obj_property>
+                  <obj_property name="ObjectShortName">hsl</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/pc" type="logic">
+                  <obj_property name="ElementShortName">pc</obj_property>
+                  <obj_property name="ObjectShortName">pc</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/cd" type="array">
+                  <obj_property name="ElementShortName">cd[1:0]</obj_property>
+                  <obj_property name="ObjectShortName">cd[1:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/vbl" type="array">
+                  <obj_property name="ElementShortName">vbl[1:0]</obj_property>
+                  <obj_property name="ObjectShortName">vbl[1:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/cbsw" type="logic">
+                  <obj_property name="ElementShortName">cbsw</obj_property>
+                  <obj_property name="ObjectShortName">cbsw</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/vbsw" type="logic">
+                  <obj_property name="ElementShortName">vbsw</obj_property>
+                  <obj_property name="ObjectShortName">vbsw</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/ven" type="logic">
+                  <obj_property name="ElementShortName">ven</obj_property>
+                  <obj_property name="ObjectShortName">ven</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/cursor0_res" type="logic">
+                  <obj_property name="ElementShortName">cursor0_res</obj_property>
+                  <obj_property name="ObjectShortName">cursor0_res</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/cursor0_en" type="logic">
+                  <obj_property name="ElementShortName">cursor0_en</obj_property>
+                  <obj_property name="ObjectShortName">cursor0_en</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/cc0_adr_i" type="array">
+                  <obj_property name="ElementShortName">cc0_adr_i[3:0]</obj_property>
+                  <obj_property name="ObjectShortName">cc0_adr_i[3:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/cc0_dat_o" type="array">
+                  <obj_property name="ElementShortName">cc0_dat_o[15:0]</obj_property>
+                  <obj_property name="ObjectShortName">cc0_dat_o[15:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/cursor1_res" type="logic">
+                  <obj_property name="ElementShortName">cursor1_res</obj_property>
+                  <obj_property name="ObjectShortName">cursor1_res</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/cursor1_en" type="logic">
+                  <obj_property name="ElementShortName">cursor1_en</obj_property>
+                  <obj_property name="ObjectShortName">cursor1_en</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/cc1_adr_i" type="array">
+                  <obj_property name="ElementShortName">cc1_adr_i[3:0]</obj_property>
+                  <obj_property name="ObjectShortName">cc1_adr_i[3:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/cc1_dat_o" type="array">
+                  <obj_property name="ElementShortName">cc1_dat_o[15:0]</obj_property>
+                  <obj_property name="ObjectShortName">cc1_dat_o[15:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/cursor0_xy" type="array">
+                  <obj_property name="ElementShortName">cursor0_xy[31:0]</obj_property>
+                  <obj_property name="ObjectShortName">cursor0_xy[31:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/cursor0_ba" type="array">
+                  <obj_property name="ElementShortName">cursor0_ba[31:11]</obj_property>
+                  <obj_property name="ObjectShortName">cursor0_ba[31:11]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/cursor0_ld" type="logic">
+                  <obj_property name="ElementShortName">cursor0_ld</obj_property>
+                  <obj_property name="ObjectShortName">cursor0_ld</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/cursor1_xy" type="array">
+                  <obj_property name="ElementShortName">cursor1_xy[31:0]</obj_property>
+                  <obj_property name="ObjectShortName">cursor1_xy[31:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/cursor1_ba" type="array">
+                  <obj_property name="ElementShortName">cursor1_ba[31:11]</obj_property>
+                  <obj_property name="ObjectShortName">cursor1_ba[31:11]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/cursor1_ld" type="logic">
+                  <obj_property name="ElementShortName">cursor1_ld</obj_property>
+                  <obj_property name="ObjectShortName">cursor1_ld</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/avmp" type="logic">
+                  <obj_property name="ElementShortName">avmp</obj_property>
+                  <obj_property name="ObjectShortName">avmp</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/acmp" type="logic">
+                  <obj_property name="ElementShortName">acmp</obj_property>
+                  <obj_property name="ObjectShortName">acmp</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/vbsint_in" type="logic">
+                  <obj_property name="ElementShortName">vbsint_in</obj_property>
+                  <obj_property name="ObjectShortName">vbsint_in</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/cbsint_in" type="logic">
+                  <obj_property name="ElementShortName">cbsint_in</obj_property>
+                  <obj_property name="ObjectShortName">cbsint_in</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/hint_in" type="logic">
+                  <obj_property name="ElementShortName">hint_in</obj_property>
+                  <obj_property name="ObjectShortName">hint_in</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/vint_in" type="logic">
+                  <obj_property name="ElementShortName">vint_in</obj_property>
+                  <obj_property name="ObjectShortName">vint_in</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/luint_in" type="logic">
+                  <obj_property name="ElementShortName">luint_in</obj_property>
+                  <obj_property name="ObjectShortName">luint_in</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/sint_in" type="logic">
+                  <obj_property name="ElementShortName">sint_in</obj_property>
+                  <obj_property name="ObjectShortName">sint_in</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/Thsync" type="array">
+                  <obj_property name="ElementShortName">Thsync[7:0]</obj_property>
+                  <obj_property name="ObjectShortName">Thsync[7:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/Thgdel" type="array">
+                  <obj_property name="ElementShortName">Thgdel[7:0]</obj_property>
+                  <obj_property name="ObjectShortName">Thgdel[7:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/Thgate" type="array">
+                  <obj_property name="ElementShortName">Thgate[15:0]</obj_property>
+                  <obj_property name="ObjectShortName">Thgate[15:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/Thlen" type="array">
+                  <obj_property name="ElementShortName">Thlen[15:0]</obj_property>
+                  <obj_property name="ObjectShortName">Thlen[15:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/Tvsync" type="array">
+                  <obj_property name="ElementShortName">Tvsync[7:0]</obj_property>
+                  <obj_property name="ObjectShortName">Tvsync[7:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/Tvgdel" type="array">
+                  <obj_property name="ElementShortName">Tvgdel[7:0]</obj_property>
+                  <obj_property name="ObjectShortName">Tvgdel[7:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/Tvgate" type="array">
+                  <obj_property name="ElementShortName">Tvgate[15:0]</obj_property>
+                  <obj_property name="ObjectShortName">Tvgate[15:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/Tvlen" type="array">
+                  <obj_property name="ElementShortName">Tvlen[15:0]</obj_property>
+                  <obj_property name="ObjectShortName">Tvlen[15:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/VBARa" type="array">
+                  <obj_property name="ElementShortName">VBARa[31:2]</obj_property>
+                  <obj_property name="ObjectShortName">VBARa[31:2]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/VBARb" type="array">
+                  <obj_property name="ElementShortName">VBARb[31:2]</obj_property>
+                  <obj_property name="ObjectShortName">VBARb[31:2]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/clut_acc" type="logic">
+                  <obj_property name="ElementShortName">clut_acc</obj_property>
+                  <obj_property name="ObjectShortName">clut_acc</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/clut_ack" type="logic">
+                  <obj_property name="ElementShortName">clut_ack</obj_property>
+                  <obj_property name="ObjectShortName">clut_ack</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/clut_q" type="array">
+                  <obj_property name="ElementShortName">clut_q[23:0]</obj_property>
+                  <obj_property name="ObjectShortName">clut_q[23:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/REG_ADR" type="array">
+                  <obj_property name="ElementShortName">REG_ADR[7:0]</obj_property>
+                  <obj_property name="ObjectShortName">REG_ADR[7:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/CLUT_ADR" type="logic">
+                  <obj_property name="ElementShortName">CLUT_ADR</obj_property>
+                  <obj_property name="ObjectShortName">CLUT_ADR</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/ctrl" type="array">
+                  <obj_property name="ElementShortName">ctrl[31:0]</obj_property>
+                  <obj_property name="ObjectShortName">ctrl[31:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/stat" type="array">
+                  <obj_property name="ElementShortName">stat[31:0]</obj_property>
+                  <obj_property name="ObjectShortName">stat[31:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/htim" type="array">
+                  <obj_property name="ElementShortName">htim[31:0]</obj_property>
+                  <obj_property name="ObjectShortName">htim[31:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/vtim" type="array">
+                  <obj_property name="ElementShortName">vtim[31:0]</obj_property>
+                  <obj_property name="ObjectShortName">vtim[31:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/hvlen" type="array">
+                  <obj_property name="ElementShortName">hvlen[31:0]</obj_property>
+                  <obj_property name="ObjectShortName">hvlen[31:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/hint" type="logic">
+                  <obj_property name="ElementShortName">hint</obj_property>
+                  <obj_property name="ObjectShortName">hint</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/vint" type="logic">
+                  <obj_property name="ElementShortName">vint</obj_property>
+                  <obj_property name="ObjectShortName">vint</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/vbsint" type="logic">
+                  <obj_property name="ElementShortName">vbsint</obj_property>
+                  <obj_property name="ObjectShortName">vbsint</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/cbsint" type="logic">
+                  <obj_property name="ElementShortName">cbsint</obj_property>
+                  <obj_property name="ObjectShortName">cbsint</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/luint" type="logic">
+                  <obj_property name="ElementShortName">luint</obj_property>
+                  <obj_property name="ObjectShortName">luint</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/sint" type="logic">
+                  <obj_property name="ElementShortName">sint</obj_property>
+                  <obj_property name="ObjectShortName">sint</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/hie" type="logic">
+                  <obj_property name="ElementShortName">hie</obj_property>
+                  <obj_property name="ObjectShortName">hie</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/vie" type="logic">
+                  <obj_property name="ElementShortName">vie</obj_property>
+                  <obj_property name="ObjectShortName">vie</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/vbsie" type="logic">
+                  <obj_property name="ElementShortName">vbsie</obj_property>
+                  <obj_property name="ObjectShortName">vbsie</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/cbsie" type="logic">
+                  <obj_property name="ElementShortName">cbsie</obj_property>
+                  <obj_property name="ObjectShortName">cbsie</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/acc" type="logic">
+                  <obj_property name="ElementShortName">acc</obj_property>
+                  <obj_property name="ObjectShortName">acc</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/acc32" type="logic">
+                  <obj_property name="ElementShortName">acc32</obj_property>
+                  <obj_property name="ObjectShortName">acc32</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/reg_acc" type="logic">
+                  <obj_property name="ElementShortName">reg_acc</obj_property>
+                  <obj_property name="ObjectShortName">reg_acc</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/reg_wacc" type="logic">
+                  <obj_property name="ElementShortName">reg_wacc</obj_property>
+                  <obj_property name="ObjectShortName">reg_wacc</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/cc0_acc" type="logic">
+                  <obj_property name="ElementShortName">cc0_acc</obj_property>
+                  <obj_property name="ObjectShortName">cc0_acc</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/cc1_acc" type="logic">
+                  <obj_property name="ElementShortName">cc1_acc</obj_property>
+                  <obj_property name="ObjectShortName">cc1_acc</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/ccr0_dat_o" type="array">
+                  <obj_property name="ElementShortName">ccr0_dat_o[31:0]</obj_property>
+                  <obj_property name="ObjectShortName">ccr0_dat_o[31:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/ccr1_dat_o" type="array">
+                  <obj_property name="ElementShortName">ccr1_dat_o[31:0]</obj_property>
+                  <obj_property name="ObjectShortName">ccr1_dat_o[31:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/reg_dato" type="array">
+                  <obj_property name="ElementShortName">reg_dato[31:0]</obj_property>
+                  <obj_property name="ObjectShortName">reg_dato[31:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/REG_ADR_HIBIT" type="array">
+                  <obj_property name="ElementShortName">REG_ADR_HIBIT[31:0]</obj_property>
+                  <obj_property name="ObjectShortName">REG_ADR_HIBIT[31:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/CTRL_ADR" type="array">
+                  <obj_property name="ElementShortName">CTRL_ADR[7:0]</obj_property>
+                  <obj_property name="ObjectShortName">CTRL_ADR[7:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/STAT_ADR" type="array">
+                  <obj_property name="ElementShortName">STAT_ADR[7:0]</obj_property>
+                  <obj_property name="ObjectShortName">STAT_ADR[7:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/HTIM_ADR" type="array">
+                  <obj_property name="ElementShortName">HTIM_ADR[7:0]</obj_property>
+                  <obj_property name="ObjectShortName">HTIM_ADR[7:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/VTIM_ADR" type="array">
+                  <obj_property name="ElementShortName">VTIM_ADR[7:0]</obj_property>
+                  <obj_property name="ObjectShortName">VTIM_ADR[7:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/HVLEN_ADR" type="array">
+                  <obj_property name="ElementShortName">HVLEN_ADR[7:0]</obj_property>
+                  <obj_property name="ObjectShortName">HVLEN_ADR[7:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/VBARA_ADR" type="array">
+                  <obj_property name="ElementShortName">VBARA_ADR[7:0]</obj_property>
+                  <obj_property name="ObjectShortName">VBARA_ADR[7:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/VBARB_ADR" type="array">
+                  <obj_property name="ElementShortName">VBARB_ADR[7:0]</obj_property>
+                  <obj_property name="ObjectShortName">VBARB_ADR[7:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/C0XY_ADR" type="array">
+                  <obj_property name="ElementShortName">C0XY_ADR[7:0]</obj_property>
+                  <obj_property name="ObjectShortName">C0XY_ADR[7:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/C0BAR_ADR" type="array">
+                  <obj_property name="ElementShortName">C0BAR_ADR[7:0]</obj_property>
+                  <obj_property name="ObjectShortName">C0BAR_ADR[7:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/CCR0_ADR" type="array">
+                  <obj_property name="ElementShortName">CCR0_ADR[7:0]</obj_property>
+                  <obj_property name="ObjectShortName">CCR0_ADR[7:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/C1XY_ADR" type="array">
+                  <obj_property name="ElementShortName">C1XY_ADR[7:0]</obj_property>
+                  <obj_property name="ObjectShortName">C1XY_ADR[7:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/C1BAR_ADR" type="array">
+                  <obj_property name="ElementShortName">C1BAR_ADR[7:0]</obj_property>
+                  <obj_property name="ObjectShortName">C1BAR_ADR[7:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/donkey_kong_video_sim/dkong_hw_tester/u_vga_ctrl/u2/wbs/CCR1_ADR" type="array">
+                  <obj_property name="ElementShortName">CCR1_ADR[7:0]</obj_property>
+                  <obj_property name="ObjectShortName">CCR1_ADR[7:0]</obj_property>
+               </wvobject>
+            </wvobject>
          </wvobject>
       </wvobject>
    </wvobject>
