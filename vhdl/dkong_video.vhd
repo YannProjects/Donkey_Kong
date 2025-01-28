@@ -138,11 +138,14 @@ attribute DONT_TOUCH : string;
 attribute DONT_TOUCH of h, Phi34n, Phi34 : signal is "true";
 
 -- Debug
--- attribute MARK_DEBUG : string;
--- attribute MARK_DEBUG of o_vblkn, o_vsyncn, o_hblkn, o_hsyncn, o_r, o_g, o_b, o_cmpsyncn, o_1_2_hb, o_1_hb, o_vf_2, o_esblkn, vf : signal is "true";    
+attribute MARK_DEBUG : string;
+attribute MARK_DEBUG of final_vid, final_col, S0_U4PN, S1_U4PN, clk_color_latch, cmpblk2_l, vblk : signal is "true";    
 
 begin
 
+    -------------------------------
+    -- Generation HSYNC / VSYNC
+    -------------------------------
     -- 1E, 1F, 1H - Video sheet schematic
     p_mc10136 : process(i_clk, i_rst)
     begin
@@ -294,11 +297,95 @@ begin
     -- U3J, U4J
     -- Les sortie de 3J/4J sont a zero dans le cas du LS157 si Q5_6K (G) =1
     dc <= (others => '0') when Q5_6K = '1' else da when U8B_sprite_data = "00" else (cd & U8B_sprite_data(1 downto 0));  
+
     
-    -- U5F
-    G_5F <= not (h(0) and h(1) and h(2) and h(3));
-    U5F : entity work.SN74LS139N(SYNTH) port map (X_1 => G_5F, X_2 => h(3), X_3 => h_256n, X_5 => O1A_5F, X_7 => O3A_5F,
-                                    X_13 => h(3), X_14 => h(2), X_15 => '0', X_10 => O2B_5F, X_11 => O1B_5F, X_12 => O0B_5F);
+    -------------------------
+    -- Gestion des Tiles
+    -------------------------
+    -- U2S, U3S, U4S
+    U234S_S <= not (vblk or h_256);
+    addr_ram_tiles <= i_addr(9 downto 0) when U234S_S = '0' else 
+                        vf(7) & vf(6) & vf(5) & vf(4) & vf(3) & 
+                        (h_128 xor flip_1) & (h(7) xor flip_1) &
+                        (h(6) xor flip_1) & (h(5) xor flip_1) & (h(4) xor flip_1);
+                        
+    addr_tiles_ram_cs_l <= (not i_vram_wrn) and (not i_vram_rdn) when U234S_S = '0' else '0';
+    char_tile_reload <= '1' when U234S_S = '0' else '0';
+    
+    -- U1S
+    U2PR_tile_id_in <= i_vid_data_in when i_vram_wrn = '0' else (others => '0');
+    
+    p_video_data_sel : process(i_objrdn, i_vram_rdn, U2PR_tile_id_out, dout_6PR)
+    begin
+        o_vid_data_out <= (others => '0');
+        if (i_objrdn = '0') then
+            o_vid_data_out <= dout_6PR;
+        elsif (i_vram_rdn = '0') then
+            o_vid_data_out <= U2PR_tile_id_out;
+        end if;
+    end process;
+    
+    U2PR : entity work.blk_mem_gen_2PR port map (clka => Phi34, wea(0) => not(i_vram_wrn), 
+                                addra => addr_ram_tiles, dina => U2PR_tile_id_in, douta => U2PR_tile_id_out, ena => not addr_tiles_ram_cs_l);
+
+    U2N : entity work.dist_mem_gen_2N port map (a => addr_ram_tiles(9 downto 7)& addr_ram_tiles(4 downto 0), spo => data_2N);
+    
+    clk_color_latch <= not(h(3) and h(2) and h(1));
+
+    -- U2M
+    U2M: process(clk_color_latch)
+    begin
+        if rising_edge(clk_color_latch) then
+            col <= data_2N;
+        end if;
+    end process;                                         
+
+    addr_tiles_data_3PN <= U2PR_tile_id_out & vf(2 downto 0);
+    U3P_tile_bank_1 : entity work.dist_mem_gen_3P port map (a => addr_tiles_data_3PN, spo => data_tile_1);
+    U3N_tile_bank_2 : entity work.dist_mem_gen_3N port map (a => addr_tiles_data_3PN, spo => data_tile_2);
+
+    -- U4P                               
+	U4P : process(h(0))
+	begin
+        if falling_edge(h(0)) then
+            case S_U4PN is
+                when "10" => shift_reg_U4P <= shift_reg_U4P(1 to 7) & '0'; -- Shift left
+                when "01" => shift_reg_U4P <= '0' & shift_reg_U4P(0 to 6); -- Shift right
+                when "11" => shift_reg_U4P <= data_tile_1;                     -- Parallel load
+                when others => null;
+            end case;
+		end if;
+	end process;
+	Q7_4P	<= shift_reg_U4P(7);
+	Q0_4P	<= shift_reg_U4P(0);	                                   
+
+    -- U4N                               
+	process(h(0))
+	begin
+      if falling_edge(h(0)) then
+        case S_U4PN is
+            when "10" => shift_reg_U4N <= shift_reg_U4N(1 to 7) & '0'; -- Shift left
+            when "01" => shift_reg_U4N <= '0' & shift_reg_U4N(0 to 6); -- Shift right
+            when "11" => shift_reg_U4N <= data_tile_2;                 -- Parallel load
+            when others => null;
+        end case;
+      end if;
+	end process;
+	Q7_4N	<= shift_reg_U4N(7);
+	Q0_4N	<= shift_reg_U4N(0);	                                                                      
+	
+	S_U4PN <= S1_U4PN & S0_U4PN;
+	    
+    tile_shift_reg_reload_l <= (not clk_color_latch) and (not char_tile_reload);
+    -- U4M
+    A_4M <= (Q0_4P, Q0_4N, '1', tile_shift_reg_reload_l);
+    B_4M <= (Q7_4P, Q7_4N, '1', tile_shift_reg_reload_l);
+    (vid_1, vid_0, S1_U4PN, S0_U4PN) <= Y_4M;
+    Y_4M <= A_4M when flip_1 = '0' else B_4M;    
+    
+    -------------------------
+    -- Gestion des Sprites
+    -------------------------
     -- U3E, U4E
     clr_u3E4E_l <= (O3A_5F or Q5_6K);
     load_u3E4E_l <= O1A_5F;
@@ -363,6 +450,11 @@ begin
             end if;
         end if;
     end process;
+
+    -- U5F
+    G_5F <= not (h(0) and h(1) and h(2) and h(3));
+    U5F : entity work.SN74LS139N(SYNTH) port map (X_1 => G_5F, X_2 => h(3), X_3 => h_256n, X_5 => O1A_5F, X_7 => O3A_5F,
+                                    X_13 => h(3), X_14 => h(2), X_15 => '0', X_10 => O2B_5F, X_11 => O1B_5F, X_12 => O0B_5F);
 
     -- U7C, U7D, U7E, U7F
     addr_7CDEF <= Q_6H(6 downto 0) & (db(3 downto 0) xor (Q_6H(7) & Q_6H(7) & Q_6H(7) & Q_6H(7)));
@@ -454,7 +546,6 @@ begin
 		Q1_8N <= q_tmp;
 	end process;	                                     
     
-    -- Zone A-J 1-9
     -- U3L, U3M
     final_col <= col when da(1 downto 0) = "00" else da(5 downto 2);
     final_vid <= (vid_1 & vid_0) when da(1 downto 0) = "00" else da(1 downto 0);
@@ -470,11 +561,16 @@ begin
             u1ef_clr_l <= cmpblk2_l;
         end if;
     end process;        
-                                                  
+      
     -- U2E, U2F (sur la carte CPU)
+    -- Conversion de la palette en couleurs RGB
     U2E_COL : entity work.dist_mem_gen_2E port map (a => addr_2EF, spo => data_2E);
     U2F_COL : entity work.dist_mem_gen_2F port map (a => addr_2EF, spo => data_2F);
 
+    -- Par défaut les couleurs sont inversées par les transistors Q15, Q19,...
+    -- On ne sait plus bien à quelle couleur ça correspond. J'ai échantillonés les 17 couleurs
+    -- utilisés dans la palette et les ai convertit en RGB sur 8 bits. Chaque sortie de 2E, 2F
+    -- est un index dans la table de couleur du controlleur VGA vers la couleur finale.
     o_r <= data_2E(3 downto 1) when rom_u2F_cs_l = '0' else (others => '1');
     o_g <= data_2E(0) & data_2F(3 downto 2) when rom_u2F_cs_l = '0' else (others => '1');
     o_b <= data_2F(1 downto 0) when rom_u2F_cs_l = '0' else (others => '1');
@@ -591,86 +687,9 @@ begin
     o_1_hb <= h(1);
     o_vf_2 <= vf(1);
 
-    -- U2S, U3S, U4S
-    U234S_S <= not (vblk or h_256);
-    addr_ram_tiles <= i_addr(9 downto 0) when U234S_S = '0' else 
-                        vf(7) & vf(6) & vf(5) & vf(4) & vf(3) & 
-                        (h_128 xor flip_1) & (h(7) xor flip_1) &
-                        (h(6) xor flip_1) & (h(5) xor flip_1) & (h(4) xor flip_1);
-                        
-    addr_tiles_ram_cs_l <= (not i_vram_wrn) and (not i_vram_rdn) when U234S_S = '0' else '0';
-    char_tile_reload <= '1' when U234S_S = '0' else '0';
+
                   
-    -- U1S
-    U2PR_tile_id_in <= i_vid_data_in when i_vram_wrn = '0' else (others => '0');
-    
-    p_video_data_sel : process(i_objrdn, i_vram_rdn, U2PR_tile_id_out, dout_6PR)
-    begin
-        o_vid_data_out <= (others => '0');
-        if (i_objrdn = '0') then
-            o_vid_data_out <= dout_6PR;
-        elsif (i_vram_rdn = '0') then
-            o_vid_data_out <= U2PR_tile_id_out;
-        end if;
-    end process;
-    
-    U2PR : entity work.blk_mem_gen_2PR port map (clka => Phi34, wea(0) => not(i_vram_wrn), 
-                                addra => addr_ram_tiles, dina => U2PR_tile_id_in, douta => U2PR_tile_id_out, ena => not addr_tiles_ram_cs_l);
 
-    U2N : entity work.dist_mem_gen_2N port map (a => addr_ram_tiles(9 downto 7)& addr_ram_tiles(4 downto 0), spo => data_2N);
-    
-    clk_color_latch <= not(h(3) and h(2) and h(1));
-
-    -- U2M
-    U2M: process(clk_color_latch)
-    begin
-        if rising_edge(clk_color_latch) then
-            col <= data_2N;
-        end if;
-    end process;                                         
-
-    addr_tiles_data_3PN <= U2PR_tile_id_out & vf(2 downto 0);
-    U3P_tile_bank_1 : entity work.dist_mem_gen_3P port map (a => addr_tiles_data_3PN, spo => data_tile_1);
-    U3N_tile_bank_2 : entity work.dist_mem_gen_3N port map (a => addr_tiles_data_3PN, spo => data_tile_2);
-
-    -- U4P                               
-	U4P : process(h(0))
-	begin
-        if falling_edge(h(0)) then
-            case S_U4PN is
-                when "10" => shift_reg_U4P <= shift_reg_U4P(1 to 7) & '0'; -- Shift left
-                when "01" => shift_reg_U4P <= '0' & shift_reg_U4P(0 to 6); -- Shift right
-                when "11" => shift_reg_U4P <= data_tile_1;                     -- Parallel load
-                when others => null;
-            end case;
-		end if;
-	end process;
-	Q7_4P	<= shift_reg_U4P(7);
-	Q0_4P	<= shift_reg_U4P(0);	                                   
-
-    -- U4N                               
-	process(h(0))
-	begin
-      if falling_edge(h(0)) then
-        case S_U4PN is
-            when "10" => shift_reg_U4N <= shift_reg_U4N(1 to 7) & '0'; -- Shift left
-            when "01" => shift_reg_U4N <= '0' & shift_reg_U4N(0 to 6); -- Shift right
-            when "11" => shift_reg_U4N <= data_tile_2;                 -- Parallel load
-            when others => null;
-        end case;
-      end if;
-	end process;
-	Q7_4N	<= shift_reg_U4N(7);
-	Q0_4N	<= shift_reg_U4N(0);	                                                                      
-	
-	S_U4PN <= S1_U4PN & S0_U4PN;
-	    
-    tile_shift_reg_reload_l <= (not clk_color_latch) and (not char_tile_reload);
-    -- U4M
-    A_4M <= (Q0_4P, Q0_4N, '1', tile_shift_reg_reload_l);
-    B_4M <= (Q7_4P, Q7_4N, '1', tile_shift_reg_reload_l);
-    (vid_1, vid_0, S1_U4PN, S0_U4PN) <= Y_4M;
-    Y_4M <= A_4M when flip_1 = '0' else B_4M;
     
     flip_1 <= not i_flipn;
     -- flip_2 <= flip_1 xor '0'; -- 3R
