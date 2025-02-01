@@ -93,7 +93,7 @@ signal vga : r_Core_to_VGA;
 signal vga_control_init_done, clk_dkong, clk_52m : std_logic;
 signal video_r, video_g, vga_r, vga_g, vga_b : std_logic_vector(2 downto 0);
 signal video_b : std_logic_vector(1 downto 0);
-signal core_vsync_l, core_blank, pixel_clk : std_logic;
+signal core_vsync_l, core_blank, pixel_clk, clk_audio, clk_audio_shifter : std_logic;
 
 begin
 
@@ -104,10 +104,13 @@ begin
   port map (
       -- 12 MHz CMOD S7
       i_clk_main => i_clk_sys,
+      reset => not i_rst_sysn,
       o_clk_dkong_main => clk_dkong,
+      o_sound_cpu_clk => clk_audio,
+      o_sound_cpu_clk_shifter => clk_audio_shifter,
       o_clk_52m => clk_52m,
       o_clk_vga => vga_clock,
-      reset => not i_rst_sysn,
+
       locked => pll_locked
   );
   
@@ -172,6 +175,8 @@ begin
   port map (
     -- System clock (61.44 MHz)
     i_clk => clk_dkong,
+    i_clk_audio_6M => clk_audio,
+    i_clk_audio_12M => clk_audio_shifter,
     i_core_reset => core_rst,
 
     -- Video

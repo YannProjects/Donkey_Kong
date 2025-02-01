@@ -37,6 +37,8 @@ entity dkong_top is
 port (
     -- System clock (61.44 MHz)
     i_clk                 : in  std_logic;
+    i_clk_audio_6M        : in  std_logic;
+    i_clk_audio_12M       : in  std_logic;    
     i_core_reset          : in  std_logic; -- actif niveau haut
 
     -- Video
@@ -87,7 +89,7 @@ signal video_data_in, video_data_out, ram_data_in_34_A, ram_data_in_34_B, ram_da
 signal ram_data_out_34_A, ram_data_out_34_B, ram_data_out_34_C, data_5A, data_5B, data_5C, data_5E : std_logic_vector(7 downto 0);
 signal rom_5E_sel_l, rom_5A_sel_l, rom_5B_sel_l, rom_5C_sel_l, ram_sel_l, sprite_vid_ram_sel_l : std_logic;
 signal ram_3C4C_sel_l, ram_3B4B_sel_l, ram_3A4A_sel_l, dma_cs_l, vram_wait_l : std_logic;
-signal Q2_7F, Q1n_7F, nmi_int_en_l, hsync_l, cmpblk2n : std_logic;
+signal nmi_int_en_l, hsync_l, cmpblk2n : std_logic;
 
 begin
 
@@ -134,33 +136,66 @@ begin
         i_invert_colors_n => '0'
     );
     
-    -- U4D
-    rom_5E_sel_l <= '0' when (addr_bus(15 downto 12) = "0000" and i_cpu_rfsh_l = '1') else '1';
-    rom_5A_sel_l <= '0' when (addr_bus(15 downto 12) = "0001" and i_cpu_rfsh_l = '1') else '1';
-    rom_5B_sel_l <= '0' when (addr_bus(15 downto 12) = "0010" and i_cpu_rfsh_l = '1') else '1';
-    rom_5C_sel_l <= '0' when (addr_bus(15 downto 12) = "0011" and i_cpu_rfsh_l = '1') else '1';
-    ram_sel_l <= '0' when (addr_bus(15 downto 12) = "0110" and i_cpu_rfsh_l = '1') else '1';
-    sprite_vid_ram_sel_l <= '0' when (addr_bus(15 downto 12) = "0111" and i_cpu_rfsh_l = '1') else '1';
+     u_Dkong_Audio : entity work.dkong_audio
+     port map (
+        i_rst_l => not i_core_reset,
+        i_sound_cpu_clk => i_clk_audio_6M,
+        i_sound_cpu_clk_shifter => i_clk_audio_12M,
     
-    -- U2D
-    ram_3C4C_sel_l <= '0' when (addr_bus(11 downto 10) = "00" and ram_sel_l = '0' and (i_cpu_rd_l = '0' or i_cpu_rd_l = '0') and i_cpu_mreq_l = '0')  else '1';
-    ram_3B4B_sel_l <= '0' when (addr_bus(11 downto 10) = "01" and ram_sel_l = '0' and (i_cpu_rd_l = '0' or i_cpu_rd_l = '0') and i_cpu_mreq_l = '0')  else '1';
-    ram_3A4A_sel_l <= '0' when (addr_bus(11 downto 10) = "10" and ram_sel_l = '0' and (i_cpu_rd_l = '0' or i_cpu_rd_l = '0') and i_cpu_mreq_l = '0')  else '1';
+        -- CPU son
+        i_audio_effects => (walk => '1', jump => '1', barrel => '1',
+            boom => '1', spring => '1', gorilla_fall => '1'), 
+        
+        i_sound_int_n => '1',        
+        i_sound_data => (others => '0'),
     
-    -- 2A
-    dma_cs_l <= '0' when (addr_bus(11 downto 10) = "00" and sprite_vid_ram_sel_l = '0')  else '1';
-    obj_rq_l <= '0' when (addr_bus(11 downto 10) = "00" and sprite_vid_ram_sel_l = '0' and i_cpu_mreq_l = '0')  else '1';
-    vram_wait_l <= '0' when (addr_bus(11 downto 10) = "01" and sprite_vid_ram_sel_l = '0' and i_cpu_mreq_l = '0')  else '1';
+        i_sound_PB5 => '1',
+        i_2_VF => '1'
+        
+        -- o_sound_boom_1 : out std_logic; -- Pilotage transisotr Q2 = i_sound_boom_1
+        -- o_sound_boom_2 : out std_logic; -- Pilotage transisotr Q1
+        -- o_dac_vref : out std_logic;
+        -- o_io_sound : out std_logic;
+        -- o_sound_walk : out std_logic;
+        -- o_sound_jump : out std_logic;
+        -- o_sound_boom : out std_logic
+     );
     
-    -- 2B
-    obj_rd_l <= '0' when (sprite_vid_ram_sel_l & addr_bus(11 downto 10) = "000" and Q2_7F = '1' and i_cpu_mreq_l = '0' and i_cpu_rd_l = '0' )  else '1';
-    vram_rd_l <= '0' when (sprite_vid_ram_sel_l & addr_bus(11 downto 10) = "001" and Q2_7F = '1' and i_cpu_mreq_l = '0' and i_cpu_rd_l = '0' )  else '1';
-
-    -- 2C
-    obj_wr_l <= '0' when (sprite_vid_ram_sel_l & addr_bus(11 downto 10) = "000" and i_cpu_mreq_l = '0' and i_cpu_wr_l = '0' and Q2_7F = '1')  else '1';
-    vram_wr_l <= '0' when (sprite_vid_ram_sel_l & addr_bus(11 downto 10) = "001" and i_cpu_mreq_l = '0' and i_cpu_wr_l = '0' and Q2_7F = '1')  else '1';
-    
-    -- U6A n'est pas implemente et remplacé par deux bus separes : i_vid_data_in, o_vid_data_out
+    u_DKong_Adec : entity work.dkong_adec
+    port map (
+        i_rst => i_core_reset,
+        i_clk_audio_12M => i_clk_audio_12M,
+        i_addr => i_cpu_a,
+        i_data => i_cpu_do(3 downto 0),
+        i_vblk_l => v_blkn,
+        i_vram_busy => vram_busy_l,
+        i_rfrsh_l => i_cpu_rfsh_l,
+        i_mreq_comb_l => i_cpu_mreq_l,
+        i_rd_l => i_cpu_rd_l,
+        i_wr_l => i_cpu_wr_l,
+        i_h_1 => h_1,
+        
+        o_objrd_l => open,
+        o_objwr_l => open,
+        o_objrq_l => open,
+        o_vram_wr_l => open,
+        o_vram_rd_l => open,
+        o_cpu_wait_l => open,
+        o_nmi_l => open,
+        o_ram_34A_cs_l => open,
+        o_ram_34B_cs_l => open,
+        o_ram_34C_cs_l => open,
+        
+        o_rom_cs_l => open,
+        o_dma_cs_l => open,
+        o_in1_cs_l => open,
+        o_in2_cs_l => open,
+        o_in3_cs_l => open,
+        o_dipsw_cs_l => open,
+        o_5H_cs_l => open,
+        o_6H_cs_l => open,
+        o_3D_cs_l => open
+    );       
     
     -- ROMs 5A, 5B, 5C, 5E
     u_rom_5A : entity work.dist_mem_gen_5A port map(a => addr_bus(11 downto 0), spo => data_5A);
@@ -172,56 +207,5 @@ begin
     u_ram_34_A : entity work.blk_mem_gen_34A port map (clka => i_clk, wea(0) => i_cpu_wr_l, addra => addr_bus(9 downto 0), dina => ram_data_in_34_A, douta => ram_data_out_34_A);
     u_ram_34_B : entity work.blk_mem_gen_34B port map (clka => i_clk, wea(0) => i_cpu_wr_l, addra => addr_bus(9 downto 0), dina => ram_data_in_34_B, douta => ram_data_out_34_B);
     u_ram_34_C : entity work.blk_mem_gen_34C port map (clka => i_clk, wea(0) => i_cpu_wr_l, addra => addr_bus(9 downto 0), dina => ram_data_in_34_C, douta => ram_data_out_34_C);
-    
-    -- Signaux CPUs
-    -- U7F : entity work.SN74LS74N port map(X_1 => v_blkn, X_4 => not i_core_reset, X_3 => h_1, X_2 => (not vram_busy_l) and (not vram_wait_l), X_6 => Q1n_7F, 
-    --                        X_13 => not i_core_reset, X_10 => not i_core_reset, X_11 => not h_1, X_12 => Q1n_7F, X_9 => Q2_7F);
-    U7F_1 : process(h_1, v_blkn, i_core_reset)
-    begin
-        if (v_blkn = '0') then
-            Q1n_7F <= '1';
-        elsif (i_core_reset = '1') then
-            Q1n_7F <= '0';
-        elsif rising_edge(h_1) then
-            if ((not vram_busy_l) and (not vram_wait_l)) = '1' then
-                Q1n_7F <= '0';
-            else
-                Q1n_7F <= '1';
-            end if;
-        end if;
-    end process;
-    
-    U7F_2 : process(h_1, i_core_reset)
-    begin
-        if (i_core_reset = '1') then
-            Q2_7F <= '0';
-        elsif falling_edge(h_1) then
-            if Q1n_7F = '1' then
-                Q2_7F <= '1';
-            else
-                Q2_7F <= '0';
-            end if;
-        end if;
-    end process;                                
-                           
-    -- U8F : entity work.SN74LS74N port map(X_1 => not i_core_reset, X_4 => nmi_int_en_l, X_3 => not v_blkn, X_2 => '0', X_5 => o_cpu_nmi_l, 
-    --                        X_13 => '0', X_10 => '1', X_11 => '0', X_12 => '0');
-    U8F_1 : process(h_1, v_blkn, i_core_reset)
-    begin
-        if (nmi_int_en_l = '0') then
-            o_cpu_nmi_l <= '1';
-        elsif (i_core_reset = '1') then
-            o_cpu_nmi_l <= '0';
-        elsif falling_edge(v_blkn) then
-            o_cpu_nmi_l <= '0';
-        end if;
-    end process;                           
-                        
-    -- A faire plus tard NMIn est autorise avec une écrtireu à l'adresse 0x7D84 (U5H)
-    nmi_int_en_l <= '1';   
-    
-    o_core_blank <= not cmpblk2n;
-    o_cpu_wait_l <= Q1n_7F;
-    o_cpu_int_l <= '1';
 
 end Behavioral;

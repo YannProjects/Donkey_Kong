@@ -41,4 +41,36 @@ type r_Core_to_VGA is record
     b_vga : std_logic_vector(2 downto 0);
 end record;
 
+type r_AudioEffectsTrigger is record
+    walk : std_logic;
+    jump : std_logic;
+    barrel : std_logic;
+    boom : std_logic;
+    spring : std_logic;
+    gorilla_fall : std_logic;
+end record;
+
+type r_IN1 is record
+    right : std_logic;
+    left  : std_logic;
+    up : std_logic;
+    down : std_logic;
+    jump : std_logic;
+
+end record;
+
+type r_IN2 is record
+    right : std_logic;
+    left  : std_logic;
+    up : std_logic;
+    down : std_logic;
+    jump : std_logic;
+end record;
+
+type r_IN3 is record
+    one_player : std_logic;
+    two_players : std_logic;
+    pb4 : std_logic;
+end record;
+
 end;
