@@ -67,10 +67,11 @@ type r_IN2 is record
     jump : std_logic;
 end record;
 
+-- L'entree sur le bit 6 (pb4) reste en interne du FPGA
 type r_IN3 is record
     one_player : std_logic;
     two_players : std_logic;
-    pb4 : std_logic;
+    coin : std_logic;
 end record;
 
 end;

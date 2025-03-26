@@ -99,7 +99,7 @@ signal O1B_5F, O0B_5F, u8h_O0B_5F_0 : std_logic;
 signal I1C_I0D_8B, Q7_8H, Q1_8H, Q0_8H, Q6_8H, Q1_8N  : std_logic;
 signal clk_u3E4E, mb7074_wr, csn_6PR : std_logic;
 signal Q_5KL : unsigned(7 downto 0);
-signal scanline_wr_l, scanline_wr_l_0 : std_logic;
+signal scanline_wr_l : std_logic;
 signal Q0_4P, Q0_4N, Q7_4P, Q7_4N : std_logic;
 signal DI0_7M, Q_4L, u1ef_clr_l, rom_u2F_cs_l : std_logic;
 signal addr_7M : std_logic_vector(5 downto 0);
@@ -107,7 +107,7 @@ signal dataout_7M : std_logic_vector(8 downto 0);
 signal addr_7CDEF, addr_tiles_data_3PN, Y_6_7_8_S, A_6_7_8_S, B_6_7_8_S : std_logic_vector(10 downto 0);
 signal vid_0, vid_1, S0_U4PN, S1_U4PN : std_logic;
 
-signal vram_busy, esblk, tile_shift_reg_reload_l, sprite_reload_S1, sprite_reload_S0 : std_logic;
+signal vram_busy_l, esblk_l, tile_shift_reg_reload_l, sprite_reload_S1, sprite_reload_S0 : std_logic;
 signal do_draw_l, u6pr_ram_wr : std_logic;
 signal U8B_sprite_data, sprite_shifter : std_logic_vector(1 downto 0);
 signal addr_ram_tiles : std_logic_vector(9 downto 0);
@@ -134,12 +134,12 @@ constant VSYNC_W : unsigned(7 downto 0) := X"08";
 constant HSYNC_P : unsigned(7 downto 0) := X"E7";
 constant HSYNC_W : unsigned(7 downto 0) := X"10";
 
-attribute DONT_TOUCH : string;
-attribute DONT_TOUCH of h, Phi34n, Phi34 : signal is "true";
+-- attribute DONT_TOUCH : string;
+-- attribute DONT_TOUCH of h, Phi34n, Phi34 : signal is "true";
 
 -- Debug
-attribute MARK_DEBUG : string;
-attribute MARK_DEBUG of final_vid, final_col, S0_U4PN, S1_U4PN, clk_color_latch, cmpblk2_l, vblk : signal is "true";    
+-- attribute MARK_DEBUG : string;
+-- attribute MARK_DEBUG of final_vid, final_col, S0_U4PN, S1_U4PN, clk_color_latch, cmpblk2_l, vblk : signal is "true";    
 
 begin
 
@@ -656,12 +656,12 @@ begin
     U2K_1 : process(h(5), h_256)
     begin
         if (h_256 = '0') then
-           esblk  <= '1';
+           esblk_l  <= '1';
         elsif rising_edge(h(5)) then
             if (h(6) = '1') then
-                esblk <='0';
+                esblk_l <='1';
             else
-                esblk <='1';
+                esblk_l <='0';
             end if;
         end if;
     end process; 
@@ -670,18 +670,18 @@ begin
     U2K_2 : process(h(2), h_256)
     begin
         if (h_256 = '0') then
-           vram_busy <= '1';
+           vram_busy_l <= '0';
         elsif rising_edge(h(2)) then
             if (h(7 downto 4) = "1111") then
-                vram_busy <='0';
+                vram_busy_l <='0';
             else
-                vram_busy <='1';
+                vram_busy_l <='1';
             end if;
         end if;
     end process;
 
-    o_vram_busyn <= not vram_busy;
-    o_esblkn <= not esblk;
+    o_vram_busyn <= vram_busy_l;
+    o_esblkn <= esblk_l;
     -- Dephasage de h(0) pour resoudre des problemes de timing dans l'ecriture de la RAM du controlleur VGA 
     o_pixel_core_clock <= h(0);
     o_1_hb <= h(1);

@@ -71,7 +71,6 @@ entity dkong_audio is
 port (
     i_rst_l : in std_logic;
     i_sound_cpu_clk : in std_logic; -- 6 MHz
-    i_sound_cpu_clk_shifter : in std_logic; -- 12 MHz
 
     -- CPU son
     i_audio_effects : in r_AudioEffectsTrigger;
@@ -79,7 +78,6 @@ port (
     i_sound_data : in std_logic_vector(3 downto 0);
 
     i_sound_int_n : in std_logic;
-    i_sound_PB5 : in std_logic;
     i_2_VF : in std_logic; -- Horloge 4K, 5K, 6K
     
     o_sound_boom_1 : out std_logic; -- Pilotage transisotr Q2 = i_sound_boom_1
@@ -108,7 +106,7 @@ begin
 
     -- U4K, U5K, U6K (SIPO shift register)
     u456k_clk <= not i_2_VF;
-    U6K : process(i_rst_l, u456k_clk)
+    U6K : process(i_rst_l, i_2_VF)
     begin
         if i_rst_l = '0' then
             Q_6K <= X"00";
@@ -117,7 +115,7 @@ begin
         end if;
     end process;
 
-    U5K : process(i_rst_l, u456k_clk)
+    U5K : process(i_rst_l, i_2_VF)
     begin
         if i_rst_l = '0' then
             Q_5K <= X"00";
@@ -126,7 +124,7 @@ begin
         end if;
     end process; 
     
-    U4K : process(i_rst_l, u456k_clk)
+    U4K : process(i_rst_l, i_2_VF)
     begin
         if i_rst_l = '0' then
             Q_4K <= X"00";
@@ -206,13 +204,13 @@ begin
    
    -- U3F, U3H
    -- Code et data CPU son
-   U3F : entity work.dist_mem_gen_sound_1 port map(a => addr_roms, spo => cpu_data_3f);
-   U3H : entity work.dist_mem_gen_sound_2 port map(a => addr_roms, spo => cpu_data_3h);
+   U3F : entity work.dist_mem_gen_sound_1 port map(a => addr_roms, spo => cpu_data_3h);
+   U3H : entity work.dist_mem_gen_sound_2 port map(a => addr_roms, spo => cpu_data_3f);
 
    -- Utilise en remplacement de 5J, R19, C37 pour retarder le signal RDn du CPU son
-   process(i_sound_cpu_clk_shifter)
+   process(i_sound_cpu_clk)
    begin
-        if rising_edge(i_sound_cpu_clk_shifter) then
+        if rising_edge(i_sound_cpu_clk) then
             sound_data_en_delayed <= not (sound_data_en_l and (not sound_cpu_rd_l));
         end if;
    end process;
