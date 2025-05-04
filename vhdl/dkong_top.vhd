@@ -35,8 +35,7 @@ use work.DKong_Pack.all;
 
 entity dkong_core_top is
 port (
-    -- System clock (61.44 MHz)
-    i_clk                 : in  std_logic;
+    i_clk                 : in  std_logic; -- System clock (61.44 MHz)
     i_clk_audio_6M        : in  std_logic; -- Clock audio
     i_core_reset          : in  std_logic; -- actif niveau haut
 
@@ -72,7 +71,7 @@ port (
     o_cpu_wait_l          : out std_logic; -- Z80 wait
     o_cpu_nmi_l           : out std_logic; -- Z80 NMI
     o_cpu_busrq           : out std_logic; -- Z80 BUSRQn
-    i_cpu_m1_l            : in std_logic; -- Z80 M1
+    i_cpu_m1_l            : in std_logic; -- Z80 M1 => A supprimer, pas utilise ?
     i_cpu_mreq_l          : in std_logic; -- Z80 MREQ
     i_cpu_rd_l            : in std_logic; -- Z80 RD
     i_cpu_wr_l            : in std_logic; -- Z80 WR
@@ -81,59 +80,110 @@ port (
     
     o_rom_cs_l            : out std_logic; -- Lecture ROM programme
     o_uart_cs_l           : out std_logic; -- UART
-    o_pixel_clk           : out std_logic
+    o_pixel_wr            : out std_logic
     
     );
 end dkong_core_top;
 
 architecture Behavioral of dkong_core_top is
 
--- CPU_RST_P = Nombre de pulse Phi34 entre le début de i_core_reset et le début du pulse de reset CPU/DMA
--- CPU_RST_W = Nombre de pulse Phi34 pour la durée du pulse de reset CPU/DMA
-constant CPU_RST_P : unsigned(15 downto 0) := to_unsigned(1000, 16);
-constant CPU_RST_W : unsigned(15 downto 0) := to_unsigned(10000, 16);
+constant RESET_DURATION : integer := 600000; -- 6 MHz * 0.1 s = 600 000 cycles
+-- constant RESET_DURATION : integer := 60000;
 
-signal cnt_reset : unsigned(15 downto 0);
-signal v_blkn, h_1, vf_2 : std_logic;
+signal cnt_reset : integer;
+signal v_blkn, v_blkn_0, vf_2 : std_logic;
 signal vram_busy_l, vram_wr_l, vram_rd_l, psl_2, obj_wr_l, obj_rd_l, obj_rq_l : std_logic;
 signal video_data_out, ram_data_in_34_A, ram_data_in_34_B, ram_data_in_34_C : std_logic_vector(7 downto 0);
 signal ram_data_out_34_A, ram_data_out_34_B, ram_data_out_34_C, data_5A, data_5B, data_5C, data_5E : std_logic_vector(7 downto 0);
 signal rom_5E_sel_l, rom_5A_sel_l, rom_5B_sel_l, rom_5C_sel_l, ram_sel_l, sprite_vid_ram_sel_l : std_logic;
 signal ram_3C4C_sel_l, ram_3B4B_sel_l, ram_3A4A_sel_l, dma_cs_l, vram_wait_l : std_logic;
-signal nmi_int_en_l, hsync_l, cmpblk2n, cpu_wait, dma_aen, drq0, dma_adstb : std_logic;
+signal nmi_int_en_l, cmpblk2n, cpu_wait, dma_aen, drq0, dma_adstb : std_logic;
 signal dma_iord_l, dma_iowr_l, dma_mem_read_l, dma_mem_write_l, final_mreq_l, dma_busrq : std_logic;
 signal dma_ack : std_logic_vector(3 downto 0);
 signal dma_master_addr, dma_data_in, dma_data_out, dma_addr_high, dma_data : std_logic_vector(7 downto 0);
 signal dma_data_latch, final_bus_data, Q_6H : std_logic_vector(7 downto 0);
 signal final_addr : std_logic_vector(15 downto 0);
 signal U5H_cs_l, U6H_cs_l, U3D_cs_l, vid_board_mux_en_l : std_logic;
-signal ram_34A_cs_l, ram_34B_cs_l, ram_34C_cs_l, objrq_l, final_rd_l, final_wr_l, pb4, final_rfsh_l : std_logic;
-signal clear_nmi_l, flip, play_death_music : std_logic;
+signal ram_34A_cs_l, ram_34B_cs_l, ram_34C_cs_l, final_rd_l, final_wr_l, pb4, final_rfsh_l : std_logic;
+signal clear_nmi_l, flipn, play_death_music : std_logic;
 signal sound_data : std_logic_vector(3 downto 0);
+signal cnt : unsigned(3 downto 0);
 signal bank_palette : std_logic_vector(1 downto 0);
-signal in1_cs, in2_cs, in3_cs, dipsw_cs : std_logic; 
+signal in1_cs, in2_cs, in3_cs, dipsw_cs, internal_rst_l, vram_req_l : std_logic; 
 signal in1 : r_IN1;
 signal in2 : r_IN2;
 signal in3 : r_IN3;
+signal Phi34, Phi34n, g_3K, s2, hsyncn, dma_clock, obj_vram_wr_enable : std_logic;
+signal v : unsigned(7 downto 0);
+signal h : unsigned(9 downto 0);
+
+attribute dont_touch : string;
+attribute dont_touch of i_cpu_m1_l, v_blkn, Phi34n, Phi34, g_3K : signal is "true";
+
+-- Debug
+-- attribute MARK_DEBUG : string;
+-- attribute MARK_DEBUG of final_addr, final_bus_data, final_mreq_l, final_rd_l, final_rfsh_l, final_wr_l : signal is "true"; 
 
 begin
 
     -- CPU reset (équivalent de U1N)
-    p_cpu_reset : process(i_clk, i_core_reset, cnt_reset)
+    p_cpu_reset : process(Phi34n, i_core_reset, cnt_reset)
     begin
-        if (i_core_reset = '1') or (cnt_reset = CPU_RST_W + 1) then
-            cnt_reset <= (others => '0');
-        elsif rising_edge(i_clk) then
-            if (cnt_reset < CPU_RST_W) then
-                cnt_reset <= cnt_reset + 1;
+        if i_core_reset = '1' then
+            internal_rst_l <= '0';
+            cnt_reset <= 0;
+        elsif rising_edge(Phi34n) then
+            if internal_rst_l = '0' then
+                if cnt_reset < RESET_DURATION then
+                    cnt_reset <= cnt_reset + 1;
+                else
+                    internal_rst_l <= '1'; -- Fin du reset
+                end if;
             end if;
         end if;
     end process;
     
+    -- 1E, 1F, 1H - Clock generation (Phi34, Phi34n, G_3K)
+    p_mc10136 : process(i_clk, i_core_reset)
+    begin
+        if i_core_reset = '1' then
+            cnt <= X"0";
+        elsif rising_edge(i_clk) then
+            if (s2 = '0') then
+                cnt <= (others => '0');
+            else
+                cnt <= cnt + 1;
+            end if;
+        end if;
+    end process;
+    
+    s2 <= not cnt(2);
+    g_3K <= not(cnt(1) or cnt(2));
+    Phi34n <= not cnt(1);
+    Phi34 <= cnt(1);
+    
+    -- Horizontal / Vertical clocks et gestion NMI/WAIT (U7F/U8F)
+    u_HVClocks : entity work.hv_clocks_wait_nmi
+    port map (
+        i_rst => i_core_reset,
+        i_Phi34n => Phi34n,
+        i_vram_req_l => vram_req_l,
+        i_vram_busy_l => vram_busy_l,
+        i_clear_nmi_l => clear_nmi_l,
+        o_h => h,
+        o_v => v,
+        o_hsyncn => hsyncn,
+        o_vblkn => v_blkn,
+        o_vsyncn => o_core_vsync_l,
+        o_cpu_wait_l => cpu_wait,
+        o_rams_wr_enable => obj_vram_wr_enable,
+        o_cpu_nmi_l => o_cpu_nmi_l
+    );
+    
     -- DMA i8257
     u_DMA : entity work.i8257
     port map (
-        i_clk => not h_1,
+        i_clk => not h(1),
         i_reset => i_core_reset,
         i_ready => cpu_wait,
         o_aen => dma_aen,
@@ -158,35 +208,38 @@ begin
     );
     
     -- U6B (DMA addresses latch)
-    U6B : process(h_1)
+    U6B : process(Phi34n)
 	begin
-        if falling_edge(h_1) then
-            if dma_adstb = '1' then
-                dma_addr_high <= dma_data_out;
-            end if;
-        end if;
+	   if rising_edge(Phi34n) then
+           if dma_adstb = '1' then
+               dma_addr_high <= dma_data_out;
+           end if;
+       end if;
 	end process;
 	
 	-- U2N (DMA data latch)
-    U2N : process(h_1)
+    U2N : process(Phi34n)
 	begin
-        if falling_edge(h_1) then
-            if ((not dma_ack(0)) and not(dma_mem_write_l)) = '1' then
-                dma_data_latch <= final_bus_data;
-            end if;
+        if rising_edge(Phi34n) then
+             if ((not dma_ack(0)) and (not dma_mem_write_l)) = '1' then
+                 dma_data_latch <= final_bus_data;
+             end if;
         end if;
 	end process;
 
     u_Dkong_Video : entity work.dk_tg4_video
     port map (
-        i_clk => i_clk,
         i_rst => i_core_reset,
-        o_vblkn => v_blkn,
-        o_vsyncn => o_core_vsync_l,
-        o_hsyncn => hsync_l,
+        i_clk => i_clk, -- 61.44 MHz
+        i_Phi34 => Phi34,
+        i_Phi34n => Phi34n,
+        i_cnt => cnt,
+        i_vblk => not v_blkn,
+        i_h => h,
+        i_v => v,
+        i_g_3K_clk => g_3K,
+        o_pixel_write => o_pixel_wr,
         o_cmpblk2_l => cmpblk2n,
-        o_pixel_core_clock => o_pixel_clk,
-        o_1_hb => h_1,
         o_vf_2 => vf_2,
         o_r => o_core_red,
         o_g => o_core_green,
@@ -194,7 +247,7 @@ begin
         o_vram_busyn => vram_busy_l,
         i_vram_wrn => vram_wr_l,
         i_vram_rdn => vram_rd_l,
-        i_psl_2 => psl_2,
+        i_psl_2 => psl_2, -- Palette switch
         i_addr => final_addr(9 downto 0),
         i_vid_data_in => final_bus_data,
         o_vid_data_out => video_data_out,
@@ -202,9 +255,11 @@ begin
         i_objwrn => obj_wr_l,
         i_objrdn => obj_rd_l,
         i_objrqn => obj_rq_l,
-        i_flipn => not flip,
+        i_flipn => flipn,
         i_invert_colors_n => '0'
     );
+    
+    o_core_blank <= not cmpblk2n;
     
     u_Dkong_Audio : entity work.dkong_audio
      port map (
@@ -213,7 +268,7 @@ begin
     
         -- CPU son
         i_audio_effects => (walk => Q_6H(0), jump => Q_6H(1), boom => Q_6H(2), 
-                            spring => Q_6H(3), gorilla_fall => Q_6H(4), barrel => Q_6H(5)),
+                            spring => not Q_6H(3), gorilla_fall => not Q_6H(4), barrel => not Q_6H(5)),
         
         i_sound_int_n => not play_death_music,  -- An external interrupt will play the death music.      
         i_sound_data => sound_data,
@@ -228,9 +283,11 @@ begin
         o_sound_jump => o_jump
      );
     
+    -- Decodage adresses
     u_DKong_Adec : entity work.dkong_adec
     port map (
         i_rst => i_core_reset,
+        i_clk => Phi34n,
         i_addr => final_addr,
         i_vblk_l => v_blkn,
         i_vram_busy_l => vram_busy_l,
@@ -238,14 +295,15 @@ begin
         i_mreq_comb_l => final_mreq_l,
         i_rd_l => final_rd_l,
         i_wr_l => final_wr_l,
-        i_h_1 => h_1,
+        i_rams_wr_enable => obj_vram_wr_enable, -- Validation OBJRDn, OBJWRn, VRAMRDn, VRAMWRn si pas de CPU wait
         
         o_objrd_l => obj_rd_l,
         o_objwr_l => obj_wr_l,
-        o_objrq_l => objrq_l,
+        o_objrq_l => obj_rq_l,
         o_vram_wr_l => vram_wr_l,
         o_vram_rd_l => vram_rd_l,
-        o_cpu_wait_l => cpu_wait,
+        o_vram_req_l => vram_req_l,
+        
         o_ram_34A_cs_l => ram_34A_cs_l,
         o_ram_34B_cs_l => ram_34B_cs_l,
         o_ram_34C_cs_l => ram_34C_cs_l,
@@ -263,20 +321,20 @@ begin
     );
 
     -- U5H
-    U5H : process(i_clk, i_core_reset)
+    U5H : process(Phi34n, i_core_reset)
 	begin
 		if i_core_reset = '1' then
 			play_death_music <= '0';
-			flip <= '0';
+			flipn <= '0';
 			psl_2 <= '0';
 			clear_nmi_l <= '0';
 			drq0 <= '0';
 			bank_palette <= "00";
-		elsif rising_edge(i_clk) then
+		elsif rising_edge(Phi34n) then
 			if U5H_cs_l = '0' then
 				case final_addr(2 downto 0) is
-					when "000" => play_death_music <= i_cpu_do(0); -- INTn CPU audio
-					when "010" => flip <= i_cpu_do(0); -- Flip
+					when "000" => play_death_music <= not i_cpu_do(0); -- INTn CPU audio
+					when "010" => flipn <= i_cpu_do(0); -- Flip
 					when "011" => psl_2 <= i_cpu_do(0); -- 2 PSL
 					when "100" => clear_nmi_l <= i_cpu_do(0); -- Clear NMIn
 					when "101" => drq0 <= i_cpu_do(0); -- DMA request
@@ -289,11 +347,11 @@ begin
 	end process;
 
     -- U6H
-    U6H : process(i_clk, i_core_reset)
+    U6H : process(Phi34n, i_core_reset)
 	begin
 		if i_core_reset = '1' then
 			Q_6H <= (others => '0');
-		elsif rising_edge(i_clk) then
+		elsif rising_edge(Phi34n) then
 			if U6H_cs_l = '0' then
 				case final_addr(2 downto 0) is
 					when "000" => Q_6H(0) <= i_cpu_do(0);
@@ -311,28 +369,16 @@ begin
 	end process;    
   
     -- U3D
-    U3D : process(i_clk, i_core_reset)
+    U3D : process(Phi34n, i_core_reset)
 	begin
 		if i_core_reset = '1' then
 			sound_data <= (others => '0');
-		elsif rising_edge(i_clk) then
+		elsif rising_edge(Phi34n) then
 		  if U3D_cs_l = '0' then
 			sound_data <= i_cpu_do(3 downto 0);
 	      end if;
 		end if;
 	end process;
-	
-    -- U8F 
-    U8F : process(h_1, v_blkn, i_core_reset)
-    begin
-        if (clear_nmi_l = '0') then
-            o_cpu_nmi_l <= '1';
-        elsif (i_core_reset = '1') then
-            o_cpu_nmi_l <= '0';
-        elsif falling_edge(v_blkn) then
-            o_cpu_nmi_l <= '0';
-        end if;
-    end process;
     
     -- RAMs 3A, 4A, 3B, 4B, 3C, 4C
     u_ram_34_A : entity work.blk_mem_gen_34A port map (clka => i_clk, wea(0) => not (final_wr_l or ram_34A_cs_l), addra => final_addr(9 downto 0), dina => final_bus_data, douta => ram_data_out_34_A);
@@ -340,9 +386,9 @@ begin
     u_ram_34_C : entity work.blk_mem_gen_34C port map (clka => i_clk, wea(0) => not (final_wr_l or ram_34C_cs_l), addra => final_addr(9 downto 0), dina => final_bus_data, douta => ram_data_out_34_C);
     
     -- Data/Addresses CPU, RAM,...
-    final_mreq_l <= i_cpu_mreq_l when dma_aen = '0' else ((not dma_ack(1)) and (not dma_ack(0)));
+    final_mreq_l <= i_cpu_mreq_l when dma_aen = '0' else (dma_ack(1) and dma_ack(0));
     -- Utilise pour simuler le niveau 1 sur l'entree G1 de U4D quand le CPU est en HighZ. Il n'y a pas de pull-up
-    -- sur ce signal. Mais, quand le DMA contrôle le bus il est en High Z. peut-être est-ce que le 74LS138 a une pull-up en interne ???
+    -- sur ce signal. Mais, quand le DMA contrôle le bus il est en High Z. Peut-être est-ce que le 74LS138 a une pull-up en interne ???
     final_rfsh_l <= i_cpu_rfsh_l when dma_aen = '0' else '1';
     final_rd_l <= i_cpu_rd_l when dma_aen = '0' else dma_iord_l;
     final_wr_l <= i_cpu_wr_l when dma_aen = '0' else dma_iowr_l;
@@ -352,7 +398,7 @@ begin
 	                  ram_data_out_34_B when ((ram_34B_cs_l = '0') and (final_wr_l = '1')) else
 	                  ram_data_out_34_C when ((ram_34C_cs_l = '0') and (final_wr_l = '1')) else
                       video_data_out when ((vid_board_mux_en_l = '0') and (final_rd_l = '0')) else
-                      dma_data_latch when ((not dma_ack(1)) and not(dma_mem_read_l)) = '1' else
+                      dma_data_latch when (dma_ack(1) or dma_mem_read_l) = '0' else
                       dma_data_out when ((dma_cs_l = '0') and (final_rd_l = '0')) else
                        -- Les LS240 2P, 4P, 3P, 4N inverses les bits
                       ("000" & not(in1.jump) & not(in1.down) & not(in1.up) & not(in1.left) & not(in1.right) ) when in1_cs = '0' else
@@ -383,11 +429,10 @@ begin
     o_dipsw_cs_l <= dipsw_cs;    
     
     -- Signaux CPU
-    o_cpu_rst_l <= '0' when (cnt_reset >= CPU_RST_P) and (cnt_reset < CPU_RST_W) else '1';
+    o_cpu_rst_l <= internal_rst_l;
     o_cpu_wait_l <= cpu_wait;
-    o_cpu_clk <= h_1;
+    o_cpu_clk <= h(1);
     o_cpu_busrq <= not dma_busrq;
     o_cpu_di <= final_bus_data;
-    
 
 end Behavioral;
