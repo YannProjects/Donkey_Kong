@@ -25,23 +25,15 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="276,227.297 ns"></ZoomStartTime>
-      <ZoomEndTime time="279,321.298 ns"></ZoomEndTime>
-      <Cursor1Time time="277,545.297 ns"></Cursor1Time>
+      <ZoomStartTime time="116,020.852344 us"></ZoomStartTime>
+      <ZoomEndTime time="116,137.252345 us"></ZoomEndTime>
+      <Cursor1Time time="116,070.074924 us"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="223"></NameColumnWidth>
-      <ValueColumnWidth column_width="58"></ValueColumnWidth>
+      <NameColumnWidth column_width="275"></NameColumnWidth>
+      <ValueColumnWidth column_width="78"></ValueColumnWidth>
    </column_width_setting>
    <WVObjectSize size="3" />
-   <wave_markers>
-      <marker time="62647844056" label="" />
-      <marker time="62618218249" label="" />
-      <marker time="62622776066" label="" />
-      <marker time="281532417753" label="" />
-      <marker time="278033634" label="" />
-      <marker time="277545297" label="" />
-   </wave_markers>
    <wvobject fp_name="group379" type="group">
       <obj_property name="label">DKong_Hw_Tester</obj_property>
       <obj_property name="DisplayName">label</obj_property>
@@ -166,6 +158,103 @@
          <obj_property name="label">u_Core</obj_property>
          <obj_property name="DisplayName">label</obj_property>
          <obj_property name="isExpanded"></obj_property>
+         <wvobject fp_name="group555" type="group">
+            <obj_property name="label">u_HVclocks</obj_property>
+            <obj_property name="DisplayName">label</obj_property>
+            <obj_property name="isExpanded"></obj_property>
+            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_HVClocks/i_rst" type="logic">
+               <obj_property name="ElementShortName">i_rst</obj_property>
+               <obj_property name="ObjectShortName">i_rst</obj_property>
+            </wvobject>
+            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_HVClocks/i_Phi34n" type="logic">
+               <obj_property name="ElementShortName">i_Phi34n</obj_property>
+               <obj_property name="ObjectShortName">i_Phi34n</obj_property>
+            </wvobject>
+            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_HVClocks/i_clear_nmi_l" type="logic">
+               <obj_property name="ElementShortName">i_clear_nmi_l</obj_property>
+               <obj_property name="ObjectShortName">i_clear_nmi_l</obj_property>
+            </wvobject>
+            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_HVClocks/i_vram_busy_l" type="logic">
+               <obj_property name="ElementShortName">i_vram_busy_l</obj_property>
+               <obj_property name="ObjectShortName">i_vram_busy_l</obj_property>
+            </wvobject>
+            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_HVClocks/i_vram_req_l" type="logic">
+               <obj_property name="ElementShortName">i_vram_req_l</obj_property>
+               <obj_property name="ObjectShortName">i_vram_req_l</obj_property>
+            </wvobject>
+            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/cnt" type="array">
+               <obj_property name="ElementShortName">cnt[3:0]</obj_property>
+               <obj_property name="ObjectShortName">cnt[3:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_HVClocks/o_h" type="array">
+               <obj_property name="ElementShortName">o_h[9:0]</obj_property>
+               <obj_property name="ObjectShortName">o_h[9:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_HVClocks/o_v" type="array">
+               <obj_property name="ElementShortName">o_v[7:0]</obj_property>
+               <obj_property name="ObjectShortName">o_v[7:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_HVClocks/o_hsyncn" type="logic">
+               <obj_property name="ElementShortName">o_hsyncn</obj_property>
+               <obj_property name="ObjectShortName">o_hsyncn</obj_property>
+            </wvobject>
+            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_HVClocks/o_vblkn" type="logic">
+               <obj_property name="ElementShortName">o_vblkn</obj_property>
+               <obj_property name="ObjectShortName">o_vblkn</obj_property>
+            </wvobject>
+            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_HVClocks/o_vsyncn" type="logic">
+               <obj_property name="ElementShortName">o_vsyncn</obj_property>
+               <obj_property name="ObjectShortName">o_vsyncn</obj_property>
+            </wvobject>
+            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_HVClocks/h_cnt" type="array">
+               <obj_property name="ElementShortName">h_cnt[11:0]</obj_property>
+               <obj_property name="ObjectShortName">h_cnt[11:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_HVClocks/cnt_hsync" type="array">
+               <obj_property name="ElementShortName">cnt_hsync[7:0]</obj_property>
+               <obj_property name="ObjectShortName">cnt_hsync[7:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_HVClocks/cnt_vsync" type="array">
+               <obj_property name="ElementShortName">cnt_vsync[7:0]</obj_property>
+               <obj_property name="ObjectShortName">cnt_vsync[7:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_HVClocks/h_256" type="logic">
+               <obj_property name="ElementShortName">h_256</obj_property>
+               <obj_property name="ObjectShortName">h_256</obj_property>
+            </wvobject>
+            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_HVClocks/v_clk" type="logic">
+               <obj_property name="ElementShortName">v_clk</obj_property>
+               <obj_property name="ObjectShortName">v_clk</obj_property>
+            </wvobject>
+            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_HVClocks/vblk" type="logic">
+               <obj_property name="ElementShortName">vblk</obj_property>
+               <obj_property name="ObjectShortName">vblk</obj_property>
+            </wvobject>
+            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_HVClocks/v" type="array">
+               <obj_property name="ElementShortName">v[8:0]</obj_property>
+               <obj_property name="ObjectShortName">v[8:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_HVClocks/Q1n_7F" type="logic">
+               <obj_property name="ElementShortName">Q1n_7F</obj_property>
+               <obj_property name="ObjectShortName">Q1n_7F</obj_property>
+            </wvobject>
+            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_HVClocks/Q2_7F" type="logic">
+               <obj_property name="ElementShortName">Q2_7F</obj_property>
+               <obj_property name="ObjectShortName">Q2_7F</obj_property>
+            </wvobject>
+            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_HVClocks/o_cpu_nmi_l" type="logic">
+               <obj_property name="ElementShortName">o_cpu_nmi_l</obj_property>
+               <obj_property name="ObjectShortName">o_cpu_nmi_l</obj_property>
+            </wvobject>
+            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_HVClocks/o_rams_wr_enable" type="logic">
+               <obj_property name="ElementShortName">o_rams_wr_enable</obj_property>
+               <obj_property name="ObjectShortName">o_rams_wr_enable</obj_property>
+            </wvobject>
+            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_HVClocks/o_cpu_wait_l" type="logic">
+               <obj_property name="ElementShortName">o_cpu_wait_l</obj_property>
+               <obj_property name="ObjectShortName">o_cpu_wait_l</obj_property>
+            </wvobject>
+         </wvobject>
          <wvobject fp_name="group1481" type="group">
             <obj_property name="label">Dkong_adec</obj_property>
             <obj_property name="DisplayName">label</obj_property>
@@ -197,9 +286,9 @@
                <obj_property name="ElementShortName">i_wr_l</obj_property>
                <obj_property name="ObjectShortName">i_wr_l</obj_property>
             </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_DKong_Adec/i_h_1" type="logic">
-               <obj_property name="ElementShortName">i_h_1</obj_property>
-               <obj_property name="ObjectShortName">i_h_1</obj_property>
+            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_DKong_Adec/i_h_1" type="array">
+               <obj_property name="ElementShortName">i_h_1[1:0]</obj_property>
+               <obj_property name="ObjectShortName">i_h_1[1:0]</obj_property>
             </wvobject>
             <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_DKong_Adec/o_objrd_l" type="logic">
                <obj_property name="ElementShortName">o_objrd_l</obj_property>
@@ -220,10 +309,6 @@
             <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_DKong_Adec/o_vram_rd_l" type="logic">
                <obj_property name="ElementShortName">o_vram_rd_l</obj_property>
                <obj_property name="ObjectShortName">o_vram_rd_l</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_DKong_Adec/o_cpu_wait_l" type="logic">
-               <obj_property name="ElementShortName">o_cpu_wait_l</obj_property>
-               <obj_property name="ObjectShortName">o_cpu_wait_l</obj_property>
             </wvobject>
             <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_DKong_Adec/o_ram_34A_cs_l" type="logic">
                <obj_property name="ElementShortName">o_ram_34A_cs_l</obj_property>
@@ -273,15 +358,9 @@
                <obj_property name="ElementShortName">o_3D_cs_l</obj_property>
                <obj_property name="ObjectShortName">o_3D_cs_l</obj_property>
             </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_DKong_Adec/Q2_7F" type="logic">
-               <obj_property name="ElementShortName">Q2_7F</obj_property>
-               <obj_property name="ObjectShortName">Q2_7F</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_DKong_Adec/Q1n_7F" type="logic">
-               <obj_property name="ElementShortName">Q1n_7F</obj_property>
-               <obj_property name="ObjectShortName">Q1n_7F</obj_property>
-               <obj_property name="CustomSignalColor">#FF0080</obj_property>
-               <obj_property name="UseCustomSignalColor">true</obj_property>
+            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/o_vram_busyn" type="logic">
+               <obj_property name="ElementShortName">o_vram_busyn</obj_property>
+               <obj_property name="ObjectShortName">o_vram_busyn</obj_property>
             </wvobject>
             <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_DKong_Adec/Q7_4D" type="logic">
                <obj_property name="ElementShortName">Q7_4D</obj_property>
@@ -490,7 +569,6 @@
             <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_DMA/dma_registers_debug" type="array">
                <obj_property name="ElementShortName">dma_registers_debug[0:3]</obj_property>
                <obj_property name="ObjectShortName">dma_registers_debug[0:3]</obj_property>
-               <obj_property name="isExpanded"></obj_property>
             </wvobject>
             <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_DMA/dma_mode_debug" type="array">
                <obj_property name="ElementShortName">dma_mode_debug[7:0]</obj_property>
@@ -834,25 +912,34 @@
          <wvobject fp_name="group383" type="group">
             <obj_property name="label">Dkong_video</obj_property>
             <obj_property name="DisplayName">label</obj_property>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/i_clk" type="logic">
-               <obj_property name="ElementShortName">i_clk</obj_property>
-               <obj_property name="ObjectShortName">i_clk</obj_property>
-            </wvobject>
+            <obj_property name="isExpanded"></obj_property>
             <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/i_rst" type="logic">
                <obj_property name="ElementShortName">i_rst</obj_property>
                <obj_property name="ObjectShortName">i_rst</obj_property>
             </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/o_vblkn" type="logic">
-               <obj_property name="ElementShortName">o_vblkn</obj_property>
-               <obj_property name="ObjectShortName">o_vblkn</obj_property>
+            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/i_clk" type="logic">
+               <obj_property name="DisplayName">label</obj_property>
+               <obj_property name="ElementShortName">i_clk</obj_property>
+               <obj_property name="ObjectShortName">i_clk</obj_property>
+               <obj_property name="label">i_clk_61.44M</obj_property>
             </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/o_vsyncn" type="logic">
-               <obj_property name="ElementShortName">o_vsyncn</obj_property>
-               <obj_property name="ObjectShortName">o_vsyncn</obj_property>
+            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/i_Phi34" type="logic">
+               <obj_property name="ElementShortName">i_Phi34</obj_property>
+               <obj_property name="ObjectShortName">i_Phi34</obj_property>
+               <obj_property name="CustomSignalColor">#E0FFFF</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
             </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/o_hsyncn" type="logic">
-               <obj_property name="ElementShortName">o_hsyncn</obj_property>
-               <obj_property name="ObjectShortName">o_hsyncn</obj_property>
+            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/i_Phi34n" type="logic">
+               <obj_property name="ElementShortName">i_Phi34n</obj_property>
+               <obj_property name="ObjectShortName">i_Phi34n</obj_property>
+               <obj_property name="CustomSignalColor">#E0FFFF</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+            </wvobject>
+            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/g_3K" type="logic">
+               <obj_property name="ElementShortName">g_3K</obj_property>
+               <obj_property name="ObjectShortName">g_3K</obj_property>
+               <obj_property name="CustomSignalColor">#E0FFFF</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
             </wvobject>
             <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/o_r" type="array">
                <obj_property name="ElementShortName">o_r[2:0]</obj_property>
@@ -870,10 +957,6 @@
                <obj_property name="ElementShortName">o_cmpblk2_l</obj_property>
                <obj_property name="ObjectShortName">o_cmpblk2_l</obj_property>
             </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/o_pixel_core_clock" type="logic">
-               <obj_property name="ElementShortName">o_pixel_core_clock</obj_property>
-               <obj_property name="ObjectShortName">o_pixel_core_clock</obj_property>
-            </wvobject>
             <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/o_1_hb" type="logic">
                <obj_property name="ElementShortName">o_1_hb</obj_property>
                <obj_property name="ObjectShortName">o_1_hb</obj_property>
@@ -885,10 +968,6 @@
             <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/o_esblkn" type="logic">
                <obj_property name="ElementShortName">o_esblkn</obj_property>
                <obj_property name="ObjectShortName">o_esblkn</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/o_vram_busyn" type="logic">
-               <obj_property name="ElementShortName">o_vram_busyn</obj_property>
-               <obj_property name="ObjectShortName">o_vram_busyn</obj_property>
             </wvobject>
             <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/i_vram_wrn" type="logic">
                <obj_property name="ElementShortName">i_vram_wrn</obj_property>
@@ -940,41 +1019,14 @@
                <obj_property name="ElementShortName">i_invert_colors_n</obj_property>
                <obj_property name="ObjectShortName">i_invert_colors_n</obj_property>
             </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/Phi34" type="logic">
-               <obj_property name="ElementShortName">Phi34</obj_property>
-               <obj_property name="ObjectShortName">Phi34</obj_property>
+            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/i_h" type="array">
+               <obj_property name="ElementShortName">i_h[9:0]</obj_property>
+               <obj_property name="ObjectShortName">i_h[9:0]</obj_property>
+               <obj_property name="isExpanded"></obj_property>
             </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/Phi34n" type="logic">
-               <obj_property name="ElementShortName">Phi34n</obj_property>
-               <obj_property name="ObjectShortName">Phi34n</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/g_3K" type="logic">
-               <obj_property name="ElementShortName">g_3K</obj_property>
-               <obj_property name="ObjectShortName">g_3K</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/h" type="array">
-               <obj_property name="ElementShortName">h[7:0]</obj_property>
-               <obj_property name="ObjectShortName">h[7:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/hpo" type="array">
-               <obj_property name="ElementShortName">hpo[7:0]</obj_property>
-               <obj_property name="ObjectShortName">hpo[7:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/vfc" type="array">
-               <obj_property name="ElementShortName">vfc[7:0]</obj_property>
-               <obj_property name="ObjectShortName">vfc[7:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/S_7_8_J" type="array">
-               <obj_property name="ElementShortName">S_7_8_J[7:0]</obj_property>
-               <obj_property name="ObjectShortName">S_7_8_J[7:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/S_78R" type="array">
-               <obj_property name="ElementShortName">S_78R[7:0]</obj_property>
-               <obj_property name="ObjectShortName">S_78R[7:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/S_78P" type="array">
-               <obj_property name="ElementShortName">S_78P[7:0]</obj_property>
-               <obj_property name="ObjectShortName">S_78P[7:0]</obj_property>
+            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/i_vblk" type="logic">
+               <obj_property name="ElementShortName">i_vblk</obj_property>
+               <obj_property name="ObjectShortName">i_vblk</obj_property>
             </wvobject>
             <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/h_128" type="logic">
                <obj_property name="ElementShortName">h_128</obj_property>
@@ -992,293 +1044,438 @@
                <obj_property name="ElementShortName">h_256n</obj_property>
                <obj_property name="ObjectShortName">h_256n</obj_property>
             </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/cnt" type="array">
-               <obj_property name="ElementShortName">cnt[3:0]</obj_property>
-               <obj_property name="ObjectShortName">cnt[3:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/dc" type="array">
-               <obj_property name="ElementShortName">dc[5:0]</obj_property>
-               <obj_property name="ObjectShortName">dc[5:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/da" type="array">
-               <obj_property name="ElementShortName">da[5:0]</obj_property>
-               <obj_property name="ObjectShortName">da[5:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/cd" type="array">
-               <obj_property name="ElementShortName">cd[3:0]</obj_property>
-               <obj_property name="ObjectShortName">cd[3:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/db" type="array">
-               <obj_property name="ElementShortName">db[3:0]</obj_property>
-               <obj_property name="ObjectShortName">db[3:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/data_2N" type="array">
-               <obj_property name="ElementShortName">data_2N[3:0]</obj_property>
-               <obj_property name="ObjectShortName">data_2N[3:0]</obj_property>
-               <obj_property name="CustomSignalColor">#FF00FF</obj_property>
-               <obj_property name="UseCustomSignalColor">true</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/A_4M" type="array">
-               <obj_property name="ElementShortName">A_4M[3:0]</obj_property>
-               <obj_property name="ObjectShortName">A_4M[3:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/B_4M" type="array">
-               <obj_property name="ElementShortName">B_4M[3:0]</obj_property>
-               <obj_property name="ObjectShortName">B_4M[3:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/Y_4M" type="array">
-               <obj_property name="ElementShortName">Y_4M[3:0]</obj_property>
-               <obj_property name="ObjectShortName">Y_4M[3:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/mb7074_addr" type="array">
-               <obj_property name="ElementShortName">mb7074_addr[7:0]</obj_property>
-               <obj_property name="ObjectShortName">mb7074_addr[7:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/hd" type="array">
-               <obj_property name="ElementShortName">hd[7:0]</obj_property>
-               <obj_property name="ObjectShortName">hd[7:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/Q_6H" type="array">
-               <obj_property name="ElementShortName">Q_6H[7:0]</obj_property>
-               <obj_property name="ObjectShortName">Q_6H[7:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/data_7C" type="array">
-               <obj_property name="ElementShortName">data_7C[7:0]</obj_property>
-               <obj_property name="ObjectShortName">data_7C[7:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/data_7D" type="array">
-               <obj_property name="ElementShortName">data_7D[7:0]</obj_property>
-               <obj_property name="ObjectShortName">data_7D[7:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/data_7E" type="array">
-               <obj_property name="ElementShortName">data_7E[7:0]</obj_property>
-               <obj_property name="ObjectShortName">data_7E[7:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/data_7F" type="array">
-               <obj_property name="ElementShortName">data_7F[7:0]</obj_property>
-               <obj_property name="ObjectShortName">data_7F[7:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/vram_busy_l" type="logic">
-               <obj_property name="ElementShortName">vram_busy_l</obj_property>
-               <obj_property name="ObjectShortName">vram_busy_l</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/U2PR_tile_id_in" type="array">
-               <obj_property name="ElementShortName">U2PR_tile_id_in[7:0]</obj_property>
-               <obj_property name="ObjectShortName">U2PR_tile_id_in[7:0]</obj_property>
-               <obj_property name="CustomSignalColor">#FF00FF</obj_property>
-               <obj_property name="UseCustomSignalColor">true</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/Q_6J" type="array">
-               <obj_property name="ElementShortName">Q_6J[7:0]</obj_property>
-               <obj_property name="ObjectShortName">Q_6J[7:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/data_6N" type="array">
-               <obj_property name="ElementShortName">data_6N[7:0]</obj_property>
-               <obj_property name="ObjectShortName">data_6N[7:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/din_6PR" type="array">
-               <obj_property name="ElementShortName">din_6PR[7:0]</obj_property>
-               <obj_property name="ObjectShortName">din_6PR[7:0]</obj_property>
-               <obj_property name="CustomSignalColor">#00FFFF</obj_property>
-               <obj_property name="UseCustomSignalColor">true</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/dout_6PR" type="array">
-               <obj_property name="ElementShortName">dout_6PR[7:0]</obj_property>
-               <obj_property name="ObjectShortName">dout_6PR[7:0]</obj_property>
-               <obj_property name="CustomSignalColor">#00FFFF</obj_property>
-               <obj_property name="UseCustomSignalColor">true</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/u6pr_ram_wr" type="logic">
-               <obj_property name="ElementShortName">u6pr_ram_wr</obj_property>
-               <obj_property name="ObjectShortName">u6pr_ram_wr</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/datain_7M" type="array">
-               <obj_property name="ElementShortName">datain_7M[7:0]</obj_property>
-               <obj_property name="ObjectShortName">datain_7M[7:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/data_tile_1" type="array">
-               <obj_property name="ElementShortName">data_tile_1[7:0]</obj_property>
-               <obj_property name="ObjectShortName">data_tile_1[7:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/data_tile_2" type="array">
-               <obj_property name="ElementShortName">data_tile_2[7:0]</obj_property>
-               <obj_property name="ObjectShortName">data_tile_2[7:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/U2PR_tile_id_out" type="array">
-               <obj_property name="ElementShortName">U2PR_tile_id_out[7:0]</obj_property>
-               <obj_property name="ObjectShortName">U2PR_tile_id_out[7:0]</obj_property>
-               <obj_property name="CustomSignalColor">#FF00FF</obj_property>
-               <obj_property name="UseCustomSignalColor">true</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/shift_reg_U4N" type="array">
-               <obj_property name="ElementShortName">shift_reg_U4N[0:7]</obj_property>
-               <obj_property name="ObjectShortName">shift_reg_U4N[0:7]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/shift_reg_U4P" type="array">
-               <obj_property name="ElementShortName">shift_reg_U4P[0:7]</obj_property>
-               <obj_property name="ObjectShortName">shift_reg_U4P[0:7]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/addr_6PR" type="array">
-               <obj_property name="ElementShortName">addr_6PR[9:0]</obj_property>
-               <obj_property name="ObjectShortName">addr_6PR[9:0]</obj_property>
-               <obj_property name="CustomSignalColor">#00FFFF</obj_property>
-               <obj_property name="UseCustomSignalColor">true</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/mb7074_do_2E" type="array">
-               <obj_property name="ElementShortName">mb7074_do_2E[3:0]</obj_property>
-               <obj_property name="ObjectShortName">mb7074_do_2E[3:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/mb7074_do_2H" type="array">
-               <obj_property name="ElementShortName">mb7074_do_2H[3:0]</obj_property>
-               <obj_property name="ObjectShortName">mb7074_do_2H[3:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/col" type="array">
-               <obj_property name="ElementShortName">col[3:0]</obj_property>
-               <obj_property name="ObjectShortName">col[3:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/s2" type="logic">
-               <obj_property name="ElementShortName">s2</obj_property>
-               <obj_property name="ObjectShortName">s2</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/vblk" type="logic">
-               <obj_property name="ElementShortName">vblk</obj_property>
-               <obj_property name="ObjectShortName">vblk</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/v" type="array">
-               <obj_property name="ElementShortName">v[8:0]</obj_property>
-               <obj_property name="ObjectShortName">v[8:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/Q2_3A" type="logic">
-               <obj_property name="ElementShortName">Q2_3A</obj_property>
-               <obj_property name="ObjectShortName">Q2_3A</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/Q1_3A" type="logic">
-               <obj_property name="ElementShortName">Q1_3A</obj_property>
-               <obj_property name="ObjectShortName">Q1_3A</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/v_clk" type="logic">
-               <obj_property name="ElementShortName">v_clk</obj_property>
-               <obj_property name="ObjectShortName">v_clk</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/Q1_3B" type="logic">
-               <obj_property name="ElementShortName">Q1_3B</obj_property>
-               <obj_property name="ObjectShortName">Q1_3B</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/Q2_3B" type="logic">
-               <obj_property name="ElementShortName">Q2_3B</obj_property>
-               <obj_property name="ObjectShortName">Q2_3B</obj_property>
+            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/v_blkn" type="logic">
+               <obj_property name="ElementShortName">v_blkn</obj_property>
+               <obj_property name="ObjectShortName">v_blkn</obj_property>
             </wvobject>
             <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/vf" type="array">
                <obj_property name="ElementShortName">vf[7:0]</obj_property>
                <obj_property name="ObjectShortName">vf[7:0]</obj_property>
             </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/Q7_6K" type="logic">
-               <obj_property name="ElementShortName">Q7_6K</obj_property>
-               <obj_property name="ObjectShortName">Q7_6K</obj_property>
+            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/vfc" type="array">
+               <obj_property name="ElementShortName">vfc[7:0]</obj_property>
+               <obj_property name="ObjectShortName">vfc[7:0]</obj_property>
             </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/Q5_6K" type="logic">
-               <obj_property name="ElementShortName">Q5_6K</obj_property>
-               <obj_property name="ObjectShortName">Q5_6K</obj_property>
+            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/vram_busy_l" type="logic">
+               <obj_property name="ElementShortName">vram_busy_l</obj_property>
+               <obj_property name="ObjectShortName">vram_busy_l</obj_property>
             </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/Q4_6K" type="logic">
-               <obj_property name="ElementShortName">Q4_6K</obj_property>
-               <obj_property name="ObjectShortName">Q4_6K</obj_property>
+            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/final_vid" type="array">
+               <obj_property name="ElementShortName">final_vid[1:0]</obj_property>
+               <obj_property name="ObjectShortName">final_vid[1:0]</obj_property>
             </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/G_5F" type="logic">
-               <obj_property name="ElementShortName">G_5F</obj_property>
-               <obj_property name="ObjectShortName">G_5F</obj_property>
+            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/final_col" type="array">
+               <obj_property name="ElementShortName">final_col[3:0]</obj_property>
+               <obj_property name="ObjectShortName">final_col[3:0]</obj_property>
             </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/O1A_5F" type="logic">
-               <obj_property name="ElementShortName">O1A_5F</obj_property>
-               <obj_property name="ObjectShortName">O1A_5F</obj_property>
+            <wvobject fp_name="group555" type="group">
+               <obj_property name="label">Tiles</obj_property>
+               <obj_property name="DisplayName">label</obj_property>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/A_4M" type="array">
+                  <obj_property name="ElementShortName">A_4M[3:0]</obj_property>
+                  <obj_property name="ObjectShortName">A_4M[3:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/B_4M" type="array">
+                  <obj_property name="ElementShortName">B_4M[3:0]</obj_property>
+                  <obj_property name="ObjectShortName">B_4M[3:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/Y_4M" type="array">
+                  <obj_property name="ElementShortName">Y_4M[3:0]</obj_property>
+                  <obj_property name="ObjectShortName">Y_4M[3:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/shift_reg_U4N" type="array">
+                  <obj_property name="ElementShortName">shift_reg_U4N[0:7]</obj_property>
+                  <obj_property name="ObjectShortName">shift_reg_U4N[0:7]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/shift_reg_U4P" type="array">
+                  <obj_property name="ElementShortName">shift_reg_U4P[0:7]</obj_property>
+                  <obj_property name="ObjectShortName">shift_reg_U4P[0:7]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/data_tile_1" type="array">
+                  <obj_property name="ElementShortName">data_tile_1[7:0]</obj_property>
+                  <obj_property name="ObjectShortName">data_tile_1[7:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/data_tile_2" type="array">
+                  <obj_property name="ElementShortName">data_tile_2[7:0]</obj_property>
+                  <obj_property name="ObjectShortName">data_tile_2[7:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/clk_color_latch" type="logic">
+                  <obj_property name="ElementShortName">clk_color_latch</obj_property>
+                  <obj_property name="ObjectShortName">clk_color_latch</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/col" type="array">
+                  <obj_property name="ElementShortName">col[3:0]</obj_property>
+                  <obj_property name="ObjectShortName">col[3:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/addr_tiles_data_3PN" type="array">
+                  <obj_property name="ElementShortName">addr_tiles_data_3PN[10:0]</obj_property>
+                  <obj_property name="ObjectShortName">addr_tiles_data_3PN[10:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/addr_ram_tiles" type="array">
+                  <obj_property name="ElementShortName">addr_ram_tiles[9:0]</obj_property>
+                  <obj_property name="ObjectShortName">addr_ram_tiles[9:0]</obj_property>
+                  <obj_property name="CustomSignalColor">#FF00FF</obj_property>
+                  <obj_property name="UseCustomSignalColor">true</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/addr_tiles_ram_cs_l" type="logic">
+                  <obj_property name="ElementShortName">addr_tiles_ram_cs_l</obj_property>
+                  <obj_property name="ObjectShortName">addr_tiles_ram_cs_l</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/U2PR_tile_id_in" type="array">
+                  <obj_property name="ElementShortName">U2PR_tile_id_in[7:0]</obj_property>
+                  <obj_property name="ObjectShortName">U2PR_tile_id_in[7:0]</obj_property>
+                  <obj_property name="CustomSignalColor">#FF00FF</obj_property>
+                  <obj_property name="UseCustomSignalColor">true</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/U2PR_tile_id_out" type="array">
+                  <obj_property name="ElementShortName">U2PR_tile_id_out[7:0]</obj_property>
+                  <obj_property name="ObjectShortName">U2PR_tile_id_out[7:0]</obj_property>
+                  <obj_property name="CustomSignalColor">#FF00FF</obj_property>
+                  <obj_property name="UseCustomSignalColor">true</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/char_tile_reload" type="logic">
+                  <obj_property name="ElementShortName">char_tile_reload</obj_property>
+                  <obj_property name="ObjectShortName">char_tile_reload</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/U234S_S" type="logic">
+                  <obj_property name="ElementShortName">U234S_S</obj_property>
+                  <obj_property name="ObjectShortName">U234S_S</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/S0_U4PN" type="logic">
+                  <obj_property name="ElementShortName">S0_U4PN</obj_property>
+                  <obj_property name="ObjectShortName">S0_U4PN</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/S1_U4PN" type="logic">
+                  <obj_property name="ElementShortName">S1_U4PN</obj_property>
+                  <obj_property name="ObjectShortName">S1_U4PN</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/tile_shift_reg_reload_l" type="logic">
+                  <obj_property name="ElementShortName">tile_shift_reg_reload_l</obj_property>
+                  <obj_property name="ObjectShortName">tile_shift_reg_reload_l</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/data_2N" type="array">
+                  <obj_property name="ElementShortName">data_2N[3:0]</obj_property>
+                  <obj_property name="ObjectShortName">data_2N[3:0]</obj_property>
+                  <obj_property name="CustomSignalColor">#FF00FF</obj_property>
+                  <obj_property name="UseCustomSignalColor">true</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/Q0_4P" type="logic">
+                  <obj_property name="ElementShortName">Q0_4P</obj_property>
+                  <obj_property name="ObjectShortName">Q0_4P</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/Q0_4N" type="logic">
+                  <obj_property name="ElementShortName">Q0_4N</obj_property>
+                  <obj_property name="ObjectShortName">Q0_4N</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/Q7_4P" type="logic">
+                  <obj_property name="ElementShortName">Q7_4P</obj_property>
+                  <obj_property name="ObjectShortName">Q7_4P</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/Q7_4N" type="logic">
+                  <obj_property name="ElementShortName">Q7_4N</obj_property>
+                  <obj_property name="ObjectShortName">Q7_4N</obj_property>
+               </wvobject>
             </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/O3A_5F" type="logic">
-               <obj_property name="ElementShortName">O3A_5F</obj_property>
-               <obj_property name="ObjectShortName">O3A_5F</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/O2B_5F" type="logic">
-               <obj_property name="ElementShortName">O2B_5F</obj_property>
-               <obj_property name="ObjectShortName">O2B_5F</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/O1B_5F" type="logic">
-               <obj_property name="ElementShortName">O1B_5F</obj_property>
-               <obj_property name="ObjectShortName">O1B_5F</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/O0B_5F" type="logic">
-               <obj_property name="ElementShortName">O0B_5F</obj_property>
-               <obj_property name="ObjectShortName">O0B_5F</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/u8h_O0B_5F_0" type="logic">
-               <obj_property name="ElementShortName">u8h_O0B_5F_0</obj_property>
-               <obj_property name="ObjectShortName">u8h_O0B_5F_0</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/I1C_I0D_8B" type="logic">
-               <obj_property name="ElementShortName">I1C_I0D_8B</obj_property>
-               <obj_property name="ObjectShortName">I1C_I0D_8B</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/Q7_8H" type="logic">
-               <obj_property name="ElementShortName">Q7_8H</obj_property>
-               <obj_property name="ObjectShortName">Q7_8H</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/Q1_8H" type="logic">
-               <obj_property name="ElementShortName">Q1_8H</obj_property>
-               <obj_property name="ObjectShortName">Q1_8H</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/Q0_8H" type="logic">
-               <obj_property name="ElementShortName">Q0_8H</obj_property>
-               <obj_property name="ObjectShortName">Q0_8H</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/Q6_8H" type="logic">
-               <obj_property name="ElementShortName">Q6_8H</obj_property>
-               <obj_property name="ObjectShortName">Q6_8H</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/Q1_8N" type="logic">
-               <obj_property name="ElementShortName">Q1_8N</obj_property>
-               <obj_property name="ObjectShortName">Q1_8N</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/clk_u3E4E" type="logic">
-               <obj_property name="ElementShortName">clk_u3E4E</obj_property>
-               <obj_property name="ObjectShortName">clk_u3E4E</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/mb7074_wr" type="logic">
-               <obj_property name="ElementShortName">mb7074_wr</obj_property>
-               <obj_property name="ObjectShortName">mb7074_wr</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/csn_6PR" type="logic">
-               <obj_property name="ElementShortName">csn_6PR</obj_property>
-               <obj_property name="ObjectShortName">csn_6PR</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/Q_5KL" type="array">
-               <obj_property name="ElementShortName">Q_5KL[7:0]</obj_property>
-               <obj_property name="ObjectShortName">Q_5KL[7:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/scanline_wr_l" type="logic">
-               <obj_property name="ElementShortName">scanline_wr_l</obj_property>
-               <obj_property name="ObjectShortName">scanline_wr_l</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/Q0_4P" type="logic">
-               <obj_property name="ElementShortName">Q0_4P</obj_property>
-               <obj_property name="ObjectShortName">Q0_4P</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/Q0_4N" type="logic">
-               <obj_property name="ElementShortName">Q0_4N</obj_property>
-               <obj_property name="ObjectShortName">Q0_4N</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/Q7_4P" type="logic">
-               <obj_property name="ElementShortName">Q7_4P</obj_property>
-               <obj_property name="ObjectShortName">Q7_4P</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/Q7_4N" type="logic">
-               <obj_property name="ElementShortName">Q7_4N</obj_property>
-               <obj_property name="ObjectShortName">Q7_4N</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/DI0_7M" type="logic">
-               <obj_property name="ElementShortName">DI0_7M</obj_property>
-               <obj_property name="ObjectShortName">DI0_7M</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/Q_4L" type="logic">
-               <obj_property name="ElementShortName">Q_4L</obj_property>
-               <obj_property name="ObjectShortName">Q_4L</obj_property>
+            <wvobject fp_name="group556" type="group">
+               <obj_property name="label">Sprites</obj_property>
+               <obj_property name="DisplayName">label</obj_property>
+               <obj_property name="isExpanded"></obj_property>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/hpo" type="array">
+                  <obj_property name="ElementShortName">hpo[7:0]</obj_property>
+                  <obj_property name="ObjectShortName">hpo[7:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/Y_6_7_8_S" type="array">
+                  <obj_property name="ElementShortName">Y_6_7_8_S[10:0]</obj_property>
+                  <obj_property name="ObjectShortName">Y_6_7_8_S[10:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/A_6_7_8_S" type="array">
+                  <obj_property name="ElementShortName">A_6_7_8_S[10:0]</obj_property>
+                  <obj_property name="ObjectShortName">A_6_7_8_S[10:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/B_6_7_8_S" type="array">
+                  <obj_property name="ElementShortName">B_6_7_8_S[10:0]</obj_property>
+                  <obj_property name="ObjectShortName">B_6_7_8_S[10:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/S_7_8_J" type="array">
+                  <obj_property name="ElementShortName">S_7_8_J[7:0]</obj_property>
+                  <obj_property name="ObjectShortName">S_7_8_J[7:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/S_78R" type="array">
+                  <obj_property name="ElementShortName">S_78R[7:0]</obj_property>
+                  <obj_property name="ObjectShortName">S_78R[7:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/S_78P" type="array">
+                  <obj_property name="ElementShortName">S_78P[7:0]</obj_property>
+                  <obj_property name="ObjectShortName">S_78P[7:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/dc" type="array">
+                  <obj_property name="ElementShortName">dc[5:0]</obj_property>
+                  <obj_property name="ObjectShortName">dc[5:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/da" type="array">
+                  <obj_property name="ElementShortName">da[5:0]</obj_property>
+                  <obj_property name="ObjectShortName">da[5:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/cd" type="array">
+                  <obj_property name="ElementShortName">cd[3:0]</obj_property>
+                  <obj_property name="ObjectShortName">cd[3:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/db" type="array">
+                  <obj_property name="ElementShortName">db[3:0]</obj_property>
+                  <obj_property name="ObjectShortName">db[3:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/U8B_sprite_data" type="array">
+                  <obj_property name="ElementShortName">U8B_sprite_data[1:0]</obj_property>
+                  <obj_property name="ObjectShortName">U8B_sprite_data[1:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/mb7074_addr" type="array">
+                  <obj_property name="ElementShortName">mb7074_addr[7:0]</obj_property>
+                  <obj_property name="ObjectShortName">mb7074_addr[7:0]</obj_property>
+                  <obj_property name="CustomSignalColor">#FFFF00</obj_property>
+                  <obj_property name="UseCustomSignalColor">true</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/mb7074_wr" type="logic">
+                  <obj_property name="ElementShortName">mb7074_wr</obj_property>
+                  <obj_property name="ObjectShortName">mb7074_wr</obj_property>
+                  <obj_property name="CustomSignalColor">#FFFF00</obj_property>
+                  <obj_property name="UseCustomSignalColor">true</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/mb7074_do_2E" type="array">
+                  <obj_property name="ElementShortName">mb7074_do_2E[3:0]</obj_property>
+                  <obj_property name="ObjectShortName">mb7074_do_2E[3:0]</obj_property>
+                  <obj_property name="CustomSignalColor">#FFFF00</obj_property>
+                  <obj_property name="UseCustomSignalColor">true</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/mb7074_do_2H" type="array">
+                  <obj_property name="ElementShortName">mb7074_do_2H[3:0]</obj_property>
+                  <obj_property name="ObjectShortName">mb7074_do_2H[3:0]</obj_property>
+                  <obj_property name="CustomSignalColor">#FFFF00</obj_property>
+                  <obj_property name="UseCustomSignalColor">true</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/hd" type="array">
+                  <obj_property name="ElementShortName">hd[7:0]</obj_property>
+                  <obj_property name="ObjectShortName">hd[7:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/Q_6H" type="array">
+                  <obj_property name="ElementShortName">Q_6H[7:0]</obj_property>
+                  <obj_property name="ObjectShortName">Q_6H[7:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/data_7C" type="array">
+                  <obj_property name="ElementShortName">data_7C[7:0]</obj_property>
+                  <obj_property name="ObjectShortName">data_7C[7:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/data_7D" type="array">
+                  <obj_property name="ElementShortName">data_7D[7:0]</obj_property>
+                  <obj_property name="ObjectShortName">data_7D[7:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/data_7E" type="array">
+                  <obj_property name="ElementShortName">data_7E[7:0]</obj_property>
+                  <obj_property name="ObjectShortName">data_7E[7:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/data_7F" type="array">
+                  <obj_property name="ElementShortName">data_7F[7:0]</obj_property>
+                  <obj_property name="ObjectShortName">data_7F[7:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/data_6N" type="array">
+                  <obj_property name="ElementShortName">data_6N[7:0]</obj_property>
+                  <obj_property name="ObjectShortName">data_6N[7:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/addr_6PR" type="array">
+                  <obj_property name="ElementShortName">addr_6PR[9:0]</obj_property>
+                  <obj_property name="ObjectShortName">addr_6PR[9:0]</obj_property>
+                  <obj_property name="CustomSignalColor">#00FFFF</obj_property>
+                  <obj_property name="UseCustomSignalColor">true</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/u6pr_ram_wr" type="logic">
+                  <obj_property name="ElementShortName">u6pr_ram_wr</obj_property>
+                  <obj_property name="ObjectShortName">u6pr_ram_wr</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/csn_6PR" type="logic">
+                  <obj_property name="ElementShortName">csn_6PR</obj_property>
+                  <obj_property name="ObjectShortName">csn_6PR</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/din_6PR" type="array">
+                  <obj_property name="ElementShortName">din_6PR[7:0]</obj_property>
+                  <obj_property name="ObjectShortName">din_6PR[7:0]</obj_property>
+                  <obj_property name="CustomSignalColor">#00FFFF</obj_property>
+                  <obj_property name="UseCustomSignalColor">true</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/dout_6PR" type="array">
+                  <obj_property name="ElementShortName">dout_6PR[7:0]</obj_property>
+                  <obj_property name="ObjectShortName">dout_6PR[7:0]</obj_property>
+                  <obj_property name="CustomSignalColor">#00FFFF</obj_property>
+                  <obj_property name="UseCustomSignalColor">true</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/do_draw_l" type="logic">
+                  <obj_property name="ElementShortName">do_draw_l</obj_property>
+                  <obj_property name="ObjectShortName">do_draw_l</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/DI0_7M" type="logic">
+                  <obj_property name="ElementShortName">DI0_7M</obj_property>
+                  <obj_property name="ObjectShortName">DI0_7M</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/addr_7M" type="array">
+                  <obj_property name="ElementShortName">addr_7M[5:0]</obj_property>
+                  <obj_property name="ObjectShortName">addr_7M[5:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/datain_7M" type="array">
+                  <obj_property name="ElementShortName">datain_7M[7:0]</obj_property>
+                  <obj_property name="ObjectShortName">datain_7M[7:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/dataout_7M" type="array">
+                  <obj_property name="ElementShortName">dataout_7M[8:0]</obj_property>
+                  <obj_property name="ObjectShortName">dataout_7M[8:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/scanline_wr" type="logic">
+                  <obj_property name="ElementShortName">scanline_wr</obj_property>
+                  <obj_property name="ObjectShortName">scanline_wr</obj_property>
+                  <obj_property name="CustomSignalColor">#E0FFFF</obj_property>
+                  <obj_property name="UseCustomSignalColor">true</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/O0B_5F" type="logic">
+                  <obj_property name="ElementShortName">O0B_5F</obj_property>
+                  <obj_property name="ObjectShortName">O0B_5F</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/O1B_5F" type="logic">
+                  <obj_property name="ElementShortName">O1B_5F</obj_property>
+                  <obj_property name="ObjectShortName">O1B_5F</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/O2B_5F" type="logic">
+                  <obj_property name="ElementShortName">O2B_5F</obj_property>
+                  <obj_property name="ObjectShortName">O2B_5F</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/Q_6J" type="array">
+                  <obj_property name="ElementShortName">Q_6J[7:0]</obj_property>
+                  <obj_property name="ObjectShortName">Q_6J[7:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/clk_4KL" type="logic">
+                  <obj_property name="ElementShortName">clk_4KL</obj_property>
+                  <obj_property name="ObjectShortName">clk_4KL</obj_property>
+                  <obj_property name="CustomSignalColor">#FF00FF</obj_property>
+                  <obj_property name="UseCustomSignalColor">true</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/Q_4L" type="logic">
+                  <obj_property name="ElementShortName">Q_4L</obj_property>
+                  <obj_property name="ObjectShortName">Q_4L</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/Q_5KL" type="array">
+                  <obj_property name="ElementShortName">Q_5KL[7:0]</obj_property>
+                  <obj_property name="ObjectShortName">Q_5KL[7:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/A_U8B" type="array">
+                  <obj_property name="ElementShortName">A_U8B[3:0]</obj_property>
+                  <obj_property name="ObjectShortName">A_U8B[3:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/B_U8B" type="array">
+                  <obj_property name="ElementShortName">B_U8B[3:0]</obj_property>
+                  <obj_property name="ObjectShortName">B_U8B[3:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/Y_U8B" type="array">
+                  <obj_property name="ElementShortName">Y_U8B[3:0]</obj_property>
+                  <obj_property name="ObjectShortName">Y_U8B[3:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/addr_7CDEF" type="array">
+                  <obj_property name="ElementShortName">addr_7CDEF[10:0]</obj_property>
+                  <obj_property name="ObjectShortName">addr_7CDEF[10:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/clk_u3E4E" type="logic">
+                  <obj_property name="ElementShortName">clk_u3E4E</obj_property>
+                  <obj_property name="ObjectShortName">clk_u3E4E</obj_property>
+                  <obj_property name="CustomSignalColor">#E0FFFF</obj_property>
+                  <obj_property name="UseCustomSignalColor">true</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/clr_u3E4E_l" type="logic">
+                  <obj_property name="ElementShortName">clr_u3E4E_l</obj_property>
+                  <obj_property name="ObjectShortName">clr_u3E4E_l</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/load_u3E4E_l" type="logic">
+                  <obj_property name="ElementShortName">load_u3E4E_l</obj_property>
+                  <obj_property name="ObjectShortName">load_u3E4E_l</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/Q_3_4_E" type="array">
+                  <obj_property name="ElementShortName">Q_3_4_E[7:0]</obj_property>
+                  <obj_property name="ObjectShortName">Q_3_4_E[7:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/sprite_shifter" type="array">
+                  <obj_property name="ElementShortName">sprite_shifter[1:0]</obj_property>
+                  <obj_property name="ObjectShortName">sprite_shifter[1:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/sprite_reload_S1" type="logic">
+                  <obj_property name="ElementShortName">sprite_reload_S1</obj_property>
+                  <obj_property name="ObjectShortName">sprite_reload_S1</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/sprite_reload_S0" type="logic">
+                  <obj_property name="ElementShortName">sprite_reload_S0</obj_property>
+                  <obj_property name="ObjectShortName">sprite_reload_S0</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/G_5F" type="logic">
+                  <obj_property name="ElementShortName">G_5F</obj_property>
+                  <obj_property name="ObjectShortName">G_5F</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/Q1_8N" type="logic">
+                  <obj_property name="ElementShortName">Q1_8N</obj_property>
+                  <obj_property name="ObjectShortName">Q1_8N</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/I1C_I0D_8B" type="logic">
+                  <obj_property name="ElementShortName">I1C_I0D_8B</obj_property>
+                  <obj_property name="ObjectShortName">I1C_I0D_8B</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/U8CD_reg" type="array">
+                  <obj_property name="ElementShortName">U8CD_reg[15:0]</obj_property>
+                  <obj_property name="ObjectShortName">U8CD_reg[15:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/U8CD_sprite_data" type="array">
+                  <obj_property name="ElementShortName">U8CD_sprite_data[15:0]</obj_property>
+                  <obj_property name="ObjectShortName">U8CD_sprite_data[15:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/U8EF_reg" type="array">
+                  <obj_property name="ElementShortName">U8EF_reg[15:0]</obj_property>
+                  <obj_property name="ObjectShortName">U8EF_reg[15:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/U8EF_sprite_data" type="array">
+                  <obj_property name="ElementShortName">U8EF_sprite_data[15:0]</obj_property>
+                  <obj_property name="ObjectShortName">U8EF_sprite_data[15:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="vbus727" type="vbus">
+                  <obj_property name="label">Q_High_8H</obj_property>
+                  <obj_property name="DisplayName">label</obj_property>
+                  <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/Q7_8H" type="logic">
+                     <obj_property name="ElementShortName">Q7_8H</obj_property>
+                     <obj_property name="ObjectShortName">Q7_8H</obj_property>
+                  </wvobject>
+                  <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/Q0_8H" type="logic">
+                     <obj_property name="ElementShortName">Q0_8H</obj_property>
+                     <obj_property name="ObjectShortName">Q0_8H</obj_property>
+                  </wvobject>
+                  <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/Q1_8H" type="logic">
+                     <obj_property name="ElementShortName">Q1_8H</obj_property>
+                     <obj_property name="ObjectShortName">Q1_8H</obj_property>
+                  </wvobject>
+                  <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/Q6_8H" type="logic">
+                     <obj_property name="ElementShortName">Q6_8H</obj_property>
+                     <obj_property name="ObjectShortName">Q6_8H</obj_property>
+                  </wvobject>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/O3A_5F" type="logic">
+                  <obj_property name="ElementShortName">O3A_5F</obj_property>
+                  <obj_property name="ObjectShortName">O3A_5F</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/O1A_5F" type="logic">
+                  <obj_property name="ElementShortName">O1A_5F</obj_property>
+                  <obj_property name="ObjectShortName">O1A_5F</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/Q7_6K" type="logic">
+                  <obj_property name="ElementShortName">Q7_6K</obj_property>
+                  <obj_property name="ObjectShortName">Q7_6K</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/Q5_6K" type="logic">
+                  <obj_property name="ElementShortName">Q5_6K</obj_property>
+                  <obj_property name="ObjectShortName">Q5_6K</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/Q4_6K" type="logic">
+                  <obj_property name="ElementShortName">Q4_6K</obj_property>
+                  <obj_property name="ObjectShortName">Q4_6K</obj_property>
+               </wvobject>
             </wvobject>
             <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/u1ef_clr_l" type="logic">
                <obj_property name="ElementShortName">u1ef_clr_l</obj_property>
@@ -1288,34 +1485,6 @@
                <obj_property name="ElementShortName">rom_u2F_cs_l</obj_property>
                <obj_property name="ObjectShortName">rom_u2F_cs_l</obj_property>
             </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/addr_7M" type="array">
-               <obj_property name="ElementShortName">addr_7M[5:0]</obj_property>
-               <obj_property name="ObjectShortName">addr_7M[5:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/dataout_7M" type="array">
-               <obj_property name="ElementShortName">dataout_7M[8:0]</obj_property>
-               <obj_property name="ObjectShortName">dataout_7M[8:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/addr_7CDEF" type="array">
-               <obj_property name="ElementShortName">addr_7CDEF[10:0]</obj_property>
-               <obj_property name="ObjectShortName">addr_7CDEF[10:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/addr_tiles_data_3PN" type="array">
-               <obj_property name="ElementShortName">addr_tiles_data_3PN[10:0]</obj_property>
-               <obj_property name="ObjectShortName">addr_tiles_data_3PN[10:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/Y_6_7_8_S" type="array">
-               <obj_property name="ElementShortName">Y_6_7_8_S[10:0]</obj_property>
-               <obj_property name="ObjectShortName">Y_6_7_8_S[10:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/A_6_7_8_S" type="array">
-               <obj_property name="ElementShortName">A_6_7_8_S[10:0]</obj_property>
-               <obj_property name="ObjectShortName">A_6_7_8_S[10:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/B_6_7_8_S" type="array">
-               <obj_property name="ElementShortName">B_6_7_8_S[10:0]</obj_property>
-               <obj_property name="ObjectShortName">B_6_7_8_S[10:0]</obj_property>
-            </wvobject>
             <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/vid_0" type="logic">
                <obj_property name="ElementShortName">vid_0</obj_property>
                <obj_property name="ObjectShortName">vid_0</obj_property>
@@ -1324,115 +1493,15 @@
                <obj_property name="ElementShortName">vid_1</obj_property>
                <obj_property name="ObjectShortName">vid_1</obj_property>
             </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/S0_U4PN" type="logic">
-               <obj_property name="ElementShortName">S0_U4PN</obj_property>
-               <obj_property name="ObjectShortName">S0_U4PN</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/S1_U4PN" type="logic">
-               <obj_property name="ElementShortName">S1_U4PN</obj_property>
-               <obj_property name="ObjectShortName">S1_U4PN</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/tile_shift_reg_reload_l" type="logic">
-               <obj_property name="ElementShortName">tile_shift_reg_reload_l</obj_property>
-               <obj_property name="ObjectShortName">tile_shift_reg_reload_l</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/sprite_reload_S1" type="logic">
-               <obj_property name="ElementShortName">sprite_reload_S1</obj_property>
-               <obj_property name="ObjectShortName">sprite_reload_S1</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/sprite_reload_S0" type="logic">
-               <obj_property name="ElementShortName">sprite_reload_S0</obj_property>
-               <obj_property name="ObjectShortName">sprite_reload_S0</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/do_draw_l" type="logic">
-               <obj_property name="ElementShortName">do_draw_l</obj_property>
-               <obj_property name="ObjectShortName">do_draw_l</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/u6pr_ram_wr" type="logic">
-               <obj_property name="ElementShortName">u6pr_ram_wr</obj_property>
-               <obj_property name="ObjectShortName">u6pr_ram_wr</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/U8B_sprite_data" type="array">
-               <obj_property name="ElementShortName">U8B_sprite_data[1:0]</obj_property>
-               <obj_property name="ObjectShortName">U8B_sprite_data[1:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/sprite_shifter" type="array">
-               <obj_property name="ElementShortName">sprite_shifter[1:0]</obj_property>
-               <obj_property name="ObjectShortName">sprite_shifter[1:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/addr_ram_tiles" type="array">
-               <obj_property name="ElementShortName">addr_ram_tiles[9:0]</obj_property>
-               <obj_property name="ObjectShortName">addr_ram_tiles[9:0]</obj_property>
-               <obj_property name="CustomSignalColor">#FF00FF</obj_property>
-               <obj_property name="UseCustomSignalColor">true</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/addr_tiles_ram_cs_l" type="logic">
-               <obj_property name="ElementShortName">addr_tiles_ram_cs_l</obj_property>
-               <obj_property name="ObjectShortName">addr_tiles_ram_cs_l</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/char_tile_reload" type="logic">
-               <obj_property name="ElementShortName">char_tile_reload</obj_property>
-               <obj_property name="ObjectShortName">char_tile_reload</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/U234S_S" type="logic">
-               <obj_property name="ElementShortName">U234S_S</obj_property>
-               <obj_property name="ObjectShortName">U234S_S</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/clk_color_latch" type="logic">
-               <obj_property name="ElementShortName">clk_color_latch</obj_property>
-               <obj_property name="ObjectShortName">clk_color_latch</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/scanline_wr" type="logic">
-               <obj_property name="ElementShortName">scanline_wr</obj_property>
-               <obj_property name="ObjectShortName">scanline_wr</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/clk_4KL" type="logic">
-               <obj_property name="ElementShortName">clk_4KL</obj_property>
-               <obj_property name="ObjectShortName">clk_4KL</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/clk_4KL_0" type="logic">
-               <obj_property name="ElementShortName">clk_4KL_0</obj_property>
-               <obj_property name="ObjectShortName">clk_4KL_0</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/clr_u3E4E_l" type="logic">
-               <obj_property name="ElementShortName">clr_u3E4E_l</obj_property>
-               <obj_property name="ObjectShortName">clr_u3E4E_l</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/load_u3E4E_l" type="logic">
-               <obj_property name="ElementShortName">load_u3E4E_l</obj_property>
-               <obj_property name="ObjectShortName">load_u3E4E_l</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/cmpblk2_l" type="logic">
-               <obj_property name="ElementShortName">cmpblk2_l</obj_property>
-               <obj_property name="ObjectShortName">cmpblk2_l</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/final_vid" type="array">
-               <obj_property name="ElementShortName">final_vid[1:0]</obj_property>
-               <obj_property name="ObjectShortName">final_vid[1:0]</obj_property>
-            </wvobject>
             <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/S_U4PN" type="array">
                <obj_property name="ElementShortName">S_U4PN[1:0]</obj_property>
                <obj_property name="ObjectShortName">S_U4PN[1:0]</obj_property>
             </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/final_col" type="array">
-               <obj_property name="ElementShortName">final_col[3:0]</obj_property>
-               <obj_property name="ObjectShortName">final_col[3:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/A_U8B" type="array">
-               <obj_property name="ElementShortName">A_U8B[3:0]</obj_property>
-               <obj_property name="ObjectShortName">A_U8B[3:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/B_U8B" type="array">
-               <obj_property name="ElementShortName">B_U8B[3:0]</obj_property>
-               <obj_property name="ObjectShortName">B_U8B[3:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/Y_U8B" type="array">
-               <obj_property name="ElementShortName">Y_U8B[3:0]</obj_property>
-               <obj_property name="ObjectShortName">Y_U8B[3:0]</obj_property>
-            </wvobject>
             <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/addr_2EF" type="array">
                <obj_property name="ElementShortName">addr_2EF[7:0]</obj_property>
                <obj_property name="ObjectShortName">addr_2EF[7:0]</obj_property>
+               <obj_property name="CustomSignalColor">#FF00FF</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
             </wvobject>
             <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/data_2E" type="array">
                <obj_property name="ElementShortName">data_2E[7:0]</obj_property>
@@ -1449,26 +1518,6 @@
             <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/U6K_Q" type="array">
                <obj_property name="ElementShortName">U6K_Q[7:0]</obj_property>
                <obj_property name="ObjectShortName">U6K_Q[7:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/cnt_vsync" type="array">
-               <obj_property name="ElementShortName">cnt_vsync[7:0]</obj_property>
-               <obj_property name="ObjectShortName">cnt_vsync[7:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/cnt_hsync" type="array">
-               <obj_property name="ElementShortName">cnt_hsync[7:0]</obj_property>
-               <obj_property name="ObjectShortName">cnt_hsync[7:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/Q_3_4_E" type="array">
-               <obj_property name="ElementShortName">Q_3_4_E[7:0]</obj_property>
-               <obj_property name="ObjectShortName">Q_3_4_E[7:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/hsyncn" type="logic">
-               <obj_property name="ElementShortName">hsyncn</obj_property>
-               <obj_property name="ObjectShortName">hsyncn</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/vsyncn" type="logic">
-               <obj_property name="ElementShortName">vsyncn</obj_property>
-               <obj_property name="ObjectShortName">vsyncn</obj_property>
             </wvobject>
             <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/flip_1" type="logic">
                <obj_property name="ElementShortName">flip_1</obj_property>
@@ -1506,78 +1555,22 @@
                <obj_property name="ElementShortName">Q15_8EF</obj_property>
                <obj_property name="ObjectShortName">Q15_8EF</obj_property>
             </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/U8CD_reg" type="array">
-               <obj_property name="ElementShortName">U8CD_reg[15:0]</obj_property>
-               <obj_property name="ObjectShortName">U8CD_reg[15:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/U8CD_sprite_data" type="array">
-               <obj_property name="ElementShortName">U8CD_sprite_data[15:0]</obj_property>
-               <obj_property name="ObjectShortName">U8CD_sprite_data[15:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/U8EF_reg" type="array">
-               <obj_property name="ElementShortName">U8EF_reg[15:0]</obj_property>
-               <obj_property name="ObjectShortName">U8EF_reg[15:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/U8EF_sprite_data" type="array">
-               <obj_property name="ElementShortName">U8EF_sprite_data[15:0]</obj_property>
-               <obj_property name="ObjectShortName">U8EF_sprite_data[15:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/h_cnt" type="array">
-               <obj_property name="ElementShortName">h_cnt[11:0]</obj_property>
-               <obj_property name="ObjectShortName">h_cnt[11:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/h_256_0" type="logic">
-               <obj_property name="ElementShortName">h_256_0</obj_property>
-               <obj_property name="ObjectShortName">h_256_0</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/v_4_0" type="logic">
-               <obj_property name="ElementShortName">v_4_0</obj_property>
-               <obj_property name="ObjectShortName">v_4_0</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/v_clk_0" type="logic">
-               <obj_property name="ElementShortName">v_clk_0</obj_property>
-               <obj_property name="ObjectShortName">v_clk_0</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/h_256n_0" type="logic">
-               <obj_property name="ElementShortName">h_256n_0</obj_property>
-               <obj_property name="ObjectShortName">h_256n_0</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/u8n_O0B_5F_0" type="logic">
-               <obj_property name="ElementShortName">u8n_O0B_5F_0</obj_property>
-               <obj_property name="ObjectShortName">u8n_O0B_5F_0</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/u1e_h_0_0" type="logic">
-               <obj_property name="ElementShortName">u1e_h_0_0</obj_property>
-               <obj_property name="ObjectShortName">u1e_h_0_0</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/u6j_O2B_5F_0" type="logic">
-               <obj_property name="ElementShortName">u6j_O2B_5F_0</obj_property>
-               <obj_property name="ObjectShortName">u6j_O2B_5F_0</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/VSYNC_P" type="array">
-               <obj_property name="ElementShortName">VSYNC_P[7:0]</obj_property>
-               <obj_property name="ObjectShortName">VSYNC_P[7:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/VSYNC_W" type="array">
-               <obj_property name="ElementShortName">VSYNC_W[7:0]</obj_property>
-               <obj_property name="ObjectShortName">VSYNC_W[7:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/HSYNC_P" type="array">
-               <obj_property name="ElementShortName">HSYNC_P[7:0]</obj_property>
-               <obj_property name="ObjectShortName">HSYNC_P[7:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/HSYNC_W" type="array">
-               <obj_property name="ElementShortName">HSYNC_W[7:0]</obj_property>
-               <obj_property name="ObjectShortName">HSYNC_W[7:0]</obj_property>
-            </wvobject>
          </wvobject>
-         <wvobject fp_name="/DKong_Sim/core_top_0/i_clk_sys" type="logic">
-            <obj_property name="ElementShortName">i_clk_sys</obj_property>
-            <obj_property name="ObjectShortName">i_clk_sys</obj_property>
+         <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/i_clk" type="logic">
+            <obj_property name="ElementShortName">i_clk</obj_property>
+            <obj_property name="ObjectShortName">i_clk</obj_property>
          </wvobject>
          <wvobject fp_name="/DKong_Sim/core_top_0/i_rst_sysn" type="logic">
             <obj_property name="ElementShortName">i_rst_sysn</obj_property>
             <obj_property name="ObjectShortName">i_rst_sysn</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/internal_rst_l" type="logic">
+            <obj_property name="ElementShortName">internal_rst_l</obj_property>
+            <obj_property name="ObjectShortName">internal_rst_l</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/cnt_reset" type="other">
+            <obj_property name="ElementShortName">cnt_reset</obj_property>
+            <obj_property name="ObjectShortName">cnt_reset</obj_property>
          </wvobject>
          <wvobject fp_name="/DKong_Sim/core_top_0/i_cpu_a_core" type="array">
             <obj_property name="ElementShortName">i_cpu_a_core[15:0]</obj_property>
@@ -1594,6 +1587,10 @@
          <wvobject fp_name="/DKong_Sim/core_top_0/o_buffer_enable_n" type="logic">
             <obj_property name="ElementShortName">o_buffer_enable_n</obj_property>
             <obj_property name="ObjectShortName">o_buffer_enable_n</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/cnt_reset" type="other">
+            <obj_property name="ElementShortName">cnt_reset</obj_property>
+            <obj_property name="ObjectShortName">cnt_reset</obj_property>
          </wvobject>
          <wvobject fp_name="/DKong_Sim/core_top_0/o_cpu_rst_core" type="logic">
             <obj_property name="ElementShortName">o_cpu_rst_core</obj_property>
@@ -1655,10 +1652,6 @@
             <obj_property name="ElementShortName">U5H_cs_l</obj_property>
             <obj_property name="ObjectShortName">U5H_cs_l</obj_property>
          </wvobject>
-         <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/flip" type="logic">
-            <obj_property name="ElementShortName">flip</obj_property>
-            <obj_property name="ObjectShortName">flip</obj_property>
-         </wvobject>
          <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/psl_2" type="logic">
             <obj_property name="ElementShortName">psl_2</obj_property>
             <obj_property name="ObjectShortName">psl_2</obj_property>
@@ -1679,10 +1672,6 @@
             <obj_property name="ElementShortName">U6H_cs_l</obj_property>
             <obj_property name="ObjectShortName">U6H_cs_l</obj_property>
          </wvobject>
-         <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/Q_6H" type="array">
-            <obj_property name="ElementShortName">Q_6H[7:0]</obj_property>
-            <obj_property name="ObjectShortName">Q_6H[7:0]</obj_property>
-         </wvobject>
          <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/U3D_cs_l" type="logic">
             <obj_property name="ElementShortName">U3D_cs_l</obj_property>
             <obj_property name="ObjectShortName">U3D_cs_l</obj_property>
@@ -1694,6 +1683,10 @@
          <wvobject fp_name="/DKong_Sim/core_top_0/core_rst" type="logic">
             <obj_property name="ElementShortName">core_rst</obj_property>
             <obj_property name="ObjectShortName">core_rst</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/v_blkn" type="logic">
+            <obj_property name="ElementShortName">v_blkn</obj_property>
+            <obj_property name="ObjectShortName">v_blkn</obj_property>
          </wvobject>
          <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/dma_addr_high" type="array">
             <obj_property name="ElementShortName">dma_addr_high[7:0]</obj_property>
@@ -1805,10 +1798,6 @@
             <obj_property name="ElementShortName">core_blank</obj_property>
             <obj_property name="ObjectShortName">core_blank</obj_property>
          </wvobject>
-         <wvobject fp_name="/DKong_Sim/core_top_0/pixel_clk" type="logic">
-            <obj_property name="ElementShortName">pixel_clk</obj_property>
-            <obj_property name="ObjectShortName">pixel_clk</obj_property>
-         </wvobject>
          <wvobject fp_name="/DKong_Sim/core_top_0/clk_audio" type="logic">
             <obj_property name="ElementShortName">clk_audio</obj_property>
             <obj_property name="ObjectShortName">clk_audio</obj_property>
@@ -1824,7 +1813,6 @@
          <wvobject fp_name="group1577" type="group">
             <obj_property name="label">ram_34_A</obj_property>
             <obj_property name="DisplayName">label</obj_property>
-            <obj_property name="isExpanded"></obj_property>
             <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_ram_34_A/clka" type="logic">
                <obj_property name="ElementShortName">clka</obj_property>
                <obj_property name="ObjectShortName">clka</obj_property>
@@ -1906,10 +1894,137 @@
       <wvobject fp_name="group573" type="group">
          <obj_property name="label">u_VGA_Ctrl</obj_property>
          <obj_property name="DisplayName">label</obj_property>
+         <wvobject fp_name="/DKong_Sim/core_top_0/u_vga_ctrl/i_reset" type="logic">
+            <obj_property name="ElementShortName">i_reset</obj_property>
+            <obj_property name="ObjectShortName">i_reset</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/u_vga_ctrl/i_clk_52m" type="logic">
+            <obj_property name="ElementShortName">i_clk_52m</obj_property>
+            <obj_property name="ObjectShortName">i_clk_52m</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/u_vga_ctrl/i_vga_clk" type="logic">
+            <obj_property name="ElementShortName">i_vga_clk</obj_property>
+            <obj_property name="ObjectShortName">i_vga_clk</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/u_vga_ctrl/i_vsyncn" type="logic">
+            <obj_property name="ElementShortName">i_vsyncn</obj_property>
+            <obj_property name="ObjectShortName">i_vsyncn</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/u_vga_ctrl/i_blank" type="logic">
+            <obj_property name="ElementShortName">i_blank</obj_property>
+            <obj_property name="ObjectShortName">i_blank</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/u_vga_ctrl/i_rgb" type="array">
+            <obj_property name="ElementShortName">i_rgb[23:0]</obj_property>
+            <obj_property name="ObjectShortName">i_rgb[23:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/u_vga_ctrl/o_hsync" type="logic">
+            <obj_property name="ElementShortName">o_hsync</obj_property>
+            <obj_property name="ObjectShortName">o_hsync</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/u_vga_ctrl/o_vsync" type="logic">
+            <obj_property name="ElementShortName">o_vsync</obj_property>
+            <obj_property name="ObjectShortName">o_vsync</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/u_vga_ctrl/o_csync" type="logic">
+            <obj_property name="ElementShortName">o_csync</obj_property>
+            <obj_property name="ObjectShortName">o_csync</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/u_vga_ctrl/o_blank" type="logic">
+            <obj_property name="ElementShortName">o_blank</obj_property>
+            <obj_property name="ObjectShortName">o_blank</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/u_vga_ctrl/o_r" type="array">
+            <obj_property name="ElementShortName">o_r[2:0]</obj_property>
+            <obj_property name="ObjectShortName">o_r[2:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/u_vga_ctrl/o_g" type="array">
+            <obj_property name="ElementShortName">o_g[2:0]</obj_property>
+            <obj_property name="ObjectShortName">o_g[2:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/u_vga_ctrl/o_b" type="array">
+            <obj_property name="ElementShortName">o_b[2:0]</obj_property>
+            <obj_property name="ObjectShortName">o_b[2:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/u_vga_ctrl/o_vga_control_init_done" type="logic">
+            <obj_property name="ElementShortName">o_vga_control_init_done</obj_property>
+            <obj_property name="ObjectShortName">o_vga_control_init_done</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/u_vga_ctrl/video_mem_addr" type="array">
+            <obj_property name="ElementShortName">video_mem_addr[15:0]</obj_property>
+            <obj_property name="ObjectShortName">video_mem_addr[15:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/u_vga_ctrl/video_dpram_vga_core_addr_l" type="array">
+            <obj_property name="ElementShortName">video_dpram_vga_core_addr_l[31:0]</obj_property>
+            <obj_property name="ObjectShortName">video_dpram_vga_core_addr_l[31:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/u_vga_ctrl/video_dpram_vga_core_addr" type="array">
+            <obj_property name="ElementShortName">video_dpram_vga_core_addr[14:0]</obj_property>
+            <obj_property name="ObjectShortName">video_dpram_vga_core_addr[14:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/u_vga_ctrl/video_mem_data" type="array">
+            <obj_property name="ElementShortName">video_mem_data[7:0]</obj_property>
+            <obj_property name="ObjectShortName">video_mem_data[7:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/u_vga_ctrl/video_mem_vga_core_data" type="array">
+            <obj_property name="ElementShortName">video_mem_vga_core_data[15:0]</obj_property>
+            <obj_property name="ObjectShortName">video_mem_vga_core_data[15:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/u_vga_ctrl/vga_adr_o" type="array">
+            <obj_property name="ElementShortName">vga_adr_o[31:0]</obj_property>
+            <obj_property name="ObjectShortName">vga_adr_o[31:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/u_vga_ctrl/vga_addr_even_line_start" type="array">
+            <obj_property name="ElementShortName">vga_addr_even_line_start[31:0]</obj_property>
+            <obj_property name="ObjectShortName">vga_addr_even_line_start[31:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/u_vga_ctrl/vga_frame_offset" type="array">
+            <obj_property name="ElementShortName">vga_frame_offset[31:0]</obj_property>
+            <obj_property name="ObjectShortName">vga_frame_offset[31:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/u_vga_ctrl/vga_odd_line" type="logic">
+            <obj_property name="ElementShortName">vga_odd_line</obj_property>
+            <obj_property name="ObjectShortName">vga_odd_line</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/u_vga_ctrl/vga_dat_i" type="array">
+            <obj_property name="ElementShortName">vga_dat_i[31:0]</obj_property>
+            <obj_property name="ObjectShortName">vga_dat_i[31:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/u_vga_ctrl/vga_stb_o" type="logic">
+            <obj_property name="ElementShortName">vga_stb_o</obj_property>
+            <obj_property name="ObjectShortName">vga_stb_o</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/u_vga_ctrl/vga_cyc_o" type="logic">
+            <obj_property name="ElementShortName">vga_cyc_o</obj_property>
+            <obj_property name="ObjectShortName">vga_cyc_o</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/u_vga_ctrl/vga_ack_i" type="logic">
+            <obj_property name="ElementShortName">vga_ack_i</obj_property>
+            <obj_property name="ObjectShortName">vga_ack_i</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/u_vga_ctrl/hsync_vga" type="logic">
+            <obj_property name="ElementShortName">hsync_vga</obj_property>
+            <obj_property name="ObjectShortName">hsync_vga</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/u_vga_ctrl/vsync_vga" type="logic">
+            <obj_property name="ElementShortName">vsync_vga</obj_property>
+            <obj_property name="ObjectShortName">vsync_vga</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/u_vga_ctrl/r_vgac" type="array">
+            <obj_property name="ElementShortName">r_vgac[7:0]</obj_property>
+            <obj_property name="ObjectShortName">r_vgac[7:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/u_vga_ctrl/g_vgac" type="array">
+            <obj_property name="ElementShortName">g_vgac[7:0]</obj_property>
+            <obj_property name="ObjectShortName">g_vgac[7:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/u_vga_ctrl/b_vgac" type="array">
+            <obj_property name="ElementShortName">b_vgac[7:0]</obj_property>
+            <obj_property name="ObjectShortName">b_vgac[7:0]</obj_property>
+         </wvobject>
          <wvobject fp_name="group333" type="group">
             <obj_property name="label">VGA_Core</obj_property>
             <obj_property name="DisplayName">label</obj_property>
-            <obj_property name="isExpanded"></obj_property>
             <wvobject fp_name="group337" type="group">
                <obj_property name="label">clut_mem</obj_property>
                <obj_property name="DisplayName">label</obj_property>
@@ -1936,13 +2051,615 @@
       <wvobject fp_name="group1001" type="group">
          <obj_property name="label">uart</obj_property>
          <obj_property name="DisplayName">label</obj_property>
-         <obj_property name="isExpanded"></obj_property>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/wb_clk_i" type="logic">
+            <obj_property name="ElementShortName">wb_clk_i</obj_property>
+            <obj_property name="ObjectShortName">wb_clk_i</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/wb_rst_i" type="logic">
+            <obj_property name="ElementShortName">wb_rst_i</obj_property>
+            <obj_property name="ObjectShortName">wb_rst_i</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/wb_we_i" type="logic">
+            <obj_property name="ElementShortName">wb_we_i</obj_property>
+            <obj_property name="ObjectShortName">wb_we_i</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/wb_stb_i" type="logic">
+            <obj_property name="ElementShortName">wb_stb_i</obj_property>
+            <obj_property name="ObjectShortName">wb_stb_i</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/wb_cyc_i" type="logic">
+            <obj_property name="ElementShortName">wb_cyc_i</obj_property>
+            <obj_property name="ObjectShortName">wb_cyc_i</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/wb_ack_o" type="logic">
+            <obj_property name="ElementShortName">wb_ack_o</obj_property>
+            <obj_property name="ObjectShortName">wb_ack_o</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/int_o" type="logic">
+            <obj_property name="ElementShortName">int_o</obj_property>
+            <obj_property name="ObjectShortName">int_o</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/srx_pad_i" type="logic">
+            <obj_property name="ElementShortName">srx_pad_i</obj_property>
+            <obj_property name="ObjectShortName">srx_pad_i</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/cts_pad_i" type="logic">
+            <obj_property name="ElementShortName">cts_pad_i</obj_property>
+            <obj_property name="ObjectShortName">cts_pad_i</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/dsr_pad_i" type="logic">
+            <obj_property name="ElementShortName">dsr_pad_i</obj_property>
+            <obj_property name="ObjectShortName">dsr_pad_i</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/ri_pad_i" type="logic">
+            <obj_property name="ElementShortName">ri_pad_i</obj_property>
+            <obj_property name="ObjectShortName">ri_pad_i</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/dcd_pad_i" type="logic">
+            <obj_property name="ElementShortName">dcd_pad_i</obj_property>
+            <obj_property name="ObjectShortName">dcd_pad_i</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/stx_pad_o" type="logic">
+            <obj_property name="ElementShortName">stx_pad_o</obj_property>
+            <obj_property name="ObjectShortName">stx_pad_o</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/rts_pad_o" type="logic">
+            <obj_property name="ElementShortName">rts_pad_o</obj_property>
+            <obj_property name="ObjectShortName">rts_pad_o</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/dtr_pad_o" type="logic">
+            <obj_property name="ElementShortName">dtr_pad_o</obj_property>
+            <obj_property name="ObjectShortName">dtr_pad_o</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/wb_adr_i" type="array">
+            <obj_property name="ElementShortName">wb_adr_i[2:0]</obj_property>
+            <obj_property name="ObjectShortName">wb_adr_i[2:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/wb_dat_i" type="array">
+            <obj_property name="ElementShortName">wb_dat_i[7:0]</obj_property>
+            <obj_property name="ObjectShortName">wb_dat_i[7:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/wb_dat_o" type="array">
+            <obj_property name="ElementShortName">wb_dat_o[7:0]</obj_property>
+            <obj_property name="ObjectShortName">wb_dat_o[7:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/wb_sel_i" type="array">
+            <obj_property name="ElementShortName">wb_sel_i[3:0]</obj_property>
+            <obj_property name="ObjectShortName">wb_sel_i[3:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/wb_adr_int" type="array">
+            <obj_property name="ElementShortName">wb_adr_int[2:0]</obj_property>
+            <obj_property name="ObjectShortName">wb_adr_int[2:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/clk" type="logic">
+            <obj_property name="ElementShortName">clk</obj_property>
+            <obj_property name="ObjectShortName">clk</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/wb_rst_i" type="logic">
+            <obj_property name="ElementShortName">wb_rst_i</obj_property>
+            <obj_property name="ObjectShortName">wb_rst_i</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/wb_we_i" type="logic">
+            <obj_property name="ElementShortName">wb_we_i</obj_property>
+            <obj_property name="ObjectShortName">wb_we_i</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/wb_re_i" type="logic">
+            <obj_property name="ElementShortName">wb_re_i</obj_property>
+            <obj_property name="ObjectShortName">wb_re_i</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/modem_inputs" type="array">
+            <obj_property name="ElementShortName">modem_inputs[3:0]</obj_property>
+            <obj_property name="ObjectShortName">modem_inputs[3:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/enable" type="logic">
+            <obj_property name="ElementShortName">enable</obj_property>
+            <obj_property name="ObjectShortName">enable</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/stx_pad_o" type="logic">
+            <obj_property name="ElementShortName">stx_pad_o</obj_property>
+            <obj_property name="ObjectShortName">stx_pad_o</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/srx_pad_i" type="logic">
+            <obj_property name="ElementShortName">srx_pad_i</obj_property>
+            <obj_property name="ObjectShortName">srx_pad_i</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/srx_pad" type="logic">
+            <obj_property name="ElementShortName">srx_pad</obj_property>
+            <obj_property name="ObjectShortName">srx_pad</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/wb_dat_o" type="array">
+            <obj_property name="ElementShortName">wb_dat_o[7:0]</obj_property>
+            <obj_property name="ObjectShortName">wb_dat_o[7:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/wb_addr_i" type="array">
+            <obj_property name="ElementShortName">wb_addr_i[2:0]</obj_property>
+            <obj_property name="ObjectShortName">wb_addr_i[2:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/wb_dat_i" type="array">
+            <obj_property name="ElementShortName">wb_dat_i[7:0]</obj_property>
+            <obj_property name="ObjectShortName">wb_dat_i[7:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/ier" type="array">
+            <obj_property name="ElementShortName">ier[3:0]</obj_property>
+            <obj_property name="ObjectShortName">ier[3:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/iir" type="array">
+            <obj_property name="ElementShortName">iir[3:0]</obj_property>
+            <obj_property name="ObjectShortName">iir[3:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/fcr" type="array">
+            <obj_property name="ElementShortName">fcr[1:0]</obj_property>
+            <obj_property name="ObjectShortName">fcr[1:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/mcr" type="array">
+            <obj_property name="ElementShortName">mcr[4:0]</obj_property>
+            <obj_property name="ObjectShortName">mcr[4:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/lcr" type="array">
+            <obj_property name="ElementShortName">lcr[7:0]</obj_property>
+            <obj_property name="ObjectShortName">lcr[7:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/msr" type="array">
+            <obj_property name="ElementShortName">msr[7:0]</obj_property>
+            <obj_property name="ObjectShortName">msr[7:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/dl" type="array">
+            <obj_property name="ElementShortName">dl[15:0]</obj_property>
+            <obj_property name="ObjectShortName">dl[15:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/scratch" type="array">
+            <obj_property name="ElementShortName">scratch[7:0]</obj_property>
+            <obj_property name="ObjectShortName">scratch[7:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/start_dlc" type="logic">
+            <obj_property name="ElementShortName">start_dlc</obj_property>
+            <obj_property name="ObjectShortName">start_dlc</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/lsr_mask_d" type="logic">
+            <obj_property name="ElementShortName">lsr_mask_d</obj_property>
+            <obj_property name="ObjectShortName">lsr_mask_d</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/msi_reset" type="logic">
+            <obj_property name="ElementShortName">msi_reset</obj_property>
+            <obj_property name="ObjectShortName">msi_reset</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/dlc" type="array">
+            <obj_property name="ElementShortName">dlc[15:0]</obj_property>
+            <obj_property name="ObjectShortName">dlc[15:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/int_o" type="logic">
+            <obj_property name="ElementShortName">int_o</obj_property>
+            <obj_property name="ObjectShortName">int_o</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/trigger_level" type="array">
+            <obj_property name="ElementShortName">trigger_level[3:0]</obj_property>
+            <obj_property name="ObjectShortName">trigger_level[3:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/rx_reset" type="logic">
+            <obj_property name="ElementShortName">rx_reset</obj_property>
+            <obj_property name="ObjectShortName">rx_reset</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/tx_reset" type="logic">
+            <obj_property name="ElementShortName">tx_reset</obj_property>
+            <obj_property name="ObjectShortName">tx_reset</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/dlab" type="logic">
+            <obj_property name="ElementShortName">dlab</obj_property>
+            <obj_property name="ObjectShortName">dlab</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/cts_pad_i" type="logic">
+            <obj_property name="ElementShortName">cts_pad_i</obj_property>
+            <obj_property name="ObjectShortName">cts_pad_i</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/dsr_pad_i" type="logic">
+            <obj_property name="ElementShortName">dsr_pad_i</obj_property>
+            <obj_property name="ObjectShortName">dsr_pad_i</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/ri_pad_i" type="logic">
+            <obj_property name="ElementShortName">ri_pad_i</obj_property>
+            <obj_property name="ObjectShortName">ri_pad_i</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/dcd_pad_i" type="logic">
+            <obj_property name="ElementShortName">dcd_pad_i</obj_property>
+            <obj_property name="ObjectShortName">dcd_pad_i</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/loopback" type="logic">
+            <obj_property name="ElementShortName">loopback</obj_property>
+            <obj_property name="ObjectShortName">loopback</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/cts" type="logic">
+            <obj_property name="ElementShortName">cts</obj_property>
+            <obj_property name="ObjectShortName">cts</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/dsr" type="logic">
+            <obj_property name="ElementShortName">dsr</obj_property>
+            <obj_property name="ObjectShortName">dsr</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/ri" type="logic">
+            <obj_property name="ElementShortName">ri</obj_property>
+            <obj_property name="ObjectShortName">ri</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/dcd" type="logic">
+            <obj_property name="ElementShortName">dcd</obj_property>
+            <obj_property name="ObjectShortName">dcd</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/cts_c" type="logic">
+            <obj_property name="ElementShortName">cts_c</obj_property>
+            <obj_property name="ObjectShortName">cts_c</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/dsr_c" type="logic">
+            <obj_property name="ElementShortName">dsr_c</obj_property>
+            <obj_property name="ObjectShortName">dsr_c</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/ri_c" type="logic">
+            <obj_property name="ElementShortName">ri_c</obj_property>
+            <obj_property name="ObjectShortName">ri_c</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/dcd_c" type="logic">
+            <obj_property name="ElementShortName">dcd_c</obj_property>
+            <obj_property name="ObjectShortName">dcd_c</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/rts_pad_o" type="logic">
+            <obj_property name="ElementShortName">rts_pad_o</obj_property>
+            <obj_property name="ObjectShortName">rts_pad_o</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/dtr_pad_o" type="logic">
+            <obj_property name="ElementShortName">dtr_pad_o</obj_property>
+            <obj_property name="ObjectShortName">dtr_pad_o</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/lsr" type="array">
+            <obj_property name="ElementShortName">lsr[7:0]</obj_property>
+            <obj_property name="ObjectShortName">lsr[7:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/lsr0" type="logic">
+            <obj_property name="ElementShortName">lsr0</obj_property>
+            <obj_property name="ObjectShortName">lsr0</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/lsr1" type="logic">
+            <obj_property name="ElementShortName">lsr1</obj_property>
+            <obj_property name="ObjectShortName">lsr1</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/lsr2" type="logic">
+            <obj_property name="ElementShortName">lsr2</obj_property>
+            <obj_property name="ObjectShortName">lsr2</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/lsr3" type="logic">
+            <obj_property name="ElementShortName">lsr3</obj_property>
+            <obj_property name="ObjectShortName">lsr3</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/lsr4" type="logic">
+            <obj_property name="ElementShortName">lsr4</obj_property>
+            <obj_property name="ObjectShortName">lsr4</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/lsr5" type="logic">
+            <obj_property name="ElementShortName">lsr5</obj_property>
+            <obj_property name="ObjectShortName">lsr5</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/lsr6" type="logic">
+            <obj_property name="ElementShortName">lsr6</obj_property>
+            <obj_property name="ObjectShortName">lsr6</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/lsr7" type="logic">
+            <obj_property name="ElementShortName">lsr7</obj_property>
+            <obj_property name="ObjectShortName">lsr7</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/lsr0r" type="logic">
+            <obj_property name="ElementShortName">lsr0r</obj_property>
+            <obj_property name="ObjectShortName">lsr0r</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/lsr1r" type="logic">
+            <obj_property name="ElementShortName">lsr1r</obj_property>
+            <obj_property name="ObjectShortName">lsr1r</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/lsr2r" type="logic">
+            <obj_property name="ElementShortName">lsr2r</obj_property>
+            <obj_property name="ObjectShortName">lsr2r</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/lsr3r" type="logic">
+            <obj_property name="ElementShortName">lsr3r</obj_property>
+            <obj_property name="ObjectShortName">lsr3r</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/lsr4r" type="logic">
+            <obj_property name="ElementShortName">lsr4r</obj_property>
+            <obj_property name="ObjectShortName">lsr4r</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/lsr5r" type="logic">
+            <obj_property name="ElementShortName">lsr5r</obj_property>
+            <obj_property name="ObjectShortName">lsr5r</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/lsr6r" type="logic">
+            <obj_property name="ElementShortName">lsr6r</obj_property>
+            <obj_property name="ObjectShortName">lsr6r</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/lsr7r" type="logic">
+            <obj_property name="ElementShortName">lsr7r</obj_property>
+            <obj_property name="ObjectShortName">lsr7r</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/lsr_mask" type="logic">
+            <obj_property name="ElementShortName">lsr_mask</obj_property>
+            <obj_property name="ObjectShortName">lsr_mask</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/rls_int" type="logic">
+            <obj_property name="ElementShortName">rls_int</obj_property>
+            <obj_property name="ObjectShortName">rls_int</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/rda_int" type="logic">
+            <obj_property name="ElementShortName">rda_int</obj_property>
+            <obj_property name="ObjectShortName">rda_int</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/ti_int" type="logic">
+            <obj_property name="ElementShortName">ti_int</obj_property>
+            <obj_property name="ObjectShortName">ti_int</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/thre_int" type="logic">
+            <obj_property name="ElementShortName">thre_int</obj_property>
+            <obj_property name="ObjectShortName">thre_int</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/ms_int" type="logic">
+            <obj_property name="ElementShortName">ms_int</obj_property>
+            <obj_property name="ObjectShortName">ms_int</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/tf_push" type="logic">
+            <obj_property name="ElementShortName">tf_push</obj_property>
+            <obj_property name="ObjectShortName">tf_push</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/rf_pop" type="logic">
+            <obj_property name="ElementShortName">rf_pop</obj_property>
+            <obj_property name="ObjectShortName">rf_pop</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/rf_data_out" type="array">
+            <obj_property name="ElementShortName">rf_data_out[10:0]</obj_property>
+            <obj_property name="ObjectShortName">rf_data_out[10:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/rf_error_bit" type="logic">
+            <obj_property name="ElementShortName">rf_error_bit</obj_property>
+            <obj_property name="ObjectShortName">rf_error_bit</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/rf_count" type="array">
+            <obj_property name="ElementShortName">rf_count[4:0]</obj_property>
+            <obj_property name="ObjectShortName">rf_count[4:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/tf_count" type="array">
+            <obj_property name="ElementShortName">tf_count[4:0]</obj_property>
+            <obj_property name="ObjectShortName">tf_count[4:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/tstate" type="array">
+            <obj_property name="ElementShortName">tstate[2:0]</obj_property>
+            <obj_property name="ObjectShortName">tstate[2:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/rstate" type="array">
+            <obj_property name="ElementShortName">rstate[3:0]</obj_property>
+            <obj_property name="ObjectShortName">rstate[3:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/counter_t" type="array">
+            <obj_property name="ElementShortName">counter_t[9:0]</obj_property>
+            <obj_property name="ObjectShortName">counter_t[9:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/thre_set_en" type="logic">
+            <obj_property name="ElementShortName">thre_set_en</obj_property>
+            <obj_property name="ObjectShortName">thre_set_en</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/block_cnt" type="array">
+            <obj_property name="ElementShortName">block_cnt[7:0]</obj_property>
+            <obj_property name="ObjectShortName">block_cnt[7:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/block_value" type="array">
+            <obj_property name="ElementShortName">block_value[7:0]</obj_property>
+            <obj_property name="ObjectShortName">block_value[7:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/serial_out" type="logic">
+            <obj_property name="ElementShortName">serial_out</obj_property>
+            <obj_property name="ObjectShortName">serial_out</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/serial_in" type="logic">
+            <obj_property name="ElementShortName">serial_in</obj_property>
+            <obj_property name="ObjectShortName">serial_in</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/lsr_mask_condition" type="logic">
+            <obj_property name="ElementShortName">lsr_mask_condition</obj_property>
+            <obj_property name="ObjectShortName">lsr_mask_condition</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/iir_read" type="logic">
+            <obj_property name="ElementShortName">iir_read</obj_property>
+            <obj_property name="ObjectShortName">iir_read</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/msr_read" type="logic">
+            <obj_property name="ElementShortName">msr_read</obj_property>
+            <obj_property name="ObjectShortName">msr_read</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/fifo_read" type="logic">
+            <obj_property name="ElementShortName">fifo_read</obj_property>
+            <obj_property name="ObjectShortName">fifo_read</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/transmitter/fifo_tx/clk" type="logic">
+            <obj_property name="ElementShortName">clk</obj_property>
+            <obj_property name="ObjectShortName">clk</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/transmitter/fifo_tx/wb_rst_i" type="logic">
+            <obj_property name="ElementShortName">wb_rst_i</obj_property>
+            <obj_property name="ObjectShortName">wb_rst_i</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/transmitter/fifo_tx/push" type="logic">
+            <obj_property name="ElementShortName">push</obj_property>
+            <obj_property name="ObjectShortName">push</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/transmitter/fifo_tx/pop" type="logic">
+            <obj_property name="ElementShortName">pop</obj_property>
+            <obj_property name="ObjectShortName">pop</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/transmitter/fifo_tx/data_in" type="array">
+            <obj_property name="ElementShortName">data_in[7:0]</obj_property>
+            <obj_property name="ObjectShortName">data_in[7:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/transmitter/fifo_tx/fifo_reset" type="logic">
+            <obj_property name="ElementShortName">fifo_reset</obj_property>
+            <obj_property name="ObjectShortName">fifo_reset</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/transmitter/fifo_tx/reset_status" type="logic">
+            <obj_property name="ElementShortName">reset_status</obj_property>
+            <obj_property name="ObjectShortName">reset_status</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/transmitter/fifo_tx/data_out" type="array">
+            <obj_property name="ElementShortName">data_out[7:0]</obj_property>
+            <obj_property name="ObjectShortName">data_out[7:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/transmitter/fifo_tx/top" type="array">
+            <obj_property name="ElementShortName">top[3:0]</obj_property>
+            <obj_property name="ObjectShortName">top[3:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/transmitter/fifo_tx/bottom" type="array">
+            <obj_property name="ElementShortName">bottom[3:0]</obj_property>
+            <obj_property name="ObjectShortName">bottom[3:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/transmitter/fifo_tx/count" type="array">
+            <obj_property name="ElementShortName">count[4:0]</obj_property>
+            <obj_property name="ObjectShortName">count[4:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/transmitter/fifo_tx/overrun" type="logic">
+            <obj_property name="ElementShortName">overrun</obj_property>
+            <obj_property name="ObjectShortName">overrun</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/transmitter/fifo_tx/top_plus_1" type="array">
+            <obj_property name="ElementShortName">top_plus_1[3:0]</obj_property>
+            <obj_property name="ObjectShortName">top_plus_1[3:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/transmitter/fifo_tx/fifo_width" type="array">
+            <obj_property name="ElementShortName">fifo_width[31:0]</obj_property>
+            <obj_property name="ObjectShortName">fifo_width[31:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/transmitter/fifo_tx/fifo_depth" type="array">
+            <obj_property name="ElementShortName">fifo_depth[31:0]</obj_property>
+            <obj_property name="ObjectShortName">fifo_depth[31:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/transmitter/fifo_tx/fifo_pointer_w" type="array">
+            <obj_property name="ElementShortName">fifo_pointer_w[31:0]</obj_property>
+            <obj_property name="ObjectShortName">fifo_pointer_w[31:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/transmitter/fifo_tx/fifo_counter_w" type="array">
+            <obj_property name="ElementShortName">fifo_counter_w[31:0]</obj_property>
+            <obj_property name="ObjectShortName">fifo_counter_w[31:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/fifo_write" type="logic">
+            <obj_property name="ElementShortName">fifo_write</obj_property>
+            <obj_property name="ObjectShortName">fifo_write</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/delayed_modem_signals" type="array">
+            <obj_property name="ElementShortName">delayed_modem_signals[3:0]</obj_property>
+            <obj_property name="ObjectShortName">delayed_modem_signals[3:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/lsr0_d" type="logic">
+            <obj_property name="ElementShortName">lsr0_d</obj_property>
+            <obj_property name="ObjectShortName">lsr0_d</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/lsr1_d" type="logic">
+            <obj_property name="ElementShortName">lsr1_d</obj_property>
+            <obj_property name="ObjectShortName">lsr1_d</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/lsr2_d" type="logic">
+            <obj_property name="ElementShortName">lsr2_d</obj_property>
+            <obj_property name="ObjectShortName">lsr2_d</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/lsr3_d" type="logic">
+            <obj_property name="ElementShortName">lsr3_d</obj_property>
+            <obj_property name="ObjectShortName">lsr3_d</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/lsr4_d" type="logic">
+            <obj_property name="ElementShortName">lsr4_d</obj_property>
+            <obj_property name="ObjectShortName">lsr4_d</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/lsr5_d" type="logic">
+            <obj_property name="ElementShortName">lsr5_d</obj_property>
+            <obj_property name="ObjectShortName">lsr5_d</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/lsr6_d" type="logic">
+            <obj_property name="ElementShortName">lsr6_d</obj_property>
+            <obj_property name="ObjectShortName">lsr6_d</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/lsr7_d" type="logic">
+            <obj_property name="ElementShortName">lsr7_d</obj_property>
+            <obj_property name="ObjectShortName">lsr7_d</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/rls_int_d" type="logic">
+            <obj_property name="ElementShortName">rls_int_d</obj_property>
+            <obj_property name="ObjectShortName">rls_int_d</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/thre_int_d" type="logic">
+            <obj_property name="ElementShortName">thre_int_d</obj_property>
+            <obj_property name="ObjectShortName">thre_int_d</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/ms_int_d" type="logic">
+            <obj_property name="ElementShortName">ms_int_d</obj_property>
+            <obj_property name="ObjectShortName">ms_int_d</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/ti_int_d" type="logic">
+            <obj_property name="ElementShortName">ti_int_d</obj_property>
+            <obj_property name="ObjectShortName">ti_int_d</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/rda_int_d" type="logic">
+            <obj_property name="ElementShortName">rda_int_d</obj_property>
+            <obj_property name="ObjectShortName">rda_int_d</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/rls_int_rise" type="logic">
+            <obj_property name="ElementShortName">rls_int_rise</obj_property>
+            <obj_property name="ObjectShortName">rls_int_rise</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/thre_int_rise" type="logic">
+            <obj_property name="ElementShortName">thre_int_rise</obj_property>
+            <obj_property name="ObjectShortName">thre_int_rise</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/ms_int_rise" type="logic">
+            <obj_property name="ElementShortName">ms_int_rise</obj_property>
+            <obj_property name="ObjectShortName">ms_int_rise</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/ti_int_rise" type="logic">
+            <obj_property name="ElementShortName">ti_int_rise</obj_property>
+            <obj_property name="ObjectShortName">ti_int_rise</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/rda_int_rise" type="logic">
+            <obj_property name="ElementShortName">rda_int_rise</obj_property>
+            <obj_property name="ObjectShortName">rda_int_rise</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/rls_int_pnd" type="logic">
+            <obj_property name="ElementShortName">rls_int_pnd</obj_property>
+            <obj_property name="ObjectShortName">rls_int_pnd</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/rda_int_pnd" type="logic">
+            <obj_property name="ElementShortName">rda_int_pnd</obj_property>
+            <obj_property name="ObjectShortName">rda_int_pnd</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/thre_int_pnd" type="logic">
+            <obj_property name="ElementShortName">thre_int_pnd</obj_property>
+            <obj_property name="ObjectShortName">thre_int_pnd</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/ms_int_pnd" type="logic">
+            <obj_property name="ElementShortName">ms_int_pnd</obj_property>
+            <obj_property name="ObjectShortName">ms_int_pnd</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/ti_int_pnd" type="logic">
+            <obj_property name="ElementShortName">ti_int_pnd</obj_property>
+            <obj_property name="ObjectShortName">ti_int_pnd</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/rf_overrun" type="logic">
+            <obj_property name="ElementShortName">rf_overrun</obj_property>
+            <obj_property name="ObjectShortName">rf_overrun</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/regs/rf_push_pulse" type="logic">
+            <obj_property name="ElementShortName">rf_push_pulse</obj_property>
+            <obj_property name="ObjectShortName">rf_push_pulse</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/we_o" type="logic">
+            <obj_property name="ElementShortName">we_o</obj_property>
+            <obj_property name="ObjectShortName">we_o</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/re_o" type="logic">
+            <obj_property name="ElementShortName">re_o</obj_property>
+            <obj_property name="ObjectShortName">re_o</obj_property>
+         </wvobject>
       </wvobject>
    </wvobject>
    <wvobject fp_name="group2272" type="group">
       <obj_property name="label">z80</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="isExpanded"></obj_property>
       <wvobject fp_name="/DKong_Sim/u_z80/RESET_n" type="logic">
          <obj_property name="ElementShortName">RESET_n</obj_property>
          <obj_property name="ObjectShortName">RESET_n</obj_property>
@@ -2011,7 +2728,6 @@
    <wvobject fp_name="group821" type="group">
       <obj_property name="label">Flash_memory</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="isExpanded"></obj_property>
       <wvobject fp_name="vbus1450" type="vbus">
          <obj_property name="label">Addr</obj_property>
          <obj_property name="DisplayName">label</obj_property>

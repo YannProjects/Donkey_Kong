@@ -53,7 +53,7 @@ entity vga_control_top is
         i_reset : in STD_LOGIC;
         i_clk_52m : in std_logic; -- 52 MHz
         i_vga_clk : in std_logic; -- 25.18750 Mhz
-        i_sys_clk : in std_logic; -- 6.144 Mhz (18.432 MHz / 3)
+        i_pixel_write : in std_logic;
 
         i_vsyncn : in std_logic; -- VSYNC core
         i_blank : in std_logic; -- Video BLANK core
@@ -165,7 +165,7 @@ architecture Behavioral of vga_control_top is
 	signal vga_dat_i                       : std_logic_vector(31 downto 0);
 	signal vga_stb_o, vga_cyc_o, vga_ack_i : std_logic;
 	
-    signal hsync_vga, vsync_vga : std_logic;
+    signal hsync_vga, vsync_vga, pixel_wr_0 : std_logic;
     
     signal r_vgac, g_vgac, b_vgac: std_logic_vector(7 downto 0);
         
@@ -301,8 +301,8 @@ begin
     -- PortA : Côté écriture (8 bits)
     -- PortB : Côté lecture (16 bits)
     u1: blk_mem_gen_video_ram port map (
-        clka => i_sys_clk, -- Write side 6,144 MHz
-        wea(0) => '1',
+        clka => i_clk_52m, -- Write side 6,144 MHz
+        wea(0) => i_pixel_write,
         addra => std_logic_vector(video_mem_addr),
         dina => video_mem_data,
 
@@ -311,14 +311,18 @@ begin
         doutb => video_mem_vga_core_data
     );
         
-    process(i_sys_clk)
+    process(i_clk_52m)
     begin
         -- Reset ou top trame venant du core
         if ((i_reset = '1') or (i_vsyncn = '0')) then
             video_mem_addr <= (others => '0');
-        elsif rising_edge(i_sys_clk) then
-            if (i_blank = '0') then
-                video_mem_addr <= video_mem_addr + 1;
+        elsif rising_edge(i_clk_52m) then
+            -- Detection front montant i_pixel_write. A remplacer par quelque chose d'autre basé sur i_clk_52m ?
+            pixel_wr_0 <= i_pixel_write;
+            if ((pixel_wr_0 = '0') and (i_pixel_write = '1')) then
+                if (i_blank = '0') then
+                    video_mem_addr <= video_mem_addr + 1;
+                end if;
             end if;
         end if;
     end process;
