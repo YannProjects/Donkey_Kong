@@ -34,6 +34,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 entity dkong_adec is
 port (
         i_rst : in std_logic;
+        i_clk : in std_logic; -- Phi34n
         i_addr : in std_logic_vector(15 downto 0);
         i_vblk_l : in std_logic;
         i_vram_busy_l : in std_logic;
@@ -41,14 +42,14 @@ port (
         i_mreq_comb_l : in std_logic;
         i_rd_l : in std_logic; -- Z80 read
         i_wr_l : in std_logic; -- Z80 write
-        i_h_1 : in std_logic;
+        i_rams_wr_enable : in std_logic; -- Enable WR to RAMs if not RAM busy
         
         o_objrd_l : out std_logic;
         o_objwr_l : out std_logic;
         o_objrq_l : out std_logic;
         o_vram_wr_l : out std_logic;
         o_vram_rd_l : out std_logic;
-        o_cpu_wait_l : out std_logic;
+        o_vram_req_l : out std_logic;
         o_ram_34A_cs_l : out std_logic;
         o_ram_34B_cs_l : out std_logic;
         o_ram_34C_cs_l : out std_logic;
@@ -68,43 +69,13 @@ end dkong_adec;
 
 architecture Behavioral of dkong_adec is
 
-signal Q2_7F, Q1n_7F, Q7_4D, Q6_4D, Q1_2A_1 : std_logic;
+signal Q0_4D, Q1_4D, Q2_4D, Q3_4D, Q6_4D, Q7_4D : std_logic;
+signal Q1_2A_1 : std_logic;
 signal Q0_2A_2, Q1_2A_2, Q3_2A_2, Q0_2B, Q1_2B, Q0_2C, Q1_2C : std_logic;
 signal Q0_2D, Q1_2D, Q2_2D, Q0_1B, Q1_1B, Q2_1B, Q3_1B : std_logic;
 signal Q0_1C, Q2_1C, Q3_1C : std_logic;
 
 begin
-
-    -- Signaux CPUs
-    -- U7F
-    --
-    U7F_1 : process(i_h_1, i_vblk_l, i_rst)
-    begin
-        if (i_vblk_l = '0') then
-            Q1n_7F <= '1';
-        elsif (i_rst = '1') then
-            Q1n_7F <= '0';
-        elsif rising_edge(i_h_1) then
-            if ((not i_vram_busy_l) and (not Q1_2A_2)) = '1' then
-                Q1n_7F <= '0';
-            else
-                Q1n_7F <= '1';
-            end if;
-        end if;
-    end process;
-    
-    U7F_2 : process(i_h_1, i_rst)
-    begin
-        if (i_rst = '1') then
-            Q2_7F <= '0';
-        elsif falling_edge(i_h_1) then
-            if Q1n_7F = '1' then
-                Q2_7F <= '1';
-            else
-                Q2_7F <= '0';
-            end if;
-        end if;
-    end process;
     
     --    
     -- Decodage adresses:
@@ -163,13 +134,14 @@ begin
     -- 0x7c0E - Rivet level completed
     -- 0x7c0F - Gorilla roar
     --
-
-    o_rom_cs_l <= '0' when (i_addr(15 downto 14) = "00" and i_rfrsh_l = '1') else '1';
-    o_uart_cs_l <= '0' when (i_addr(15 downto 14) = "10" and i_rfrsh_l = '1') else '1';
     
     -- U4D
-    Q7_4D <= '0' when (i_addr(15 downto 12) = "0111" and i_rfrsh_l = '1') else '1';
+    Q0_4D <= '0' when (i_addr(15 downto 12) = "0000" and i_rfrsh_l = '1') else '1';
+    Q1_4D <= '0' when (i_addr(15 downto 12) = "0001" and i_rfrsh_l = '1') else '1';
+    Q2_4D <= '0' when (i_addr(15 downto 12) = "0010" and i_rfrsh_l = '1') else '1';
+    Q3_4D <= '0' when (i_addr(15 downto 12) = "0011" and i_rfrsh_l = '1') else '1';
     Q6_4D <= '0' when (i_addr(15 downto 12) = "0110" and i_rfrsh_l = '1') else '1';
+    Q7_4D <= '0' when (i_addr(15 downto 12) = "0111" and i_rfrsh_l = '1') else '1';
     
     -- U2A_1
     Q1_2A_1 <= '0' when i_addr(11) = '1' and Q7_4D = '0' else '1';
@@ -184,13 +156,13 @@ begin
     Q1_2B <= '0' when (i_addr(11 downto 10) = "01" and Q7_4D = '0' and i_mreq_comb_l = '0' and i_rd_l = '0') else '1';
     
     -- U2C
-    Q0_2C <= '0' when (i_addr(11 downto 10) = "00" and Q7_4D = '0' and i_mreq_comb_l = '0' and i_wr_l = '0' and Q2_7F = '1') else '1';
-    Q1_2C <= '0' when (i_addr(11 downto 10) = "01" and Q7_4D = '0' and i_mreq_comb_l = '0' and i_wr_l = '0' and Q2_7F = '1') else '1';
+    Q0_2C <= '0' when (i_addr(11 downto 10) = "00" and Q7_4D = '0' and i_mreq_comb_l = '0' and i_wr_l = '0' and i_rams_wr_enable = '1') else '1';
+    Q1_2C <= '0' when (i_addr(11 downto 10) = "01" and Q7_4D = '0' and i_mreq_comb_l = '0' and i_wr_l = '0' and i_rams_wr_enable = '1') else '1';
     
     -- U2D
-    Q0_2D <= '0' when (i_addr(11 downto 10) = "00" and Q6_4D = '0' and i_mreq_comb_l = '0' and (i_rd_l = '0' or i_wr_l = '0') and Q2_7F = '1') else '1';
-    Q1_2D <= '0' when (i_addr(11 downto 10) = "01" and Q6_4D = '0' and i_mreq_comb_l = '0' and (i_rd_l = '0' or i_wr_l = '0') and Q2_7F = '1') else '1';
-    Q2_2D <= '0' when (i_addr(11 downto 10) = "10" and Q6_4D = '0' and i_mreq_comb_l = '0' and (i_rd_l = '0' or i_wr_l = '0') and Q2_7F = '1') else '1';
+    Q0_2D <= '0' when (i_addr(11 downto 10) = "00" and Q6_4D = '0' and i_mreq_comb_l = '0' and (i_rd_l = '0' or i_wr_l = '0') and i_rams_wr_enable = '1') else '1';
+    Q1_2D <= '0' when (i_addr(11 downto 10) = "01" and Q6_4D = '0' and i_mreq_comb_l = '0' and (i_rd_l = '0' or i_wr_l = '0') and i_rams_wr_enable = '1') else '1';
+    Q2_2D <= '0' when (i_addr(11 downto 10) = "10" and Q6_4D = '0' and i_mreq_comb_l = '0' and (i_rd_l = '0' or i_wr_l = '0') and i_rams_wr_enable = '1') else '1';
 
     -- U1B
     Q0_1B <= '0' when (i_addr(9 downto 7) = "000" and Q3_2A_2 = '0' and i_rd_l = '0') else '1';
@@ -203,13 +175,15 @@ begin
     Q2_1C <= '0' when (i_addr(9 downto 7) = "010" and Q3_2A_2 = '0' and i_wr_l = '0') else '1';
     Q3_1C <= '0' when (i_addr(9 downto 7) = "011" and Q3_2A_2 = '0' and i_wr_l = '0') else '1';
 
-    o_cpu_wait_l <= Q1n_7F;
     o_objwr_l <= Q0_2C;
     o_vram_wr_l <= Q1_2C;
+    o_vram_req_l <= Q1_2A_2;
     o_objrd_l <= Q0_2B;
     o_vram_rd_l <= Q1_2B;
     o_objrq_l <= Q0_2A_2;
     o_dma_cs_l <= '0' when (Q1_2A_1 = '0' and i_addr(10) = '0') else '1';
+    o_rom_cs_l <= '0' when (Q0_4D = '0' or Q1_4D = '0' or Q2_4D = '0' or Q3_4D = '0') else '1';
+    o_uart_cs_l <= '0' when (i_addr(15 downto 14) = "10" and i_rfrsh_l = '1') else '1';    
     o_ram_34A_cs_l <= Q2_2D;
     o_ram_34B_cs_l <= Q1_2D;
     o_ram_34C_cs_l <= Q0_2D;
