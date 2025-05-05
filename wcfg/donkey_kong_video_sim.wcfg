@@ -3,7 +3,7 @@
    <wave_state>
    </wave_state>
    <db_ref_list>
-      <db_ref path="DKong_Sim_behav.wdb" id="1">
+      <db_ref path="C:/Users/yannv/Documents/Projets_HW/Donkey_Kong/Dkong_Artyx7/Dkong_Artyx7.sim/sim_1/behav/xsim/DKong_Sim_behav.wdb" id="1">
          <top_modules>
             <top_module name="DKong_Sim" />
             <top_module name="dkong_pack" />
@@ -25,15 +25,18 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="116,020.852344 us"></ZoomStartTime>
-      <ZoomEndTime time="116,137.252345 us"></ZoomEndTime>
-      <Cursor1Time time="116,070.074924 us"></Cursor1Time>
+      <ZoomStartTime time="78,526.275421 us"></ZoomStartTime>
+      <ZoomEndTime time="83,766.275422 us"></ZoomEndTime>
+      <Cursor1Time time="80,606.275421 us"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="275"></NameColumnWidth>
-      <ValueColumnWidth column_width="78"></ValueColumnWidth>
+      <ValueColumnWidth column_width="74"></ValueColumnWidth>
    </column_width_setting>
    <WVObjectSize size="3" />
+   <wave_markers>
+      <marker time="97091164751" label="" />
+   </wave_markers>
    <wvobject fp_name="group379" type="group">
       <obj_property name="label">DKong_Hw_Tester</obj_property>
       <obj_property name="DisplayName">label</obj_property>
@@ -233,6 +236,7 @@
             <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_HVClocks/v" type="array">
                <obj_property name="ElementShortName">v[8:0]</obj_property>
                <obj_property name="ObjectShortName">v[8:0]</obj_property>
+               <obj_property name="isExpanded"></obj_property>
             </wvobject>
             <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_HVClocks/Q1n_7F" type="logic">
                <obj_property name="ElementShortName">Q1n_7F</obj_property>

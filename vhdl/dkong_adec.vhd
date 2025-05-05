@@ -160,9 +160,9 @@ begin
     Q1_2C <= '0' when (i_addr(11 downto 10) = "01" and Q7_4D = '0' and i_mreq_comb_l = '0' and i_wr_l = '0' and i_rams_wr_enable = '1') else '1';
     
     -- U2D
-    Q0_2D <= '0' when (i_addr(11 downto 10) = "00" and Q6_4D = '0' and i_mreq_comb_l = '0' and (i_rd_l = '0' or i_wr_l = '0') and i_rams_wr_enable = '1') else '1';
-    Q1_2D <= '0' when (i_addr(11 downto 10) = "01" and Q6_4D = '0' and i_mreq_comb_l = '0' and (i_rd_l = '0' or i_wr_l = '0') and i_rams_wr_enable = '1') else '1';
-    Q2_2D <= '0' when (i_addr(11 downto 10) = "10" and Q6_4D = '0' and i_mreq_comb_l = '0' and (i_rd_l = '0' or i_wr_l = '0') and i_rams_wr_enable = '1') else '1';
+    Q0_2D <= '0' when (i_addr(11 downto 10) = "00" and Q6_4D = '0' and i_mreq_comb_l = '0' and (i_rd_l = '0' or i_wr_l = '0')) else '1';
+    Q1_2D <= '0' when (i_addr(11 downto 10) = "01" and Q6_4D = '0' and i_mreq_comb_l = '0' and (i_rd_l = '0' or i_wr_l = '0')) else '1';
+    Q2_2D <= '0' when (i_addr(11 downto 10) = "10" and Q6_4D = '0' and i_mreq_comb_l = '0' and (i_rd_l = '0' or i_wr_l = '0')) else '1';
 
     -- U1B
     Q0_1B <= '0' when (i_addr(9 downto 7) = "000" and Q3_2A_2 = '0' and i_rd_l = '0') else '1';
