@@ -106,7 +106,7 @@ signal core_rst, blank_vga : std_logic;
 signal video_rgb : std_logic_vector(23 downto 0);
 signal o_audio_vol_out, o_audio_wav_out : std_logic_vector(3 downto 0);
 signal vga : r_Core_to_VGA;
-signal vga_control_init_done, clk_dkong, clk_52m : std_logic;
+signal vga_control_init_done, clk_dkong : std_logic;
 signal video_r, video_g, vga_r, vga_g, vga_b : std_logic_vector(2 downto 0);
 signal video_b : std_logic_vector(1 downto 0);
 signal core_vsync_l, core_blank, pixel_write, clk_audio, rom_cs_l : std_logic;
@@ -128,7 +128,6 @@ begin
       locked => pll_locked
   );
   
-  clk_52m <= clk_dkong;
   uart_clk <= clk_dkong;
     
   ---------------------
@@ -210,7 +209,7 @@ begin
   port map ( 
      -- i_reset => not i_rst_sys_n,
      i_reset => not pll_locked,
-     i_clk_52m => clk_52m,
+     i_clk_52m => clk_dkong,
      i_vga_clk => vga_clock,
      i_pixel_write => pixel_write,
     
@@ -254,7 +253,7 @@ begin
       
       core_to_cpu_data <= uart_reg when uart_cs_l = '0' else rom_data when rom_cs_l = '0' else core_data;
     
-      -- Pas de selction de la memoire Flash en mode debug, c'est la ROM de test qui est utilisee dans ce cas
+      -- Pas de selection de la memoire Flash en mode debug, c'est la ROM de test qui est utilisee dans ce cas
       o_rom_cs_l <= '1';
         
       ---------------------------------------------------
@@ -267,73 +266,75 @@ begin
       -- UART
       ------------
       -- WB manager
-      p_wb_manager : process(uart_clk, core_rst)
-      begin
-         if (core_rst = '1') then
-              wb_bus_state <= wb_idle;
-              uart_wb_we <= '0';
-              uart_wb_stb <= '0';
-              uart_wb_cyc <= '0';
-         elsif rising_edge(uart_clk) then
-             cpu_mreq_0 <= i_cpu_mreq_l_core;
-             if (wb_bus_state = wb_idle) then
+      -- p_wb_manager : process(uart_clk, core_rst)
+      -- begin
+      --    if (core_rst = '1') then
+      --         wb_bus_state <= wb_idle;
+      --         uart_wb_we <= '0';
+      --         uart_wb_stb <= '0';
+      --         uart_wb_cyc <= '0';
+      --    elsif rising_edge(uart_clk) then
+      --        cpu_mreq_0 <= i_cpu_mreq_l_core;
+      --        if (wb_bus_state = wb_idle) then
                   -- Declenchement d'un cycle WB sur validation MREQn
-                  if (uart_cs_l = '0' and cpu_mreq_0 = '1' and i_cpu_mreq_l_core = '0' and i_cpu_rfrsh_l_core = '1') then
-                      wb_bus_state <= wb_wait_for_rd_or_wr_cycle;
-                  end if;
-             elsif (wb_bus_state = wb_wait_for_rd_or_wr_cycle) then
-                  if i_cpu_rd_l_core = '0' then
-                      uart_wb_stb <= '1';
-                      uart_wb_cyc <= '1';
-                      wb_bus_state <= wb_wait_for_ack;
-                  elsif i_cpu_wr_l_core = '0' then
-                      uart_wb_stb <= '1';
-                      uart_wb_cyc <= '1';
-                      uart_wb_we <= '1';
-                      wb_bus_state <= wb_wait_for_ack;
-                  end if;
-             elsif (wb_bus_state = wb_wait_for_ack) then
-                 if (uart_wb_ack = '1')  then
-                      uart_wb_we <= '0';
-                      uart_wb_stb <= '0';
-                      uart_wb_cyc <= '0';
+      --             if (uart_cs_l = '0' and cpu_mreq_0 = '1' and i_cpu_mreq_l_core = '0' and i_cpu_rfrsh_l_core = '1') then
+      --                 wb_bus_state <= wb_wait_for_rd_or_wr_cycle;
+      --             end if;
+      --        elsif (wb_bus_state = wb_wait_for_rd_or_wr_cycle) then
+      --             if i_cpu_rd_l_core = '0' then
+      --                 uart_wb_stb <= '1';
+      --                 uart_wb_cyc <= '1';
+      --                 wb_bus_state <= wb_wait_for_ack;
+      --             elsif i_cpu_wr_l_core = '0' then
+      --                 uart_wb_stb <= '1';
+      --                 uart_wb_cyc <= '1';
+      --                 uart_wb_we <= '1';
+      --                 wb_bus_state <= wb_wait_for_ack;
+      --             end if;
+      --        elsif (wb_bus_state = wb_wait_for_ack) then
+      --            if (uart_wb_ack = '1')  then
+      --                 uart_wb_we <= '0';
+      --                 uart_wb_stb <= '0';
+      --                 uart_wb_cyc <= '0';
                      -- Memorise le registre de l'UART quand wb_ack = 1 pour la fin du cycle
                      -- du Z80 qui arrive plus tard 
-                     uart_reg <= uart_data;
-                     wb_bus_state <= wb_idle;
-                 end if;
-             end if;
-         end if;
-      end process;
+      --                uart_reg <= uart_data;
+      --                wb_bus_state <= wb_idle;
+      --            end if;
+      --        end if;
+      --    end if;
+      -- end process;
     
-      uart : entity work.uart_top
-      port map (
-          wb_clk_i =>  uart_clk,
+      -- uart : entity work.uart_top
+      -- port map (
+      --     wb_clk_i =>  uart_clk,
           -- Wishbone signals
-          wb_rst_i => core_rst,
-          wb_adr_i => i_cpu_a_core(2 downto 0),
-          wb_dat_i => cpu_to_core_data,
-          wb_dat_o => uart_data,
-          wb_we_i => uart_wb_we,
-          wb_stb_i => uart_wb_stb, 
-          wb_cyc_i => uart_wb_cyc,
-          wb_ack_o => uart_wb_ack,
-          wb_sel_i => "1111",
+      --     wb_rst_i => core_rst,
+      --     wb_adr_i => i_cpu_a_core(2 downto 0),
+      --     wb_dat_i => cpu_to_core_data,
+      --     wb_dat_o => uart_data,
+      --     wb_we_i => uart_wb_we,
+      --     wb_stb_i => uart_wb_stb, 
+      --     wb_cyc_i => uart_wb_cyc,
+      --     wb_ack_o => uart_wb_ack,
+      --     wb_sel_i => "1111",
           -- int_o -- interrupt request
     
           -- UART	signals
           -- serial input/output
-          stx_pad_o => o_uart_tx,
-          srx_pad_i => i_uart_rx,
+      --     stx_pad_o => o_uart_tx,
+      --     srx_pad_i => i_uart_rx,
       
           -- modem signals
           -- rts_pad_o
-          cts_pad_i => '0',
+      --     cts_pad_i => '0',
           -- dtr_pad_o
-          dsr_pad_i => '0',
-          ri_pad_i => '0',
-          dcd_pad_i => '0'
-       ); 
+      --     dsr_pad_i => '0',
+      --     ri_pad_i => '0',
+      --     dcd_pad_i => '0'
+      --  );
+       
+      o_uart_tx <= '1';
 
 
   end generate g_Dkong_Add_Debug;

@@ -301,7 +301,7 @@ begin
     -- PortA : Côté écriture (8 bits)
     -- PortB : Côté lecture (16 bits)
     u1: blk_mem_gen_video_ram port map (
-        clka => i_clk_52m, -- Write side 6,144 MHz
+        clka => i_clk_52m,
         wea(0) => i_pixel_write,
         addra => std_logic_vector(video_mem_addr),
         dina => video_mem_data,

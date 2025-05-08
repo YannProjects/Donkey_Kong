@@ -117,8 +117,8 @@ signal Phi34, Phi34n, g_3K, s2, hsyncn, dma_clock, obj_vram_wr_enable : std_logi
 signal v : unsigned(7 downto 0);
 signal h : unsigned(9 downto 0);
 
-attribute dont_touch : string;
-attribute dont_touch of i_cpu_m1_l, v_blkn, Phi34n, Phi34, g_3K : signal is "true";
+-- attribute dont_touch : string;
+-- attribute dont_touch of Phi34n : signal is "true";
 
 -- Debug
 -- attribute MARK_DEBUG : string;

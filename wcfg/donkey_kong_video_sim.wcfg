@@ -25,17 +25,17 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="78,526.275421 us"></ZoomStartTime>
-      <ZoomEndTime time="83,766.275422 us"></ZoomEndTime>
-      <Cursor1Time time="80,606.275421 us"></Cursor1Time>
+      <ZoomStartTime time="85,346,967.686 ns"></ZoomStartTime>
+      <ZoomEndTime time="85,348,462.687 ns"></ZoomEndTime>
+      <Cursor1Time time="85,347,950.855 ns"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="275"></NameColumnWidth>
-      <ValueColumnWidth column_width="74"></ValueColumnWidth>
+      <ValueColumnWidth column_width="58"></ValueColumnWidth>
    </column_width_setting>
    <WVObjectSize size="3" />
    <wave_markers>
-      <marker time="97091164751" label="" />
+      <marker time="85347625297" label="" />
    </wave_markers>
    <wvobject fp_name="group379" type="group">
       <obj_property name="label">DKong_Hw_Tester</obj_property>
@@ -225,10 +225,6 @@
                <obj_property name="ElementShortName">h_256</obj_property>
                <obj_property name="ObjectShortName">h_256</obj_property>
             </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_HVClocks/v_clk" type="logic">
-               <obj_property name="ElementShortName">v_clk</obj_property>
-               <obj_property name="ObjectShortName">v_clk</obj_property>
-            </wvobject>
             <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_HVClocks/vblk" type="logic">
                <obj_property name="ElementShortName">vblk</obj_property>
                <obj_property name="ObjectShortName">vblk</obj_property>
@@ -289,10 +285,6 @@
             <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_DKong_Adec/i_wr_l" type="logic">
                <obj_property name="ElementShortName">i_wr_l</obj_property>
                <obj_property name="ObjectShortName">i_wr_l</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_DKong_Adec/i_h_1" type="array">
-               <obj_property name="ElementShortName">i_h_1[1:0]</obj_property>
-               <obj_property name="ObjectShortName">i_h_1[1:0]</obj_property>
             </wvobject>
             <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_DKong_Adec/o_objrd_l" type="logic">
                <obj_property name="ElementShortName">o_objrd_l</obj_property>
@@ -450,6 +442,7 @@
          <wvobject fp_name="group454" type="group">
             <obj_property name="label">DMA</obj_property>
             <obj_property name="DisplayName">label</obj_property>
+            <obj_property name="isExpanded"></obj_property>
             <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_DMA/i_clk" type="logic">
                <obj_property name="ElementShortName">i_clk</obj_property>
                <obj_property name="ObjectShortName">i_clk</obj_property>
@@ -916,7 +909,6 @@
          <wvobject fp_name="group383" type="group">
             <obj_property name="label">Dkong_video</obj_property>
             <obj_property name="DisplayName">label</obj_property>
-            <obj_property name="isExpanded"></obj_property>
             <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/i_rst" type="logic">
                <obj_property name="ElementShortName">i_rst</obj_property>
                <obj_property name="ObjectShortName">i_rst</obj_property>
@@ -1075,6 +1067,7 @@
             <wvobject fp_name="group555" type="group">
                <obj_property name="label">Tiles</obj_property>
                <obj_property name="DisplayName">label</obj_property>
+               <obj_property name="isExpanded"></obj_property>
                <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/A_4M" type="array">
                   <obj_property name="ElementShortName">A_4M[3:0]</obj_property>
                   <obj_property name="ObjectShortName">A_4M[3:0]</obj_property>
@@ -1110,6 +1103,14 @@
                <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/col" type="array">
                   <obj_property name="ElementShortName">col[3:0]</obj_property>
                   <obj_property name="ObjectShortName">col[3:0]</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/vid_0" type="logic">
+                  <obj_property name="ElementShortName">vid_0</obj_property>
+                  <obj_property name="ObjectShortName">vid_0</obj_property>
+               </wvobject>
+               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/vid_1" type="logic">
+                  <obj_property name="ElementShortName">vid_1</obj_property>
+                  <obj_property name="ObjectShortName">vid_1</obj_property>
                </wvobject>
                <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/addr_tiles_data_3PN" type="array">
                   <obj_property name="ElementShortName">addr_tiles_data_3PN[10:0]</obj_property>
@@ -1183,7 +1184,6 @@
             <wvobject fp_name="group556" type="group">
                <obj_property name="label">Sprites</obj_property>
                <obj_property name="DisplayName">label</obj_property>
-               <obj_property name="isExpanded"></obj_property>
                <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/hpo" type="array">
                   <obj_property name="ElementShortName">hpo[7:0]</obj_property>
                   <obj_property name="ObjectShortName">hpo[7:0]</obj_property>
@@ -1489,14 +1489,6 @@
                <obj_property name="ElementShortName">rom_u2F_cs_l</obj_property>
                <obj_property name="ObjectShortName">rom_u2F_cs_l</obj_property>
             </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/vid_0" type="logic">
-               <obj_property name="ElementShortName">vid_0</obj_property>
-               <obj_property name="ObjectShortName">vid_0</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/vid_1" type="logic">
-               <obj_property name="ElementShortName">vid_1</obj_property>
-               <obj_property name="ObjectShortName">vid_1</obj_property>
-            </wvobject>
             <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/S_U4PN" type="array">
                <obj_property name="ElementShortName">S_U4PN[1:0]</obj_property>
                <obj_property name="ObjectShortName">S_U4PN[1:0]</obj_property>
@@ -1766,10 +1758,6 @@
             <obj_property name="ElementShortName">clk_dkong</obj_property>
             <obj_property name="ObjectShortName">clk_dkong</obj_property>
          </wvobject>
-         <wvobject fp_name="/DKong_Sim/core_top_0/clk_52m" type="logic">
-            <obj_property name="ElementShortName">clk_52m</obj_property>
-            <obj_property name="ObjectShortName">clk_52m</obj_property>
-         </wvobject>
          <wvobject fp_name="/DKong_Sim/core_top_0/video_r" type="array">
             <obj_property name="ElementShortName">video_r[2:0]</obj_property>
             <obj_property name="ObjectShortName">video_r[2:0]</obj_property>
@@ -1909,6 +1897,10 @@
          <wvobject fp_name="/DKong_Sim/core_top_0/u_vga_ctrl/i_vga_clk" type="logic">
             <obj_property name="ElementShortName">i_vga_clk</obj_property>
             <obj_property name="ObjectShortName">i_vga_clk</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/u_vga_ctrl/i_pixel_write" type="logic">
+            <obj_property name="ElementShortName">i_pixel_write</obj_property>
+            <obj_property name="ObjectShortName">i_pixel_write</obj_property>
          </wvobject>
          <wvobject fp_name="/DKong_Sim/core_top_0/u_vga_ctrl/i_vsyncn" type="logic">
             <obj_property name="ElementShortName">i_vsyncn</obj_property>

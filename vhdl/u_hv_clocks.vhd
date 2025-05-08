@@ -48,7 +48,7 @@ architecture Behavioral of hv_clocks_wait_nmi is
     signal cnt_hsync, cnt_vsync : unsigned(7 downto 0);
     signal h_256, vblk : std_logic;
     signal v : unsigned(8 downto 0);
-    signal v_clk : std_logic;
+    -- signal v_clk : std_logic;
     signal Q1n_7F, Q2_7F : std_logic;
         
     -- VSYNC_P = Nombre de pulse Phi34 entre le début de VBLK et le début du pulse signal VSYNCn
@@ -152,26 +152,36 @@ begin
 
     o_v <= v(7 downto 0);
 
-    -- U4B et U8F
-    U4B : process(i_Phi34n, i_clear_nmi_l)
+    -- U4B
+    U4B : process(i_Phi34n, i_rst)
     begin
-        -- Gestion de la NMI ici pour éviter d'avoir à redéfinir une horloge sur le signal VBLKn
-        if (i_clear_nmi_l = '0') then
-            o_cpu_nmi_l <= '1';
+        if (i_rst = '1') then
+            vblk <= '1';
         elsif rising_edge(i_Phi34n) then
             -- Front montant v(4). v change sur v_clk qui change lui-même quand h_cnt = X"E5F"...
             if (h_cnt = X"E5F") and v(3 downto 0) = "1111" then
                 if (v(7 downto 5) = "111") then
-                    if  (vblk = '0') then
-                        vblk <='1';
-                        o_cpu_nmi_l <= '0';
-                    end if;
+                    vblk <='1';
                 else
                     vblk <='0';
                 end if;
             end if;
         end if;
     end process;
+    
+    -- U8F
+    U8F : process(i_Phi34n, i_clear_nmi_l)
+    begin
+        -- Gestion de la NMI ici pour éviter d'avoir à redéfinir une horloge sur le signal VBLKn
+        if (i_clear_nmi_l = '0') then
+            o_cpu_nmi_l <= '1';
+        elsif rising_edge(i_Phi34n) then
+            -- Front montant vblk = front descendant o_vblkn
+            if (h_cnt = X"E5F") and (v = X"1EF") then
+                o_cpu_nmi_l <= '0';
+            end if;
+        end if;
+    end process;    
     
     o_vblkn <= not vblk; 
     
