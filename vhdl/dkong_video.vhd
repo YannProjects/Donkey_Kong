@@ -158,16 +158,6 @@ begin
     -- U1S
     U2PR_tile_id_in <= i_vid_data_in when i_vram_wrn = '0' else (others => '0');
     
-    -- p_video_data_sel : process(i_objrdn, i_vram_rdn, U2PR_tile_id_out, dout_6PR)
-    -- begin
-    --     o_vid_data_out <= (others => '0');
-    --     if (i_objrdn = '0') then
-    --         o_vid_data_out <= dout_6PR;
-    --     elsif (i_vram_rdn = '0') then
-    --         o_vid_data_out <= U2PR_tile_id_out;
-    --     end if;
-    -- end process;
-    -- dout_6PR quand i_objrdn. Sinon U2PR_tile_id_out qui est normalement lu si i_vram_rdn = '0'
     -- Pour simplifier on retourne U2PR_tile_id_out par defaut.
     o_vid_data_out <= dout_6PR when i_objrdn = '0' else U2PR_tile_id_out;
     

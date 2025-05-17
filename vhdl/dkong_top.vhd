@@ -261,28 +261,27 @@ begin
     
     o_core_blank <= not cmpblk2n;
     
-    -- u_Dkong_Audio : entity work.dkong_audio
-    --  port map (
-    --     i_rst_l => not i_core_reset,
-    --     i_sound_cpu_clk => i_clk_audio_6M,
+    -- CPU son
+    u_Dkong_Audio : entity work.dkong_audio
+    port map (
+       i_rst_l => not i_core_reset,
+       i_sound_cpu_clk => i_clk_audio_6M,
     
-        -- CPU son
-    --     i_audio_effects => (walk => Q_6H(0), jump => Q_6H(1), boom => Q_6H(2), 
-    --                         spring => not Q_6H(3), gorilla_fall => not Q_6H(4), barrel => not Q_6H(5)),
+       i_audio_effects => (walk => Q_6H(0), jump => Q_6H(1), boom => Q_6H(2), 
+                           spring => not Q_6H(3), gorilla_fall => not Q_6H(4), barrel => not Q_6H(5)),
         
-    --     i_sound_int_n => not play_death_music,  -- An external interrupt will play the death music.      
-    --     i_sound_data => sound_data,
+       i_sound_int_n => not play_death_music,  -- An external interrupt will play the death music.      
+       i_sound_data => sound_data,
     
-    --     i_2_VF => vf_2,
+       i_2_VF => vf_2,
         
-    --     o_sound_boom_1 => o_boom_1,
-    --     o_sound_boom_2 => o_boom_2,
-    --     o_dac_vref => o_dac_vref,
-    --     o_io_sound => pb4,
-    --     o_sound_walk => o_walk,
-    --     o_sound_jump => o_jump
-    --  );
-    pb4 <= '1';
+       o_sound_boom_1 => o_boom_1,
+       o_sound_boom_2 => o_boom_2,
+       o_dac_vref => o_dac_vref,
+       o_io_sound => pb4,
+       o_sound_walk => o_walk,
+       o_sound_jump => o_jump
+    );
     
     -- Decodage adresses
     u_DKong_Adec : entity work.dkong_adec
