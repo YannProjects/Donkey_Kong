@@ -191,6 +191,12 @@ set_property IOSTANDARD LVCMOS33 [get_ports o_walk_driver]
 
 
 create_generated_clock -name PHI34N -source [get_pins clk_gen_0/o_clk_dkong_main] -edges {1 7 11} -edge_shift {0.000 0.000 0.000} u_Core/clk
+#create_generated_clock -name PHI34N -source [get_pins clk_gen_0/o_clk_dkong_main] -edges {1 7 11} -edge_shift {0.000 0.000 0.000} [get_nets u_Core/Phi34n]
 
 
 create_generated_clock -name DMA_CLK -source u_Core/clk -divide_by 4 [get_pins {u_Core/u_HVClocks/h_cnt_reg[1]/Q}]
+#create_generated_clock -name DMA_CLK -source [get_pins u_Core/u_Dkong_Video_i_1/O] -divide_by 4 [get_pins {u_Core/u_HVClocks/h_cnt_reg[1]/Q}]
+
+
+connect_debug_port dbg_hub/clk [get_nets uart_clk]
+

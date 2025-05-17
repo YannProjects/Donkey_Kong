@@ -51,7 +51,7 @@ use UNISIM.VComponents.all;
 entity vga_control_top is
     Port ( 
         i_reset : in STD_LOGIC;
-        i_clk_52m : in std_logic; -- 52 MHz
+        i_clk : in std_logic;
         i_vga_clk : in std_logic; -- 25.18750 Mhz
         i_pixel_write : in std_logic;
 
@@ -158,12 +158,12 @@ architecture Behavioral of vga_control_top is
 	signal s_stb_vga_o : std_logic;
 	
     -- vga master
-	signal vga_adr_o                       : std_logic_vector(31 downto 0);
+	signal vga_adr                  : std_logic_vector(31 downto 0);
 	signal vga_addr_even_line_start        : unsigned(31 downto 0);
 	signal vga_frame_offset                : unsigned(31 downto 0);
 	signal vga_odd_line : std_logic;
-	signal vga_dat_i                       : std_logic_vector(31 downto 0);
-	signal vga_stb_o, vga_cyc_o, vga_ack_i : std_logic;
+	signal vga_dat                         : std_logic_vector(31 downto 0);
+	signal vga_stb, vga_cyc, vga_ack       : std_logic;
 	
     signal hsync_vga, vsync_vga, pixel_wr_0 : std_logic;
     
@@ -243,7 +243,7 @@ begin
     -- Une fois le controlleur initialisé, on met VGA_CONTROL_INIT_DONE = 1 
     -- ce qui permettra de démarrer les autres composants (Z80, ULA,...).
     
-	process(i_clk_52m, i_reset)
+	process(i_clk, i_reset)
 	begin
         if (i_reset = '1') then
             state <= chk_stop;
@@ -257,7 +257,7 @@ begin
             vga_controller_ok <= '0';
             init_timer <= 0;
             
-        elsif rising_edge(i_clk_52m) then    
+        elsif falling_edge(i_clk) then    
               case state is
                 when wait_init =>
                     init_timer <= init_timer + 1;
@@ -301,22 +301,22 @@ begin
     -- PortA : Côté écriture (8 bits)
     -- PortB : Côté lecture (16 bits)
     u1: blk_mem_gen_video_ram port map (
-        clka => i_clk_52m,
+        clka => i_clk,
         wea(0) => i_pixel_write,
         addra => std_logic_vector(video_mem_addr),
         dina => video_mem_data,
 
-        clkb => not i_clk_52m, -- Read side 52 MHz
+        clkb => not i_clk, -- Read side 52 MHz
         addrb => video_dpram_vga_core_addr,
         doutb => video_mem_vga_core_data
     );
         
-    process(i_clk_52m)
+    process(i_clk)
     begin
         -- Reset ou top trame venant du core
         if ((i_reset = '1') or (i_vsyncn = '0')) then
             video_mem_addr <= (others => '0');
-        elsif rising_edge(i_clk_52m) then
+        elsif rising_edge(i_clk) then
             -- Detection front montant i_pixel_write. A remplacer par quelque chose d'autre basé sur i_clk_52m ?
             pixel_wr_0 <= i_pixel_write;
             if ((pixel_wr_0 = '0') and (i_pixel_write = '1')) then
@@ -358,16 +358,16 @@ begin
     -- Ligne 4: 0x120 ... 0x1AF  ([0x900..0xB3F] / 4  - vga_frame_offset (0x120))
     -- Ligne 4: 0x120 ... 0x1AF  ([0xB40..0xD7F] / 4  - vga_frame_offset (0x1B0))
     -- ...
-	process(i_clk_52m, i_reset)
+	process(i_clk, i_reset)
     begin
-        if (i_reset = '1' or vga_adr_o = X"00000000") then
+        if (i_reset = '1' or vga_adr = X"00000000") then
             vga_frame_offset <= (others => '0');
             vga_addr_even_line_start <= (others => '0');
             vga_odd_line <= '0';
-        elsif rising_edge(i_clk_52m) then
-            if unsigned("00" & vga_adr_o(31 downto 2)) - vga_addr_even_line_start = DKONG_LINE_RESOLUTION then
+        elsif rising_edge(i_clk) then
+            if unsigned("00" & vga_adr(31 downto 2)) - vga_addr_even_line_start = DKONG_LINE_RESOLUTION then
                 vga_odd_line <= not vga_odd_line;
-                vga_addr_even_line_start <= unsigned("00" & vga_adr_o(31 downto 2));
+                vga_addr_even_line_start <= unsigned("00" & vga_adr(31 downto 2));
                 if vga_odd_line = '0' then
                     vga_frame_offset <= vga_frame_offset + DKONG_LINE_RESOLUTION;
                 end if;
@@ -375,10 +375,10 @@ begin
         end if;
     end process;
     
-    video_dpram_vga_core_addr_l <= std_logic_vector(unsigned("00" & vga_adr_o(31 downto 2)) - vga_frame_offset);
+    video_dpram_vga_core_addr_l <= std_logic_vector(unsigned("00" & vga_adr(31 downto 2)) - vga_frame_offset);
     video_dpram_vga_core_addr <= video_dpram_vga_core_addr_l(14 downto 0);
     -- La DPRAM retourne 2 pixels sur 8 bits qui sont dupliqués et retournes au controlleur VGA.
-    vga_dat_i <=  video_mem_vga_core_data(7 downto 0) & video_mem_vga_core_data(7 downto 0) & video_mem_vga_core_data(15 downto 8) & video_mem_vga_core_data(15 downto 8);
+    vga_dat <=  video_mem_vga_core_data(7 downto 0) & video_mem_vga_core_data(7 downto 0) & video_mem_vga_core_data(15 downto 8) & video_mem_vga_core_data(15 downto 8);
 
     o_vga_control_init_done <= vga_controller_ok;
 
@@ -387,21 +387,21 @@ begin
 	--
 	-- Contrôleur VGA s'interfaçant avec le U3 (vid_mem)
 	u2: vga_enh_top port map (
-        wb_clk_i => i_clk_52m, wb_rst_i => '0', rst_i => not i_reset,
+        wb_clk_i => i_clk, wb_rst_i => '0', rst_i => not i_reset,
         
         wbs_adr_i => s_adr_o(11 downto 0), wbs_dat_i => s_dat_o, 
         wbs_sel_i => s_sel_o, wbs_we_i => s_we_o, wbs_stb_i => s_stb_vga_o,
 		wbs_cyc_i => s_cyc_o, wbs_ack_o => s_ack_i,
 		
-		wbm_adr_o => vga_adr_o, wbm_dat_i => vga_dat_i, wbm_stb_o => vga_stb_o,
-		wbm_cyc_o => vga_cyc_o, wbm_ack_i => vga_ack_i, wbm_err_i => '0',
+		wbm_adr_o => vga_adr, wbm_dat_i => vga_dat, wbm_stb_o => vga_stb,
+		wbm_cyc_o => vga_cyc, wbm_ack_i => vga_ack, wbm_err_i => '0',
 		
 		clk_p_i => i_vga_clk, hsync_pad_o => hsync_vga, vsync_pad_o => vsync_vga, csync_pad_o => o_csync, blank_pad_o => o_blank,
 		r_pad_o => r_vgac, g_pad_o => g_vgac, b_pad_o => b_vgac	
 	);    
     
     -- Acquittement immédiat
-    vga_ack_i <= '1' when (vga_cyc_o = '1') and (vga_stb_o = '1') else '0'; 
+    vga_ack <= '1' when (vga_cyc = '1') and (vga_stb = '1') else '0'; 
  
     o_hsync <= hsync_vga;
     o_vsync <= vsync_vga;

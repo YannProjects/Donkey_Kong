@@ -18,10 +18,10 @@
 -- 
 ----------------------------------------------------------------------------------
 
-
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use ieee.numeric_std.all;
+
 
 -- Uncomment the following library declaration if instantiating
 -- any Xilinx leaf cells in this code.
@@ -117,9 +117,6 @@ signal Q_3_4_E, vfc : unsigned(7 downto 0);
 signal flip_1, flip_2, flip_3, flip_4, flip_5 : std_logic;
 signal Q0_8CD, Q15_8CD, Q0_8EF, Q15_8EF : std_logic;
 signal U8CD_reg, U8CD_sprite_data, U8EF_reg, U8EF_sprite_data : std_logic_vector(15 downto 0);
-signal h_256_0, h_256n_0, h_5_0, v_4_0_U4B : std_logic;
-signal clk_color_latch_0_U2M, clk_0_u3E4E, g_3K_0_U3K, O0B_5F_0_U8H : std_logic;
-signal O0B_5F_0_U8N, scanline_wr_0_U5KL, h_2_0_U2K_2, h_5_1_0_U2K, clk_4KL_0_U4KL, O2B_5F_0_U6J : std_logic;
 signal h_256n, h_128n : std_logic;
 
 -- Debug
@@ -161,15 +158,18 @@ begin
     -- U1S
     U2PR_tile_id_in <= i_vid_data_in when i_vram_wrn = '0' else (others => '0');
     
-    p_video_data_sel : process(i_objrdn, i_vram_rdn, U2PR_tile_id_out, dout_6PR)
-    begin
-        o_vid_data_out <= (others => '0');
-        if (i_objrdn = '0') then
-            o_vid_data_out <= dout_6PR;
-        elsif (i_vram_rdn = '0') then
-            o_vid_data_out <= U2PR_tile_id_out;
-        end if;
-    end process;
+    -- p_video_data_sel : process(i_objrdn, i_vram_rdn, U2PR_tile_id_out, dout_6PR)
+    -- begin
+    --     o_vid_data_out <= (others => '0');
+    --     if (i_objrdn = '0') then
+    --         o_vid_data_out <= dout_6PR;
+    --     elsif (i_vram_rdn = '0') then
+    --         o_vid_data_out <= U2PR_tile_id_out;
+    --     end if;
+    -- end process;
+    -- dout_6PR quand i_objrdn. Sinon U2PR_tile_id_out qui est normalement lu si i_vram_rdn = '0'
+    -- Pour simplifier on retourne U2PR_tile_id_out par defaut.
+    o_vid_data_out <= dout_6PR when i_objrdn = '0' else U2PR_tile_id_out;
     
     U2PR : entity work.blk_mem_gen_2PR port map (clka => i_clk, wea(0) => not(i_vram_wrn), 
                                 addra => addr_ram_tiles, dina => U2PR_tile_id_in, douta => U2PR_tile_id_out, ena => not addr_tiles_ram_cs_l);

@@ -207,9 +207,8 @@ begin
   -- Controlleur VGA
   u_vga_ctrl : entity work.vga_control_top
   port map ( 
-     -- i_reset => not i_rst_sys_n,
      i_reset => not pll_locked,
-     i_clk_52m => clk_dkong,
+     i_clk => clk_dkong,
      i_vga_clk => vga_clock,
      i_pixel_write => pixel_write,
     
@@ -251,7 +250,7 @@ begin
       core_to_cpu_en_l <= '0' when (i_cpu_rd_l_core = '0') and (i_cpu_rfrsh_l_core = '1') and (i_cpu_mreq_l_core = '0') else '1';
       cpu_to_core_en_l <= '0' when (i_cpu_wr_l_core = '0') and (i_cpu_rfrsh_l_core = '1') and (i_cpu_mreq_l_core = '0') else '1';
       
-      core_to_cpu_data <= uart_reg when uart_cs_l = '0' else rom_data when rom_cs_l = '0' else core_data;
+      core_to_cpu_data <= rom_data when rom_cs_l = '0' else core_data;
     
       -- Pas de selection de la memoire Flash en mode debug, c'est la ROM de test qui est utilisee dans ce cas
       o_rom_cs_l <= '1';
@@ -276,7 +275,7 @@ begin
       --    elsif rising_edge(uart_clk) then
       --        cpu_mreq_0 <= i_cpu_mreq_l_core;
       --        if (wb_bus_state = wb_idle) then
-                  -- Declenchement d'un cycle WB sur validation MREQn
+               -- Declenchement d'un cycle WB sur validation MREQn
       --             if (uart_cs_l = '0' and cpu_mreq_0 = '1' and i_cpu_mreq_l_core = '0' and i_cpu_rfrsh_l_core = '1') then
       --                 wb_bus_state <= wb_wait_for_rd_or_wr_cycle;
       --             end if;
@@ -296,8 +295,8 @@ begin
       --                 uart_wb_we <= '0';
       --                 uart_wb_stb <= '0';
       --                 uart_wb_cyc <= '0';
-                     -- Memorise le registre de l'UART quand wb_ack = 1 pour la fin du cycle
-                     -- du Z80 qui arrive plus tard 
+                  -- Memorise le registre de l'UART quand wb_ack = 1 pour la fin du cycle
+                  -- du Z80 qui arrive plus tard 
       --                uart_reg <= uart_data;
       --                wb_bus_state <= wb_idle;
       --            end if;
@@ -332,7 +331,7 @@ begin
       --     dsr_pad_i => '0',
       --     ri_pad_i => '0',
       --     dcd_pad_i => '0'
-      --  );
+      -- );
        
       o_uart_tx <= '1';
 

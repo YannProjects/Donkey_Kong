@@ -87,17 +87,16 @@ end dkong_core_top;
 
 architecture Behavioral of dkong_core_top is
 
-constant RESET_DURATION : integer := 600000; -- 6 MHz * 0.1 s = 600 000 cycles
--- constant RESET_DURATION : integer := 60000;
+-- constant RESET_DURATION : integer := 600000; -- 6 MHz * 0.1 s = 600 000 cycles
+constant RESET_DURATION : integer := 60000;
 
 signal cnt_reset : integer;
-signal v_blkn, v_blkn_0, vf_2 : std_logic;
+signal v_blkn, vf_2 : std_logic;
 signal vram_busy_l, vram_wr_l, vram_rd_l, psl_2, obj_wr_l, obj_rd_l, obj_rq_l : std_logic;
 signal video_data_out, ram_data_in_34_A, ram_data_in_34_B, ram_data_in_34_C : std_logic_vector(7 downto 0);
-signal ram_data_out_34_A, ram_data_out_34_B, ram_data_out_34_C, data_5A, data_5B, data_5C, data_5E : std_logic_vector(7 downto 0);
-signal rom_5E_sel_l, rom_5A_sel_l, rom_5B_sel_l, rom_5C_sel_l, ram_sel_l, sprite_vid_ram_sel_l : std_logic;
-signal ram_3C4C_sel_l, ram_3B4B_sel_l, ram_3A4A_sel_l, dma_cs_l, vram_wait_l : std_logic;
-signal nmi_int_en_l, cmpblk2n, cpu_wait, dma_aen, drq0, dma_adstb : std_logic;
+signal ram_data_out_34_A, ram_data_out_34_B, ram_data_out_34_C  : std_logic_vector(7 downto 0);
+signal dma_cs_l : std_logic;
+signal cmpblk2n, cpu_wait, dma_aen, drq0, dma_adstb : std_logic;
 signal dma_iord_l, dma_iowr_l, dma_mem_read_l, dma_mem_write_l, final_mreq_l, dma_busrq : std_logic;
 signal dma_ack : std_logic_vector(3 downto 0);
 signal dma_master_addr, dma_data_in, dma_data_out, dma_addr_high, dma_data : std_logic_vector(7 downto 0);
@@ -113,7 +112,7 @@ signal in1_cs, in2_cs, in3_cs, dipsw_cs, internal_rst_l, vram_req_l : std_logic;
 signal in1 : r_IN1;
 signal in2 : r_IN2;
 signal in3 : r_IN3;
-signal Phi34, Phi34n, g_3K, s2, hsyncn, dma_clock, obj_vram_wr_enable : std_logic;
+signal Phi34, Phi34n, g_3K, s2, hsyncn, obj_vram_wr_enable : std_logic;
 signal v : unsigned(7 downto 0);
 signal h : unsigned(9 downto 0);
 
@@ -183,7 +182,8 @@ begin
     -- DMA i8257
     u_DMA : entity work.i8257
     port map (
-        i_clk => not h(1),
+        i_clk => Phi34n,
+        i_h_0_1 => h(1 downto 0),
         i_reset => i_core_reset,
         i_ready => cpu_wait,
         o_aen => dma_aen,
@@ -261,27 +261,28 @@ begin
     
     o_core_blank <= not cmpblk2n;
     
-    u_Dkong_Audio : entity work.dkong_audio
-     port map (
-        i_rst_l => not i_core_reset,
-        i_sound_cpu_clk => i_clk_audio_6M,
+    -- u_Dkong_Audio : entity work.dkong_audio
+    --  port map (
+    --     i_rst_l => not i_core_reset,
+    --     i_sound_cpu_clk => i_clk_audio_6M,
     
         -- CPU son
-        i_audio_effects => (walk => Q_6H(0), jump => Q_6H(1), boom => Q_6H(2), 
-                            spring => not Q_6H(3), gorilla_fall => not Q_6H(4), barrel => not Q_6H(5)),
+    --     i_audio_effects => (walk => Q_6H(0), jump => Q_6H(1), boom => Q_6H(2), 
+    --                         spring => not Q_6H(3), gorilla_fall => not Q_6H(4), barrel => not Q_6H(5)),
         
-        i_sound_int_n => not play_death_music,  -- An external interrupt will play the death music.      
-        i_sound_data => sound_data,
+    --     i_sound_int_n => not play_death_music,  -- An external interrupt will play the death music.      
+    --     i_sound_data => sound_data,
     
-        i_2_VF => vf_2,
+    --     i_2_VF => vf_2,
         
-        o_sound_boom_1 => o_boom_1,
-        o_sound_boom_2 => o_boom_2,
-        o_dac_vref => o_dac_vref,
-        o_io_sound => pb4,
-        o_sound_walk => o_walk,
-        o_sound_jump => o_jump
-     );
+    --     o_sound_boom_1 => o_boom_1,
+    --     o_sound_boom_2 => o_boom_2,
+    --     o_dac_vref => o_dac_vref,
+    --     o_io_sound => pb4,
+    --     o_sound_walk => o_walk,
+    --     o_sound_jump => o_jump
+    --  );
+    pb4 <= '1';
     
     -- Decodage adresses
     u_DKong_Adec : entity work.dkong_adec
@@ -394,10 +395,10 @@ begin
     final_wr_l <= i_cpu_wr_l when dma_aen = '0' else dma_iowr_l;
 
     final_addr <= (dma_addr_high & dma_master_addr) when dma_aen = '1' else i_cpu_a;    
-	final_bus_data <= ram_data_out_34_A when ((ram_34A_cs_l = '0') and (final_wr_l = '1')) else
-	                  ram_data_out_34_B when ((ram_34B_cs_l = '0') and (final_wr_l = '1')) else
-	                  ram_data_out_34_C when ((ram_34C_cs_l = '0') and (final_wr_l = '1')) else
-                      video_data_out when ((vid_board_mux_en_l = '0') and (final_rd_l = '0')) else
+    final_bus_data <= ram_data_out_34_A when ((ram_34A_cs_l = '0') and (final_wr_l = '1')) else
+                      ram_data_out_34_B when ((ram_34B_cs_l = '0') and (final_wr_l = '1')) else
+                      ram_data_out_34_C when ((ram_34C_cs_l = '0') and (final_wr_l = '1')) else
+                      video_data_out when ((obj_rd_l = '0') or (vram_rd_l = '0')) else
                       dma_data_latch when (dma_ack(1) or dma_mem_read_l) = '0' else
                       dma_data_out when ((dma_cs_l = '0') and (final_rd_l = '0')) else
                        -- Les LS240 2P, 4P, 3P, 4N inverses les bits

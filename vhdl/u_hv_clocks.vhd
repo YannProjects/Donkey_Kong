@@ -46,9 +46,9 @@ architecture Behavioral of hv_clocks_wait_nmi is
 
     signal h_cnt : unsigned(11 downto 0);
     signal cnt_hsync, cnt_vsync : unsigned(7 downto 0);
-    signal h_256, vblk : std_logic;
+    signal h_256, vblk, vblk_0 : std_logic;
     signal v : unsigned(8 downto 0);
-    -- signal v_clk : std_logic;
+    signal v_clk, v_clk_0, v_4_0 : std_logic;
     signal Q1n_7F, Q2_7F : std_logic;
         
     -- VSYNC_P = Nombre de pulse Phi34 entre le début de VBLK et le début du pulse signal VSYNCn
@@ -116,31 +116,30 @@ begin
     o_vsyncn <= '0' when (cnt_vsync < VSYNC_W) else '1';
         
     -- U4A, U4B, U5D, U6D
-    -- Ne sert plus à rien a priori. Etait utilise dans U56D mais remplacé avec un if sur h_cnt
-    -- pour éviter d'ajouter une horloge.   
-    -- U4A : process(i_Phi34n, h_256)
-    -- begin
-    --     if (h_256 = '0') then
-    --         v_clk <= '0';
-    --     elsif rising_edge(i_Phi34n) then
+    U4A : process(i_Phi34n, h_256)
+    begin
+        if (h_256 = '0') then
+            v_clk <= '0';
+        elsif rising_edge(i_Phi34n) then
             -- Front montant h(5)
-    --         if (h_cnt(5 downto 0) = "011111") then
-    --           if (not((not(h_cnt(7))) and h_cnt(6))) = '1' then
-    --               v_clk <= '0';
-    --           else
-    --               v_clk <= '1';
-    --           end if;
-    --        end if;
-    --    end if;
-    -- end process;
+            if (h_cnt(5 downto 0) = "011111") then
+              if (not((not(h_cnt(7))) and h_cnt(6))) = '1' then
+                  v_clk <= '0';
+              else
+                  v_clk <= '1';
+              end if;
+           end if;
+       end if;
+    end process;
    
     U56D : process(i_rst, i_Phi34n)
     begin
         if (i_rst = '1') then
            v <= (others => '0');
         elsif rising_edge(i_Phi34n) then
-           -- Front montant v_clk si h_cnt = 0xe5f
-           if h_cnt = X"E5F" then
+           -- Detection front montant v_clk
+           v_clk_0 <= v_clk;
+           if (v_clk_0 = '0' and v_clk = '1') then           
                if (v = "1" & X"FF") then
                    v <= "011111000";
                else 
@@ -158,8 +157,9 @@ begin
         if (i_rst = '1') then
             vblk <= '1';
         elsif rising_edge(i_Phi34n) then
-            -- Front montant v(4). v change sur v_clk qui change lui-même quand h_cnt = X"E5F"...
-            if (h_cnt = X"E5F") and v(3 downto 0) = "1111" then
+            -- Detection front montant v(4)
+            v_4_0 <= v(4);
+            if (v_4_0 = '0' and v(4) = '1') then
                 if (v(7 downto 5) = "111") then
                     vblk <='1';
                 else
@@ -176,10 +176,11 @@ begin
         if (i_clear_nmi_l = '0') then
             o_cpu_nmi_l <= '1';
         elsif rising_edge(i_Phi34n) then
-            -- Front montant vblk = front descendant o_vblkn
-            if (h_cnt = X"E5F") and (v = X"1EF") then
-                o_cpu_nmi_l <= '0';
-            end if;
+            -- Detection front montant vblk = front descendant o_vblkn
+           vblk_0 <= vblk;
+           if (vblk_0 = '0' and vblk  = '1') then
+               o_cpu_nmi_l <= '0';
+           end if;
         end if;
     end process;    
     
