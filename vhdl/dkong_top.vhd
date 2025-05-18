@@ -47,7 +47,9 @@ port (
     o_core_vsync_l        : out std_logic;
     
     -- Entrees
-    i_config_reg          : in std_logic_vector(7 downto 0);
+    i_config_dipsw        : in std_logic_vector(7 downto 0);
+    i_ins1                : in std_logic_vector(7 downto 0);
+    i_ins2                : in std_logic_vector(7 downto 0);
     o_in1_cs_l            : out std_logic;
     o_in2_cs_l            : out std_logic;
     o_in3_cs_l            : out std_logic;
@@ -121,7 +123,7 @@ signal h : unsigned(9 downto 0);
 
 -- Debug
 -- attribute MARK_DEBUG : string;
--- attribute MARK_DEBUG of final_addr, final_bus_data, final_mreq_l, final_rd_l, final_rfsh_l, final_wr_l : signal is "true"; 
+-- attribute MARK_DEBUG of final_addr, final_bus_data, final_mreq_l, final_rd_l, final_rfsh_l, final_wr_l, i_cpu_m1_l : signal is "true";
 
 begin
 
@@ -198,7 +200,7 @@ begin
         i_iowsn => i_cpu_wr_l,
         o_iormn => dma_iord_l,
         o_iowmn => dma_iowr_l,
-        i_Din => final_bus_data,
+        i_Din => i_cpu_do,
         o_Dout => dma_data_out,
         i_csn => dma_cs_l,
         o_memrn => dma_mem_read_l,
@@ -222,7 +224,7 @@ begin
 	begin
         if rising_edge(Phi34n) then
              if ((not dma_ack(0)) and (not dma_mem_write_l)) = '1' then
-                 dma_data_latch <= final_bus_data;
+                 dma_data_latch <= ram_data_out_34_A;
              end if;
         end if;
 	end process;
@@ -381,9 +383,9 @@ begin
 	end process;
     
     -- RAMs 3A, 4A, 3B, 4B, 3C, 4C
-    u_ram_34_A : entity work.blk_mem_gen_34A port map (clka => i_clk, wea(0) => not (final_wr_l or ram_34A_cs_l), addra => final_addr(9 downto 0), dina => final_bus_data, douta => ram_data_out_34_A);
-    u_ram_34_B : entity work.blk_mem_gen_34B port map (clka => i_clk, wea(0) => not (final_wr_l or ram_34B_cs_l), addra => final_addr(9 downto 0), dina => final_bus_data, douta => ram_data_out_34_B);
-    u_ram_34_C : entity work.blk_mem_gen_34C port map (clka => i_clk, wea(0) => not (final_wr_l or ram_34C_cs_l), addra => final_addr(9 downto 0), dina => final_bus_data, douta => ram_data_out_34_C);
+    u_ram_34_A : entity work.blk_mem_gen_34A port map (clka => i_clk, wea(0) => not (final_wr_l or ram_34A_cs_l), addra => final_addr(9 downto 0), dina => i_cpu_do, douta => ram_data_out_34_A);
+    u_ram_34_B : entity work.blk_mem_gen_34B port map (clka => i_clk, wea(0) => not (final_wr_l or ram_34B_cs_l), addra => final_addr(9 downto 0), dina => i_cpu_do, douta => ram_data_out_34_B);
+    u_ram_34_C : entity work.blk_mem_gen_34C port map (clka => i_clk, wea(0) => not (final_wr_l or ram_34C_cs_l), addra => final_addr(9 downto 0), dina => i_cpu_do, douta => ram_data_out_34_C);
     
     -- Data/Addresses CPU, RAM,...
     final_mreq_l <= i_cpu_mreq_l when dma_aen = '0' else (dma_ack(1) and dma_ack(0));
@@ -393,35 +395,35 @@ begin
     final_rd_l <= i_cpu_rd_l when dma_aen = '0' else dma_iord_l;
     final_wr_l <= i_cpu_wr_l when dma_aen = '0' else dma_iowr_l;
 
-    final_addr <= (dma_addr_high & dma_master_addr) when dma_aen = '1' else i_cpu_a;    
-    final_bus_data <= ram_data_out_34_A when ((ram_34A_cs_l = '0') and (final_wr_l = '1')) else
-                      ram_data_out_34_B when ((ram_34B_cs_l = '0') and (final_wr_l = '1')) else
-                      ram_data_out_34_C when ((ram_34C_cs_l = '0') and (final_wr_l = '1')) else
+    final_addr <= (dma_addr_high & dma_master_addr) when dma_aen = '1' else i_cpu_a;
+    final_bus_data <= ram_data_out_34_A when ram_34A_cs_l = '0' else
+                      ram_data_out_34_B when ram_34B_cs_l = '0' else
+                      ram_data_out_34_C when ram_34C_cs_l = '0' else
                       video_data_out when ((obj_rd_l = '0') or (vram_rd_l = '0')) else
                       dma_data_latch when (dma_ack(1) or dma_mem_read_l) = '0' else
                       dma_data_out when ((dma_cs_l = '0') and (final_rd_l = '0')) else
-                       -- Les LS240 2P, 4P, 3P, 4N inverses les bits
+                      -- Les LS240 2P, 4P, 3P, 4N inverses les bits
                       ("000" & not(in1.jump) & not(in1.down) & not(in1.up) & not(in1.left) & not(in1.right) ) when in1_cs = '0' else
                       ("000" & not(in2.jump) & not(in2.down) & not(in2.up) & not(in2.left) & not(in2.right) ) when in2_cs = '0' else 
                       (not(in3.coin) & pb4 & "00" & not(in3.two_players) & not(in3.one_player) & "00") when in3_cs = '0' else
-                      (not i_config_reg) when dipsw_cs = '0' else
+                      (not i_config_dipsw) when dipsw_cs = '0' else
                       i_cpu_do;
 
-    in1.right <= i_config_reg(0);
-    in1.left <= i_config_reg(1);
-    in1.up <= i_config_reg(2);
-    in1.down <= i_config_reg(3);
-    in1.jump <= i_config_reg(5);
+    in1.right <= '1';
+    in1.left <= '1';
+    in1.up <= '1';
+    in1.down <= '1';
+    in1.jump <= '1';
     
-    in2.right <= i_config_reg(0);
-    in2.left <= i_config_reg(1);
-    in2.up <= i_config_reg(2);
-    in2.down <= i_config_reg(3);
-    in2.jump <= i_config_reg(5);
+    in2.right <= '1';
+    in2.left <= '1';
+    in2.up <= '1';
+    in2.down <= '1';
+    in2.jump <= '1';
 
-    in3.coin <= i_config_reg(7);
-    in3.two_players <= i_config_reg(3);
-    in3.one_player <= i_config_reg(2);
+    in3.coin <= '1';
+    in3.two_players <= '1';
+    in3.one_player <= '1';
     
     o_in1_cs_l <= in1_cs;
     o_in2_cs_l <= in2_cs;

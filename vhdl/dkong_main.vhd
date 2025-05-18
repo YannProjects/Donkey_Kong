@@ -65,10 +65,12 @@ entity DKong_Main is
     o_vga                 : out r_Core_to_VGA;
 
     -- Entrees joystick, coin,...
-    -- i_config_reg : in std_logic_vector(7 downto 0);
-    -- o_in1_l : out std_logic;
-    -- o_in2_l : out std_logic;
-    -- o_in3_l : out std_logic;
+    -- i_config_dipsw : in std_logic_vector(7 downto 0);
+    -- i_in1_joystick_buttons : in std_logic_vector(7 downto 0);
+    -- i_in2_joystick_buttons : in std_logic_vector(7 downto 0);
+    -- o_in1_cs_l : out std_logic;
+    -- o_in2_cs_l : out std_logic;
+    -- o_in3_cs_l : out std_logic;
     -- o_dipsw_l : out std_logic;
 
     -- Son
@@ -110,8 +112,12 @@ signal vga_control_init_done, clk_dkong : std_logic;
 signal video_r, video_g, vga_r, vga_g, vga_b : std_logic_vector(2 downto 0);
 signal video_b : std_logic_vector(1 downto 0);
 signal core_vsync_l, core_blank, pixel_write, clk_audio, rom_cs_l : std_logic;
-signal config_reg_temp : std_logic_vector(7 downto 0);
+signal config_dipsw_temp, in1_joystick_buttons_temp, in2_joystick_buttons_temp : std_logic_vector(7 downto 0);
 signal o_dipsw_l : std_logic;
+
+-- attribute MARK_DEBUG : string;
+-- attribute MARK_DEBUG of i_cpu_a_core, io_cpu_data_bidir, i_cpu_mreq_l_core, i_cpu_rd_l_core, i_cpu_wr_l_core : signal is "true";
+-- attribute MARK_DEBUG of i_cpu_busack_l, o_cpu_busrq_l, i_cpu_rfrsh_l_core, o_cpu_waitn, o_cpu_nmi_l : signal is "true"; 
 
 begin
 
@@ -145,8 +151,9 @@ begin
     -- o_in2_cs_l => o_in2_l,
     -- o_in3_cs_l =>  o_in3_l,
     o_dipsw_cs_l => o_dipsw_l,
-    -- i_config_reg => i_config_reg,
-    i_config_reg => config_reg_temp,
+    i_config_dipsw => config_dipsw_temp,
+    i_ins1 => in1_joystick_buttons_temp,
+    i_ins2 => in2_joystick_buttons_temp,
 
     -- Video
     o_core_red => video_r,
@@ -194,7 +201,9 @@ begin
  --   bit 2 : / 00 = 7000  01 = 10000  10 = 15000  11 = 20000
  --   bit 1 : \ 00 = 3 lives  01 = 4 lives
  --   bit 0 : / 10 = 5 lives  11 = 6 lives
-  config_reg_temp <= "10000100" when o_dipsw_l = '0' else (others => '1');
+  config_dipsw_temp <= "10000100" when o_dipsw_l = '0' else (others => '1');
+  in1_joystick_buttons_temp <= (others => '1');
+  in2_joystick_buttons_temp <= (others => '1');
 
   o_buffer_enable_n <= core_to_cpu_en_l and cpu_to_core_en_l;
   o_buffer_dir <= '1' when cpu_to_core_en_l = '0' else '0';
@@ -250,7 +259,7 @@ begin
       core_to_cpu_en_l <= '0' when (i_cpu_rd_l_core = '0') and (i_cpu_rfrsh_l_core = '1') and (i_cpu_mreq_l_core = '0') else '1';
       cpu_to_core_en_l <= '0' when (i_cpu_wr_l_core = '0') and (i_cpu_rfrsh_l_core = '1') and (i_cpu_mreq_l_core = '0') else '1';
       
-      core_to_cpu_data <= rom_data when rom_cs_l = '0' else core_data;
+      core_to_cpu_data <= rom_data when (rom_cs_l = '0' and i_cpu_rd_l_core = '0') else core_data;
     
       -- Pas de selection de la memoire Flash en mode debug, c'est la ROM de test qui est utilisee dans ce cas
       o_rom_cs_l <= '1';

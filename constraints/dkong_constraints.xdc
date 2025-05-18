@@ -103,9 +103,6 @@ set_property PACKAGE_PIN G1 [get_ports i_cpu_rfrsh_l_core]
 set_property IOSTANDARD LVCMOS33 [get_ports o_cpu_waitn]
 set_property PACKAGE_PIN B3 [get_ports o_cpu_waitn]
 
-
-
-
 set_property PACKAGE_PIN N1 [get_ports {o_vga[b_vga][2]}]
 set_property PACKAGE_PIN R2 [get_ports {o_vga[b_vga][1]}]
 set_property PACKAGE_PIN T1 [get_ports {o_vga[b_vga][0]}]
@@ -201,4 +198,14 @@ create_generated_clock -name PHI34N -source [get_pins clk_gen_0/o_clk_dkong_main
 #set_false_path -from [get_clocks -of_objects [get_pins clk_gen_0/inst/mmcm_adv_inst/CLKOUT0]] -to [get_clocks -of_objects [get_pins clk_gen_0/inst/mmcm_adv_inst/CLKOUT2]]
 
 set_clock_groups -name SYSTEM_CLOCKS -logically_exclusive -group [get_clocks [list PHI34N [get_clocks -of_objects [get_pins clk_gen_0/inst/mmcm_adv_inst/CLKOUT0]]]] -group [get_clocks -of_objects [get_pins clk_gen_0/inst/mmcm_adv_inst/CLKOUT2]] -group [get_clocks -of_objects [get_pins clk_gen_0/inst/mmcm_adv_inst/CLKOUT1]]
+
+
+
+
+
+
+
+
+connect_debug_port u_ila_0/probe4 [get_nets [list i_cpu_m1_l_core]]
+
 
