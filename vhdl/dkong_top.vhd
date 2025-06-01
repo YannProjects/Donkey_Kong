@@ -89,8 +89,8 @@ end dkong_core_top;
 
 architecture Behavioral of dkong_core_top is
 
--- constant RESET_DURATION : integer := 600000; -- 6 MHz * 0.1 s = 600 000 cycles
-constant RESET_DURATION : integer := 60000;
+constant RESET_DURATION : integer := 600000; -- 6 MHz * 0.1 s = 600 000 cycles
+-- constant RESET_DURATION : integer := 60000;
 
 signal cnt_reset : integer;
 signal v_blkn, vf_2 : std_logic;
@@ -119,7 +119,7 @@ signal v : unsigned(7 downto 0);
 signal h : unsigned(9 downto 0);
 
 -- attribute dont_touch : string;
--- attribute dont_touch of Phi34n : signal is "true";
+-- attribute dont_touch of i_cpu_m1_l : signal is "true";
 
 -- Debug
 -- attribute MARK_DEBUG : string;
@@ -288,7 +288,6 @@ begin
     -- Decodage adresses
     u_DKong_Adec : entity work.dkong_adec
     port map (
-        i_rst => i_core_reset,
         i_clk => Phi34n,
         i_addr => final_addr,
         i_vblk_l => v_blkn,
@@ -383,9 +382,9 @@ begin
 	end process;
     
     -- RAMs 3A, 4A, 3B, 4B, 3C, 4C
-    u_ram_34_A : entity work.blk_mem_gen_34A port map (clka => i_clk, wea(0) => not (final_wr_l or ram_34A_cs_l), addra => final_addr(9 downto 0), dina => i_cpu_do, douta => ram_data_out_34_A);
-    u_ram_34_B : entity work.blk_mem_gen_34B port map (clka => i_clk, wea(0) => not (final_wr_l or ram_34B_cs_l), addra => final_addr(9 downto 0), dina => i_cpu_do, douta => ram_data_out_34_B);
-    u_ram_34_C : entity work.blk_mem_gen_34C port map (clka => i_clk, wea(0) => not (final_wr_l or ram_34C_cs_l), addra => final_addr(9 downto 0), dina => i_cpu_do, douta => ram_data_out_34_C);
+    u_ram_34_A : entity work.dist_mem_gen_34A port map (clk => i_clk, we => not (final_wr_l or ram_34A_cs_l), a => final_addr(9 downto 0), d => i_cpu_do, spo => ram_data_out_34_A);
+    u_ram_34_B : entity work.dist_mem_gen_34B port map (clk => i_clk, we => not (final_wr_l or ram_34B_cs_l), a => final_addr(9 downto 0), d => i_cpu_do, spo => ram_data_out_34_B);
+    u_ram_34_C : entity work.dist_mem_gen_34C port map (clk => i_clk, we => not (final_wr_l or ram_34C_cs_l), a => final_addr(9 downto 0), d => i_cpu_do, spo => ram_data_out_34_C);
     
     -- Data/Addresses CPU, RAM,...
     final_mreq_l <= i_cpu_mreq_l when dma_aen = '0' else (dma_ack(1) and dma_ack(0));
