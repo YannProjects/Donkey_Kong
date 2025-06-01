@@ -152,7 +152,7 @@ begin
                         (h_128 xor flip_1) & (i_h(7) xor flip_1) &
                         (i_h(6) xor flip_1) & (i_h(5) xor flip_1) & (i_h(4) xor flip_1);
                         
-    addr_tiles_ram_cs_l <= (i_vram_wrn and i_vram_rdn) when U234S_S = '0' else '0';
+    -- addr_tiles_ram_cs_l <= (i_vram_wrn and i_vram_rdn) when U234S_S = '0' else '0';
     char_tile_reload <= '1' when U234S_S = '0' else '0';
     
     -- U1S
@@ -161,8 +161,10 @@ begin
     -- Pour simplifier on retourne U2PR_tile_id_out par defaut.
     o_vid_data_out <= dout_6PR when i_objrdn = '0' else U2PR_tile_id_out;
     
-    U2PR : entity work.blk_mem_gen_2PR port map (clka => i_clk, wea(0) => not(i_vram_wrn), 
-                                addra => addr_ram_tiles, dina => U2PR_tile_id_in, douta => U2PR_tile_id_out, ena => not addr_tiles_ram_cs_l);
+    -- U2PR : entity work.blk_mem_gen_2PR port map (clka => i_clk, wea(0) => not(i_vram_wrn), 
+    --                             addra => addr_ram_tiles, dina => U2PR_tile_id_in, douta => U2PR_tile_id_out, ena => not addr_tiles_ram_cs_l);
+    U2PR : entity work.dist_mem_gen_2PR port map (clk => i_clk, we => not(i_vram_wrn), 
+                                a => addr_ram_tiles, d => U2PR_tile_id_in, spo => U2PR_tile_id_out);
 
     U2N : entity work.dist_mem_gen_2N port map (a => addr_ram_tiles(9 downto 7)& addr_ram_tiles(4 downto 0), spo => data_2N);
     
@@ -260,8 +262,8 @@ begin
          xor (Q4_6K & Q4_6K & Q4_6K & Q4_6K & Q4_6K & Q4_6K & Q4_6K & Q4_6K);
         
     -- 2E, 2H, 3K
-    U2E : entity work.blk_mem_gen_2E port map (clka => i_clk, wea(0) => mb7074_wr, addra => mb7074_addr , dina => dc(5 downto 3) & '0', douta => mb7074_do_2E);
-    U2H : entity work.blk_mem_gen_2H port map (clka => i_clk, wea(0) => mb7074_wr, addra => mb7074_addr , dina => dc(2 downto 0) & '0', douta => mb7074_do_2H);
+    U2E : entity work.dist_mem_gen_MB7074_2E port map (clk => i_clk, we => mb7074_wr, a => mb7074_addr , d => dc(5 downto 3) & '0', spo => mb7074_do_2E);
+    U2H : entity work.dist_mem_gen_MB7074_2H port map (clk => i_clk, we => mb7074_wr, a => mb7074_addr , d => dc(2 downto 0) & '0', spo => mb7074_do_2H);
     
     U3K : process (i_clk)
     begin
@@ -451,7 +453,7 @@ begin
                                    
     -- 6P, 6R
     u6pr_ram_wr <= not i_objwrn;
-    U6PR : entity work.blk_mem_gen_6PR port map(clka => i_clk, ena => not csn_6PR, wea(0) => u6pr_ram_wr, addra => addr_6PR, dina => din_6PR, douta => dout_6PR);
+    U6PR : entity work.dist_mem_gen_6PR port map(clk => i_clk, we => u6pr_ram_wr, a => addr_6PR, d => din_6PR, spo => dout_6PR);
     
     -- U6N, U6M
     U6N : process(i_Phi34n)
@@ -495,7 +497,7 @@ begin
 
     -- Scanline buffer (64 x 9 bits)
     scanline_wr <= not scanline_wr_l;
-    U7M : entity work.blk_mem_gen_7M port map (clka => i_clk, wea(0) => scanline_wr, addra => addr_7M , dina => datain_7M & DI0_7M , douta => dataout_7M);
+    U7M : entity work.dist_mem_gen_7M port map (clk => i_clk, we => scanline_wr, a => addr_7M , d => datain_7M & DI0_7M , spo => dataout_7M);
     -- La memoire 93419 est a collector ouvert en sortie, les bits sont donc inversés, ce qui n'est pas
     -- le cas avec une memoire classique comme avec l'Artyx 7, on n'inverse donc pas dataout_7M contrairement au schema
     -- L'ordre des bits n'est pas inverse entre dataout_7M et hd car il y a déjà une inversion entre l'entree et la sortie de U6M => Ca ne change rien
