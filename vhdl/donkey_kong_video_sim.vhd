@@ -167,50 +167,50 @@ begin
         i_uart_rx => '1'
     );  
 
-    -- flash_memory : entity work.s29al008j
-    -- generic map (
-    --     TimingModel => "UNIT",
-    --     UserPreload => TRUE,
-    --     mem_file_name => "s29al008j_dkong.mem"
-    -- )
-    -- port map(
-    --     A18 => '0',
-    --     A17 => '0',
-    --     A16 => '0',
-    --     A15 => '0',
-    --     A14 => '0',
-    --     A13 => z80_a(14),
-    --     A12 => z80_a(13),
-    --     A11 => z80_a(12),
-    --     A10 => z80_a(11),
-    --     A9 => z80_a(10),
-    --     A8 => z80_a(9),
-    --     A7 => z80_a(8),
-    --     A6 => z80_a(7),
-    --     A5 => z80_a(6),
-    --     A4 => z80_a(5),
-    --     A3 => z80_a(4),
-    --     A2 => z80_a(3),
-    --     A1 => z80_a(2),
-    --     DQ15 => z80_a(0),
-    --     A0 => z80_a(1),
+    flash_memory : entity work.s29al008j
+    generic map (
+        TimingModel => "UNIT",
+        UserPreload => TRUE,
+        mem_file_name => "s29al008j_dkong.mem"
+    )
+    port map(
+        A18 => '0',
+        A17 => '0',
+        A16 => '0',
+        A15 => '0',
+        A14 => '0',
+        A13 => z80_a(14),
+        A12 => z80_a(13),
+        A11 => z80_a(12),
+        A10 => z80_a(11),
+        A9 => z80_a(10),
+        A8 => z80_a(9),
+        A7 => z80_a(8),
+        A6 => z80_a(7),
+        A5 => z80_a(6),
+        A4 => z80_a(5),
+        A3 => z80_a(4),
+        A2 => z80_a(3),
+        A1 => z80_a(2),
+        DQ15 => z80_a(0),
+        A0 => z80_a(1),
         
-    --     DQ7 => D_bidir(7),
-    --     DQ6 => D_bidir(6),
-    --     DQ5 => D_bidir(5),
-    --     DQ4 => D_bidir(4),
-    --     DQ3 => D_bidir(3),
-    --     DQ2 => D_bidir(2),
-    --     DQ1 => D_bidir(1),
-    --     DQ0 => D_bidir(0),
+        DQ7 => D_bidir(7),
+        DQ6 => D_bidir(6),
+        DQ5 => D_bidir(5),
+        DQ4 => D_bidir(4),
+        DQ3 => D_bidir(3),
+        DQ2 => D_bidir(2),
+        DQ1 => D_bidir(1),
+        DQ0 => D_bidir(0),
         
-    --     CENeg => flash_csn,
-    --     OENeg => z80_rd_l,
-    --     WENeg => z80_wr_l,
-    --     RESETNeg => rst_sys,
-    --     BYTENeg => '0',
-    --     WPNeg => '1'
-   -- );
+        CENeg => flash_csn,
+        OENeg => z80_rd_l,
+        WENeg => z80_wr_l,
+        RESETNeg => rst_sys,
+        BYTENeg => '0',
+        WPNeg => '1'
+    );
 
   config_reg <= (others => '1') when in1_cs_l = '0' else (others => 'Z');
   config_reg <= (others => '1') when in2_cs_l = '0' else (others => 'Z');
