@@ -33,7 +33,6 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 entity dkong_adec is
 port (
-        i_rst : in std_logic;
         i_clk : in std_logic; -- Phi34n
         i_addr : in std_logic_vector(15 downto 0);
         i_vblk_l : in std_logic;
