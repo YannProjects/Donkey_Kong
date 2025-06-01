@@ -27,7 +27,7 @@ use work.DKong_Pack.all;
 
 entity DKong_Main is
   generic (
-    g_Dkong_Debug      : natural := 1        -- 0 = no debug, 1 = Ajout UART et ROM pour le code de debug
+    g_Dkong_Debug      : natural := 0        -- 0 = no debug, 1 = Ajout UART et ROM pour le code de debug
   );
   port (
     -- System clock
@@ -95,9 +95,9 @@ signal uart_data, uart_reg, core_data, rom_data : std_logic_vector(7 downto 0);
 signal pacman_core_vol, pacman_core_wav : std_logic_vector(3 downto 0);
 signal cpu_mreq_0, z80_rst_n : std_logic;
 
-type wb_state is (wb_idle, wb_wait_for_ack, wb_wait_for_rd_or_wr_cycle);
-signal uart_wb_we, uart_wb_stb, uart_wb_cyc, uart_wb_ack : std_logic;
-signal wb_bus_state : wb_state;
+type wb_state is (wb_idle, wb_wait_for_ack, wb_wait_for_rd_or_wr_cycle, wb_wait_for_ack_next_cycle, wb_for_end_of_z80_cycle);
+signal uart_wb_stb, uart_wb_cyc, uart_wb_ack, uart_wb_we : std_logic;
+signal wb_current_state : wb_state;
 
 signal cpu_to_core_data, core_to_cpu_data : std_logic_vector(7 downto 0);
 
@@ -115,9 +115,12 @@ signal core_vsync_l, core_blank, pixel_write, clk_audio, rom_cs_l : std_logic;
 signal config_dipsw_temp, in1_joystick_buttons_temp, in2_joystick_buttons_temp : std_logic_vector(7 downto 0);
 signal o_dipsw_l : std_logic;
 
+-- attribute dont_touch : string;
+-- attribute dont_touch of i_cpu_m1_l_core : signal is "true";
+
 -- attribute MARK_DEBUG : string;
 -- attribute MARK_DEBUG of i_cpu_a_core, io_cpu_data_bidir, i_cpu_mreq_l_core, i_cpu_rd_l_core, i_cpu_wr_l_core : signal is "true";
--- attribute MARK_DEBUG of i_cpu_busack_l, o_cpu_busrq_l, i_cpu_rfrsh_l_core, o_cpu_waitn, o_cpu_nmi_l : signal is "true"; 
+-- attribute MARK_DEBUG of i_cpu_busack_l, o_cpu_busrq_l, i_cpu_rfrsh_l_core, o_cpu_waitn, o_cpu_nmi_l, o_rom_cs_l : signal is "true"; 
 
 begin
 
@@ -273,77 +276,94 @@ begin
       ------------ 
       -- UART
       ------------
-      -- WB manager
-      -- p_wb_manager : process(uart_clk, core_rst)
-      -- begin
-      --    if (core_rst = '1') then
-      --         wb_bus_state <= wb_idle;
-      --         uart_wb_we <= '0';
-      --         uart_wb_stb <= '0';
-      --         uart_wb_cyc <= '0';
-      --    elsif rising_edge(uart_clk) then
-      --        cpu_mreq_0 <= i_cpu_mreq_l_core;
-      --        if (wb_bus_state = wb_idle) then
-               -- Declenchement d'un cycle WB sur validation MREQn
-      --             if (uart_cs_l = '0' and cpu_mreq_0 = '1' and i_cpu_mreq_l_core = '0' and i_cpu_rfrsh_l_core = '1') then
-      --                 wb_bus_state <= wb_wait_for_rd_or_wr_cycle;
-      --             end if;
-      --        elsif (wb_bus_state = wb_wait_for_rd_or_wr_cycle) then
-      --             if i_cpu_rd_l_core = '0' then
-      --                 uart_wb_stb <= '1';
-      --                 uart_wb_cyc <= '1';
-      --                 wb_bus_state <= wb_wait_for_ack;
-      --             elsif i_cpu_wr_l_core = '0' then
-      --                 uart_wb_stb <= '1';
-      --                 uart_wb_cyc <= '1';
-      --                 uart_wb_we <= '1';
-      --                 wb_bus_state <= wb_wait_for_ack;
-      --             end if;
-      --        elsif (wb_bus_state = wb_wait_for_ack) then
-      --            if (uart_wb_ack = '1')  then
-      --                 uart_wb_we <= '0';
-      --                 uart_wb_stb <= '0';
-      --                 uart_wb_cyc <= '0';
-                  -- Memorise le registre de l'UART quand wb_ack = 1 pour la fin du cycle
-                  -- du Z80 qui arrive plus tard 
-      --                uart_reg <= uart_data;
-      --                wb_bus_state <= wb_idle;
-      --            end if;
-      --        end if;
-      --    end if;
-      -- end process;
-    
-      -- uart : entity work.uart_top
-      -- port map (
-      --     wb_clk_i =>  uart_clk,
-          -- Wishbone signals
-      --     wb_rst_i => core_rst,
-      --     wb_adr_i => i_cpu_a_core(2 downto 0),
-      --     wb_dat_i => cpu_to_core_data,
-      --     wb_dat_o => uart_data,
-      --     wb_we_i => uart_wb_we,
-      --     wb_stb_i => uart_wb_stb, 
-      --     wb_cyc_i => uart_wb_cyc,
-      --     wb_ack_o => uart_wb_ack,
-      --     wb_sel_i => "1111",
-          -- int_o -- interrupt request
-    
-          -- UART	signals
-          -- serial input/output
-      --     stx_pad_o => o_uart_tx,
-      --     srx_pad_i => i_uart_rx,
+      p_wb_manager : process(core_rst, uart_clk)
+      begin
+        if (core_rst = '0') then
+            uart_wb_stb <= '0';
+            uart_wb_we <= '0';
+            uart_wb_cyc <= '0';	       
+            wb_current_state <= wb_idle;
+        elsif rising_edge(uart_clk) then
+            -- Default values to provide the synthesis tool with a default value to assign the signal if the signal was not assigned in the CASE statement
+            uart_wb_stb <= '0';
+            uart_wb_we <= '0';
+            uart_wb_cyc <= '0';
+            
+            case wb_current_state is
+                when wb_idle =>
+                    -- Declenchement d'un cycle WB sur validation MREQn
+                    if (uart_cs_l = '0' and i_cpu_mreq_l_core = '0' and i_cpu_m1_l_core = '1') then
+                         wb_current_state <= wb_wait_for_rd_or_wr_cycle;
+                    end if;
+                when wb_wait_for_rd_or_wr_cycle =>
+                    -- Debut cycle lecture ou ecriture WB
+                    if i_cpu_rd_l_core = '0' then
+                        uart_wb_stb <= '1';
+                        uart_wb_cyc <= '1';
+                        wb_current_state <= wb_wait_for_ack;
+                     elsif i_cpu_wr_l_core = '0' then
+                        uart_wb_stb <= '1';
+                        uart_wb_cyc <= '1';
+                        uart_wb_we <= '1';
+                        wb_current_state <= wb_wait_for_ack;
+                     else
+                        wb_current_state <= wb_wait_for_rd_or_wr_cycle;
+                     end if;
+                when wb_wait_for_ack =>
+                     -- Attente acquittement lecture/ecriture
+                     if uart_wb_ack = '0' then
+                         uart_wb_stb <= '1';
+                         uart_wb_cyc <= '1';
+                         if i_cpu_wr_l_core = '0' then
+                             uart_wb_we <= '1';
+                         end if;
+                     else
+                         uart_reg <= uart_data;
+                         wb_current_state <= wb_for_end_of_z80_cycle;
+                     end if;
+                when wb_for_end_of_z80_cycle =>
+                    if (i_cpu_mreq_l_core = '1') then
+                        wb_current_state <= wb_idle;
+                    end if;
+                when others =>
+                    wb_current_state <= wb_idle;
+                end case;
+            end if; 
+      end process;
       
-          -- modem signals
-          -- rts_pad_o
-      --     cts_pad_i => '0',
-          -- dtr_pad_o
-      --     dsr_pad_i => '0',
-      --     ri_pad_i => '0',
-      --     dcd_pad_i => '0'
-      -- );
-       
-      o_uart_tx <= '1';
-
+      -- 
+      -- UART
+      -- 
+      uart : entity work.uart_top
+      port map (
+        wb_clk_i =>  uart_clk,
+        -- Wishbone signals
+        wb_rst_i => not core_rst,
+        wb_adr_i => i_cpu_a_core(2 downto 0),
+        wb_dat_i => cpu_to_core_data,
+        wb_dat_o => uart_data,
+        wb_we_i => uart_wb_we,
+        wb_stb_i => uart_wb_stb, 
+        wb_cyc_i => uart_wb_cyc,
+        wb_ack_o => uart_wb_ack,
+        wb_sel_i => "1111",
+        -- int_o -- interrupt request
+    
+        -- UART	signals
+        -- serial input/output
+        stx_pad_o => o_uart_tx,
+        srx_pad_i => i_uart_rx,
+    
+        -- modem signals
+        -- rts_pad_o
+        cts_pad_i => '0',
+        -- dtr_pad_o
+        dsr_pad_i => '0',
+        ri_pad_i => '0',
+        dcd_pad_i => '0'
+      );
+           
+      -- o_uart_tx <= '1';
 
   end generate g_Dkong_Add_Debug;
 
@@ -355,9 +375,9 @@ begin
     
   g_Dkong_No_Debug : if g_Dkong_Debug = 0 generate
     
-      -- Gestion buffer bidir
-      core_to_cpu_en_l <= '0' when (i_cpu_rd_l_core = '0') and (i_cpu_rfrsh_l_core = '1') and (i_cpu_mreq_l_core = '0') and (i_cpu_a_core(14) = '1') else '1';
-      cpu_to_core_en_l <= '0' when (i_cpu_wr_l_core = '0') and (i_cpu_rfrsh_l_core = '1') and (i_cpu_mreq_l_core = '0') and (i_cpu_a_core(14) = '1') else '1';
+      -- Gestion buffer bidir entre le FPGA et le bus Z80
+      core_to_cpu_en_l <= '0' when (i_cpu_rd_l_core = '0') and (i_cpu_rfrsh_l_core = '1') and (i_cpu_mreq_l_core = '0') and (rom_cs_l = '1') else '1';
+      cpu_to_core_en_l <= '0' when (i_cpu_wr_l_core = '0') and (i_cpu_rfrsh_l_core = '1') and (i_cpu_mreq_l_core = '0') and (rom_cs_l = '1') else '1';
       core_to_cpu_data <= core_data;
       
       o_rom_cs_l <= rom_cs_l;
