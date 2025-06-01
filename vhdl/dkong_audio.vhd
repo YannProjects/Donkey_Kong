@@ -148,8 +148,8 @@ begin
     
     -- U7H (processeur son)
 	-- RAM externe du core CPU T48 (64 Byte)
-	U7H_RAM : entity work.blk_mem_gen_7h port map (clka => i_sound_cpu_clk, wea(0) => t48_ram_we, 
-                                addra => t48_ram_addr(5 downto 0), dina => t48_ram_di, douta => t48_ram_do); 
+	U7H_RAM : entity work.dist_mem_gen_7H port map (clk => i_sound_cpu_clk, we => t48_ram_we, 
+                                a => t48_ram_addr(5 downto 0), d => t48_ram_di, spo => t48_ram_do); 
     
     U7H : entity work.t48_core
     port map (
