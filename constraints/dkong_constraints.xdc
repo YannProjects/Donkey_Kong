@@ -199,13 +199,3 @@ create_generated_clock -name PHI34N -source [get_pins clk_gen_0/o_clk_dkong_main
 
 set_clock_groups -name SYSTEM_CLOCKS -logically_exclusive -group [get_clocks [list PHI34N [get_clocks -of_objects [get_pins clk_gen_0/inst/mmcm_adv_inst/CLKOUT0]]]] -group [get_clocks -of_objects [get_pins clk_gen_0/inst/mmcm_adv_inst/CLKOUT2]] -group [get_clocks -of_objects [get_pins clk_gen_0/inst/mmcm_adv_inst/CLKOUT1]]
 
-
-
-
-
-
-
-
-connect_debug_port u_ila_0/probe4 [get_nets [list i_cpu_m1_l_core]]
-
-
