@@ -27,7 +27,7 @@ use work.DKong_Pack.all;
 
 entity DKong_Main is
   generic (
-    g_Dkong_Debug      : natural := 0        -- 0 = no debug, 1 = Ajout UART et ROM pour le code de debug
+    g_Dkong_Debug      : natural := 1        -- 0 = no debug, 1 = Ajout UART et ROM pour le code de debug
   );
   port (
     -- System clock
@@ -262,7 +262,9 @@ begin
       core_to_cpu_en_l <= '0' when (i_cpu_rd_l_core = '0') and (i_cpu_rfrsh_l_core = '1') and (i_cpu_mreq_l_core = '0') else '1';
       cpu_to_core_en_l <= '0' when (i_cpu_wr_l_core = '0') and (i_cpu_rfrsh_l_core = '1') and (i_cpu_mreq_l_core = '0') else '1';
       
-      core_to_cpu_data <= rom_data when (rom_cs_l = '0' and i_cpu_rd_l_core = '0') else core_data;
+      core_to_cpu_data <= rom_data when (rom_cs_l = '0' and i_cpu_rd_l_core = '0') 
+                          else uart_reg when (uart_cs_l = '0' and i_cpu_rd_l_core = '0')
+                          else core_data;
     
       -- Pas de selection de la memoire Flash en mode debug, c'est la ROM de test qui est utilisee dans ce cas
       o_rom_cs_l <= '1';
@@ -278,7 +280,7 @@ begin
       ------------
       p_wb_manager : process(core_rst, uart_clk)
       begin
-        if (core_rst = '0') then
+        if (core_rst = '1') then
             uart_wb_stb <= '0';
             uart_wb_we <= '0';
             uart_wb_cyc <= '0';	       
@@ -338,7 +340,7 @@ begin
       port map (
         wb_clk_i =>  uart_clk,
         -- Wishbone signals
-        wb_rst_i => not core_rst,
+        wb_rst_i => core_rst,
         wb_adr_i => i_cpu_a_core(2 downto 0),
         wb_dat_i => cpu_to_core_data,
         wb_dat_o => uart_data,
