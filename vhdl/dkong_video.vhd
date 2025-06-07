@@ -118,6 +118,7 @@ signal flip_1, flip_2, flip_3, flip_4, flip_5 : std_logic;
 signal Q0_8CD, Q15_8CD, Q0_8EF, Q15_8EF : std_logic;
 signal U8CD_reg, U8CD_sprite_data, U8EF_reg, U8EF_sprite_data : std_logic_vector(15 downto 0);
 signal h_256n, h_128n : std_logic;
+signal AB_1, AB_2 : std_logic_vector(1 downto 0);
 
 -- Debug
 -- attribute MARK_DEBUG : string;
@@ -152,7 +153,6 @@ begin
                         (h_128 xor flip_1) & (i_h(7) xor flip_1) &
                         (i_h(6) xor flip_1) & (i_h(5) xor flip_1) & (i_h(4) xor flip_1);
                         
-    -- addr_tiles_ram_cs_l <= (i_vram_wrn and i_vram_rdn) when U234S_S = '0' else '0';
     char_tile_reload <= '1' when U234S_S = '0' else '0';
     
     -- U1S
@@ -161,8 +161,6 @@ begin
     -- Pour simplifier on retourne U2PR_tile_id_out par defaut.
     o_vid_data_out <= dout_6PR when i_objrdn = '0' else U2PR_tile_id_out;
     
-    -- U2PR : entity work.blk_mem_gen_2PR port map (clka => i_clk, wea(0) => not(i_vram_wrn), 
-    --                             addra => addr_ram_tiles, dina => U2PR_tile_id_in, douta => U2PR_tile_id_out, ena => not addr_tiles_ram_cs_l);
     U2PR : entity work.dist_mem_gen_2PR port map (clk => i_clk, we => not(i_vram_wrn), 
                                 a => addr_ram_tiles, d => U2PR_tile_id_in, spo => U2PR_tile_id_out);
 
@@ -308,10 +306,43 @@ begin
         end if;
     end process;
 
-    -- U5F
+    -- U5F-1
+    AB_1 <= (i_h(3), i_h(2));
+    process(AB_1)
+    begin
+        O0B_5F <= '1';
+        O1B_5F <= '1';
+        O2B_5F <= '1';
+        case AB_1 is
+            when "00" =>
+                O0B_5F <= '0';
+            when "01" =>
+                O1B_5F <= '0';
+            when "10" =>
+                O2B_5F <= '0';
+            when others =>
+        end case;
+    end process;
+    
+    -- U5F-2
+    AB_2 <= (h_256n, i_h(3));
     G_5F <= not (i_h(0) and i_h(1) and i_h(2) and i_h(3));
-    U5F : entity work.SN74LS139N(SYNTH) port map (X_1 => G_5F, X_2 => i_h(3), X_3 => h_256n, X_5 => O1A_5F, X_7 => O3A_5F,
-                                    X_13 => i_h(3), X_14 => i_h(2), X_15 => '0', X_10 => O2B_5F, X_11 => O1B_5F, X_12 => O0B_5F);
+    process(AB_2, G_5F)
+    begin
+        O1A_5F <= '1';
+        O3A_5F <= '1';
+        case AB_2 is
+            when "01" =>
+                if G_5F = '0' then
+                    O1A_5F <= '0';
+                end if;
+            when "11" =>
+                if G_5F = '0' then
+                    O3A_5F <= '0';
+                end if;
+            when others =>
+        end case;
+    end process;
 
     -- U7C, U7D, U7E, U7F
     addr_7CDEF <= Q_6H(6 downto 0) & (db(3 downto 0) xor (Q_6H(7) & Q_6H(7) & Q_6H(7) & Q_6H(7)));

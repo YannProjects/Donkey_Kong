@@ -148,8 +148,14 @@ begin
     
     -- U7H (processeur son)
 	-- RAM externe du core CPU T48 (64 Byte)
-	U7H_RAM : entity work.dist_mem_gen_7H port map (clk => i_sound_cpu_clk, we => t48_ram_we, 
-                                a => t48_ram_addr(5 downto 0), d => t48_ram_di, spo => t48_ram_do); 
+	-- 01/06/2025:
+	-- Je voulais remplacer la RAM blk_mem_gen par un type dist_mem_gen. Mais, ça ne fonctionne pas.
+	-- Il y a une erreur lors de la simulation: FATAL_ERROR: Iteration limit 10000 is reached. Possible zero delay oscillation detected where simulation time can not advance. Please check your source code
+	-- Je ne sais pas pourquoi
+	-- U7H_RAM : entity work.dist_mem_gen_7H port map (clk => i_sound_cpu_clk, we => t48_ram_we, 
+    --                             a => t48_ram_addr(5 downto 0), d => t48_ram_di, spo => t48_ram_do);
+    U7H_RAM : entity work.blk_mem_gen_7H port map (clka => i_sound_cpu_clk, wea(0) => t48_ram_we, 
+                                addra => t48_ram_addr(5 downto 0), dina => t48_ram_di, douta => t48_ram_do); 
     
     U7H : entity work.t48_core
     port map (

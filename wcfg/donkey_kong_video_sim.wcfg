@@ -25,12 +25,12 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="74,152.754374 us"></ZoomStartTime>
-      <ZoomEndTime time="74,167.984375 us"></ZoomEndTime>
-      <Cursor1Time time="74,165.446041 us"></Cursor1Time>
+      <ZoomStartTime time="146,893,305.879 ns"></ZoomStartTime>
+      <ZoomEndTime time="146,900,940.880 ns"></ZoomEndTime>
+      <Cursor1Time time="146,895,824.205 ns"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="247"></NameColumnWidth>
+      <NameColumnWidth column_width="243"></NameColumnWidth>
       <ValueColumnWidth column_width="58"></ValueColumnWidth>
    </column_width_setting>
    <WVObjectSize size="3" />
@@ -39,6 +39,8 @@
       <marker time="47585628274" label="" />
       <marker time="82926936463" label="" />
       <marker time="328144229167" label="" />
+      <marker time="80604989465" label="" />
+      <marker time="146896800879" label="" />
    </wave_markers>
    <wvobject fp_name="group379" type="group">
       <obj_property name="label">DKong_Hw_Tester</obj_property>
@@ -163,6 +165,7 @@
       <wvobject fp_name="group382" type="group">
          <obj_property name="label">u_Core</obj_property>
          <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="isExpanded"></obj_property>
          <wvobject fp_name="group555" type="group">
             <obj_property name="label">u_HVclocks</obj_property>
             <obj_property name="DisplayName">label</obj_property>
@@ -1677,6 +1680,26 @@
          <wvobject fp_name="/DKong_Sim/core_top_0/uart/wb_clk_i" type="logic">
             <obj_property name="ElementShortName">wb_clk_i</obj_property>
             <obj_property name="ObjectShortName">wb_clk_i</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart_wb_stb" type="logic">
+            <obj_property name="ElementShortName">uart_wb_stb</obj_property>
+            <obj_property name="ObjectShortName">uart_wb_stb</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart_wb_cyc" type="logic">
+            <obj_property name="ElementShortName">uart_wb_cyc</obj_property>
+            <obj_property name="ObjectShortName">uart_wb_cyc</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart_wb_ack" type="logic">
+            <obj_property name="ElementShortName">uart_wb_ack</obj_property>
+            <obj_property name="ObjectShortName">uart_wb_ack</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart_wb_we" type="logic">
+            <obj_property name="ElementShortName">uart_wb_we</obj_property>
+            <obj_property name="ObjectShortName">uart_wb_we</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/wb_current_state" type="other">
+            <obj_property name="ElementShortName">wb_current_state</obj_property>
+            <obj_property name="ObjectShortName">wb_current_state</obj_property>
          </wvobject>
          <wvobject fp_name="/DKong_Sim/core_top_0/uart/wb_rst_i" type="logic">
             <obj_property name="ElementShortName">wb_rst_i</obj_property>

@@ -27,7 +27,7 @@ use work.DKong_Pack.all;
 
 entity DKong_Main is
   generic (
-    g_Dkong_Debug      : natural := 1        -- 0 = no debug, 1 = Ajout UART et ROM pour le code de debug
+    g_Dkong_Debug      : natural := 0        -- 0 = no debug, 1 = Ajout UART et ROM pour le code de debug
   );
   port (
     -- System clock
