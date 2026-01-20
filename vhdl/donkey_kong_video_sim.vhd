@@ -49,7 +49,7 @@ signal z80_a : std_logic_vector(15 downto 0);
 signal buffer_enable, buffer_dir : std_logic;
 signal D_bidir, core_data_bidir : std_logic_vector(7 downto 0);
 signal cfg_dip_sw, in0_reg, in1_reg, config_reg, core_data_output : std_logic_vector(7 downto 0);
-signal in1_cs_l, in2_cs_l, in3_cs_l, dip_sw_cs_l : std_logic;
+signal merged_input_cs_l, dip_sw_cs_l : std_logic;
 
 signal dipsw : std_logic_vector(7 downto 0);
 
@@ -143,7 +143,8 @@ begin
     
         o_cpu_rst_core => z80_rst_l,
         o_cpu_clk_core => z80_clk,
-        i_cpu_m1_l_core => z80_m1_l,
+        -- A decommenter si on souhaite utiliser l'UART
+        -- i_cpu_m1_l_core => z80_m1_l,
         i_cpu_mreq_l_core => z80_mreq_l,
         i_cpu_rd_l_core => z80_rd_l,
         i_cpu_wr_l_core => z80_wr_l,
@@ -157,11 +158,18 @@ begin
         o_rom_cs_l => flash_csn, -- Flash CS
     
         -- Entrees
-        -- i_config_reg => config_reg,
-        -- o_in1_l => in1_cs_l,
-        -- o_in2_l => in2_cs_l,
-        -- o_in3_l => in3_cs_l,
-        -- o_dipsw_l => dip_sw_cs_l,
+        i_config_reg => config_reg,
+        i_coin_insert => '1',
+        i_service => '1',
+        o_merged_inputs_cs_l => merged_input_cs_l,
+        o_dipsw_l => dip_sw_cs_l,
+        
+        o_boom_driver => open,
+        o_boom_seq_driver => open, 
+        o_walk_driver => open,
+        o_jump_driver => open,
+        o_vol_decay => open,
+        o_music_data => open,
         
         -- UART
         i_uart_rx => '1'
@@ -212,9 +220,7 @@ begin
         WPNeg => '1'
     );
 
-  config_reg <= (others => '1') when in1_cs_l = '0' else (others => 'Z');
-  config_reg <= (others => '1') when in2_cs_l = '0' else (others => 'Z');
-  config_reg <= (others => '1') when in3_cs_l = '0' else (others => 'Z');
+  config_reg <= (others => '1') when merged_input_cs_l = '0' else (others => 'Z');
   config_reg <= X"AB" when dip_sw_cs_l = '0' else (others => 'Z');
         
   rst_sys <= '0', '1' after 100 us;

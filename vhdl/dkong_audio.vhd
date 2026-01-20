@@ -80,9 +80,10 @@ port (
     i_sound_int_n : in std_logic;
     i_2_VF : in std_logic; -- Horloge 4K, 5K, 6K
     
+    o_dac : out std_logic_vector(7 downto 0);
     o_sound_boom_1 : out std_logic; -- Pilotage transisotr Q2 = i_sound_boom_1
     o_sound_boom_2 : out std_logic; -- Pilotage transisotr Q1
-    o_dac_vref : out std_logic;
+    o_sound_decay : out std_logic;
     o_io_sound : out std_logic;
     o_sound_walk : out std_logic;
     o_sound_jump : out std_logic
@@ -93,7 +94,7 @@ end dkong_audio;
 architecture Behavioral of dkong_audio is
 
 signal Q_4K, Q_5K, Q_6K, sound_cpu_data_in, sound_cpu_data_out : std_logic_vector(7 downto 0);
-signal sound_cpu_pb, dac_input, Q_4HF, cpu_data_3f, cpu_data_3h : std_logic_vector(7 downto 0);
+signal sound_cpu_pb, Q_4HF, cpu_data_3f, cpu_data_3h : std_logic_vector(7 downto 0);
 signal t48_ram_addr, t48_ram_di, t48_ram_do : std_logic_vector(7 downto 0);
 signal addr_roms : std_logic_vector(10 downto 0);
 signal cnt_u3j : unsigned(3 downto 0);
@@ -177,7 +178,7 @@ begin
         p2_i => "00" & i_audio_effects.spring & "00000",
         p2_o => sound_cpu_pb,
         p1_i => (others => '0'),
-        p1_o => dac_input,
+        p1_o => o_dac,
         p1_low_imp_o => open,
         prog_n_o => open,
         
@@ -195,7 +196,7 @@ begin
 		pmem_data_i		=> x"00"
    );
 
-   o_dac_vref <= sound_cpu_pb(7);
+   o_sound_decay <= sound_cpu_pb(7);
    sound_data_en_l <= sound_cpu_pb(6);
    o_io_sound <= sound_cpu_pb(4);
    
@@ -228,7 +229,7 @@ begin
    process (rom_3F_cs_l, rom_3H_cs_l, sound_data_en_delayed, cpu_data_3f, cpu_data_3h, i_sound_data)
     begin
         if sound_data_en_delayed = '0' then
-            sound_cpu_data_in <=  "0000" & (not i_sound_data);
+            sound_cpu_data_in <=  "0000" & i_sound_data;
         elsif rom_3H_cs_l = '0' then
             sound_cpu_data_in <= cpu_data_3h;
         elsif rom_3F_cs_l = '0' then

@@ -364,8 +364,8 @@ begin
             vga_frame_offset <= (others => '0');
             vga_addr_even_line_start <= (others => '0');
             vga_odd_line <= '0';
-        elsif rising_edge(i_clk) then
-            if unsigned("00" & vga_adr(31 downto 2)) - vga_addr_even_line_start = DKONG_LINE_RESOLUTION then
+        elsif falling_edge(i_clk) then
+            if unsigned("00" & vga_adr(31 downto 2)) - vga_addr_even_line_start >= DKONG_LINE_RESOLUTION then
                 vga_odd_line <= not vga_odd_line;
                 vga_addr_even_line_start <= unsigned("00" & vga_adr(31 downto 2));
                 if vga_odd_line = '0' then
@@ -379,7 +379,7 @@ begin
     video_dpram_vga_core_addr <= video_dpram_vga_core_addr_l(14 downto 0);
     -- La DPRAM retourne 2 pixels sur 8 bits qui sont dupliqués et retournes au controlleur VGA.
     vga_dat <=  video_mem_vga_core_data(7 downto 0) & video_mem_vga_core_data(7 downto 0) & video_mem_vga_core_data(15 downto 8) & video_mem_vga_core_data(15 downto 8);
-
+    
     o_vga_control_init_done <= vga_controller_ok;
 
 	--

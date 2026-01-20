@@ -47,7 +47,7 @@ entity DKong_Main is
     
     o_cpu_rst_core        : out std_logic;
     o_cpu_clk_core        : out std_logic;
-    i_cpu_m1_l_core       : in std_logic;
+    -- i_cpu_m1_l_core       : in std_logic;
     i_cpu_mreq_l_core     : in std_logic;
     i_cpu_rd_l_core       : in std_logic;
     i_cpu_wr_l_core       : in std_logic;
@@ -56,7 +56,6 @@ entity DKong_Main is
     i_cpu_rfrsh_l_core    : in std_logic;
     o_cpu_waitn           : out std_logic;
     o_cpu_nmi_l           : out std_logic;
-    o_cpu_int_l           : out std_logic;
         
     -- Z80 pacman code en memoire flash
     o_rom_cs_l            : out std_logic; -- Flash CS
@@ -65,22 +64,19 @@ entity DKong_Main is
     o_vga                 : out r_Core_to_VGA;
 
     -- Entrees joystick, coin,...
-    -- i_config_dipsw : in std_logic_vector(7 downto 0);
-    -- i_in1_joystick_buttons : in std_logic_vector(7 downto 0);
-    -- i_in2_joystick_buttons : in std_logic_vector(7 downto 0);
-    -- o_in1_cs_l : out std_logic;
-    -- o_in2_cs_l : out std_logic;
-    -- o_in3_cs_l : out std_logic;
-    -- o_dipsw_l : out std_logic;
+    i_config_reg : in std_logic_vector(7 downto 0);
+    i_coin_insert : in std_logic;
+    i_service : in std_logic;
+    o_merged_inputs_cs_l : out std_logic;
+    o_dipsw_l : out std_logic;
 
     -- Son
-    -- o_boom1_driver        : out std_logic;
-    -- o_boom2_driver        : out std_logic;
-    -- o_boom_driver         : out std_logic;
+    o_boom_driver         : out std_logic;
+    o_boom_seq_driver     : out std_logic;
     o_walk_driver         : out std_logic;
-    -- o_jump_driver         : out std_logic;
-    -- o_reset_vol_decay     : out std_logic;
-    -- o_music_data          : out std_logic_vector(7 downto 0); -- Entrée DAC
+    o_jump_driver         : out std_logic;
+    o_vol_decay           : out std_logic;
+    o_music_data          : out std_logic_vector(7 downto 0); -- Entrée DAC
     
     -- UART
     o_uart_tx : out std_logic;
@@ -112,15 +108,17 @@ signal vga_control_init_done, clk_dkong : std_logic;
 signal video_r, video_g, vga_r, vga_g, vga_b : std_logic_vector(2 downto 0);
 signal video_b : std_logic_vector(1 downto 0);
 signal core_vsync_l, core_blank, pixel_write, clk_audio, rom_cs_l : std_logic;
-signal config_dipsw_temp, in1_joystick_buttons_temp, in2_joystick_buttons_temp : std_logic_vector(7 downto 0);
-signal o_dipsw_l : std_logic;
+signal in1_joystick_buttons_temp, in2_joystick_buttons_temp : std_logic_vector(7 downto 0);
+signal cpu_clk_core : std_logic;
 
 -- attribute dont_touch : string;
 -- attribute dont_touch of i_cpu_m1_l_core : signal is "true";
 
 -- attribute MARK_DEBUG : string;
 -- attribute MARK_DEBUG of i_cpu_a_core, io_cpu_data_bidir, i_cpu_mreq_l_core, i_cpu_rd_l_core, i_cpu_wr_l_core : signal is "true";
--- attribute MARK_DEBUG of i_cpu_busack_l, o_cpu_busrq_l, i_cpu_rfrsh_l_core, o_cpu_waitn, o_cpu_nmi_l, o_rom_cs_l : signal is "true"; 
+-- attribute MARK_DEBUG of i_cpu_busack_l, o_cpu_busrq_l, i_cpu_rfrsh_l_core, o_cpu_waitn, o_cpu_nmi_l, o_rom_cs_l : signal is "true";
+
+-- attribute MARK_DEBUG of i_cpu_a_core, rom_data, core_to_cpu_data, rom_cs_l : signal is "true";
 
 begin
 
@@ -150,13 +148,10 @@ begin
     i_core_reset => core_rst,
     
     -- Entrees
-    -- o_in1_cs_l => o_in1_l,
-    -- o_in2_cs_l => o_in2_l,
-    -- o_in3_cs_l =>  o_in3_l,
+    o_merged_inputs_cs_l => o_merged_inputs_cs_l,
     o_dipsw_cs_l => o_dipsw_l,
-    i_config_dipsw => config_dipsw_temp,
-    i_ins1 => in1_joystick_buttons_temp,
-    i_ins2 => in2_joystick_buttons_temp,
+    i_config_reg => i_config_reg,
+    i_coin_service => i_coin_insert and i_service,
 
     -- Video
     o_core_red => video_r,
@@ -166,12 +161,12 @@ begin
     o_core_vsync_l => core_vsync_l,
     
     -- Son
-    -- o_boom_1 => o_boom1_driver,
-    -- o_boom_2 => o_boom2_driver,
-    -- o_boom => o_boom_driver, 
-    -- o_dac_vref => o_dac_vref_driver,
+    o_boom_1 => o_boom_driver,
+    o_boom_2 => o_boom_seq_driver,
+    o_dac => o_music_data,
     o_walk => o_walk_driver,
-    -- o_jump => o_jump_driver,
+    o_jump => o_jump_driver, 
+    o_sound_decay => o_vol_decay,
     
     -- Z80    
     i_cpu_a => i_cpu_a_core,
@@ -180,9 +175,8 @@ begin
     i_cpu_busack_l => i_cpu_busack_l,
     
     o_cpu_rst_l => o_cpu_rst_core,
-    o_cpu_clk => o_cpu_clk_core,
+    o_cpu_clk => cpu_clk_core,
     o_cpu_wait_l => o_cpu_waitn,
-    i_cpu_m1_l => i_cpu_m1_l_core,
     i_cpu_mreq_l => i_cpu_mreq_l_core,
     i_cpu_rd_l => i_cpu_rd_l_core,
     i_cpu_wr_l => i_cpu_wr_l_core,
@@ -195,7 +189,9 @@ begin
     o_pixel_wr => pixel_write
   );
   
-  -- DIP siwtch:
+  o_cpu_clk_core <= cpu_clk_core;
+  
+  -- DIP switch:
  --   bit 7 : COCKTAIL or UPRIGHT cabinet (1 = UPRIGHT)
  --   bit 6 : \ 000 = 1 coin 1 play   001 = 2 coins 1 play  010 = 1 coin 2 plays
  --   bit 5 : | 011 = 3 coins 1 play  100 = 1 coin 3 plays  101 = 4 coins 1 play
@@ -204,17 +200,11 @@ begin
  --   bit 2 : / 00 = 7000  01 = 10000  10 = 15000  11 = 20000
  --   bit 1 : \ 00 = 3 lives  01 = 4 lives
  --   bit 0 : / 10 = 5 lives  11 = 6 lives
-  config_dipsw_temp <= "10000100" when o_dipsw_l = '0' else (others => '1');
-  in1_joystick_buttons_temp <= (others => '1');
-  in2_joystick_buttons_temp <= (others => '1');
-
+ 
   o_buffer_enable_n <= core_to_cpu_en_l and cpu_to_core_en_l;
   o_buffer_dir <= '1' when cpu_to_core_en_l = '0' else '0';
   io_cpu_data_bidir <= core_to_cpu_data when core_to_cpu_en_l = '0' else (others => 'Z');
   cpu_to_core_data <= io_cpu_data_bidir when cpu_to_core_en_l = '0' else (others => 'Z');  
-  
-  -- Pour faire un essai avec le HW Pacmacn (INTn n'est pas utilise dans le cas de DKong).
-  o_cpu_int_l <= '1';
    
   -- Controlleur VGA
   u_vga_ctrl : entity work.vga_control_top
@@ -250,6 +240,8 @@ begin
  
   core_rst <= '1' when i_rst_sysn = '0' or  vga_control_init_done = '0' else '0';
 
+  o_rom_cs_l <= rom_cs_l;
+  
   --------------------
   --------------------
   --    Debug
@@ -259,21 +251,26 @@ begin
   
       -- Gestion buffer bidir
       -- Cas de la memoire ROM de test HW dans le FPGA
-      core_to_cpu_en_l <= '0' when (i_cpu_rd_l_core = '0') and (i_cpu_rfrsh_l_core = '1') and (i_cpu_mreq_l_core = '0') else '1';
-      cpu_to_core_en_l <= '0' when (i_cpu_wr_l_core = '0') and (i_cpu_rfrsh_l_core = '1') and (i_cpu_mreq_l_core = '0') else '1';
+      core_to_cpu_en_l <= '0' when (i_cpu_rd_l_core = '0') and (i_cpu_rfrsh_l_core = '1') and (i_cpu_mreq_l_core = '0') and (rom_cs_l = '1') else '1';
+      cpu_to_core_en_l <= '0' when (i_cpu_wr_l_core = '0') and (i_cpu_rfrsh_l_core = '1') and (i_cpu_mreq_l_core = '0') and (rom_cs_l = '1') else '1';
       
-      core_to_cpu_data <= rom_data when (rom_cs_l = '0' and i_cpu_rd_l_core = '0') 
-                          else uart_reg when (uart_cs_l = '0' and i_cpu_rd_l_core = '0')
+      core_to_cpu_data <= uart_reg when (uart_cs_l = '0' and i_cpu_rd_l_core = '0')
                           else core_data;
     
       -- Pas de selection de la memoire Flash en mode debug, c'est la ROM de test qui est utilisee dans ce cas
-      o_rom_cs_l <= '1';
+      -- o_rom_cs_l <= '1';
         
       ---------------------------------------------------
       -- ROM de test contenant le code de debug du HW
       ---------------------------------------------------
-      u_rom : entity work.dist_mem_gen_test_HW
-      port map (a => i_cpu_a_core(13 downto 0), spo => rom_data);
+      -- Comme j'avais des problèmes avec le logiciel de debug dont je ne comprensias pas trop l'origine
+      -- j'avais décidé de tout exécuter (code DKong ou code de gbu) à partir de la mémoire flash externe.
+      -- Au final je pense que les pbes étaient dus au fichier de Timing Constraints qui avait disparu.
+      -- Mais, je n'ai aps reesséayé avec la ROM du code de test en interne depuis.
+      -- u_rom : entity work.dist_mem_gen_dkong_debug
+      -- port map (
+      --   a => i_cpu_a_core(13 downto 0), spo => rom_data
+      -- );
       
       ------------ 
       -- UART
@@ -294,7 +291,10 @@ begin
             case wb_current_state is
                 when wb_idle =>
                     -- Declenchement d'un cycle WB sur validation MREQn
-                    if (uart_cs_l = '0' and i_cpu_mreq_l_core = '0' and i_cpu_m1_l_core = '1') then
+                    -- Si on veut utiliser l'UART, remettre la condition i_cpu_m1_l_core = '1' et rajouter l'entrée
+                    -- M1n dans le fichier de containte (restée en commentaire).
+                    -- if (uart_cs_l = '0' and i_cpu_mreq_l_core = '0' and i_cpu_m1_l_core = '1') then
+                    if (uart_cs_l = '0' and i_cpu_mreq_l_core = '0') then
                          wb_current_state <= wb_wait_for_rd_or_wr_cycle;
                     end if;
                 when wb_wait_for_rd_or_wr_cycle =>
@@ -365,8 +365,6 @@ begin
         dcd_pad_i => '0'
       );
            
-      -- o_uart_tx <= '1';
-
   end generate g_Dkong_Add_Debug;
 
   --------------------
@@ -381,8 +379,6 @@ begin
       core_to_cpu_en_l <= '0' when (i_cpu_rd_l_core = '0') and (i_cpu_rfrsh_l_core = '1') and (i_cpu_mreq_l_core = '0') and (rom_cs_l = '1') else '1';
       cpu_to_core_en_l <= '0' when (i_cpu_wr_l_core = '0') and (i_cpu_rfrsh_l_core = '1') and (i_cpu_mreq_l_core = '0') and (rom_cs_l = '1') else '1';
       core_to_cpu_data <= core_data;
-      
-      o_rom_cs_l <= rom_cs_l;
 
   end generate g_Dkong_No_Debug;
 

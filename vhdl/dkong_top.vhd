@@ -47,21 +47,18 @@ port (
     o_core_vsync_l        : out std_logic;
     
     -- Entrees
-    i_config_dipsw        : in std_logic_vector(7 downto 0);
-    i_ins1                : in std_logic_vector(7 downto 0);
-    i_ins2                : in std_logic_vector(7 downto 0);
-    o_in1_cs_l            : out std_logic;
-    o_in2_cs_l            : out std_logic;
-    o_in3_cs_l            : out std_logic;
+    i_config_reg          : in std_logic_vector(7 downto 0);
+    o_merged_inputs_cs_l  : out std_logic;
     o_dipsw_cs_l          : out std_logic;
+    i_coin_service        : in std_logic;
     
     -- Sorties
     o_boom_1              : out std_logic;
     o_boom_2              : out std_logic;
-    o_boom                : out std_logic;    
-    o_dac_vref            : out std_logic;
+    o_sound_decay         : out std_logic;
     o_walk                : out std_logic;
     o_jump                : out std_logic;
+    o_dac                 : out std_logic_vector(7 downto 0);
     
     -- Z80    
     i_cpu_a               : in std_logic_vector(15 downto 0);  -- Z80 adresse bus
@@ -73,7 +70,6 @@ port (
     o_cpu_wait_l          : out std_logic; -- Z80 wait
     o_cpu_nmi_l           : out std_logic; -- Z80 NMI
     o_cpu_busrq           : out std_logic; -- Z80 BUSRQn
-    i_cpu_m1_l            : in std_logic; -- Z80 M1 => A supprimer, pas utilise ?
     i_cpu_mreq_l          : in std_logic; -- Z80 MREQ
     i_cpu_rd_l            : in std_logic; -- Z80 RD
     i_cpu_wr_l            : in std_logic; -- Z80 WR
@@ -102,12 +98,12 @@ signal cmpblk2n, cpu_wait, dma_aen, drq0, dma_adstb : std_logic;
 signal dma_iord_l, dma_iowr_l, dma_mem_read_l, dma_mem_write_l, final_mreq_l, dma_busrq : std_logic;
 signal dma_ack : std_logic_vector(3 downto 0);
 signal dma_master_addr, dma_data_in, dma_data_out, dma_addr_high, dma_data : std_logic_vector(7 downto 0);
-signal dma_data_latch, final_bus_data, Q_6H : std_logic_vector(7 downto 0);
+signal dma_data_latch, final_bus_data, Q_6H, Q_5H : std_logic_vector(7 downto 0);
 signal final_addr : std_logic_vector(15 downto 0);
 signal U5H_cs_l, U6H_cs_l, U3D_cs_l, vid_board_mux_en_l : std_logic;
 signal ram_34A_cs_l, ram_34B_cs_l, ram_34C_cs_l, final_rd_l, final_wr_l, pb4, final_rfsh_l : std_logic;
 signal clear_nmi_l, flipn, play_death_music : std_logic;
-signal sound_data : std_logic_vector(3 downto 0);
+signal sound_data, Q_3D : std_logic_vector(3 downto 0);
 signal cnt : unsigned(3 downto 0);
 signal bank_palette : std_logic_vector(1 downto 0);
 signal in1_cs, in2_cs, in3_cs, dipsw_cs, internal_rst_l, vram_req_l : std_logic; 
@@ -123,7 +119,7 @@ signal h : unsigned(9 downto 0);
 
 -- Debug
 -- attribute MARK_DEBUG : string;
--- attribute MARK_DEBUG of final_addr, final_bus_data, final_mreq_l, final_rd_l, final_rfsh_l, final_wr_l, i_cpu_m1_l : signal is "true";
+-- attribute MARK_DEBUG of final_addr : signal is "true";
 
 begin
 
@@ -269,17 +265,22 @@ begin
        i_rst_l => not i_core_reset,
        i_sound_cpu_clk => i_clk_audio_6M,
     
+       -- Les sorties sont à 1 par défaut sur le schéma original à cause des inverseurs 6J
+       -- Pour l'instant il manque aussi des buffers 3,3 V => 5 V. A priori, mettre les valeurs par défaut à 1 et utiliser des
+       -- buffers 3,3 V => 5 V non inverseurs.
+       -- Walk, Jump, Boom ont 2 inverseurs en cascade sur le schema
        i_audio_effects => (walk => Q_6H(0), jump => Q_6H(1), boom => Q_6H(2), 
                            spring => not Q_6H(3), gorilla_fall => not Q_6H(4), barrel => not Q_6H(5)),
         
-       i_sound_int_n => not play_death_music,  -- An external interrupt will play the death music.      
+       i_sound_int_n => play_death_music,  -- An external interrupt will play the death music.      
        i_sound_data => sound_data,
     
        i_2_VF => vf_2,
         
+       o_dac => o_dac,
        o_sound_boom_1 => o_boom_1,
        o_sound_boom_2 => o_boom_2,
-       o_dac_vref => o_dac_vref,
+       o_sound_decay => o_sound_decay,
        o_io_sound => pb4,
        o_sound_walk => o_walk,
        o_sound_jump => o_jump
@@ -325,27 +326,31 @@ begin
     U5H : process(Phi34n, i_core_reset)
 	begin
 		if i_core_reset = '1' then
-			play_death_music <= '0';
-			flipn <= '0';
-			psl_2 <= '0';
-			clear_nmi_l <= '0';
-			drq0 <= '0';
-			bank_palette <= "00";
+            Q_5H <= (others => '0');
 		elsif rising_edge(Phi34n) then
 			if U5H_cs_l = '0' then
 				case final_addr(2 downto 0) is
-					when "000" => play_death_music <= not i_cpu_do(0); -- INTn CPU audio
-					when "010" => flipn <= i_cpu_do(0); -- Flip
-					when "011" => psl_2 <= i_cpu_do(0); -- 2 PSL
-					when "100" => clear_nmi_l <= i_cpu_do(0); -- Clear NMIn
-					when "101" => drq0 <= i_cpu_do(0); -- DMA request
-					when "110" => bank_palette(0) <= i_cpu_do(0); -- Palette bank selection
-					when "111" => bank_palette(1) <= i_cpu_do(0); -- Palette bank selection
+					when "000" => Q_5H(0) <= i_cpu_do(0);
+					when "001" => Q_5H(1) <= i_cpu_do(0); -- Pas utilise
+					when "010" => Q_5H(2) <= i_cpu_do(0);
+					when "011" => Q_5H(3) <= i_cpu_do(0);
+					when "100" => Q_5H(4) <= i_cpu_do(0);
+					when "101" => Q_5H(5) <= i_cpu_do(0);
+					when "110" => Q_5H(6) <= i_cpu_do(0);
+					when "111" => Q_5H(7) <= i_cpu_do(0);
 					when others => null;
 				end case;
 			end if;
 		end if;
 	end process;
+	
+	play_death_music <= not Q_5H(0); -- INTn CPU audio
+	flipn <= Q_5H(2); -- Flip. Il y a un double inverseur sur la sortie FLIPn => je laisse comme ça.
+	psl_2 <= Q_5H(3); -- 2 PSL
+	clear_nmi_l <= Q_5H(4); -- Clear NMIn
+	drq0 <= Q_5H(5); -- DMA request
+	bank_palette(0) <= Q_5H(6); -- Palette bank selection
+	bank_palette(1) <= Q_5H(7); -- Palette bank selection
 
     -- U6H
     U6H : process(Phi34n, i_core_reset)
@@ -361,6 +366,7 @@ begin
 					when "011" => Q_6H(3) <= i_cpu_do(0);
 					when "100" => Q_6H(4) <= i_cpu_do(0);
 					when "101" => Q_6H(5) <= i_cpu_do(0);
+					-- Pas utilisées
 					when "110" => Q_6H(6) <= i_cpu_do(0);
 					when "111" => Q_6H(7) <= i_cpu_do(0);
 					when others => null;
@@ -372,19 +378,26 @@ begin
     -- U3D
     U3D : process(Phi34n, i_core_reset)
 	begin
+        -- Les sorties sont à 1 par défaut sur le schéma original à cause des inverseurs 3D
 		if i_core_reset = '1' then
-			sound_data <= (others => '0');
+			Q_3D <= (others => '0');
 		elsif rising_edge(Phi34n) then
 		  if U3D_cs_l = '0' then
-			sound_data <= i_cpu_do(3 downto 0);
+			Q_3D <= i_cpu_do(3 downto 0);
 	      end if;
 		end if;
 	end process;
+	
+	sound_data <= not Q_3D;
     
     -- RAMs 3A, 4A, 3B, 4B, 3C, 4C
-    u_ram_34_A : entity work.dist_mem_gen_34A port map (clk => i_clk, we => not (final_wr_l or ram_34A_cs_l), a => final_addr(9 downto 0), d => i_cpu_do, spo => ram_data_out_34_A);
-    u_ram_34_B : entity work.dist_mem_gen_34B port map (clk => i_clk, we => not (final_wr_l or ram_34B_cs_l), a => final_addr(9 downto 0), d => i_cpu_do, spo => ram_data_out_34_B);
-    u_ram_34_C : entity work.dist_mem_gen_34C port map (clk => i_clk, we => not (final_wr_l or ram_34C_cs_l), a => final_addr(9 downto 0), d => i_cpu_do, spo => ram_data_out_34_C);
+    u_ram_34_A : entity work.dist_mem_gen_34A port map (clk => i_clk, we => not (final_wr_l or ram_34A_cs_l),
+                    a => final_addr(9 downto 0), d => i_cpu_do, spo => ram_data_out_34_A);
+    u_ram_34_B : entity work.dist_mem_gen_34B port map (clk => i_clk, we => not (final_wr_l or ram_34B_cs_l),
+                    a => final_addr(9 downto 0), d => i_cpu_do, spo => ram_data_out_34_B);
+    u_ram_34_C : entity work.dist_mem_gen_34C port map (clk => i_clk, we => not (final_wr_l or ram_34C_cs_l),
+                    a => final_addr(9 downto 0), d => i_cpu_do, spo => ram_data_out_34_C);
+
     
     -- Data/Addresses CPU, RAM,...
     final_mreq_l <= i_cpu_mreq_l when dma_aen = '0' else (dma_ack(1) and dma_ack(0));
@@ -405,28 +418,27 @@ begin
                       ("000" & not(in1.jump) & not(in1.down) & not(in1.up) & not(in1.left) & not(in1.right) ) when in1_cs = '0' else
                       ("000" & not(in2.jump) & not(in2.down) & not(in2.up) & not(in2.left) & not(in2.right) ) when in2_cs = '0' else 
                       (not(in3.coin) & pb4 & "00" & not(in3.two_players) & not(in3.one_player) & "00") when in3_cs = '0' else
-                      (not i_config_dipsw) when dipsw_cs = '0' else
+                      (not i_config_reg) when dipsw_cs = '0' else
                       i_cpu_do;
 
-    in1.right <= '1';
-    in1.left <= '1';
-    in1.up <= '1';
-    in1.down <= '1';
-    in1.jump <= '1';
+    in1.right <= i_config_reg(0);
+    in1.left <= i_config_reg(1);
+    in1.up <= i_config_reg(2);
+    in1.down <= i_config_reg(3);
+    in1.jump <= i_config_reg(7);
     
+    -- Pas utilise
     in2.right <= '1';
     in2.left <= '1';
     in2.up <= '1';
     in2.down <= '1';
     in2.jump <= '1';
 
-    in3.coin <= '1';
-    in3.two_players <= '1';
-    in3.one_player <= '1';
+    in3.coin <= i_coin_service;
+    in3.two_players <= i_config_reg(5);
+    in3.one_player <= i_config_reg(6);
     
-    o_in1_cs_l <= in1_cs;
-    o_in2_cs_l <= in2_cs;
-    o_in3_cs_l <= in3_cs;
+    o_merged_inputs_cs_l <= in1_cs and in2_cs and in3_cs ;
     o_dipsw_cs_l <= dipsw_cs;    
     
     -- Signaux CPU
