@@ -182,7 +182,7 @@ set_property IOSTANDARD LVCMOS33 [get_ports o_walk_driver]
 
 
 
-create_generated_clock -name PHI34N -source [get_pins clk_gen_0/o_clk_dkong_main] -edges {1 7 11} -edge_shift {0.000 0.000 0.000} [get_nets Phi34n]
+create_generated_clock -name PHI34N -source [get_pins clk_gen_0/inst/mmcm_adv_inst/CLKOUT0] -edges {1 7 11} -edge_shift {0.000 0.000 0.000} [get_nets Phi34n]
 
 #create_generated_clock -name DMA_CLK -source u_Core/clk -divide_by 4 [get_pins {u_Core/u_HVClocks/h_cnt_reg[1]/Q}]
 #create_generated_clock -name DMA_CLK -source [get_pins u_Core/u_Dkong_Video_i_1/O] -divide_by 4 [get_pins {u_Core/u_HVClocks/h_cnt_reg[1]/Q}]
@@ -247,17 +247,9 @@ set_property IOSTANDARD LVCMOS33 [get_ports {o_music_data[0]}]
 set_property PACKAGE_PIN U2 [get_ports o_merged_inputs_cs_l]
 set_property IOSTANDARD LVCMOS33 [get_ports o_merged_inputs_cs_l]
 
+create_generated_clock -name CLK_61M -source [get_pins clk_gen_0/inst/mmcm_adv_inst/CLKIN1] -master_clock [get_clocks i_clk_sys] [get_pins clk_gen_0/inst/mmcm_adv_inst/CLKOUT0]
+create_generated_clock -name CLK_SOUND -source [get_pins clk_gen_0/inst/mmcm_adv_inst/CLKIN1] -master_clock [get_clocks i_clk_sys] [get_pins clk_gen_0/inst/mmcm_adv_inst/CLKOUT1]
+create_generated_clock -name CLK_VGA -source [get_pins clk_gen_0/inst/mmcm_adv_inst/CLKIN1] -master_clock [get_clocks i_clk_sys] [get_pins clk_gen_0/inst/mmcm_adv_inst/CLKOUT2]
 
-create_clock -period 16.200 -name CLK_61M -waveform {0.000 8.100} [get_pins clk_gen_0/o_clk_dkong_main]
-create_clock -period 166.700 -name CLK_SOUND -waveform {0.000 83.350} [get_pins clk_gen_0/o_sound_cpu_clk]
-#create_generated_clock -name CLK_UART -source [get_pins clk_gen_0/inst/o_clk_dkong_main] -multiply_by 1 [get_nets -hierarchical *uart_clk*]
-
-set_false_path -from [get_clocks CLK_SOUND] -to [get_clocks CLK_61M]
-set_false_path -from [get_clocks CLK_61M] -to [get_clocks CLK_SOUND]
-
-create_clock -period 39.700 -name CLK_VGA -waveform {0.000 19.850} [get_pins clk_gen_0/o_clk_vga]
-
-set_false_path -from [get_clocks CLK_VGA] -to [get_clocks CLK_61M]
-set_false_path -from [get_clocks CLK_61M] -to [get_clocks CLK_VGA]
-
-set_false_path -from [get_clocks PHI34N] -to [get_clocks CLK_SOUND]
+set_property PACKAGE_PIN U4 [get_ports o_hb]
+set_property IOSTANDARD LVCMOS33 [get_ports o_hb]

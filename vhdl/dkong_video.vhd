@@ -45,7 +45,7 @@ use ieee.numeric_std.all;
 
 entity dk_tg4_video is
     Port (  i_rst : in std_logic;
-            i_clk : in std_logic; -- 61.44 MHz
+            i_clkn : in std_logic; -- 61.44 MHz
             i_Phi34 : in std_logic; -- System clock (6 MHz)
             i_Phi34n : in std_logic;
             i_cnt : in unsigned(3 downto 0);
@@ -108,7 +108,7 @@ signal vram_busy_l, esblk_l, tile_shift_reg_reload_l, sprite_reload_S1, sprite_r
 signal do_draw_l, u6pr_ram_wr : std_logic;
 signal U8B_sprite_data, sprite_shifter : std_logic_vector(1 downto 0);
 signal addr_ram_tiles : std_logic_vector(9 downto 0);
-signal addr_tiles_ram_cs_l, char_tile_reload, U234S_S, clk_color_latch : std_logic;
+signal char_tile_reload, U234S_S, clk_color_latch : std_logic;
 signal scanline_wr, clk_4KL, clr_u3E4E_l, load_u3E4E_l, cmpblk2_l : std_logic;
 signal final_vid, S_U4PN : std_logic_vector(1 downto 0);
 signal final_col, A_U8B, B_U8B, Y_U8B : std_logic_vector(3 downto 0);
@@ -161,7 +161,7 @@ begin
     -- Pour simplifier on retourne U2PR_tile_id_out par defaut.
     o_vid_data_out <= dout_6PR when i_objrdn = '0' else U2PR_tile_id_out;
     
-    U2PR : entity work.dist_mem_gen_2PR port map (clk => i_clk, we => not(i_vram_wrn), 
+    U2PR : entity work.dist_mem_gen_2PR port map (clk => i_Phi34n, we => not(i_vram_wrn), 
                                 a => addr_ram_tiles, d => U2PR_tile_id_in, spo => U2PR_tile_id_out);
     -- U2PR : entity work.blk_mem_gen_2PR port map (clka => i_clk, wea(0) => not(i_vram_wrn) and not i_h(1), 
     --                             addra => addr_ram_tiles, dina => U2PR_tile_id_in, douta => U2PR_tile_id_out);
@@ -262,16 +262,18 @@ begin
          xor (Q4_6K & Q4_6K & Q4_6K & Q4_6K & Q4_6K & Q4_6K & Q4_6K & Q4_6K);
         
     -- 2E, 2H, 3K
-    U2E : entity work.dist_mem_gen_MB7074_2E port map (clk => i_clk, we => mb7074_wr, a => mb7074_addr , d => dc(5 downto 3) & '0', spo => mb7074_do_2E);
-    U2H : entity work.dist_mem_gen_MB7074_2H port map (clk => i_clk, we => mb7074_wr, a => mb7074_addr , d => dc(2 downto 0) & '0', spo => mb7074_do_2H);
+    -- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! --
+    U2E : entity work.dist_mem_gen_MB7074_2E port map (clk => i_clkn, we => mb7074_wr, a => mb7074_addr , d => dc(5 downto 3) & '0', spo => mb7074_do_2E);
+    U2H : entity work.dist_mem_gen_MB7074_2H port map (clk => i_clkn, we => mb7074_wr, a => mb7074_addr , d => dc(2 downto 0) & '0', spo => mb7074_do_2H);
     
     -- U2E : entity work.blk_mem_gen_2E port map (clka => i_clk, wea(0) => mb7074_wr, 
     --                             addra => mb7074_addr, dina => dc(5 downto 3) & '0', douta => mb7074_do_2E);
     -- U2H : entity work.blk_mem_gen_2H port map (clka => i_clk, wea(0) => mb7074_wr, 
     --                             addra => mb7074_addr, dina => dc(2 downto 0) & '0', douta => mb7074_do_2H);    
-    U3K : process (i_clk)
+    -- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! --
+    U3K : process (i_clkn)
     begin
-        if rising_edge(i_clk) then
+        if rising_edge(i_clkn) then
             if i_g_3K_clk = '1' then
                 da <= mb7074_do_2E(3 downto 1) & mb7074_do_2H(3 downto 1);
             end if;
@@ -490,7 +492,7 @@ begin
                                    
     -- 6P, 6R
     u6pr_ram_wr <= not i_objwrn;
-    U6PR : entity work.dist_mem_gen_6PR port map(clk => i_clk, we => u6pr_ram_wr, a => addr_6PR, d => din_6PR, spo => dout_6PR);
+    U6PR : entity work.dist_mem_gen_6PR port map(clk => i_Phi34n, we => u6pr_ram_wr, a => addr_6PR, d => din_6PR, spo => dout_6PR);
     -- U6PR : entity work.blk_mem_gen_6PR port map (clka => i_clk, wea(0) => u6pr_ram_wr and not i_h(1), 
     --                             addra => addr_6PR, dina => din_6PR, douta => dout_6PR);
                                 
@@ -535,8 +537,9 @@ begin
     end process;
 
     -- Scanline buffer (64 x 9 bits)
+    -- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! --
     scanline_wr <= not scanline_wr_l;
-    U7M : entity work.blk_mem_gen_7M port map (clka => i_clk, wea(0) => scanline_wr, 
+    U7M : entity work.blk_mem_gen_7M port map (clka => i_clkn, wea(0) => scanline_wr, 
                                 addra => addr_7M, dina => datain_7M & DI0_7M, douta => dataout_7M);
     
     -- La memoire 93419 est a collector ouvert en sortie, les bits sont donc inversés, ce qui n'est pas

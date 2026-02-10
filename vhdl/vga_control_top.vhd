@@ -205,8 +205,8 @@ architecture Behavioral of vga_control_top is
         -- => active time = 448 lignes
         -- => back porch = 30
         -- => front porch = 600 - (2+30+448) = 120 lignes
-        (VTIM_REG_ADDR,x"013201BF", '0'), --   program vertical timing register
-        (HVLEN_REG_ADDR,x"031F020C", '0'), --   program horizontal/vertical length register (800 x 525).
+        (VTIM_REG_ADDR,x"013001BF", '0'), --   program vertical timing register
+        (HVLEN_REG_ADDR,x"031F020B", '0'), --   program horizontal/vertical length register (800 x 525).
         
         -- Table de conversion des niveaux RGB en sortie des ROMs 2E/2F sour la forme de 3 bits rouge,
         -- 3 bits vers, 2 bits bleus sous forme  d'un index dans la table de LUT vers des valeurs équivalentes
@@ -316,7 +316,7 @@ begin
         -- Reset ou top trame venant du core
         if ((i_reset = '1') or (i_vsyncn = '0')) then
             video_mem_addr <= (others => '0');
-        elsif rising_edge(i_clk) then
+        elsif falling_edge(i_clk) then
             -- Detection front montant i_pixel_write. A remplacer par quelque chose d'autre basé sur i_clk_52m ?
             pixel_wr_0 <= i_pixel_write;
             if ((pixel_wr_0 = '0') and (i_pixel_write = '1')) then

@@ -78,7 +78,9 @@ port (
     
     o_rom_cs_l            : out std_logic; -- Lecture ROM programme
     o_uart_cs_l           : out std_logic; -- UART
-    o_pixel_wr            : out std_logic
+    o_pixel_wr            : out std_logic;
+    
+    o_heart_beat          : out std_logic
     
     );
 end dkong_core_top;
@@ -87,6 +89,8 @@ architecture Behavioral of dkong_core_top is
 
 constant RESET_DURATION : integer := 600000; -- 6 MHz * 0.1 s = 600 000 cycles
 -- constant RESET_DURATION : integer := 60000;
+
+constant LED_HB_PERIOD   : unsigned(7 downto 0) := X"F0";
 
 signal cnt_reset : integer;
 signal v_blkn, vf_2 : std_logic;
@@ -110,12 +114,15 @@ signal in1_cs, in2_cs, in3_cs, dipsw_cs, internal_rst_l, vram_req_l : std_logic;
 signal in1 : r_IN1;
 signal in2 : r_IN2;
 signal in3 : r_IN3;
-signal Phi34, Phi34n, g_3K, s2, hsyncn, obj_vram_wr_enable : std_logic;
-signal v : unsigned(7 downto 0);
+signal Phi34, Phi34n, g_3K, s2, hsyncn, obj_vram_wr_enable, clkn : std_logic;
+signal v, hb_cnt : unsigned(7 downto 0);
 signal h : unsigned(9 downto 0);
+signal phi_rise : std_logic;
+signal phi_sync : std_logic_vector(1 downto 0);
+signal hb_led_status, clear_nmi_0, clear_nmi_1 : std_logic; 
 
--- attribute dont_touch : string;
--- attribute dont_touch of i_cpu_m1_l : signal is "true";
+attribute dont_touch : string;
+attribute dont_touch of h : signal is "true";
 
 -- Debug
 -- attribute MARK_DEBUG : string;
@@ -158,6 +165,7 @@ begin
     g_3K <= not(cnt(1) or cnt(2));
     Phi34n <= not cnt(1);
     Phi34 <= cnt(1);
+    clkn <= not i_clk;
     
     -- Horizontal / Vertical clocks et gestion NMI/WAIT (U7F/U8F)
     u_HVClocks : entity work.hv_clocks_wait_nmi
@@ -176,6 +184,30 @@ begin
         o_rams_wr_enable => obj_vram_wr_enable,
         o_cpu_nmi_l => o_cpu_nmi_l
     );
+    
+    p_heart_beat : process
+        variable hb_end : boolean;
+    begin
+        wait until rising_edge(Phi34n);
+        -- Front descendant clear_nmi_l
+        clear_nmi_0 <= clear_nmi_l;
+        clear_nmi_1 <= clear_nmi_0;
+          
+        if (i_core_reset = '1') then
+            hb_led_status <= '0';
+            hb_cnt <= LED_HB_PERIOD;
+        elsif (clear_nmi_0 = '0' and clear_nmi_1 = '1') then
+            hb_end := (hb_cnt = X"FF");
+            if hb_end then
+                hb_cnt <= LED_HB_PERIOD;
+                hb_led_status <= not hb_led_status;
+            else
+                hb_cnt <= hb_cnt + "1";
+            end if;
+        end if;  
+    end process;
+  
+    o_heart_beat <= hb_led_status;
     
     -- DMA i8257
     u_DMA : entity work.i8257
@@ -219,16 +251,16 @@ begin
     U2N : process(Phi34n)
 	begin
         if rising_edge(Phi34n) then
-             if ((not dma_ack(0)) and (not dma_mem_write_l)) = '1' then
-                 dma_data_latch <= ram_data_out_34_A;
-             end if;
-        end if;
+                if ((not dma_ack(0)) and (not dma_mem_write_l)) = '1' then
+                    dma_data_latch <= ram_data_out_34_A;
+                end if;
+            end if;
 	end process;
 
     u_Dkong_Video : entity work.dk_tg4_video
     port map (
         i_rst => i_core_reset,
-        i_clk => i_clk, -- 61.44 MHz
+        i_clkn => clkn, -- 61.44 MHz
         i_Phi34 => Phi34,
         i_Phi34n => Phi34n,
         i_cnt => cnt,
@@ -391,11 +423,11 @@ begin
 	sound_data <= not Q_3D;
     
     -- RAMs 3A, 4A, 3B, 4B, 3C, 4C
-    u_ram_34_A : entity work.dist_mem_gen_34A port map (clk => i_clk, we => not (final_wr_l or ram_34A_cs_l),
+    u_ram_34_A : entity work.dist_mem_gen_34A port map (clk => Phi34n, we => not (final_wr_l or ram_34A_cs_l),
                     a => final_addr(9 downto 0), d => i_cpu_do, spo => ram_data_out_34_A);
-    u_ram_34_B : entity work.dist_mem_gen_34B port map (clk => i_clk, we => not (final_wr_l or ram_34B_cs_l),
+    u_ram_34_B : entity work.dist_mem_gen_34B port map (clk => Phi34n, we => not (final_wr_l or ram_34B_cs_l),
                     a => final_addr(9 downto 0), d => i_cpu_do, spo => ram_data_out_34_B);
-    u_ram_34_C : entity work.dist_mem_gen_34C port map (clk => i_clk, we => not (final_wr_l or ram_34C_cs_l),
+    u_ram_34_C : entity work.dist_mem_gen_34C port map (clk => Phi34n, we => not (final_wr_l or ram_34C_cs_l),
                     a => final_addr(9 downto 0), d => i_cpu_do, spo => ram_data_out_34_C);
 
     

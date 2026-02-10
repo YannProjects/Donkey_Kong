@@ -80,7 +80,10 @@ entity DKong_Main is
     
     -- UART
     o_uart_tx : out std_logic;
-    i_uart_rx : in std_logic
+    i_uart_rx : in std_logic;
+    
+    -- Heat Beat
+    o_hb : out std_logic
   );
 end DKong_Main;
 
@@ -186,7 +189,9 @@ begin
     
     o_rom_cs_l => rom_cs_l,
     o_uart_cs_l => uart_cs_l,
-    o_pixel_wr => pixel_write
+    o_pixel_wr => pixel_write,
+    
+    o_heart_beat => o_hb
   );
   
   o_cpu_clk_core <= cpu_clk_core;
