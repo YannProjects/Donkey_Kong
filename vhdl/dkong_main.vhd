@@ -261,22 +261,6 @@ begin
       
       core_to_cpu_data <= uart_reg when (uart_cs_l = '0' and i_cpu_rd_l_core = '0')
                           else core_data;
-    
-      -- Pas de selection de la memoire Flash en mode debug, c'est la ROM de test qui est utilisee dans ce cas
-      -- o_rom_cs_l <= '1';
-        
-      ---------------------------------------------------
-      -- ROM de test contenant le code de debug du HW
-      ---------------------------------------------------
-      -- Comme j'avais des problèmes avec le logiciel de debug dont je ne comprensias pas trop l'origine
-      -- j'avais décidé de tout exécuter (code DKong ou code de gbu) à partir de la mémoire flash externe.
-      -- Au final je pense que les pbes étaient dus au fichier de Timing Constraints qui avait disparu.
-      -- Mais, je n'ai aps reesséayé avec la ROM du code de test en interne depuis.
-      -- u_rom : entity work.dist_mem_gen_dkong_debug
-      -- port map (
-      --   a => i_cpu_a_core(13 downto 0), spo => rom_data
-      -- );
-      
       ------------ 
       -- UART
       ------------

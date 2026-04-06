@@ -87,8 +87,8 @@ end dkong_core_top;
 
 architecture Behavioral of dkong_core_top is
 
-constant RESET_DURATION : integer := 600000; -- 6 MHz * 0.1 s = 600 000 cycles
--- constant RESET_DURATION : integer := 60000;
+-- constant RESET_DURATION : integer := 600000; -- 6 MHz * 0.1 s = 600 000 cycles
+constant RESET_DURATION : integer := 60000;
 
 constant LED_HB_PERIOD   : unsigned(7 downto 0) := X"F0";
 

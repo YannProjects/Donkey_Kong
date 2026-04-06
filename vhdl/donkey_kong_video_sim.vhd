@@ -179,7 +179,8 @@ begin
     generic map (
         TimingModel => "UNIT",
         UserPreload => TRUE,
-        mem_file_name => "s29al008j_dkong.mem"
+        -- mem_file_name => "s29al008j_dkong.mem"
+        mem_file_name => "DKong_Hw_test_s29al008j.mem"
     )
     port map(
         A18 => '0',

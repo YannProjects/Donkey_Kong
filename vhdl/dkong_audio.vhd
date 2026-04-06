@@ -98,7 +98,7 @@ signal sound_cpu_pb, Q_4HF, cpu_data_3f, cpu_data_3h : std_logic_vector(7 downto
 signal t48_ram_addr, t48_ram_di, t48_ram_do : std_logic_vector(7 downto 0);
 signal addr_roms : std_logic_vector(10 downto 0);
 signal cnt_u3j : unsigned(3 downto 0);
-signal clk_u3j, sound_cpu_rd_l, rom_3H_cs_l, sound_cpu_ale : std_logic;
+signal clk_u3j, clk_u3j_0, clk_u3j_1, sound_cpu_rd_l, rom_3H_cs_l, sound_cpu_ale : std_logic;
 signal sound_data_en_l, sound_data_en_delayed, rom_3F_cs_l, u456k_clk : std_logic;
 signal t48_ram_we, xtal3_s : std_logic;
  
@@ -137,12 +137,19 @@ begin
     clk_u3j <= Q_5K(2) xor Q_4K(7);
     
     -- U3J (Synchronous presettable 4-bit binary counter)    
-    U3J : process(i_rst_l, clk_u3j)
+    U3J : process(i_rst_l, i_sound_cpu_clk)
     begin
         if i_rst_l = '0' then
             cnt_u3j <= X"0";
-        elsif rising_edge(clk_u3j) then
-            cnt_u3j <= cnt_u3j + 1;
+            clk_u3j_0 <= '0';
+            clk_u3j_1 <= '0';
+        elsif rising_edge(i_sound_cpu_clk) then
+            clk_u3j_0 <= clk_u3j;
+            clk_u3j_1 <= clk_u3j_0;
+            -- Front montant clk_u3j
+            if (clk_u3j_0 = '1' and clk_u3j_1 = '0') then      
+                cnt_u3j <= cnt_u3j + 1;
+            end if;
         end if;
     end process;
     o_sound_boom_2 <= cnt_u3j(2);
@@ -202,10 +209,12 @@ begin
    
    addr_roms <= sound_cpu_pb(2 downto 0) & Q_4HF;
    
-   process(sound_cpu_ale)
+   process(i_sound_cpu_clk, sound_cpu_ale)
    begin
-       if falling_edge(sound_cpu_ale) then
-           Q_4HF <= sound_cpu_data_out;
+        if rising_edge(i_sound_cpu_clk) then
+            if (sound_cpu_ale = '1') then
+                Q_4HF <= sound_cpu_data_out;
+            end if;
        end if;
    end process;
    

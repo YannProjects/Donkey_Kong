@@ -25,15 +25,21 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="181,021.798 ns"></ZoomStartTime>
-      <ZoomEndTime time="183,869.799 ns"></ZoomEndTime>
-      <Cursor1Time time="181,496.464 ns"></Cursor1Time>
+      <ZoomStartTime time="0.000000000 ms"></ZoomStartTime>
+      <ZoomEndTime time="181.200000001 ms"></ZoomEndTime>
+      <Cursor1Time time="17.608907679 ms"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="301"></NameColumnWidth>
-      <ValueColumnWidth column_width="103"></ValueColumnWidth>
+      <NameColumnWidth column_width="240"></NameColumnWidth>
+      <ValueColumnWidth column_width="112"></ValueColumnWidth>
    </column_width_setting>
    <WVObjectSize size="3" />
+   <wave_markers>
+      <marker time="410768894180" label="" />
+      <marker time="66837372592" label="" />
+      <marker time="67087401376" label="" />
+      <marker time="66837453981" label="" />
+   </wave_markers>
    <wvobject fp_name="group379" type="group">
       <obj_property name="label">DKong_Hw_Tester</obj_property>
       <obj_property name="DisplayName">label</obj_property>
@@ -157,7 +163,6 @@
       <wvobject fp_name="group382" type="group">
          <obj_property name="label">u_Core</obj_property>
          <obj_property name="DisplayName">label</obj_property>
-         <obj_property name="isExpanded"></obj_property>
          <wvobject fp_name="group555" type="group">
             <obj_property name="label">u_HVclocks</obj_property>
             <obj_property name="DisplayName">label</obj_property>
@@ -457,11 +462,6 @@
                <obj_property name="ElementShortName">i_clk</obj_property>
                <obj_property name="ObjectShortName">i_clk</obj_property>
             </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_DMA/i_h_0_1" type="array">
-               <obj_property name="ElementShortName">i_h_0_1[1:0]</obj_property>
-               <obj_property name="ObjectShortName">i_h_0_1[1:0]</obj_property>
-               <obj_property name="isExpanded"></obj_property>
-            </wvobject>
             <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_DMA/i_reset" type="logic">
                <obj_property name="ElementShortName">i_reset</obj_property>
                <obj_property name="ObjectShortName">i_reset</obj_property>
@@ -594,7 +594,6 @@
          <wvobject fp_name="group1369" type="group">
             <obj_property name="label">Dkong_audio</obj_property>
             <obj_property name="DisplayName">label</obj_property>
-            <obj_property name="isExpanded"></obj_property>
             <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Audio/i_rst_l" type="logic">
                <obj_property name="ElementShortName">i_rst_l</obj_property>
                <obj_property name="ObjectShortName">i_rst_l</obj_property>
@@ -606,7 +605,6 @@
             <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Audio/i_audio_effects" type="array">
                <obj_property name="ElementShortName">i_audio_effects</obj_property>
                <obj_property name="ObjectShortName">i_audio_effects</obj_property>
-               <obj_property name="isExpanded"></obj_property>
             </wvobject>
             <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Audio/i_sound_data" type="array">
                <obj_property name="ElementShortName">i_sound_data[3:0]</obj_property>
@@ -722,6 +720,14 @@
                <obj_property name="ElementShortName">clk_u3j</obj_property>
                <obj_property name="ObjectShortName">clk_u3j</obj_property>
             </wvobject>
+            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Audio/clk_u3j_0" type="logic">
+               <obj_property name="ElementShortName">clk_u3j_0</obj_property>
+               <obj_property name="ObjectShortName">clk_u3j_0</obj_property>
+            </wvobject>
+            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Audio/clk_u3j_1" type="logic">
+               <obj_property name="ElementShortName">clk_u3j_1</obj_property>
+               <obj_property name="ObjectShortName">clk_u3j_1</obj_property>
+            </wvobject>
             <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Audio/sound_cpu_rd_l" type="logic">
                <obj_property name="ElementShortName">sound_cpu_rd_l</obj_property>
                <obj_property name="ObjectShortName">sound_cpu_rd_l</obj_property>
@@ -757,7 +763,6 @@
             <wvobject fp_name="group1410" type="group">
                <obj_property name="label">t48</obj_property>
                <obj_property name="DisplayName">label</obj_property>
-               <obj_property name="isExpanded"></obj_property>
                <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Audio/U7H/reset_i" type="logic">
                   <obj_property name="ElementShortName">reset_i</obj_property>
                   <obj_property name="ObjectShortName">reset_i</obj_property>
@@ -854,12 +859,6 @@
             <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/i_rst" type="logic">
                <obj_property name="ElementShortName">i_rst</obj_property>
                <obj_property name="ObjectShortName">i_rst</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/i_clk" type="logic">
-               <obj_property name="DisplayName">label</obj_property>
-               <obj_property name="ElementShortName">i_clk</obj_property>
-               <obj_property name="ObjectShortName">i_clk</obj_property>
-               <obj_property name="label">i_clk_61.44M</obj_property>
             </wvobject>
             <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/i_Phi34" type="logic">
                <obj_property name="ElementShortName">i_Phi34</obj_property>
@@ -1061,10 +1060,6 @@
                   <obj_property name="ObjectShortName">addr_ram_tiles[9:0]</obj_property>
                   <obj_property name="CustomSignalColor">#FF00FF</obj_property>
                   <obj_property name="UseCustomSignalColor">true</obj_property>
-               </wvobject>
-               <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/addr_tiles_ram_cs_l" type="logic">
-                  <obj_property name="ElementShortName">addr_tiles_ram_cs_l</obj_property>
-                  <obj_property name="ObjectShortName">addr_tiles_ram_cs_l</obj_property>
                </wvobject>
                <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/u_Dkong_Video/U2PR_tile_id_in" type="array">
                   <obj_property name="ElementShortName">U2PR_tile_id_in[7:0]</obj_property>
@@ -1495,18 +1490,6 @@
          <wvobject fp_name="group2434" type="group">
             <obj_property name="label">u_rom</obj_property>
             <obj_property name="DisplayName">label</obj_property>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_rom/clka" type="logic">
-               <obj_property name="ElementShortName">clka</obj_property>
-               <obj_property name="ObjectShortName">clka</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_rom/addra" type="array">
-               <obj_property name="ElementShortName">addra[13:0]</obj_property>
-               <obj_property name="ObjectShortName">addra[13:0]</obj_property>
-            </wvobject>
-            <wvobject fp_name="/DKong_Sim/core_top_0/u_rom/douta" type="array">
-               <obj_property name="ElementShortName">douta[7:0]</obj_property>
-               <obj_property name="ObjectShortName">douta[7:0]</obj_property>
-            </wvobject>
          </wvobject>
          <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/i_clk" type="logic">
             <obj_property name="ElementShortName">i_clk</obj_property>
@@ -1519,6 +1502,14 @@
          <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/Phi34n" type="logic">
             <obj_property name="ElementShortName">Phi34n</obj_property>
             <obj_property name="ObjectShortName">Phi34n</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/phi_rise" type="logic">
+            <obj_property name="ElementShortName">phi_rise</obj_property>
+            <obj_property name="ObjectShortName">phi_rise</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/u_Core/phi_sync" type="array">
+            <obj_property name="ElementShortName">phi_sync[1:0]</obj_property>
+            <obj_property name="ObjectShortName">phi_sync[1:0]</obj_property>
          </wvobject>
          <wvobject fp_name="/DKong_Sim/core_top_0/i_rst_sysn" type="logic">
             <obj_property name="ElementShortName">i_rst_sysn</obj_property>
@@ -1567,10 +1558,6 @@
          <wvobject fp_name="/DKong_Sim/core_top_0/i_cpu_mreq_l_core" type="logic">
             <obj_property name="ElementShortName">i_cpu_mreq_l_core</obj_property>
             <obj_property name="ObjectShortName">i_cpu_mreq_l_core</obj_property>
-         </wvobject>
-         <wvobject fp_name="/DKong_Sim/core_top_0/i_cpu_m1_l_core" type="logic">
-            <obj_property name="ElementShortName">i_cpu_m1_l_core</obj_property>
-            <obj_property name="ObjectShortName">i_cpu_m1_l_core</obj_property>
          </wvobject>
          <wvobject fp_name="/DKong_Sim/core_top_0/i_cpu_rd_l_core" type="logic">
             <obj_property name="ElementShortName">i_cpu_rd_l_core</obj_property>
@@ -1980,6 +1967,18 @@
             <obj_property name="ElementShortName">vga_odd_line</obj_property>
             <obj_property name="ObjectShortName">vga_odd_line</obj_property>
          </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/u_vga_ctrl/vga_stb" type="logic">
+            <obj_property name="ElementShortName">vga_stb</obj_property>
+            <obj_property name="ObjectShortName">vga_stb</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/u_vga_ctrl/vga_cyc" type="logic">
+            <obj_property name="ElementShortName">vga_cyc</obj_property>
+            <obj_property name="ObjectShortName">vga_cyc</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/u_vga_ctrl/vga_ack" type="logic">
+            <obj_property name="ElementShortName">vga_ack</obj_property>
+            <obj_property name="ObjectShortName">vga_ack</obj_property>
+         </wvobject>
          <wvobject fp_name="/DKong_Sim/core_top_0/u_vga_ctrl/hsync_vga" type="logic">
             <obj_property name="ElementShortName">hsync_vga</obj_property>
             <obj_property name="ObjectShortName">hsync_vga</obj_property>
@@ -2029,6 +2028,7 @@
       <wvobject fp_name="group1001" type="group">
          <obj_property name="label">uart</obj_property>
          <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="isExpanded"></obj_property>
          <wvobject fp_name="/DKong_Sim/core_top_0/uart_wb_stb" type="logic">
             <obj_property name="ElementShortName">uart_wb_stb</obj_property>
             <obj_property name="ObjectShortName">uart_wb_stb</obj_property>
@@ -2048,6 +2048,14 @@
          <wvobject fp_name="/DKong_Sim/core_top_0/wb_current_state" type="other">
             <obj_property name="ElementShortName">wb_current_state</obj_property>
             <obj_property name="ObjectShortName">wb_current_state</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/srx_pad_i" type="logic">
+            <obj_property name="ElementShortName">srx_pad_i</obj_property>
+            <obj_property name="ObjectShortName">srx_pad_i</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/core_top_0/uart/stx_pad_o" type="logic">
+            <obj_property name="ElementShortName">stx_pad_o</obj_property>
+            <obj_property name="ObjectShortName">stx_pad_o</obj_property>
          </wvobject>
       </wvobject>
    </wvobject>
@@ -2126,11 +2134,163 @@
          <obj_property name="label">Addr</obj_property>
          <obj_property name="DisplayName">label</obj_property>
          <obj_property name="Radix">HEXRADIX</obj_property>
+         <wvobject fp_name="/DKong_Sim/flash_memory/A18" type="logic">
+            <obj_property name="ElementShortName">A18</obj_property>
+            <obj_property name="ObjectShortName">A18</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/flash_memory/A17" type="logic">
+            <obj_property name="ElementShortName">A17</obj_property>
+            <obj_property name="ObjectShortName">A17</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/flash_memory/A16" type="logic">
+            <obj_property name="ElementShortName">A16</obj_property>
+            <obj_property name="ObjectShortName">A16</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/flash_memory/A15" type="logic">
+            <obj_property name="ElementShortName">A15</obj_property>
+            <obj_property name="ObjectShortName">A15</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/flash_memory/A14" type="logic">
+            <obj_property name="ElementShortName">A14</obj_property>
+            <obj_property name="ObjectShortName">A14</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/flash_memory/A13" type="logic">
+            <obj_property name="ElementShortName">A13</obj_property>
+            <obj_property name="ObjectShortName">A13</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/flash_memory/A12" type="logic">
+            <obj_property name="ElementShortName">A12</obj_property>
+            <obj_property name="ObjectShortName">A12</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/flash_memory/A11" type="logic">
+            <obj_property name="ElementShortName">A11</obj_property>
+            <obj_property name="ObjectShortName">A11</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/flash_memory/A10" type="logic">
+            <obj_property name="ElementShortName">A10</obj_property>
+            <obj_property name="ObjectShortName">A10</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/flash_memory/A9" type="logic">
+            <obj_property name="ElementShortName">A9</obj_property>
+            <obj_property name="ObjectShortName">A9</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/flash_memory/A8" type="logic">
+            <obj_property name="ElementShortName">A8</obj_property>
+            <obj_property name="ObjectShortName">A8</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/flash_memory/A7" type="logic">
+            <obj_property name="ElementShortName">A7</obj_property>
+            <obj_property name="ObjectShortName">A7</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/flash_memory/A6" type="logic">
+            <obj_property name="ElementShortName">A6</obj_property>
+            <obj_property name="ObjectShortName">A6</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/flash_memory/A5" type="logic">
+            <obj_property name="ElementShortName">A5</obj_property>
+            <obj_property name="ObjectShortName">A5</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/flash_memory/A4" type="logic">
+            <obj_property name="ElementShortName">A4</obj_property>
+            <obj_property name="ObjectShortName">A4</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/flash_memory/A3" type="logic">
+            <obj_property name="ElementShortName">A3</obj_property>
+            <obj_property name="ObjectShortName">A3</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/flash_memory/A2" type="logic">
+            <obj_property name="ElementShortName">A2</obj_property>
+            <obj_property name="ObjectShortName">A2</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/flash_memory/A1" type="logic">
+            <obj_property name="ElementShortName">A1</obj_property>
+            <obj_property name="ObjectShortName">A1</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/flash_memory/A0" type="logic">
+            <obj_property name="ElementShortName">A0</obj_property>
+            <obj_property name="ObjectShortName">A0</obj_property>
+         </wvobject>
       </wvobject>
       <wvobject fp_name="vbus842" type="vbus">
          <obj_property name="label">Data</obj_property>
          <obj_property name="DisplayName">label</obj_property>
          <obj_property name="Radix">HEXRADIX</obj_property>
+         <wvobject fp_name="/DKong_Sim/flash_memory/DQ15" type="logic">
+            <obj_property name="ElementShortName">DQ15</obj_property>
+            <obj_property name="ObjectShortName">DQ15</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/flash_memory/DQ14" type="logic">
+            <obj_property name="ElementShortName">DQ14</obj_property>
+            <obj_property name="ObjectShortName">DQ14</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/flash_memory/DQ13" type="logic">
+            <obj_property name="ElementShortName">DQ13</obj_property>
+            <obj_property name="ObjectShortName">DQ13</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/flash_memory/DQ12" type="logic">
+            <obj_property name="ElementShortName">DQ12</obj_property>
+            <obj_property name="ObjectShortName">DQ12</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/flash_memory/DQ11" type="logic">
+            <obj_property name="ElementShortName">DQ11</obj_property>
+            <obj_property name="ObjectShortName">DQ11</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/flash_memory/DQ10" type="logic">
+            <obj_property name="ElementShortName">DQ10</obj_property>
+            <obj_property name="ObjectShortName">DQ10</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/flash_memory/DQ9" type="logic">
+            <obj_property name="ElementShortName">DQ9</obj_property>
+            <obj_property name="ObjectShortName">DQ9</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/flash_memory/DQ8" type="logic">
+            <obj_property name="ElementShortName">DQ8</obj_property>
+            <obj_property name="ObjectShortName">DQ8</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/flash_memory/DQ7" type="logic">
+            <obj_property name="ElementShortName">DQ7</obj_property>
+            <obj_property name="ObjectShortName">DQ7</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/flash_memory/DQ6" type="logic">
+            <obj_property name="ElementShortName">DQ6</obj_property>
+            <obj_property name="ObjectShortName">DQ6</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/flash_memory/DQ5" type="logic">
+            <obj_property name="ElementShortName">DQ5</obj_property>
+            <obj_property name="ObjectShortName">DQ5</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/flash_memory/DQ4" type="logic">
+            <obj_property name="ElementShortName">DQ4</obj_property>
+            <obj_property name="ObjectShortName">DQ4</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/flash_memory/DQ3" type="logic">
+            <obj_property name="ElementShortName">DQ3</obj_property>
+            <obj_property name="ObjectShortName">DQ3</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/flash_memory/DQ2" type="logic">
+            <obj_property name="ElementShortName">DQ2</obj_property>
+            <obj_property name="ObjectShortName">DQ2</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/flash_memory/DQ1" type="logic">
+            <obj_property name="ElementShortName">DQ1</obj_property>
+            <obj_property name="ObjectShortName">DQ1</obj_property>
+         </wvobject>
+         <wvobject fp_name="/DKong_Sim/flash_memory/DQ0" type="logic">
+            <obj_property name="ElementShortName">DQ0</obj_property>
+            <obj_property name="ObjectShortName">DQ0</obj_property>
+         </wvobject>
+      </wvobject>
+      <wvobject fp_name="/DKong_Sim/flash_memory/CENeg" type="logic">
+         <obj_property name="ElementShortName">CENeg</obj_property>
+         <obj_property name="ObjectShortName">CENeg</obj_property>
+      </wvobject>
+      <wvobject fp_name="/DKong_Sim/flash_memory/OENeg" type="logic">
+         <obj_property name="ElementShortName">OENeg</obj_property>
+         <obj_property name="ObjectShortName">OENeg</obj_property>
+      </wvobject>
+      <wvobject fp_name="/DKong_Sim/flash_memory/WENeg" type="logic">
+         <obj_property name="ElementShortName">WENeg</obj_property>
+         <obj_property name="ObjectShortName">WENeg</obj_property>
       </wvobject>
    </wvobject>
 </wave_config>

@@ -253,3 +253,9 @@ create_generated_clock -name CLK_VGA -source [get_pins clk_gen_0/inst/mmcm_adv_i
 
 set_property PACKAGE_PIN U4 [get_ports o_hb]
 set_property IOSTANDARD LVCMOS33 [get_ports o_hb]
+
+create_clock -period 250000.000 -name VF_2 -waveform {0.000 125000.000} [get_pins -hierarchical {*u_HVClocks/D[1]*}]
+
+set_false_path -from [get_clocks VF_2] -to [get_clocks PHI34N]
+set_false_path -from [get_clocks VF_2] -to [get_clocks -of_objects [get_pins clk_gen_0/inst/mmcm_adv_inst/CLKOUT1]]
+set_false_path -from [get_clocks -of_objects [get_pins clk_gen_0/inst/mmcm_adv_inst/CLKOUT0]] -to [get_clocks VF_2]
